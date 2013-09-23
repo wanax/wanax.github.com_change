@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-09-23T21:55:54+08:00</updated>
+  <updated>2013-09-23T22:01:49+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>

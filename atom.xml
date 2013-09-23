@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[My Octopress Blog]]></title>
+  <link href="http://wanax.github.io/atom.xml" rel="self"/>
+  <link href="http://wanax.github.io/"/>
+  <updated>2013-09-23T21:55:54+08:00</updated>
+  <id>http://wanax.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[BRIEF]]></title>
+    <link href="http://wanax.github.io/blog/2013/09/23/brief/"/>
+    <updated>2013-09-23T21:30:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/09/23/brief</id>
+    <content type="html"><![CDATA[]]></content>
+  </entry>
+  
+</feed>

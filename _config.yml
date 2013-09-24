@@ -3,9 +3,9 @@
 # ----------------------- #
 
 url: http://wanax.github.io
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: 陋室
+subtitle: Ich bin die Sonne
+author: Wanax
 simple_search: http://google.com/search
 description:
 
@@ -91,8 +91,8 @@ github_skip_forks: true
 # delicious_count: 3
 
 # Disqus Comments
-# disqus_short_name:
-# disqus_show_comment_count: false
+disqus_short_name: wanax
+disqus_show_comment_count: true
 
 # Google Analytics
 # google_analytics_tracking_id:

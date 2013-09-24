@@ -4,21 +4,22 @@
   <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-09-24T15:47:27+08:00</updated>
+  <updated>2013-09-24T18:41:47+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Wanax]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[BRIEF]]></title>
-    <link href="http://wanax.github.io/blog/2013/09/23/brief/"/>
-    <updated>2013-09-23T21:30:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2013/09/23/brief</id>
-    <content type="html"><![CDATA[]]></content>
+    <title type="html"><![CDATA[Sonne]]></title>
+    <link href="http://wanax.github.io/blog/2013/09/24/sonne/"/>
+    <updated>2013-09-24T17:23:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/09/24/sonne</id>
+    <content type="html"><![CDATA[<h3>Hello World</h3>
+]]></content>
   </entry>
   
 </feed>

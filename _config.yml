@@ -92,7 +92,7 @@ github_skip_forks: true
 
 # Disqus Comments
 disqus_short_name: wanax
-disqus_show_comment_count: true
+disqus_show_comment_count: false
 
 # Google Analytics
 # google_analytics_tracking_id:

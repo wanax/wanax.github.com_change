@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[陋室]]></title>
-  <link href="http://wanax.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: life | 陋室]]></title>
+  <link href="http://wanax.github.io/blog/categories/life/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
   <updated>2013-09-25T21:13:04+08:00</updated>
   <id>http://wanax.github.io/</id>
@@ -12,17 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[序曲]]></title>
-    <link href="http://wanax.github.io/blog/2013/09/24/xu-qu/"/>
-    <updated>2013-09-24T21:31:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2013/09/24/xu-qu</id>
-    <content type="html"><![CDATA[<h2>最好的时代</h2>
-
-<p>审美疲劳的产生</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sonne]]></title>

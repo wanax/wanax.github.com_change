@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[陋室]]></title>
-  <link href="http://wanax.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: tec | 陋室]]></title>
+  <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
   <updated>2013-09-25T21:13:04+08:00</updated>
   <id>http://wanax.github.io/</id>
@@ -21,15 +21,6 @@
     <content type="html"><![CDATA[<h2>最好的时代</h2>
 
 <p>审美疲劳的产生</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sonne]]></title>
-    <link href="http://wanax.github.io/blog/2013/09/24/sonne/"/>
-    <updated>2013-09-24T17:23:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2013/09/24/sonne</id>
-    <content type="html"><![CDATA[<h3>Hello World</h3>
 ]]></content>
   </entry>
   

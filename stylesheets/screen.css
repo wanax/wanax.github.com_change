@@ -118,6 +118,14 @@ a {
 	font-weight:300;
 	font-size:30px
 }
+
+#header h2 {
+	padding-top: 10px;
+	color:#999;
+	font-style:italic;
+	font-size:14px;
+}
+
 @media screen and (max-width:1040px) {
 	#header h1 {
 	float:none
@@ -714,6 +722,8 @@ article .entry-content .caption:before {
 	position:absolute;
 	left:0
 }
+
+
 article .entry-content .video-container {
 	position:relative;
 	padding-bottom:56.25%;
@@ -1709,4 +1719,9 @@ a:hover {
 .container .mid-col .mid-col-container #content article .meta {
 	float:none
 }
+}
+h3.catag {
+	padding-top: 10px;
+	font-size: 18px;
+	color: #ff5e4d;
 }

@@ -1,5 +1,11 @@
 <ul class="main-navigation">
-  <li><a href="{{ root_url }}/">Blog</a></li>
-  <li><a href="{{ root_url }}/blog/archives">Archives</a></li>
-  <li><a href="/intro/index.html">About 苏丹</a></li>
+  <li><a href="{{ root_url }}/">首页</a></li>
+  <li><a href="{{ root_url }}/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
 </ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    {% category_list %}
+  </ul>
+</section>

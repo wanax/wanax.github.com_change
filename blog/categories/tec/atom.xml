@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tec | 陋室]]></title>
+  <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
+  <link href="http://wanax.github.io/"/>
+  <updated>2013-09-28T15:48:18+08:00</updated>
+  <id>http://wanax.github.io/</id>
+  <author>
+    <name><![CDATA[Wanax]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[常用正则表达式(转)]]></title>
+    <link href="http://wanax.github.io/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/"/>
+    <updated>2012-01-15T19:36:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan</id>
+    <content type="html"><![CDATA[<p>正则表达式用于字符串处理、表单验证等场合，实用高效。现将一些常用的表达式收集于此，以备不时之需。</p>
+
+<p>匹配中文字符的正则表达式： <code>[\u4e00-\u9fa5]</code></p>
+
+<blockquote><p>评注：匹配中文还真是个头疼的事，有了这个表达式就好办了</p></blockquote>
+
+<p>匹配双字节字符(包括汉字在内)：<code>[^\x00-\xff]</code></p>
+
+<blockquote><p>评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）</p></blockquote>
+
+<p>匹配空白行的正则表达式：<code>\n\s*\r</code></p>
+
+<blockquote><p>评注：可以用来删除空白行</p></blockquote>
+
+<p>匹配HTML标记的正则表达式：<code>&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/\1&gt;|&lt;.*? /&gt;</code></p>
+
+<blockquote><p>评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力</p></blockquote>
+
+<p>匹配首尾空白字符的正则表达式：<code>^\s*|\s*$</code></p>
+
+<blockquote><p>评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式</p></blockquote>
+
+<p>匹配Email地址的正则表达式：<code>\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*</code></p>
+
+<blockquote><p>评注：表单验证时很实用</p></blockquote>
+
+<p>匹配网址URL的正则表达式：<code>[a-zA-z]+://[^\s]*</code></p>
+
+<blockquote><p>评注：网上流传的版本功能很有限，上面这个基本可以满足需求</p></blockquote>
+
+<p>匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：<code>^[a-zA-Z][a-zA-Z0-9_]{4,15}$</code></p>
+
+<blockquote><p>评注：表单验证时很实用</p></blockquote>
+
+<p>匹配国内电话号码：<code>\d{3}-\d{8}|\d{4}-\d{7}</code></p>
+
+<blockquote><p>评注：匹配形式如 0511-4405222 或 021-87888822</p></blockquote>
+
+<p>匹配腾讯QQ号：<code>[1-9][0-9]{4,}</code></p>
+
+<blockquote><p>评注：腾讯QQ号从10000开始</p></blockquote>
+
+<p>匹配中国邮政编码：<code>[1-9]\d{5}(?!\d)</code></p>
+
+<blockquote><p>评注：中国邮政编码为6位数字</p></blockquote>
+
+<p>匹配身份证：<code>\d{15}|\d{18}</code></p>
+
+<blockquote><p>评注：中国的身份证为15位或18位</p></blockquote>
+
+<p>匹配ip地址：<code>\d+\.\d+\.\d+\.\d+</code></p>
+
+<blockquote><p>评注：提取ip地址时有用</p></blockquote>
+
+<p>匹配特定数字：
+<code>^[1-9]\d*$</code>　 　 //匹配正整数</p>
+
+<p><code>^-[1-9]\d*$</code> 　 //匹配负整数</p>
+
+<p><code>^-?[1-9]\d*$</code>　　 //匹配整数</p>
+
+<p><code>^[1-9]\d*|0$</code>　 //匹配非负整数（正整数 + 0）</p>
+
+<p><code>^-[1-9]\d*|0$</code>　　 //匹配非正整数（负整数 + 0）</p>
+
+<p><code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$</code>　　 //匹配正浮点数</p>
+
+<p><code>^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$</code> //匹配负浮点数</p>
+
+<p><code>^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$</code>　 //匹配浮点数</p>
+
+<p><code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$</code>　　 //匹配非负浮点数（正浮点数 + 0）</p>
+
+<p><code>^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$</code>　　//匹配非正浮点数（负浮点数 + 0）</p>
+
+<blockquote><p>评注：处理大量数据时有用，具体应用时注意修正</p></blockquote>
+
+<p>匹配特定字符串：
+<code>^[A-Za-z]+$</code>　　//匹配由26个英文字母组成的字符串</p>
+
+<p><code>^[A-Z]+$</code>　　//匹配由26个英文字母的大写组成的字符串</p>
+
+<p><code>^[a-z]+$</code>　　//匹配由26个英文字母的小写组成的字符串</p>
+
+<p><code>^[A-Za-z0-9]+$</code>　　//匹配由数字和26个英文字母组成的字符串</p>
+
+<p><code>^\w+$</code>　　//匹配由数字、26个英文字母或者下划线组成的字符串</p>
+
+<blockquote><p>评注：最基本也是最常用的一些表达式</p></blockquote>
+
+<p><a href="http://lifesinger.3322.org/myblog/?p=185">原载地址</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lucene入门初步]]></title>
+    <link href="http://wanax.github.io/blog/2012/01/04/luceneru-men-chu-bu/"/>
+    <updated>2012-01-04T17:10:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/01/04/luceneru-men-chu-bu</id>
+    <content type="html"><![CDATA[<p>简单地说，Lucene是两个java的程序包而已，通过引包调用接口函数我们可以很方便的对txt文档构建索引</p>
+
+<p>构建索引的大体顺序可由下图清晰可见</p>
+
+<p>即被索引的文档用Document对象表示</p>
+
+<p>IndexWriter通过函数addDocument将文档添加到索引，实现创建索引的过程</p>
+
+<p>Lucene的索引是应用反向索引</p>
+
+<p>当用户有请求是，Query代表用户的查询语句</p>
+
+<p>IndexSearcher通过函数search搜索Lucene Index</p>
+
+<p>IndexSearcher计算term weight和sorce并且将结果返回给用户</p>
+
+<p>返回给用户的文档集合用TopDocsCollector</p>
+
+<p>构建索引可以用下面代码搞定：</p>
+
+<pre><code>// MMAnalyzer作为分词工具创建一个IndexWriter  
+//INDEX_STORE_PATH表示的是需要构建索引的文件路径  
+IndexWriter writer = new IndexWriter(INDEX_STORE_PATH,analyzer, true);  
+File filesDir = new File(inputDir);  
+// 取得所有需要建立索引的文件数组  
+File[] files = filesDir.listFiles();  
+writer.setMaxFieldLength(100000);  
+// 遍历数组  
+for (int i = 0; i &lt; files.length; i++) {  
+   // 获取文件名  
+   String fileName = files[i].getName();  
+   System.out.println(fileName);  
+   // 判断文件是否为txt类型的文件  
+   if (fileName.substring(fileName.lastIndexOf(".")).equals(".txt")) {  
+       // 创建一个新的Document  
+       Document doc = new Document();  
+       // 为文件名创建一个Field  
+       Field field = new Field("filename", files[i].getName(),  
+               Field.Store.YES, Field.Index.TOKENIZED);  
+       //System.out.println(files[i].getName());  
+       doc.add(field);  
+       // 为文件内容创建一个Filed  
+       field = new Field("content", loadFileToString(files[i]),  
+               Field.Store.NO, Field.Index.TOKENIZED);  
+       doc.add(field);  
+       // 把Document加入IndexWriter  
+       writer.addDocument(doc);  
+}
+</code></pre>
+
+<p>而对索引的查询也可以如下搞定：</p>
+
+<pre><code>      // 根据索引位置建立IndexSearcher  
+      IndexSearcher searcher = new IndexSearcher(INDEX_STORE_PATH);  
+      // 建立搜索单元，searchType代表要搜索的Filed，searchKey代表关键字  
+      Term t = new Term(searchType, searchKey);  
+      // 由Term生成一个Query  
+      Query q = new TermQuery(t);  
+      Hits hits=searcher.search(q);  
+      System.out.println(hits.length());  
+      // 搜索开始时间  
+      System.out.println("开始");  
+      Date beginTime = new Date();  
+</code></pre>
+
+<p>由此可以看出其实对Lucene的入门其实很简单，而真正的难点在于如何成功地使用词法分析器，因为Doug Cutting（Lucene的编写者）生于他国，所创建的词库是不针对伟大的象形文字的，这就给我们伟大的文明古国构建文档索引创造一定程度的挑战性。</p>
+
+<p>其实构建全文索引的成功与否很大程度上即取决于此，能否完美或者近乎完美地构建一个Document文档是评价一个全文索引优劣的重要依据。</p>
+
+<p>在构建索引的的代码中我们可以看到一个Document是由若干个Field组成的，再由Writer写入索引文件。当我们进行搜索时便是根据这些一个个小的Field进行关键词搜索的。同样的一个文档，我们可以根据不同的需要对一个Document加入不同的Field，使之成为截然不同的信息文件。</p>
+
+<p>举个简单的例子便会显而易见了，对于同一个小区的描述可以有如下两种形式：</p>
+
+<p>1：</p>
+
+<blockquote><p>半岛城邦项目总用地面积299556㎡，总建筑面积917168㎡。其中一期已建成（用地面积53290.6㎡，建筑面积142968㎡）。项目基地位于深圳市南山区蛇口片区，西临蛇口渔港码头，北侧依托于蛇口山望海公园，东侧与东角头填海区相临，靠近西部通道口岸用地，南侧凭借滨海步行长廊与深圳湾紧紧相连。项目基地紧紧依托于15公里滨海步行带，是深圳滨海走廊的重要节点，背山面海，景观卓越。在一期完成后，06年重新城市设计，主要特点：（1）学校分布。将原2、4、5期的学校、幼儿园整合在2、3期（2期36班初中及幼儿园，三期36班小学及幼儿园）；（2）建筑高度由山体向海面递增，形成建筑向蛇口山退让的城市意向，与蛇口山取得协调。（3）同时城市设计将地块抬高路面3m，以减少道路对小区内的影响。除上述教育设施外，商业设施集中在由西向东贯通的商业街及1、5期间商业街。另每个小区均有会所。每个小区均有地下停车库，且相互联通，互通有无。超高层住宅建筑特点，现代简洁而不失变化，选择以盒子的方式呈现凸窗和阳台。其意义在于：（1）以方盒会意“城邦”，城是一个特大的盒子，而盒子是城的缩影。（2）独特的建筑外观。（3）在中国传统建筑及园林中，镂空的花窗有其独特的美学观念：即选景和框景。而一个个面朝大海的盒子，正是建筑完整的取景器。随着四季的变化，时刻变幻的海景画面完美的呈现在我们面前。(4)有效发挥了檐板的作用，遮阳防雨，隔绝热带气候。盒子此时同时兼具屋檐和遮阳板的功能，有效的摒弃了炽热阳光的直射和暴雨的倾泻，同时减弱了海风对窗子和室内的影响。(5)减少了楼群之间的对视问题，使居住隐私得到保护。（6）色彩与一期看齐，白色外墙，灰色凸窗与阳台，透明玻璃。有模型在会所二楼可供参观。总体上，二期采用的建材品牌和品质较一期又有了很大的提升。</p></blockquote>
+
+<p>2：</p>
+
+<blockquote><p>小区名：半岛城邦</p>
+
+<p>面积：299556㎡</p>
+
+<p>地址：深圳市南山区蛇口片区</p>
+
+<p>环境：西临蛇口渔港码头，北侧依托于蛇口山望海公园，东侧与东角头填海区相临，靠近西部通道口岸用>地，南侧凭借滨海步行长廊与深圳湾紧紧相连</p>
+
+<p>介绍：（1）学校分布。将原2、4、5期的学校、幼儿园整合在2、3期（2期36班初中及幼儿园，三期36班小学及幼儿园）；（2）建筑高度由山体向海面递增，形成建筑向蛇口山退让的城市意向，与蛇口山取得协调。（3）同时城市设计将地块抬高路面3m，以减少道路对小区内的影响。除上述教育设施外，商业设施集中在由西向东贯通的商业街及1、5期间商业街。另每个小区均有会所。每个小区均有地下停车库，且相互联通，互通有无。超高层住宅建筑特点，现代简洁而不失变化，选择以盒子的方式呈现凸窗和阳台。其意义在于：（1）以方盒会意“城邦”，城是一个特大的盒子，而盒子是城的缩影。（2）独特的建筑外观。（3）在中国传统建筑及园林中，镂空的花窗有其独特的美学观念：即选景和框景。而一个个面朝大海的盒子，正是建筑完整的取景器。随着四季的变化，时刻变幻的海景画面完美的呈现在我们面前。(4)有效发挥了檐板的作用，遮阳防雨，隔绝热带气候。盒子此时同时兼具屋檐和遮阳板的功能，有效的摒弃了炽热阳光的直射和暴雨的倾泻，同时减弱了海风对窗子和室内的影响。(5)减少了楼群之间的对视问题，使居住隐私得到保护。（6）色彩与一期看齐，白色外墙，灰色凸窗与阳台，透明玻璃。有模型在会所二楼可供参观。总体上，二期采用的建材品牌和品质较一期又有了很大的提升。</p></blockquote>
+
+<p>第一个是对整个区域做一个Field进行整合，第二个便是对这一信息通过各种Field进行描述，无需笔者提示，聪明的读者一眼便可以刻发现第二个文档的构建要明显优于第一个文档。</p>
+
+<p>就像开篇所言，Lucene对英文的支持是较好的，但对于中文Cutting兄却妥妥的是心有余而力不足了。也就在这时MMAnalyzer便华丽登场，它一定程度上可以对中文做出正确的分割，“中华人民共和国”可以分成“中华”“人民”“共和国”而不会是“中华民国”这么不和谐的字眼了，一定程度上该作者对祖国大业作出了很大的贡献。</p>
+
+<p>当然有时候MMAnalyzer也有力不从心的时候，比如说洒家不信它的词库中会收录“半岛城邦”“天上人间”这么邪门歪道的词语，于是当我们需要分割这些词汇的时候便需要自己往词库中添加单词进行分割， Cutting兄很绅士地想到了这一点，为我们提供了方便的接口添加词库，代码如下：</p>
+
+<p><code>
+FileReader reader =new FileReader("d:\\product.dic"); </code></p>
+
+<p><code>MMAnalyzer.addDictionary(reader);</code></p>
+
+<p>这样我们就可以简单地对一些特定的词语做分割了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[struts跳转控制笔记]]></title>
+    <link href="http://wanax.github.io/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji/"/>
+    <updated>2012-01-04T17:08:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji</id>
+    <content type="html"><![CDATA[<h3>当<code>namespace="/login"</code>时</h3>
+
+<p>===</p>
+
+<p>子路目中：有<code>login/</code>   <strong>no action mapped for</strong></p>
+
+<p>无<code>login/</code>   <strong>no result defined</strong></p>
+
+<p>根目录中：    <strong>no result defined</strong></p>
+
+<p><strong>no action mapped for</strong></p>
+
+<!--more-->
+
+
+<h3>当<code>namespace="/"</code>时</h3>
+
+<p>===</p>
+
+<p>子目录中：      <strong>可跳转，无样式，URL重复发送</strong></p>
+
+<p><strong>no result defined</strong></p>
+
+<p>根目录中：    <strong>no result defined</strong></p>
+
+<p>跳转成功</p>
+
+<p>结果跳转位置为“namespace+result”</p>
+
+<p>===</p>
+
+<h3>struts.xml 匹配action方式：</h3>
+
+<p>===
+1.当各目录jsp页面发送action时，系统首先在其加上所在目录                                               名，与namespace匹配。</p>
+
+<p><code>namespace=“/”</code>与不写有区别，不写则匹配所有，写等同于<code>“/test”</code>之类，<code>“/”</code>表示根目录</p>
+
+<p>故当<code>namespace=“/test”</code>时，根目录的action应写<code>test/*.action，所发出的全称即"test/*.action"</code>，即可找到对应struts，但服务器会记录信息，使URL叠加，不推荐使用。</p>
+
+<p>另：同子目录下发<code>action="*.action"，会自动加上对应文件名，即"test/*action"</code>，可与namespace匹配。</p>
+
+<p>故总体来说，推荐使用重定向的方式，不论再哪级目录下，均返回根目录对应配置文件填写action</p>
+
+<p>ex.   二级目录下，可写成<code>"../../test/test/*action"</code>重新定向。</p>
+
+<p>在匹配过程中有时候结果返回页面会发现css全部无法加载，此为因为重定向后URL改变，对应不上原来的css加载路径，此时应应变对应尝试各种更改action的发送URL。</p>
+
+<p>result 前加<code>/</code> 表返回根目录，再依具体位置写目录</p>
+
+<p>通配符的使用 ex. <code>action="jump*"    result=/test{1}/test{1}Success.jsp</code></p>
+]]></content>
+  </entry>
+  
+</feed>

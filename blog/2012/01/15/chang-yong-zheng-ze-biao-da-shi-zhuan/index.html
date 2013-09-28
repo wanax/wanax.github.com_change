@@ -1,0 +1,251 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>常用正则表达式(转) - 陋室</title>
+	<meta name="author" content="Wanax">
+	
+	<meta name="description" content="常用正则表达式(转) 正则表达式用于字符串处理、表单验证等场合，实用高效。现将一些常用的表达式收集于此，以备不时之需。 匹配中文字符的正则表达式： [\u4e00-\u9fa5] 评注：匹配中文还真是个头疼的事，有了这个表达式就好办了 匹配双字节字符(包括汉字在内)：[^\x00-\xff] &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://wanax.github.io/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src='/images/avatar.png' alt='Profile Picture' style='width: 160px;' />
+</div>
+<hgroup>
+  <h1><a href="/">陋室</a></h1>
+  
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
+</ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
+<li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (3)</a></li>
+
+  </ul>
+</section>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/wanax.github.com" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">常用正则表达式(转)</h1>
+	<div class="entry-content" itemprop="articleBody"><p>正则表达式用于字符串处理、表单验证等场合，实用高效。现将一些常用的表达式收集于此，以备不时之需。</p>
+
+<p>匹配中文字符的正则表达式： <code>[\u4e00-\u9fa5]</code></p>
+
+<blockquote><p>评注：匹配中文还真是个头疼的事，有了这个表达式就好办了</p></blockquote>
+
+<p>匹配双字节字符(包括汉字在内)：<code>[^\x00-\xff]</code></p>
+
+<blockquote><p>评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）</p></blockquote>
+
+<p>匹配空白行的正则表达式：<code>\n\s*\r</code></p>
+
+<blockquote><p>评注：可以用来删除空白行</p></blockquote>
+
+<p>匹配HTML标记的正则表达式：<code>&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/\1&gt;|&lt;.*? /&gt;</code></p>
+
+<blockquote><p>评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力</p></blockquote>
+
+<p>匹配首尾空白字符的正则表达式：<code>^\s*|\s*$</code></p>
+
+<blockquote><p>评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式</p></blockquote>
+
+<p>匹配Email地址的正则表达式：<code>\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*</code></p>
+
+<blockquote><p>评注：表单验证时很实用</p></blockquote>
+
+<p>匹配网址URL的正则表达式：<code>[a-zA-z]+://[^\s]*</code></p>
+
+<blockquote><p>评注：网上流传的版本功能很有限，上面这个基本可以满足需求</p></blockquote>
+
+<p>匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：<code>^[a-zA-Z][a-zA-Z0-9_]{4,15}$</code></p>
+
+<blockquote><p>评注：表单验证时很实用</p></blockquote>
+
+<p>匹配国内电话号码：<code>\d{3}-\d{8}|\d{4}-\d{7}</code></p>
+
+<blockquote><p>评注：匹配形式如 0511-4405222 或 021-87888822</p></blockquote>
+
+<p>匹配腾讯QQ号：<code>[1-9][0-9]{4,}</code></p>
+
+<blockquote><p>评注：腾讯QQ号从10000开始</p></blockquote>
+
+<p>匹配中国邮政编码：<code>[1-9]\d{5}(?!\d)</code></p>
+
+<blockquote><p>评注：中国邮政编码为6位数字</p></blockquote>
+
+<p>匹配身份证：<code>\d{15}|\d{18}</code></p>
+
+<blockquote><p>评注：中国的身份证为15位或18位</p></blockquote>
+
+<p>匹配ip地址：<code>\d+\.\d+\.\d+\.\d+</code></p>
+
+<blockquote><p>评注：提取ip地址时有用</p></blockquote>
+
+<p>匹配特定数字：
+<code>^[1-9]\d*$</code>　 　 //匹配正整数</p>
+
+<p><code>^-[1-9]\d*$</code> 　 //匹配负整数</p>
+
+<p><code>^-?[1-9]\d*$</code>　　 //匹配整数</p>
+
+<p><code>^[1-9]\d*|0$</code>　 //匹配非负整数（正整数 + 0）</p>
+
+<p><code>^-[1-9]\d*|0$</code>　　 //匹配非正整数（负整数 + 0）</p>
+
+<p><code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$</code>　　 //匹配正浮点数</p>
+
+<p><code>^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$</code> //匹配负浮点数</p>
+
+<p><code>^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$</code>　 //匹配浮点数</p>
+
+<p><code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$</code>　　 //匹配非负浮点数（正浮点数 + 0）</p>
+
+<p><code>^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$</code>　　//匹配非正浮点数（负浮点数 + 0）</p>
+
+<blockquote><p>评注：处理大量数据时有用，具体应用时注意修正</p></blockquote>
+
+<p>匹配特定字符串：
+<code>^[A-Za-z]+$</code>　　//匹配由26个英文字母组成的字符串</p>
+
+<p><code>^[A-Z]+$</code>　　//匹配由26个英文字母的大写组成的字符串</p>
+
+<p><code>^[a-z]+$</code>　　//匹配由26个英文字母的小写组成的字符串</p>
+
+<p><code>^[A-Za-z0-9]+$</code>　　//匹配由数字和26个英文字母组成的字符串</p>
+
+<p><code>^\w+$</code>　　//匹配由数字、26个英文字母或者下划线组成的字符串</p>
+
+<blockquote><p>评注：最基本也是最常用的一些表达式</p></blockquote>
+
+<p><a href="http://lifesinger.3322.org/myblog/?p=185">原载地址</a></p>
+</div>
+
+</article>
+
+	<!--<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+-->
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Wanax -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'wanax';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://wanax.github.io/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/';
+        var disqus_url = 'http://wanax.github.io/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,6 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://wanax.github.io/blog/2009/08/25/ti-you-kai-pian-dian/</loc>
+        <lastmod>2013-09-28T14:18:10+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2009/12/21/mo-ming-wen/</loc>
+        <lastmod>2013-09-28T14:05:05+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2010/01/13/xiao-de/</loc>
+        <lastmod>2013-09-28T14:05:09+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://wanax.github.io/blog/2010/02/18/xiao-bie/</loc>
         <lastmod>2013-09-26T17:42:14+08:00</lastmod>
     </url>
@@ -37,8 +49,52 @@
         <lastmod>2013-09-26T17:44:06+08:00</lastmod>
     </url>
     <url>
+        <loc>http://wanax.github.io/blog/2010/11/19/wu-nian/</loc>
+        <lastmod>2013-09-28T14:15:28+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2011/01/02/xiao-pian-er/</loc>
+        <lastmod>2013-09-28T13:34:57+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2011/07/11/ci-jian/</loc>
+        <lastmod>2013-09-28T13:34:52+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2011/07/17/xi-hai-zhen/</loc>
+        <lastmod>2013-09-28T13:34:47+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2011/07/21/zhe-bian-tai-yang-da-de-hen/</loc>
+        <lastmod>2013-09-28T13:42:37+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2011/07/27/dun-huang-zai-zhe-li/</loc>
+        <lastmod>2013-09-28T13:40:44+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2011/08/05/che-hu/</loc>
+        <lastmod>2013-09-28T13:42:30+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2012/03/15/ru-ci-er-yi/</loc>
+        <lastmod>2013-09-28T13:39:32+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2012/08/23/hu-yan/</loc>
+        <lastmod>2013-09-28T14:23:40+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2012/11/09/bao-zi/</loc>
+        <lastmod>2013-09-28T14:14:17+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://wanax.github.io/blog/2013/03/13/dan-sheng-bu-qi-yu/</loc>
+        <lastmod>2013-09-28T13:42:08+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://wanax.github.io/blog/archives/</loc>
-        <lastmod>2013-09-26T17:44:17+08:00</lastmod>
+        <lastmod>2013-09-28T14:23:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://wanax.github.io/blog/categories/</loc>
@@ -46,7 +102,7 @@
     </url>
     <url>
         <loc>http://wanax.github.io/</loc>
-        <lastmod>2013-09-26T17:44:17+08:00</lastmod>
+        <lastmod>2013-09-28T14:23:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://wanax.github.io/robots.txt</loc>

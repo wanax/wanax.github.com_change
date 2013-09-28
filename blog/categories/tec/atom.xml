@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tec | 陋室]]></title>
   <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-09-28T15:48:18+08:00</updated>
+  <updated>2013-09-28T15:53:45+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -27,6 +27,9 @@
 <p>匹配双字节字符(包括汉字在内)：<code>[^\x00-\xff]</code></p>
 
 <blockquote><p>评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）</p></blockquote>
+
+<!--more-->
+
 
 <p>匹配空白行的正则表达式：<code>\n\s*\r</code></p>
 
@@ -128,6 +131,9 @@
 <p>Lucene的索引是应用反向索引</p>
 
 <p>当用户有请求是，Query代表用户的查询语句</p>
+
+<!--more-->
+
 
 <p>IndexSearcher通过函数search搜索Lucene Index</p>
 

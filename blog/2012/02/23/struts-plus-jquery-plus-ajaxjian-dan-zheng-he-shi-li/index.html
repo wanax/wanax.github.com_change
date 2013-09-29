@@ -1,0 +1,260 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Struts+jquery+ajax简单整合示例 - 陋室</title>
+	<meta name="author" content="Wanax">
+	
+	<meta name="description" content="Struts+jquery+ajax简单整合示例 jsp文件： function clickButton() { $.ajax({ url :'../ajaxRequest.action', //后台处理程序 type:'post', //数据发送方式 dataType:'json', // &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://wanax.github.io/blog/2012/02/23/struts-plus-jquery-plus-ajaxjian-dan-zheng-he-shi-li/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src='/images/avatar.png' alt='Profile Picture' style='width: 160px;' />
+</div>
+<hgroup>
+  <h1><a href="/">陋室</a></h1>
+  
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
+</ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
+<li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+
+  </ul>
+</section>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/wanax.github.com" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Struts+jquery+ajax简单整合示例</h1>
+	<div class="entry-content" itemprop="articleBody"><p>jsp文件：</p>
+
+<pre><code>function clickButton()  
+            {      
+                $.ajax({  
+                   url :'../ajaxRequest.action',  //后台处理程序  
+                   type:'post',    //数据发送方式  
+                   dataType:'json',  //接受数据格式  
+                   data:{result:"RE",request:"REQ"},  //要传递的数据  
+                   success:callbackFun  //回传函数(这里是函数名)  
+                   });  
+             }   
+//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
+            function callbackFun(data)  
+            {  
+                 alert("SUCCESS");  
+                 alert(data.result);  
+                 alert(data.request);  
+                 alert(data.q[1]);  
+            }
+</code></pre>
+
+<!--more-->
+
+
+<p>           <br/>
+或者：</p>
+
+<pre><code>function clickButton()  
+            {      
+                var url = '../ajaxRequest.action';  
+                var params = {result:"RESULT",request:"REQUEST" }; //通过id获得输入值  
+                 jQuery.post(url, params, callbackFun, 'json');  
+               }   
+//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
+            function callbackFun(data)  
+            {  
+                 alert("SUCCESS");  
+                 alert(data.result);  
+                 alert(data.request)  
+            } 
+</code></pre>
+
+<p>html部分：</p>
+
+<pre><code>&lt;input type="button" onclick="clickButton();" value="clickButton"/&gt;             
+</code></pre>
+
+<p>struts代码：</p>
+
+<pre><code>&lt;package name="ajax" extends="json-default"&gt;  
+        &lt;action name="ajaxRequest"  class="com.action.ajax" method="test"&gt;  
+            &lt;result type="json"&gt;&lt;/result&gt;  
+        &lt;/action&gt;  
+&lt;/package&gt;
+</code></pre>
+
+<p>java代码：</p>
+
+<pre><code>package com.action;  
+
+import com.opensymphony.xwork2.ActionSupport;  
+
+public class ajax extends ActionSupport{  
+    private String request;  
+    private String result;  
+    private String [] q={"a","b","c"};   
+
+    public String test(){  
+        System.out.println("ajax");  
+        request="request";  
+        result="result";  
+        return SUCCESS;  
+    }  
+
+    public String getRequest() {  
+        return request;  
+    }  
+    public void setRequest(String request) {  
+        this.request = request;  
+    }  
+    public String getResult() {  
+        return result;  
+    }  
+    public void setResult(String result) {  
+        this.result = result;  
+    }  
+
+    public String[] getQ() {  
+        return q;  
+    }  
+
+    public void setQ(String[] q) {  
+        this.q = q;  
+    }  
+
+
+}
+</code></pre>
+</div>
+
+</article>
+
+	<!--<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+-->
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Wanax -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'wanax';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://wanax.github.io/blog/2012/02/23/struts-plus-jquery-plus-ajaxjian-dan-zheng-he-shi-li/';
+        var disqus_url = 'http://wanax.github.io/blog/2012/02/23/struts-plus-jquery-plus-ajaxjian-dan-zheng-he-shi-li/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+		</div>
+	</div>
+</body>
+</html>

@@ -8,7 +8,7 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Jul 17th, 2011 OnTheRoad 西海镇 兰州出来过了海石湾去到西宁，由甘肃奔到青海，空气好了很多外温度也是相差很大。早上的时候要把带来的衣服全部穿上才将将御寒。 出发时遇到华工出来的一队人马，也是经青海往新疆去，路线一样多几个人骑车也不寂寞索性同行了。 &hellip;">
+	<meta name="description" content="Feb 23rd, 2012 Tec Struts+jquery+ajax简单整合示例 jsp文件： function clickButton() { $.ajax({ url :'../ajaxRequest.action', //后台处理程序 type:'post', //数据发送方式 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,7 +60,7 @@
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (3)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
 
   </ul>
 </section>
@@ -95,6 +95,349 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-23T21:28:00+08:00" data-updated="true" itemprop="datePublished">Feb 23<span>rd</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/02/23/struts-plus-jquery-plus-ajaxjian-dan-zheng-he-shi-li/" itemprop="url">Struts+jquery+ajax简单整合示例</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>jsp文件：</p>
+
+<pre><code>function clickButton()  
+            {      
+                $.ajax({  
+                   url :'../ajaxRequest.action',  //后台处理程序  
+                   type:'post',    //数据发送方式  
+                   dataType:'json',  //接受数据格式  
+                   data:{result:"RE",request:"REQ"},  //要传递的数据  
+                   success:callbackFun  //回传函数(这里是函数名)  
+                   });  
+             }   
+//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
+            function callbackFun(data)  
+            {  
+                 alert("SUCCESS");  
+                 alert(data.result);  
+                 alert(data.request);  
+                 alert(data.q[1]);  
+            }
+</code></pre>
+
+
+		
+		<a href="/blog/2012/02/23/struts-plus-jquery-plus-ajaxjian-dan-zheng-he-shi-li/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-13T18:24:00+08:00" data-updated="true" itemprop="datePublished">Feb 13<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/02/13/chui-zhi-fa-bu-httpclientmo-ni-deng-lu-huo-qu-ye-mian-xin-xi/" itemprop="url">垂直发布—Httpclient模拟登陆获取页面信息</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>过年回了趟老家，回来后寒假还有好大一截，闲着也是没事就这两天初步了解了下垂直发布的东西，收获一点点吧，感觉离预期还差很远。趁着还有印象写下来，步步为营呗。网上搜索，看到很多模拟登录都是用Httpclient的，另外一个是HttpURLConnection。
+HttpURLConnection是java的标准类，HttpClient 是 Apache Jakarta Common 下的子项目，用来提供支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。因为是初学，就图着简单易用的目的选择了Httpclient，感觉还是挺容易上手的，不过这两天遇到的问题也不少。</p>
+
+
+		
+		<a href="/blog/2012/02/13/chui-zhi-fa-bu-httpclientmo-ni-deng-lu-huo-qu-ye-mian-xin-xi/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-15T19:36:00+08:00" data-updated="true" itemprop="datePublished">Jan 15<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/" itemprop="url">常用正则表达式(转)</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>正则表达式用于字符串处理、表单验证等场合，实用高效。现将一些常用的表达式收集于此，以备不时之需。</p>
+
+<p>匹配中文字符的正则表达式： <code>[\u4e00-\u9fa5]</code></p>
+
+<blockquote><p>评注：匹配中文还真是个头疼的事，有了这个表达式就好办了</p></blockquote>
+
+<p>匹配双字节字符(包括汉字在内)：<code>[^\x00-\xff]</code></p>
+
+<blockquote><p>评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）</p></blockquote>
+
+
+		
+		<a href="/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-04T17:10:00+08:00" data-updated="true" itemprop="datePublished">Jan 4<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/01/04/luceneru-men-chu-bu/" itemprop="url">Lucene入门初步</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>简单地说，Lucene是两个java的程序包而已，通过引包调用接口函数我们可以很方便的对txt文档构建索引</p>
+
+<p>构建索引的大体顺序可由下图清晰可见</p>
+
+<p>即被索引的文档用Document对象表示</p>
+
+<p>IndexWriter通过函数addDocument将文档添加到索引，实现创建索引的过程</p>
+
+<p>Lucene的索引是应用反向索引</p>
+
+<p>当用户有请求是，Query代表用户的查询语句</p>
+
+
+		
+		<a href="/blog/2012/01/04/luceneru-men-chu-bu/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-04T17:08:00+08:00" data-updated="true" itemprop="datePublished">Jan 4<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji/" itemprop="url">Struts跳转控制笔记</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>当<code>namespace="/login"</code>时</h3>
+
+<p>===</p>
+
+<p>子路目中：有<code>login/</code>   <strong>no action mapped for</strong></p>
+
+<p>无<code>login/</code>   <strong>no result defined</strong></p>
+
+<p>根目录中：    <strong>no result defined</strong></p>
+
+<p><strong>no action mapped for</strong></p>
+
+
+		
+		<a href="/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-05T19:13:00+08:00" data-updated="true" itemprop="datePublished">Aug 5<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/08/05/che-hu/" itemprop="url">扯乎</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>送走一帮回广州的同伴，自己的火车却6个小时后再开，等在这里心中略觉忧伤，想来这股子弥漫着馕味的忧伤是从喀纳斯一路飘来的。</p>
+
+<p>本打算去湖边看湖怪，不想竟遇到一帮变异的陆地生物，他们在那里建了个大门说想进去先交150，迈过了这道坎又听说这个鸟JB大门距湖边还有30+km，90元的区间车被宰地无话可说。在心灵上饱受摧残时，肚皮也不失时机的闹起革命，看着笑眯眯的维族同胞和他旁边锅里金灿灿的手抓饭不禁一阵腹绞，上前询问40一份，我日你妈，你这样我很忧伤。</p>
+
+
+		
+		<a href="/blog/2011/08/05/che-hu/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-27T17:59:00+08:00" data-updated="true" itemprop="datePublished">Jul 27<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/07/27/dun-huang-zai-zhe-li/" itemprop="url">敦煌在这里</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>到玉门的晚上去唱k，直接导致众人惰性大涨，纷纷拿出玉门至瓜洲段路不好走天气炎热心情不好适逢大姨妈之类的借口搪塞不骑，鄙人也一度动摇搭车算完。但床上辗转想到搭车过去要40多元，我且骑它一天省下路费去到饱餐一顿也相当划算，狠狠心第二天也就爬起来了。</p>
+
+<p>一出门果然风就不小，先犒劳了自己四个韭菜包子，盖据说男生吃这个很有用处，女生还是少是食小心长胡子。走出玉门不到20km看见旁边的高速车辆飞驰，再看看自己这边残念的国道，大货车跟驴一样的前行，还卷起漫天黄沙气就不打一处来。毫不犹豫地找了处断开的铁丝网爬了进去，一上高速感觉果然不一样，看着下面沙石覆盖的国道整个人都觉得倍儿有面子。</p>
+
+
+		
+		<a href="/blog/2011/07/27/dun-huang-zai-zhe-li/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-21T21:30:00+08:00" data-updated="true" itemprop="datePublished">Jul 21<span>st</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/07/21/zhe-bian-tai-yang-da-de-hen/" itemprop="url">这边太阳大得很</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>这边太阳大得很，今天骑了一上午脖子通红，菊花另算。</p>
+
+<p>西海镇出来也有六天，从大通城关翻达坂山到菜花茂盛的青石嘴，继而一路缓上爬去俄博，一个一眼望出的城镇，却有五六家川菜馆，着实费解，另一特点便是相当缺水，风尘而来却无水洗澡。只好打了一脸盆，在房间里自慰一下，另一随之而来的问题便是厕所。嗯，怎么说呢，除了入口的“公厕”尚含常理外，顺着那个箭头拐出胡同就会有那么一丝的诧异，公厕呢？然后地上如星罗散布的点点告诉了你答案。我们三个一人爬到一个小山坡上迎风洒泪，我找到一个酷似蹲坑的位置不亦乐乎，另一个则隐在了乱石岗中，云深不知。并相约明早继续，不得侵占对方领土。</p>
+
+
+		
+		<a href="/blog/2011/07/21/zhe-bian-tai-yang-da-de-hen/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -172,332 +515,6 @@
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-02T17:31:00+08:00" data-updated="true" itemprop="datePublished">Jan 2<span>nd</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/life/'>Life</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2011/01/02/xiao-pian-er/" itemprop="url">胶片儿</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>在地铁上看到对外国父女，孩子很皮，动来动去，父亲几次提醒都不听，最后说了句“I’ll fight you”，老实了，我也释然了，哪哪的都一样。</p>
-
-<p>走在书城那边，穿着个校服的扮成中学生的女子卖唱，脸上褶子就不说了，光那眼神一摆，坑爹呢。</p>
-
-<p>陈丹青辩论的英语四六级依旧在耳，他悲哀地说与制度的对弈倒在其次，意想不到的是与教育结果的相遇。就是考完四六级的那帮兔崽子的观点，很类似于千年的媳妇熬成了婆。</p>
-
-
-		
-		<a href="/blog/2011/01/02/xiao-pian-er/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-19T12:04:00+08:00" data-updated="true" itemprop="datePublished">Nov 19<span>th</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/life/'>Life</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2010/11/19/wu-nian/" itemprop="url">五年</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>清晨睡梦中的一次转身，带来的是一阵清脆的卡啦声，就这样，我的小P关闭了他的世界，以这种方式和我说了再见。</p>
-
-<p>五年了，身边不少的物是人非，但小P一直在这里。从最初见面的新鲜刺激，整日整夜地耗在一起，到一种冲动持续着。那些白天的记挂，晚自习一回来便是和陈简曹智杰的联机闯关对打抑或是掌中的另一个国度的展现，无时无刻，在别人挑灯夜战的时候，是小P和我的逍遥自在，也可能是又一番在陈简手中的蹂躏。再到互相的不理睬，长久地停留在书桌中的抽屉里，和电池分离着，好像从诞生之日便是如此，今后的日子也同样日复一日。但真当有一天我又拉起了他，他从此便成为了我的一部分。归于平凡，互不相离，感觉不到他的存在，就像你不用时时刻刻地去感知着四肢，躯干和内脏。</p>
-
-
-		
-		<a href="/blog/2010/11/19/wu-nian/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-07T22:09:00+08:00" data-updated="true" itemprop="datePublished">Nov 7<span>th</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/life/'>Life</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2010/11/07/cong-cong-xing/" itemprop="url">匆匆行</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>人山人海开满地，形色匆匆去留无意，天下熙熙。</p>
-
-<p>今天跟常鹏去华强北就是这直观感受了，更严重的是我似乎还有点感同身受。想起小的时候爸爸带我来这里，也是同样的一番景象，对我说，“你说这些人瞎忙些什么”，那时作为一祖国的花朵，眼前的景象完全是另一个世界，没有半点的觉悟，唯一困扰我的只是街边那久久不去的臭豆腐的味道到底从何而来。今天看来，还真是一步一步地走向明天。</p>
-
-<p>坐地铁回来时，突然想起明天上课就是第10周，这学期17个教学周，这么一算来还有8周大二的一半就走完了，再算一算很快就大三了嘛。</p>
-
-<p>遂无奈地对常鹏说：“我们快毕业了”，常鹏：“嗯”。</p>
-
-<p>然后继续我的畅想，“你是你家老小，再过多3,4年你爸就60大寿了吧”，常鹏：“嗯”。</p>
-
-<p>“我爸也快50了，不几年也大寿”， “嗯”。</p>
-
-<p>“唉，放在以前的话，老子60大寿，你都要抱孙子了，看看现在的我们在干些什么”， “嗯”。</p>
-
-<p>“过段时间毕业没地方住，房子太贵了，老婆都难讨”，“嗯”。</p>
-
-
-		
-		<a href="/blog/2010/11/07/cong-cong-xing/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-09T02:56:00+08:00" data-updated="true" itemprop="datePublished">Oct 9<span>th</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/life/'>Life</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2010/10/09/xin-ci-hui-lao-gan-jue/" itemprop="url">新词汇老感觉</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>看书看到个名词挺带感的，“制度性专家”。</p>
-
-<p>指的那种未必是掌握了所有使之能够判断该制度价值所在的知识的人士，而往往只是一些全面理解其组织构造并因此而变得不可或缺的人士。</p>
-
-<p>通俗一点讲就是狗屁虽懂但不是很通，而其个人价值主要体现于很熟悉当前制度的构造与运作，出现不和谐的地方可以较常人更快地指出来，但要问到这个制度本身怎样的话是就丈二和尚摸不到脑袋了。</p>
-
-
-		
-		<a href="/blog/2010/10/09/xin-ci-hui-lao-gan-jue/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-06T21:34:00+08:00" data-updated="true" itemprop="datePublished">Aug 6<span>th</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2010/08/06/ci-qing-ke-wen-tian/" itemprop="url">此情可问天</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>区别于高速交通工具的直接空降和徒步的持久耐性，单车，以一种我所能承受的最适宜的速度，来渐进地接近。</p>
-
-<p>今天搭旅游团的车去看冰川，回来的路上有位藏民也搭了上来，包着红头布，斜坐在最前方的过道，有旁边的游客给他东西吃，吃了一口他憨憨地笑了，而旁边游客却爆出了更大的笑声，那一刻我蓦地感受到我们与他们的距离如此之远。</p>
-
-<p>然乌，藏语中的意思是死尸的堆积，灵魂的安息地，然乌湖自然就是他们的天然墓场，而对于我们，只因为它外表的风光旖旎便不吝言语的赞美它的美好，整日人头攒攒的挤在湖边酝酿着自己的无限诗意。</p>
-
-
-		
-		<a href="/blog/2010/08/06/ci-qing-ke-wen-tian/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-03T22:12:00+08:00" data-updated="true" itemprop="datePublished">Aug 3<span>rd</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2010/08/03/liang-ping-pi-jiu-%5B%3F%5D-zhi-yan/" itemprop="url">两瓶啤酒一支烟</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>武侠小说看多了特别是金庸的小说会发现江湖上的人物正义指数是以酒量来衡量的，像鸠摩智那样的鸟人自然滴酒不沾，而乔峰这号把酒当水喝的汉子在剧中地位自然一目了然。</p>
-
-<p>事情还是发生在骑川藏的第一天，那是个阳光明媚，万里无云，天空上飘着朵朵白云的日子。我们一行人从成都进军雅安，刚出城不久就看见两个人在快悠悠地往前晃。之所以悠悠，实在是因为他们踏频太慢，慢到与我们的踏频成分针与秒针的关系，但我们又总也追不上他们&hellip;所以也就快悠悠了。而这也只是亮点之一，最令我们惊奇的是发现其中一人驮包上别着一支雪花，除此别无其它液体。此事非同小可，7月的成都太阳与我们亲热的很，它的良好愿景就是让我们成为肉干，其唯一的对抗手段便是多喝水了，而此人竟如此嚣张地与太阳作对，经过本人的认真考虑初步认定此人定是酒水过量，是以外出溜风的，遂不再理会。</p>
-
-
-		
-		<a href="/blog/2010/08/03/liang-ping-pi-jiu-%5B%3F%5D-zhi-yan/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-01T22:08:00+08:00" data-updated="true" itemprop="datePublished">Aug 1<span>st</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2010/08/01/zha-xi-de-le-yu-tang-guo-de-gu-shi/" itemprop="url">扎西德勒与糖果的故事</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>不知从什么时候藏区的大地上似乎流传起了一个美丽的传说。</p>
-
-<p>如果你面前飘过骑车的人，对他喊声“扎西德勒”就会有糖果飞入你的掌心。</p>
-
-<p>诚然，对于长久地生活在辽阔高原上整日与牛羊做伴的孩子来说，这是一个美丽的传说，但对于骑车的人来说却不折不扣地算是一种折磨。</p>
-
-<p>记得刚翻过折多山，下往新都桥的路上，风光秀丽，并且初次听到沿路的同胞跟我喊“扎西德勒”，心中欣喜万分，感慨这里的人民淳朴可爱。后来才终于明白想要能有这种心情是必须建立在车速35km/h之上的，否则的话，完全是另一种意境。</p>
-
-
-		
-		<a href="/blog/2010/08/01/zha-xi-de-le-yu-tang-guo-de-gu-shi/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-07-26T22:40:00+08:00" data-updated="true" itemprop="datePublished">Jul 26<span>th</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2010/07/26/cang-qu-wu-ping-lu/" itemprop="url">藏区无平路</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>今晚到的理塘，海拔4000多也就算了，温度还低得可以，街上满是穿羽绒服的喇嘛，而我唯一的一条长裤因为要恢复它的英雄本色，顾早早地挂在了衣绳，遂当我上街时有种错觉自己是日本的那些冬天上学还穿裙子的女学生，当然我是男的，穿短裤，也就这么一说。</p>
-
-<p>如此天气，北哥给了建设性的意见，去吃火锅。自然想到成都吃的重庆火锅，虽说辣得受不了，不过对于一个在温度不到10度的地方穿短裤的人来说也不失为一个绝妙的主意。</p>
-
-
-		
-		<a href="/blog/2010/07/26/cang-qu-wu-ping-lu/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
 </div>
 
 <nav id="pagenavi">
@@ -543,6 +560,7 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
 </script>
+
 		</div>
 	</div>
 </body>

@@ -1,0 +1,265 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>ajax对象数组传参方式 - 陋室</title>
+	<meta name="author" content="Wanax">
+	
+	<meta name="description" content="Ajax对象数组传参方式 项目中一个页面需要的功能是动态添加信息列表，传至后台添加数据库。用的方式是ajax+struts2，因为struts本身的特性，在ajax的data里直接写数组名java后台是无法正常接收到的，最简单的理解便是它无法智能的一一匹配数组里的每一个值， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://wanax.github.io/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src='/images/avatar.png' alt='Profile Picture' style='width: 160px;' />
+</div>
+<hgroup>
+  <h1><a href="/">陋室</a></h1>
+  
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
+</ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
+<li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+
+  </ul>
+</section>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/wanax.github.com" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Ajax对象数组传参方式</h1>
+	<div class="entry-content" itemprop="articleBody"><p>项目中一个页面需要的功能是动态添加信息列表，传至后台添加数据库。用的方式是ajax+struts2，因为struts本身的特性，在ajax的data里直接写数组名java后台是无法正常接收到的，最简单的理解便是它无法智能的一一匹配数组里的每一个值，所以我们在前台开始发action请求前便要组装好容易接收的数据格式。</p>
+
+<p>最简单的方法是直接拼接字符串，后台split出来，但有时候用的不是简单的字符串数组而是对象数组，这时候就需要一些其它方法了。</p>
+
+<!--more-->
+
+
+<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/1349941967_9520_zpsbbaf2803.png" alt="image" /></p>
+
+<p>如上图所示，每次提交是权限一个对象，然后关于资源对象是动态添加与删除的，很明显，这就需要一个对象数组来装这些东西</p>
+
+<p>前台页面的动态添加是这样的：</p>
+
+<pre><code>    var addNewSource = function(){  
+     var htmlStr =   
+      "&lt;tr class=\"sourcecontent\"&gt;"+  
+               "&lt;td&gt;&lt;input class=\"sourcename\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourceurl\" type=\"text\"/&gt;&lt;/td&gt;"+  
+               "&lt;td&gt;&lt;input class=\"sourcetype\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourcedes\" type=\"text\"/&gt;&lt;/td&gt;"+  
+               "&lt;td&gt;&lt;a href=\"#\" onclick=\"deleteNewSource(this);return false;\"&gt;&lt;img class=\"deleteBtn\" src=\"&lt;%=basePath%&gt;/img/delete.png\"/&gt;&lt;/a&gt;&lt;/td&gt;"+  
+            "&lt;/tr&gt;";  
+         $("#resourceInfo").append(htmlStr);  
+
+    };  
+    function deleteNewSource(obj){  
+     $(obj).parents('tr').remove();  
+    }  
+</code></pre>
+
+<p>然后就是对对象数组的拼装与发送了</p>
+
+<pre><code>    var xhrBeforeSend = function(){ 
+        $('.status').fadeIn();
+    };
+
+    var xhrSuccess = function(data,status,xhr){
+        if(data.tag=="T"){
+            $('.status').css({"margin-left":"740px","color":"green"}).html("提交数据成功");
+            $('.status').fadeOut(1000);
+        }else{
+            $('.status').css({"margin-left":"760px","color":"#FF0000"}).html("提交失败！");
+        }     
+    };
+    KindEditor.ready(function(K) {
+           K('.submitBtn').click(function() {
+                        var screenWidth = $(document).width()-6;
+                        var sourceList = '&lt;ul&gt;';
+                        $("tr.sourcecontent").each(function(){
+                            sourceList +='&lt;li&gt;'+$(this).find('.sourcename').val()+'&lt;/li&gt;';
+                        });
+                        sourceList +='&lt;/ul&gt;';
+                        var htmlStr = '&lt;div class="dailogbox"&gt;'+
+                                       '&lt;table style="width:400px; margin:10px auto;color:#ffffff;font-size:15px;"&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;权限名&lt;/td&gt;&lt;td&gt;'+$("#authname").val()+'&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;权限描述&lt;/td&gt;&lt;td&gt;'+$("#authdes").val()+'&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;父级权限&lt;/td&gt;&lt;td&gt;'+$("#authparent").val()+'&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;关联权限:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;/table&gt;'+
+                                       '&lt;div style="width:400px;margin:10px auto; color:#ffffff;"&gt;'+sourceList+ 
+                                       '&lt;/div&gt;'+
+                                       '&lt;/div&gt;';
+                        var dialog = KindEditor.dialog({
+                            width : screenWidth,
+                            height: 300,
+                            body  : htmlStr,
+                            closeBtn : {
+                                name : '关闭',
+                                click : function(e) {
+                                    dialog.remove();
+                                }
+                            },
+                            yesBtn : {
+                                name : '确定',
+                                click : function(e) {
+                                  var data = {
+                                              authName:$("#authname").val(),
+                                              authDes:$("#authdes").val(),
+                                              authParent:$("#authparent").val()
+                                   };
+                                  var n=0;
+                                  $("tr.sourcecontent").each(function(){
+                                      data["resList[" + n + "].resourceName"] = $(this).find('.sourcename').val();
+                                      data["resList[" + n + "].resourceType"] = $(this).find('.sourcetype').val();
+                                      data["resList[" + n + "].resourceDescription"] = $(this).find('.sourcedes').val();
+                                      data["resList[" + n + "].resourceURL"] = $(this).find('.sourceurl').val();
+                                      n++;
+                                  });
+                                  Pager.initUrl("insertauthority.action");
+                                  Pager.xhrBeforeSend=xhrBeforeSend;
+                                  Pager.xhrSuccess = xhrSuccess;
+                                  Pager.syncLoadData(data); 
+                                  dialog.remove();
+                                }
+                            },
+                            noBtn : {
+                                name : '取消',
+                                click : function(e) {
+                                    dialog.remove();
+                                }
+                            }
+                        });
+                    });
+         });
+</code></pre>
+</div>
+
+</article>
+
+	<!--<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+-->
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Wanax -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'wanax';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://wanax.github.io/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/';
+        var disqus_url = 'http://wanax.github.io/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+		</div>
+	</div>
+</body>
+</html>

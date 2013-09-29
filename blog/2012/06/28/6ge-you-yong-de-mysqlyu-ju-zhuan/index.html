@@ -1,0 +1,208 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>6个有用的MySQL语句(转) - 陋室</title>
+	<meta name="author" content="Wanax">
+	
+	<meta name="description" content="6个有用的MySQL语句(转) 1. 计算年数 你想通过生日来计算这个人有几岁了。 SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y') + 0; 2. 两个时间的差 取得两个 datetime &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://wanax.github.io/blog/2012/06/28/6ge-you-yong-de-mysqlyu-ju-zhuan/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src='/images/avatar.png' alt='Profile Picture' style='width: 160px;' />
+</div>
+<hgroup>
+  <h1><a href="/">陋室</a></h1>
+  
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
+</ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
+<li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+
+  </ul>
+</section>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/wanax.github.com" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">6个有用的MySQL语句(转)</h1>
+	<div class="entry-content" itemprop="articleBody"><h3>1. 计算年数</h3>
+
+<blockquote><p>你想通过生日来计算这个人有几岁了。</p></blockquote>
+
+<pre><code>SELECT
+
+DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y')
+ + 0;
+</code></pre>
+
+<!--more-->
+
+
+<h3>2. 两个时间的差</h3>
+
+<blockquote><p>取得两个 datetime 值的差。假设 dt1 和 dt2 是 datetime 类型，其格式为 ‘yyyy-mm-dd hh:mm:ss’，那么它们之间所差的秒数为：</p></blockquote>
+
+<pre><code>UNIX_TIMESTAMP(
+ dt2 ) - UNIX_TIMESTAMP( dt1 )
+</code></pre>
+
+<p>除以60就是所差的分钟数，除以3600就是所差的小时数，再除以24就是所差的天数。</p>
+
+<h3>3. 显示某一列出现过N次的值</h3>
+
+<pre><code>SELECT id FROM tbl GROUP BY id HAVING COUNT(*) = N;
+</code></pre>
+
+<h3>4. 计算两个日子间的工作日</h3>
+
+<blockquote><p>所谓工作日就是除出周六周日和节假日。</p></blockquote>
+
+<pre><code>SELECT COUNT(*) FROM calendar WHERE d BETWEEN Start AND Stop  AND DAYOFWEEK(d) NOT IN(1,7) AND holiday=0
+</code></pre>
+
+<h3>5. 查找表中的主键</h3>
+
+<pre><code>SELECT k.column_name FROM information_schema.table_constraints t JOIN information_schema.key_column_usage k USING  (constraint_name,table_schema,table_name) WHERE t.constraint_type='PRIMARY
+ KEY' AND t.table_schema='db' AND t.table_name=tbl'
+</code></pre>
+
+<h3>6. 查看你的数库有多大</h3>
+
+<pre><code>SELECT table_schema AS 'Db Name',  Round(Sum( data_length + index_length ) / 1024 / 1024, 3 ) AS 'Db Size (MB)',  Round( Sum( data_free ) / 1024 / 1024, 3 ) AS 'Free Space (MB)' FROM information_schema.tables GROUP BY table_schema ;
+</code></pre>
+
+<p>转自<a href="http://coolshell.cn/articles/3433.html">这里</a></p>
+</div>
+
+</article>
+
+	<!--<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+-->
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Wanax -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'wanax';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://wanax.github.io/blog/2012/06/28/6ge-you-yong-de-mysqlyu-ju-zhuan/';
+        var disqus_url = 'http://wanax.github.io/blog/2012/06/28/6ge-you-yong-de-mysqlyu-ju-zhuan/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+		</div>
+	</div>
+</body>
+</html>

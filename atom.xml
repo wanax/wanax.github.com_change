@@ -4,7 +4,7 @@
   <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-09-28T15:53:45+08:00</updated>
+  <updated>2013-09-29T20:37:41+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -12,6 +12,495 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UIView三种动画笔记]]></title>
+    <link href="http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/"/>
+    <updated>2013-06-09T10:30:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji</id>
+    <content type="html"><![CDATA[<pre><code>[UIView animateWithDuration:0.6f  
+                          delay:0  
+                        options:UIViewAnimationOptionCurveEaseOut  
+                     animations:^{  
+                         self.view.alpha = 0;  
+                     }  
+                     completion:^(BOOL finished) {  
+                         [self.view removeFromSuperview];  
+                     }];  
+</code></pre>
+
+<p>  <!--more--></p>
+
+<pre><code>[UIView beginAnimations:@"animation" context:nil];  
+[UIView setAnimationDuration:0.8f];  
+[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];  
+[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:delegate.tabBarController.view cache:YES];  
+[UIView commitAnimations];  
+
+
+
+CATransition *animation = [CATransition animation];  
+    animation.duration = 0.8f;  
+    /*动画时间控制      
+ UIViewAnimationCurveEaseInOut,         // slow at beginning and end      
+ UIViewAnimationCurveEaseIn,            // slow at beginning      
+ UIViewAnimationCurveEaseOut,           // slow at end     
+ UIViewAnimationCurveLinear      
+ */  
+animation.timingFunction = UIViewAnimationCurveEaseInOut;  
+animation.fillMode = kCAFillModeForwards;  
+/*动画类型      
+ kCATransitionFade;      
+ kCATransitionMoveIn;      
+ kCATransitionPush;      
+ kCATransitionReveal;      
+ */  
+animation.type = kCATransitionMoveIn;  
+/*动画进入方式      
+ kCATransitionFromRight;      
+ kCATransitionFromLeft; 
+ kCATransitionFromTop; 
+ kCATransitionFromBottom; 
+ */  
+animation.subtype = kCATransitionFromBottom;  
+[[self.view layer] addAnimation:animation forKey:@"animation"];  
+animation=nil; 
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS上js引擎的使用]]></title>
+    <link href="http://wanax.github.io/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong/"/>
+    <updated>2013-06-07T11:47:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong</id>
+    <content type="html"><![CDATA[<p> 如上篇文章所述ios折线图绘制，公司开发需要要用到一些字符串转公式的需求。自己实在有点惧自己写语法书啥的听公司大牛说可以使用js引擎试试，于是就抱着试试的态度调研了一把，感觉还不错。</p>
+
+<p>这次试用了两个js引擎，一个是javascriptcore，这个比较方便可以直接引入便使用，另一个是google的v8引擎，这个有点麻烦要先编译通过才行，搞了好一阵才派上用场~倒是学到了好多新知识，哈哈。</p>
+
+<!--more-->
+
+
+<p>先说简单的javascriptcore吧，下载好库引入静态链接库和头文件便可以了。这里有时候会报错说找不到文件。google了一下发下一般是因为xcode本身对外来拷贝文件没有正确引用导致的，解决办法很简单，进入Build Phases 的Compile Source对新添加的头文件进行引用就好了。</p>
+
+<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607111925093_zps428cacd3.png" alt="image" /></p>
+
+<p>接下来便是怎样使用的问题。</p>
+
+<p>先在头文件里引用文件：</p>
+
+<pre><code>import "JavaScriptCore/JavaScriptCore.h" 
+</code></pre>
+
+<p>然后是构造js的上下文context，这个还蛮重要的东西，具体的原理大家可以自行google，因为我自己理解的也很肤浅，略知皮毛而已。</p>
+
+<pre><code>context = JSGlobalContextCreate(NULL);  
+</code></pre>
+
+<p>完了以后我把js运行的方法封装成了一个方法，如下：</p>
+
+<pre><code>- (NSString *)runsJS:(NSString *)aJSString  
+{  
+    if (!aJSString) {  
+        NSLog(@"[JSC] JS String is empty!");  
+        return nil;  
+    }  
+
+
+JSStringRef scriptJS = JSStringCreateWithUTF8CString([aJSString UTF8String]);  
+JSValueRef exception = NULL;  
+
+JSValueRef result = JSEvaluateScript(context, scriptJS, NULL, NULL, 0, &amp;exception);  
+NSString *res = nil;  
+
+JSStringRef jstrArg = JSValueToStringCopy(context, result, NULL);  
+res = (NSString*)JSStringCopyCFString(kCFAllocatorDefault, jstrArg);  
+
+JSStringRelease(jstrArg);  
+
+JSStringRelease(scriptJS);  
+
+return res;  }  
+</code></pre>
+
+<p>封装完毕便可以顺利使用啦：</p>
+
+<pre><code>NSString *str=[self.engine runJS:@"var str='';for(var i=0;i&lt;2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
+    //NSLog(@"%@",str);  
+</code></pre>
+
+<p>这便是大体的javascriptcore的使用方法了。</p>
+
+<p>接下来是v8引擎。</p>
+
+<p>v8引擎的编译很痛苦，网上一般比较常见的教程是编译成动态库，lib之类的，但苹果貌似只让用.a的静态库，无形中又增加了负担。我网上搜了好多编译的方法，无非都是些svn check下v8的文件，然后安装python和对应python的一个编译工具scons进行编译。看攻略说，google先在又不提倡用scons了，又开发了另外一种东西&hellip;.真是能折腾。</p>
+
+<p>我遇到的主要问题是好像编译的时候要搭配一个叫breakpad的东西一起，而这玩意儿又死活装不了，就一直卡在那里了。但比较意外的是最后经竟意外发现在v8根目录还有个make的命令，也可以直接编译&hellip;..就这样稀里糊涂的把静态库给整出来了，还隐藏得很深，search了一下才发现在哪里。</p>
+
+<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607113710843_zpsd81cc322.png" alt="image" /></p>
+
+<p>这便是粗略的使用方法啦。</p>
+
+<blockquote><p>一个简单的示例</p></blockquote>
+
+<pre><code>var test=function(){  
+var val=[];  
+val["1.0"]=1;  
+val["1.1"]=2;  
+val["1.2"]=3;  
+val["1.3"]=4;  
+val["2"]=34;  
+
+var str="var v=this.val; v[\"1.3\"]=v[\"1.0\"]*v[\"1.2\"];";  
+var fun=new Function(str);  
+val["0"]=5;  
+fun();  
+return val;  
+}  
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS开发之使用CorePlot绘制折线图并添加拖动功能]]></title>
+    <link href="http://wanax.github.io/blog/2013/06/07/ioskai-fa-zhi-shi-yong-coreplothui-zhi-zhe-xian-tu-bing-tian-jia-tuo-dong-gong-neng/"/>
+    <updated>2013-06-07T11:06:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/06/07/ioskai-fa-zhi-shi-yong-coreplothui-zhi-zhe-xian-tu-bing-tian-jia-tuo-dong-gong-neng</id>
+    <content type="html"><![CDATA[<p>做ios开发快两个月了 从基本的语法开始学起看看这个学学那个的。一开始对delegate controller view各种头大，就老老实实地跟着入门教程一步步的来。所幸之前做了一年多的java开发，熟悉了eclipse的界面和Deja的字体，换到mac下面用xcode也觉得很新鲜。</p>
+
+<!--more-->
+
+
+<p>感觉做ios开发这一块对内存管理要求还是不低的，因为之前做java，对这一块基本不怎么关心，突然转到ios上的时候在内存管理上还是犯过几次错误的。开始学习的时候看书上说谁创建谁释放，就简单的以为但凡创建出来的对象都要显式地去release，后来果然出过一次诡异的错误，修正之后对内存管理就更加用心地去学习了，这一块有时间后面再讨论，现在先把这几天对coreplot的使用记录一下，以备后用。</p>
+
+<p>公司的需求是对数据解析进行折线图绘制，并且用户可以通过触摸调整数据点通过公式计算使折线图重新绘制。数据与公式都是服务器端获取的并且是打包成了一个json的字符串。这里面还牵扯到了字符串解析成公式的问题。上网搜了下，oc下并没有很好的解决方案，像这样做的话似乎只能自己写方法，让我想起了上学时候学编译原理写过的语法树，满满的都是泪啊~妥妥的能不写就不写。后来公司大牛说有js引擎可以拿过来用，因为公司这边也有做网页端的折线图绘制，在js下公式转换异常简单</p>
+
+<pre><code>var fun=new fun(str);  
+fun();  
+</code></pre>
+
+<p>如上所示，两行代码就把str代表的字符串公式解析并计算一遍了，实在是太无解了，妥妥必须使用，这个东西下篇文章再讲吧。
+图像绘制的话google出来ios上比较常用的是CorePlot和PowerPlot，看了下两者的用法，感觉CorePlot会使用更多的代理之类的东西，感觉比较符合苹果的编码思路，就选了它来用了。</p>
+
+<p>首先是下载coreplot库，把.a文件和头文件引入，这里就不赘述了。</p>
+
+<p>先在头文件里定义几个后面要用到的量</p>
+
+<pre><code>//转换坐标系字典，与手指触摸点匹配  
+@property (nonatomic,retain) NSMutableDictionary *reverseDic;  
+//js引擎上下文  
+@property (nonatomic) JSGlobalContextRef context;  
+//绘图view  
+@property (nonatomic,retain) CPTGraphHostingView *hostView;  
+
+//坐标转换方法，实际坐标转化相对坐标  
+- (CGPoint)CoordinateTransformRealToAbstract:(CGPoint)point;  
+//坐标转换方法，相对坐标转化实际坐标  
+- (CGPoint)CoordinateTransformAbstractToReal:(CGPoint)point;  
+//判断手指触摸点是否在折点旁边  
+-(BOOL)isNearByThePoint:(CGPoint)p;  
+
+//js代码运行  
+- (NSString *)runsJS:(NSString *)aJSString; 
+</code></pre>
+
+<p>因为要对图像上的折点拖动，而我没有找到合适的对点的事件绑定方法，所以先直接对整个view进行手势监听，通过实际坐标与坐标轴坐标相对转换来判定触摸点是否是在折点附近已达到合理拖动的目的。</p>
+
+<p>接下来便开始.m文件的编码工作啦。我先定义一个简单的折线图公式，y=x+n；把一些数据点塞到point数组里，做后面的datasource。接下来便是折线图的绘制，代码注释写得比较清楚，就不一一赘述了。值得注意的是，这里点的绘制也是使用ios里常用的datasource的方法，所以先别急着找那一系列点出现在哪里~</p>
+
+<pre><code>- (void)viewDidLoad  
+{  
+    [super viewDidLoad];  
+    UIButton *bt=[[UIButton alloc] init];  
+    [self.view addSubview:bt];  
+    points=[[NSMutableArray alloc] init];  
+    reverseDic=[[NSMutableDictionary alloc] init];  
+    NSUInteger i;  
+    for(i=0;i&lt;NUM;i++){  
+        id x=[NSNumber numberWithFloat:0+i];  
+        id y=[NSNumber numberWithFloat:3*i];  
+        [reverseDic setObject:y forKey:[NSString stringWithFormat:@"%.0f",[x floatValue]]];  
+        [points addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x,@"x",y,@"y",nil]];  
+    }  
+    // Do any additional setup after loading the view.  
+    //初始化图形视图  
+    graph=[[CPTXYGraph alloc] initWithFrame:CGRectZero];  
+    CPTTheme *theme=[CPTTheme themeNamed:kCPTDarkGradientTheme];  
+    [graph applyTheme:theme];  
+    self . view =[[ CPTGraphHostingView alloc ] initWithFrame :[ UIScreen mainScreen ]. bounds ];  
+    hostView=(CPTGraphHostingView *)self.view;  
+
+    [hostView setHostedGraph : graph ];  
+
+    NSLog(@"orgin:%.2f,%.2f",hostView.frame.origin.x,hostView.frame.origin.y);  
+    NSLog(@"size:%.2f,%.2f",hostView.frame.size.height,hostView.frame.size.width);  
+
+    // CPGraph 四边不留白  
+    graph . paddingLeft = 0.0f ;  
+    graph . paddingRight = 0.0f ;  
+    graph . paddingTop = 0.0f ;  
+    graph . paddingBottom = GRAPAHBOTTOMPAD ;  
+    // 绘图区 4 边留白  
+    graph . plotAreaFrame . paddingLeft = 0.0 ;  
+    graph . plotAreaFrame . paddingTop = 0.0 ;  
+    graph . plotAreaFrame . paddingRight = 0.0 ;  
+    graph . plotAreaFrame . paddingBottom = 00.0 ;  
+
+
+
+
+
+
+    //绘制图形空间  
+    CPTXYPlotSpace *plotSpace=(CPTXYPlotSpace *)graph.defaultPlotSpace;  
+    //plotSpace.allowsUserInteraction=YES;  
+
+    //设置x，y坐标范围  
+    plotSpace.xRange=[CPTPlotRange plotRangeWithLocation:  
+                      CPTDecimalFromCGFloat(XRANGEBEGIN)  
+                                                  length:CPTDecimalFromCGFloat(XRANGELENGTH)];  
+    plotSpace.yRange=[CPTPlotRange plotRangeWithLocation:  
+                      CPTDecimalFromCGFloat(YRANGEBEGIN)  length:CPTDecimalFromCGFloat(YRANGELENGTH)];  
+
+    //绘制坐标系  
+    CPTXYAxisSet *axisSet=(CPTXYAxisSet *)graph.axisSet;  
+    CPTXYAxis *x=axisSet.xAxis;  
+
+    CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];  
+    lineStyle.miterLimit = 1.0f;  
+    lineStyle.lineWidth = 2.0;  
+    lineStyle.lineColor = [CPTColor colorWithComponentRed:255/255.0 green:211/255.0 blue:155/255.0 alpha:1.0];  
+
+    x.majorIntervalLength=CPTDecimalFromFloat(XINTERVALLENGTH);  
+    x.orthogonalCoordinateDecimal=CPTDecimalFromFloat(XORTHOGONALCOORDINATE);  
+    x.minorTicksPerInterval=XTICKSPERINTERVAL;  
+    x.minorTickLineStyle = lineStyle;  
+
+    CPTXYAxis *y=axisSet.yAxis;  
+    y.majorIntervalLength=CPTDecimalFromFloat(YINTERVALLENGTH);  
+    y.orthogonalCoordinateDecimal=CPTDecimalFromFloat(YORTHOGONALCOORDINATE);  
+    y.minorTicksPerInterval=YTICKSPERINTERVAL;  
+    y.minorTickLineStyle = lineStyle;  
+
+
+    y. labelingPolicy = CPTAxisLabelingPolicyNone ;  
+
+
+    //修改折线图线段样式  
+    CPTScatterPlot *boundLinePlot=[[[CPTScatterPlot alloc] init] autorelease];  
+    //CPTMutableLineStyle *lineStyle=[CPTMutableLineStyle lineStyle];  
+    lineStyle.miterLimit=2.0f;  
+    lineStyle.lineWidth=2.0f;  
+    lineStyle.lineColor=[CPTColor whiteColor];  
+    boundLinePlot.dataLineStyle=lineStyle;  
+    boundLinePlot.identifier=@"Blue Plot";  
+    boundLinePlot.dataSource=self;//需实现委托  
+
+
+
+    // Do a red-blue gradient: 渐变色区域  
+    //  
+    /*CPTColor * blueColor        = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:0.8]; 
+    CPTColor * redColor         = [CPTColor colorWithComponentRed:1.0 green:0.3 blue:0.3 alpha:0.8]; 
+    CPTGradient * areaGradient1 = [CPTGradient gradientWithBeginningColor:blueColor 
+                                                              endingColor:redColor]; 
+    areaGradient1.angle = -120.0f; 
+    CPTFill * areaGradientFill  = [CPTFill fillWithGradient:areaGradient1]; 
+    boundLinePlot.areaFill      = areaGradientFill; 
+    boundLinePlot.areaBaseValue = [[NSDecimalNumber numberWithFloat:0.5] decimalValue]; // 渐变色的起点位置 
+    */  
+
+
+    // Add plot symbols: 表示数值的符号的形状  
+    //  
+    CPTMutableLineStyle * symbolLineStyle = [CPTMutableLineStyle lineStyle];  
+    symbolLineStyle.lineColor = [CPTColor colorWithComponentRed:102/255.0 green:204/255.0 blue:255/255.0 alpha:1.0];  
+    symbolLineStyle.lineWidth = 2.0;  
+
+    CPTPlotSymbol * plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];  
+    //plotSymbol.fill          = [CPTFill fillWithColor: [CPTColor colorWithComponentRed:102/255.0 green:204/255.0 blue:255/255.0 alpha:1.0]];  
+    plotSymbol.lineStyle     = symbolLineStyle;  
+    plotSymbol.size          = CGSizeMake(1.8, 1.8);  
+    boundLinePlot.plotSymbol = plotSymbol;  
+
+
+    // Animate in the new plot: 淡入动画  
+    boundLinePlot.opacity = 0.0f;  
+
+    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];  
+    fadeInAnimation.duration            = 3.0f;  
+    fadeInAnimation.removedOnCompletion = NO;  
+    fadeInAnimation.fillMode            = kCAFillModeForwards;  
+    fadeInAnimation.toValue             = [NSNumber numberWithFloat:1.0];  
+    [boundLinePlot addAnimation:fadeInAnimation forKey:@"shadowOffset"];  
+
+
+
+    [graph addPlot:boundLinePlot];  
+
+
+    //手势添加  
+    UIPanGestureRecognizer *panGr=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPan:)];  
+    [hostView addGestureRecognizer:panGr];  
+    [panGr release];  
+
+
+
+
+    //NSString *str=[self.engine runJS:@"var str='';for(var i=0;i&lt;2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
+    //NSLog(@"%@",str);  
+
+
+
+
+} 
+</code></pre>
+
+<h3>这样一个初步的折现图便绘制完毕啦。数据源委托和数据标签的实现如下：</h3>
+
+<pre><code>// 添加数据标签  
+-( CPTLayer *)dataLabelForPlot:( CPTPlot *)plot recordIndex:( NSUInteger )index  
+{  
+    // 定义一个白色的 TextStyle  
+    static CPTMutableTextStyle *whiteText = nil ;  
+    if ( !whiteText ) {  
+        whiteText = [[ CPTMutableTextStyle alloc ] init ];  
+        whiteText.color=[CPTColor colorWithComponentRed:152/255.0 green:251/255.0 blue:152/255.0 alpha:1.0];  
+    }  
+
+    // 定义一个 TextLayer  
+    CPTTextLayer *newLayer = nil ;  
+    NSString * identifier=( NSString *)[plot identifier];  
+    if ([identifier isEqualToString : @"Blue Plot" ]) {  
+
+        newLayer=[[[CPTTextLayer alloc] initWithText:[[[NSString alloc] initWithFormat:@"%0.1f",[[[points objectAtIndex:index] objectForKey:@"y"] doubleValue]] autorelease] style:whiteText] autorelease];  
+    }  
+    return newLayer;  
+}  
+
+
+
+//散点数据源委托实现  
+-(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot{  
+    return [points count];  
+}  
+
+-(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger) index{  
+    NSString *key=(fieldEnum==CPTScatterPlotFieldX?@"x":@"y");  
+    NSNumber *num=[[points objectAtIndex:index] valueForKey:key];  
+   //NSLog(@"key:%@,num:%@",key,num);  
+    return  num;  
+}  
+</code></pre>
+
+<h3>可以在代码里看到我实现了对页面的手势监听，以便实现折线图拖动的效果，具体方法如下：</h3>
+
+<pre><code>-(void)viewPan:(UIPanGestureRecognizer *)tapGr  
+{  
+    CGPoint now=[tapGr locationInView:self.view];  
+
+//手势变化并且接近折点旁边  
+if([tapGr state]==UIGestureRecognizerStateChanged&amp;&amp;[self isNearByThePoint:now]){  
+    CGPoint coordinate=[self CoordinateTransformRealToAbstract:now];  
+    [points removeAllObjects];  
+    [reverseDic removeAllObjects];  
+    NSUInteger i;  
+    for(i=0;i&lt;NUM;i++){  
+        id x=[NSNumber numberWithFloat:0+i];  
+        id y=[NSNumber numberWithFloat:3*i+coordinate.y];  
+        [reverseDic setObject:y forKey:[NSString stringWithFormat:@"%.0f",[x floatValue]]];  
+        [points addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x,@"x",y,@"y",nil]];  
+    }  
+    [graph reloadData];  
+}  
+
+
+}  
+
+//判断手指触摸点是否在折点旁边  
+-(BOOL)isNearByThePoint:(CGPoint)p{  
+
+//从手指触摸点的实际坐标得到抽象坐标  
+CGPoint abstractCoordinate=[self CoordinateTransformRealToAbstract:p];  
+//获取临近坐标点  
+int acX=(int)(abstractCoordinate.x+0.5);  
+//判断临近坐标点是否存在折点，存在则取出  
+float acY=[[reverseDic objectForKey:[NSString stringWithFormat:@"%d",acX]] floatValue];  
+
+//构造临近坐标折点，并转化为实际屏幕坐标点  
+CGPoint temp=[self CoordinateTransformAbstractToReal:CGPointMake([[NSNumber numberWithInt:acX] floatValue], acY)];  
+//计算临近坐标点与手指触摸点的距离  
+double distance=sqrt(pow((p.x-temp.x),2)+pow((p.y-temp.y),2));  
+
+//NSLog(@"%f",distance);  
+return distance&gt;25?NO:YES;  
+
+}  
+
+
+//空间坐标转换:实际坐标转化自定义坐标  
+-(CGPoint)CoordinateTransformRealToAbstract:(CGPoint)point{  
+
+float viewWidth=hostView.frame.size.width;  
+float viewHeight=hostView.frame.size.height;  
+
+float coordinateX=(XRANGELENGTH*point.x)/viewWidth+XRANGEBEGIN;  
+float coordinateY=YRANGELENGTH-((YRANGELENGTH*point.y)/(viewHeight-GRAPAHBOTTOMPAD))+YRANGEBEGIN;  
+
+return CGPointMake(coordinateX,coordinateY);  
+}  
+//空间坐标转换:自定义坐标转化实际坐标  
+-(CGPoint)CoordinateTransformAbstractToReal:(CGPoint)point{  
+
+float viewWidth=hostView.frame.size.width;  
+float viewHeight=hostView.frame.size.height;  
+
+float coordinateX=(point.x-XRANGEBEGIN)*viewWidth/XRANGELENGTH;  
+float coordinateY=(-1)*(point.y-YRANGEBEGIN-YRANGELENGTH)*(viewHeight-GRAPAHBOTTOMPAD)/YRANGELENGTH;  
+
+return CGPointMake(coordinateX,coordinateY);  
+
+}  
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer  
+
+{  
+    return YES;  
+}  
+</code></pre>
+
+<p>下面是一些常量的定义</p>
+
+<pre><code>#define NUM 10  
+//绘图空间与底部距离  
+#define GRAPAHBOTTOMPAD 80.0f  
+
+//x轴起点  
+#define XRANGEBEGIN 0.0  
+//x轴在屏幕可视范围内的范围  
+#define XRANGELENGTH 5.0  
+//y轴起点  
+#define YRANGEBEGIN 0.0  
+//y轴在屏幕可视范围内的范围  
+#define YRANGELENGTH 100.0  
+
+
+//x轴屏幕范围内大坐标间距  
+#define XINTERVALLENGTH 1.0  
+//x轴坐标的原点（y轴将在此与x轴相交）  
+#define XORTHOGONALCOORDINATE 10.0  
+//x轴每两个大坐标间小坐标个数  
+#define XTICKSPERINTERVAL 2  
+
+#define YINTERVALLENGTH 1.0  
+#define YORTHOGONALCOORDINATE 1.0  
+#define YTICKSPERINTERVAL 0 
+</code></pre>
+
+<p>好了，这便是iphone上怎样绘制个折线图并实现拖动效果，其实是个很简陋的例子，离真正能用还有很长的一段路要走，但先贴在这里留个记号，也许你会看到中间有些js引擎的影子，这个留在下一章再讲吧。</p>
+
+<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/20130607110518093_zps1865da13.png" alt="image" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[但生不期遇]]></title>
@@ -122,6 +611,158 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[java设置编码读写文件笔记]]></title>
+    <link href="http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/"/>
+    <updated>2012-11-01T16:04:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji</id>
+    <content type="html"><![CDATA[<pre><code>public class Test {  
+        public static void main(String[] args) {  
+            try{  
+                BufferedReader br = new BufferedReader(  
+                        new InputStreamReader(new FileInputStream(url),"UTF-8"));  
+                String data = null;  
+                StringBuffer str=new StringBuffer();  
+                while((data = br.readLine())!=null)  
+                {  
+                    str.append(data+"\n");  
+                }  
+                System.out.println(str);  
+                br.close();  
+                Test test=new Test();  
+                test.ece(str.toString());  
+            }catch(Exception e){  
+                e.printStackTrace();  
+            }             
+        }  
+        public void ece(String str){  
+            try{  
+                BufferedWriter bw = new BufferedWriter(  
+                        new OutputStreamWriter(new FileOutputStream(url,false),"UTF-8"));  
+                bw.write(str);  
+                bw.flush();  
+                bw.close();  
+            }catch(Exception e){  
+                e.printStackTrace();  
+            }     
+        }  
+}  
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ajax对象数组传参方式]]></title>
+    <link href="http://wanax.github.io/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/"/>
+    <updated>2012-10-11T15:53:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi</id>
+    <content type="html"><![CDATA[<p>项目中一个页面需要的功能是动态添加信息列表，传至后台添加数据库。用的方式是ajax+struts2，因为struts本身的特性，在ajax的data里直接写数组名java后台是无法正常接收到的，最简单的理解便是它无法智能的一一匹配数组里的每一个值，所以我们在前台开始发action请求前便要组装好容易接收的数据格式。</p>
+
+<p>最简单的方法是直接拼接字符串，后台split出来，但有时候用的不是简单的字符串数组而是对象数组，这时候就需要一些其它方法了。</p>
+
+<!--more-->
+
+
+<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/1349941967_9520_zpsbbaf2803.png" alt="image" /></p>
+
+<p>如上图所示，每次提交是权限一个对象，然后关于资源对象是动态添加与删除的，很明显，这就需要一个对象数组来装这些东西</p>
+
+<p>前台页面的动态添加是这样的：</p>
+
+<pre><code>    var addNewSource = function(){  
+     var htmlStr =   
+      "&lt;tr class=\"sourcecontent\"&gt;"+  
+               "&lt;td&gt;&lt;input class=\"sourcename\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourceurl\" type=\"text\"/&gt;&lt;/td&gt;"+  
+               "&lt;td&gt;&lt;input class=\"sourcetype\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourcedes\" type=\"text\"/&gt;&lt;/td&gt;"+  
+               "&lt;td&gt;&lt;a href=\"#\" onclick=\"deleteNewSource(this);return false;\"&gt;&lt;img class=\"deleteBtn\" src=\"&lt;%=basePath%&gt;/img/delete.png\"/&gt;&lt;/a&gt;&lt;/td&gt;"+  
+            "&lt;/tr&gt;";  
+         $("#resourceInfo").append(htmlStr);  
+
+    };  
+    function deleteNewSource(obj){  
+     $(obj).parents('tr').remove();  
+    }  
+</code></pre>
+
+<p>然后就是对对象数组的拼装与发送了</p>
+
+<pre><code>    var xhrBeforeSend = function(){ 
+        $('.status').fadeIn();
+    };
+
+    var xhrSuccess = function(data,status,xhr){
+        if(data.tag=="T"){
+            $('.status').css({"margin-left":"740px","color":"green"}).html("提交数据成功");
+            $('.status').fadeOut(1000);
+        }else{
+            $('.status').css({"margin-left":"760px","color":"#FF0000"}).html("提交失败！");
+        }     
+    };
+    KindEditor.ready(function(K) {
+           K('.submitBtn').click(function() {
+                        var screenWidth = $(document).width()-6;
+                        var sourceList = '&lt;ul&gt;';
+                        $("tr.sourcecontent").each(function(){
+                            sourceList +='&lt;li&gt;'+$(this).find('.sourcename').val()+'&lt;/li&gt;';
+                        });
+                        sourceList +='&lt;/ul&gt;';
+                        var htmlStr = '&lt;div class="dailogbox"&gt;'+
+                                       '&lt;table style="width:400px; margin:10px auto;color:#ffffff;font-size:15px;"&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;权限名&lt;/td&gt;&lt;td&gt;'+$("#authname").val()+'&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;权限描述&lt;/td&gt;&lt;td&gt;'+$("#authdes").val()+'&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;父级权限&lt;/td&gt;&lt;td&gt;'+$("#authparent").val()+'&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;tr&gt;&lt;td&gt;关联权限:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
+                                       '&lt;/table&gt;'+
+                                       '&lt;div style="width:400px;margin:10px auto; color:#ffffff;"&gt;'+sourceList+ 
+                                       '&lt;/div&gt;'+
+                                       '&lt;/div&gt;';
+                        var dialog = KindEditor.dialog({
+                            width : screenWidth,
+                            height: 300,
+                            body  : htmlStr,
+                            closeBtn : {
+                                name : '关闭',
+                                click : function(e) {
+                                    dialog.remove();
+                                }
+                            },
+                            yesBtn : {
+                                name : '确定',
+                                click : function(e) {
+                                  var data = {
+                                              authName:$("#authname").val(),
+                                              authDes:$("#authdes").val(),
+                                              authParent:$("#authparent").val()
+                                   };
+                                  var n=0;
+                                  $("tr.sourcecontent").each(function(){
+                                      data["resList[" + n + "].resourceName"] = $(this).find('.sourcename').val();
+                                      data["resList[" + n + "].resourceType"] = $(this).find('.sourcetype').val();
+                                      data["resList[" + n + "].resourceDescription"] = $(this).find('.sourcedes').val();
+                                      data["resList[" + n + "].resourceURL"] = $(this).find('.sourceurl').val();
+                                      n++;
+                                  });
+                                  Pager.initUrl("insertauthority.action");
+                                  Pager.xhrBeforeSend=xhrBeforeSend;
+                                  Pager.xhrSuccess = xhrSuccess;
+                                  Pager.syncLoadData(data); 
+                                  dialog.remove();
+                                }
+                            },
+                            noBtn : {
+                                name : '取消',
+                                click : function(e) {
+                                    dialog.remove();
+                                }
+                            }
+                        });
+                    });
+         });
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[胡言]]></title>
     <link href="http://wanax.github.io/blog/2012/08/23/hu-yan/"/>
     <updated>2012-08-23T17:55:00+08:00</updated>
@@ -170,6 +811,61 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[6个有用的MySQL语句(转)]]></title>
+    <link href="http://wanax.github.io/blog/2012/06/28/6ge-you-yong-de-mysqlyu-ju-zhuan/"/>
+    <updated>2012-06-28T01:55:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/06/28/6ge-you-yong-de-mysqlyu-ju-zhuan</id>
+    <content type="html"><![CDATA[<h3>1. 计算年数</h3>
+
+<blockquote><p>你想通过生日来计算这个人有几岁了。</p></blockquote>
+
+<pre><code>SELECT
+
+DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y')
+ + 0;
+</code></pre>
+
+<!--more-->
+
+
+<h3>2. 两个时间的差</h3>
+
+<blockquote><p>取得两个 datetime 值的差。假设 dt1 和 dt2 是 datetime 类型，其格式为 ‘yyyy-mm-dd hh:mm:ss’，那么它们之间所差的秒数为：</p></blockquote>
+
+<pre><code>UNIX_TIMESTAMP(
+ dt2 ) - UNIX_TIMESTAMP( dt1 )
+</code></pre>
+
+<p>除以60就是所差的分钟数，除以3600就是所差的小时数，再除以24就是所差的天数。</p>
+
+<h3>3. 显示某一列出现过N次的值</h3>
+
+<pre><code>SELECT id FROM tbl GROUP BY id HAVING COUNT(*) = N;
+</code></pre>
+
+<h3>4. 计算两个日子间的工作日</h3>
+
+<blockquote><p>所谓工作日就是除出周六周日和节假日。</p></blockquote>
+
+<pre><code>SELECT COUNT(*) FROM calendar WHERE d BETWEEN Start AND Stop  AND DAYOFWEEK(d) NOT IN(1,7) AND holiday=0
+</code></pre>
+
+<h3>5. 查找表中的主键</h3>
+
+<pre><code>SELECT k.column_name FROM information_schema.table_constraints t JOIN information_schema.key_column_usage k USING  (constraint_name,table_schema,table_name) WHERE t.constraint_type='PRIMARY
+ KEY' AND t.table_schema='db' AND t.table_name=tbl'
+</code></pre>
+
+<h3>6. 查看你的数库有多大</h3>
+
+<pre><code>SELECT table_schema AS 'Db Name',  Round(Sum( data_length + index_length ) / 1024 / 1024, 3 ) AS 'Db Size (MB)',  Round( Sum( data_free ) / 1024 / 1024, 3 ) AS 'Free Space (MB)' FROM information_schema.tables GROUP BY table_schema ;
+</code></pre>
+
+<p>转自<a href="http://coolshell.cn/articles/3433.html">这里</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[如此而已]]></title>
     <link href="http://wanax.github.io/blog/2012/03/15/ru-ci-er-yi/"/>
     <updated>2012-03-15T19:00:00+08:00</updated>
@@ -187,6 +883,384 @@
 <p>回来坐的是绿皮的硬座，55个小时3000+km，才170元。听说之前开过一趟特快，因为贵没人坐所以才又用回这列1086.因为来回这条线的都是些河南河北山东的民工，去新疆农忙时摘棉花，早上6点日出晚上9点日落，干满白天便是200。互相聊着的都是些家里的农活或是哪里的小工钱高一点。私下一算，若想早点成家，需要父子二人打工三四年攒钱再向亲朋好友借贷才能够数，而借贷的钱财又是需要父子二人外出打工两三年才能偿还。</p>
 
 <p>细细想来，这片土地上，有谁不是奔着那”好好挣钱 好好活着”而努力着呢，各有各自的道路罢了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Struts+jquery+ajax简单整合示例]]></title>
+    <link href="http://wanax.github.io/blog/2012/02/23/struts-plus-jquery-plus-ajaxjian-dan-zheng-he-shi-li/"/>
+    <updated>2012-02-23T21:28:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/02/23/struts-plus-jquery-plus-ajaxjian-dan-zheng-he-shi-li</id>
+    <content type="html"><![CDATA[<p>jsp文件：</p>
+
+<pre><code>function clickButton()  
+            {      
+                $.ajax({  
+                   url :'../ajaxRequest.action',  //后台处理程序  
+                   type:'post',    //数据发送方式  
+                   dataType:'json',  //接受数据格式  
+                   data:{result:"RE",request:"REQ"},  //要传递的数据  
+                   success:callbackFun  //回传函数(这里是函数名)  
+                   });  
+             }   
+//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
+            function callbackFun(data)  
+            {  
+                 alert("SUCCESS");  
+                 alert(data.result);  
+                 alert(data.request);  
+                 alert(data.q[1]);  
+            }
+</code></pre>
+
+<!--more-->
+
+
+<p>           <br/>
+或者：</p>
+
+<pre><code>function clickButton()  
+            {      
+                var url = '../ajaxRequest.action';  
+                var params = {result:"RESULT",request:"REQUEST" }; //通过id获得输入值  
+                 jQuery.post(url, params, callbackFun, 'json');  
+               }   
+//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
+            function callbackFun(data)  
+            {  
+                 alert("SUCCESS");  
+                 alert(data.result);  
+                 alert(data.request)  
+            } 
+</code></pre>
+
+<p>html部分：</p>
+
+<pre><code>&lt;input type="button" onclick="clickButton();" value="clickButton"/&gt;             
+</code></pre>
+
+<p>struts代码：</p>
+
+<pre><code>&lt;package name="ajax" extends="json-default"&gt;  
+        &lt;action name="ajaxRequest"  class="com.action.ajax" method="test"&gt;  
+            &lt;result type="json"&gt;&lt;/result&gt;  
+        &lt;/action&gt;  
+&lt;/package&gt;
+</code></pre>
+
+<p>java代码：</p>
+
+<pre><code>package com.action;  
+
+import com.opensymphony.xwork2.ActionSupport;  
+
+public class ajax extends ActionSupport{  
+    private String request;  
+    private String result;  
+    private String [] q={"a","b","c"};   
+
+    public String test(){  
+        System.out.println("ajax");  
+        request="request";  
+        result="result";  
+        return SUCCESS;  
+    }  
+
+    public String getRequest() {  
+        return request;  
+    }  
+    public void setRequest(String request) {  
+        this.request = request;  
+    }  
+    public String getResult() {  
+        return result;  
+    }  
+    public void setResult(String result) {  
+        this.result = result;  
+    }  
+
+    public String[] getQ() {  
+        return q;  
+    }  
+
+    public void setQ(String[] q) {  
+        this.q = q;  
+    }  
+
+
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[垂直发布—Httpclient模拟登陆获取页面信息]]></title>
+    <link href="http://wanax.github.io/blog/2012/02/13/chui-zhi-fa-bu-httpclientmo-ni-deng-lu-huo-qu-ye-mian-xin-xi/"/>
+    <updated>2012-02-13T18:24:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/02/13/chui-zhi-fa-bu-httpclientmo-ni-deng-lu-huo-qu-ye-mian-xin-xi</id>
+    <content type="html"><![CDATA[<p>过年回了趟老家，回来后寒假还有好大一截，闲着也是没事就这两天初步了解了下垂直发布的东西，收获一点点吧，感觉离预期还差很远。趁着还有印象写下来，步步为营呗。网上搜索，看到很多模拟登录都是用Httpclient的，另外一个是HttpURLConnection。
+HttpURLConnection是java的标准类，HttpClient 是 Apache Jakarta Common 下的子项目，用来提供支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。因为是初学，就图着简单易用的目的选择了Httpclient，感觉还是挺容易上手的，不过这两天遇到的问题也不少。</p>
+
+<!--more-->
+
+
+<p>既然是模拟正规的登录，那首先要抓包，通过一次正常的登录来获取表单提交的信息，既而自己在后台把相应的参数填好发出。</p>
+
+<p>网上的抓包工具不少，刚开始也下了好几个，像Wireshark，SmartSniff都是好多人推荐的。开始用的Wireshark，确实好多功能，还有过滤什么的，但贪图方便用着用着就转去SmartSniff了。就是准备登录时点一下开始键，然后登录，再停止抓包，挨个找一下这段时间的TCP，根据登录网址，很容易就找到目标信息了。</p>
+
+<p>就像这样
+<img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/100001114023512_zpsa214f4b2.jpg" alt="image" /></p>
+
+<p>可以看到蓝色字的最后一行就是该网站正常登录的表单提交信息了。顺便一提，上面的蓝色是浏览器发送的请求，下面的粉色则是服务器返回来的数据，一般情况下HTTP/1.1 200就表示登录正常了，这是一个判定标准。</p>
+
+<p>因为开始4.x网上用的人不多，出的时间不久的缘故吧，所以搜到的信息很多时候都是3.x的写法，自己也就照葫芦画瓢了，后来看到说4.x基本上是重写的，跟之前的3.x有很大不同，所以第二天又重新用4.x试了一遍，写法上稍微复杂了点，但方式都差不多感觉。</p>
+
+<p>这里我是用的biketo网站做的小白鼠，平常喜欢骑下单车再估计这网站也不会做得很有技术难度估计能好模拟一点就用这个了，哈哈。</p>
+
+<pre><code>POST /bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1 HTTP/1.1User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1Host: www.biketo.comContent-Length: 107Content-Type: application/x-www-form-urlencodedfastloginfield=username&amp;username=&amp;cookietime=2592000&amp;password=&amp;quickforward=yes&amp;handlekey=1s
+</code></pre>
+
+<p>首先正常登录时，发送的post是这个</p>
+
+<p><code>POST /bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1 HTTP/1.1
+Host: www.biketo.com
+Connection: keep-alive
+Content-Length: 107
+Cache-Control: max-age=0
+Origin: http://www.biketo.com
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: http://www.biketo.com/bbs/forum-73-1.html
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8
+Accept-Charset: GBK,utf-8;q=0.7,*;q=0.3
+Cookie: rtime=5; ltime=1326617596891; cnzz_eid=83708416-1318074453-; pgv_pvi=8849333319; pgv_info=ssi=s8902215826; eucsfmldoactive=136495; XFJp_2132_lastvisit=1329121650; XFJp_2132_forum_lastvisit=D_73_1329125252; XFJp_2132_visitedfid=73; XFJp_2132_sid=Q3V96V; __utma=114141336.153132218.1318078021.1329105199.1329125251.12; __utmb=114141336.4.10.1329125251; __utmc=114141336; __utmz=114141336.1319874537.4.2.utmcsr=google.com.hk|utmccn=(referral)|utmcmd=referral|utmcct=/; XFJp_2132_lastact=1329125252%09home.php%09misc; XFJp_2132_sendmail=1
+fastloginfield=username&amp;username=&amp;cookietime=2592000&amp;password=&amp;quickforward=yes&amp;handlekey=ls</code></p>
+
+<p>然后就是模拟</p>
+
+<pre><code>PostMethod post = new PostMethod("http://www.biketo.com/bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1");
+
+post.addParameter("fastloginfield", "username");
+post.addParameter("username", "uername");
+post.addParameter("cookietime", "2592000");
+post.addParameter("password", "password");
+post.addParameter("quickforward", "yes");
+post.addParameter("handlekey", "1s");
+
+HttpClient client = new HttpClient();
+//client.getParams().setCookiePolicy(CookiePolicy.RFC_2109);
+client.getParams().setParameter(HttpMethodParams.USER_AGENT,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1");//设置信息 
+client.executeMethod(post);
+GetMethod get = new GetMethod("http://www.biketo.com/bbs/home.php?mod=spacecp");
+CookieSpec cookiespec = CookiePolicy.getDefaultSpec();
+        Cookie[] cookies = cookiespec.match("www.biketo.com", 80/*端口*/, "/" , false , client.getState().getCookies());
+        for (Cookie cookie : cookies) {
+            System.out.println(cookie.getName() + ":" + cookie.getValue());
+        }
+client.executeMethod(get);
+System.out.println(new String(get.getResponseBody()));
+</code></pre>
+
+<p>这里要注意一下</p>
+
+<p>client.getParams().setParameter(HttpMethodParams.USER_AGENT
+的那行代码，因为我们是用的java来发的，不是浏览器，所以默认的user-agent是Jakarta Commons-HttpClient/3.0.1，很多服务器看到这个就直接不鸟你了，不过biketo嘛，没有这层过滤，呵呵。但一般情况下还是要伪装成浏览器的信息，这样才容易得手~
+这个样子发出的包便是</p>
+
+<p><code>POST /bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1 HTTP/1.1User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1Host: www.biketo.comContent-Length: 107Content-Type: application/x-www-form-urlencodedfastloginfield=username&amp;username=&amp;cookietime=2592000&amp;password=&amp;quickforward=yes&amp;handlekey=1s</code></p>
+
+<p>对比之下会发现比正常的浏览器似乎少了很多信息，转了一篇文章写得很详细，大家有兴趣自己看下吧<a href="http://blog.csdn.net/mxiaochi/article/details/7252582">http://blog.csdn.net/mxiaochi/article/details/7252582</a>
+post是请求，get便是验证下登录有没有成功，找一个只有登录才能访问的页面放进GetMethod 里，发送请求，然后outprint出来，贴到记事本里用浏览器打开就可以验证一下啦
+这是同样功能4.x的代码，有兴趣也可以试一下</p>
+
+<p>`// The HttpClient is used in one session</p>
+
+<pre><code>private HttpResponse response;  
+private DefaultHttpClient httpclient = new DefaultHttpClient(); 
+</code></pre>
+
+<p>private boolean login() throws IOException{</p>
+
+<pre><code>    HttpPost httpost = new HttpPost("http://www.biketo.com/bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1"); 
+    httpost.setHeader("User-Agent",
+</code></pre>
+
+<p>&ldquo;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1&rdquo;);</p>
+
+<pre><code>   /* httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpost.setHeader("Referer", "http://my.xxxxxx.com/my/login?history=aHR0cDovL3NoZW56aGVuLmFuanVrZS5jb20v");
+    httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpost.setHeader("Cache-Control", "max-age=0");
+    httpost.setHeader("Origin", "http://my.xxxxx.com");
+    httpost.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,\*\/*;q=0.8");
+    httpost.setHeader("Accept-Encoding", "gzip,deflate,sdch");
+    httpost.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
+    httpost.setHeader("Accept-Charset", "GBK,utf-8;q=0.7,*;q=0.3");*/
+    // All the parameters post to the web site  
+    List&lt;NameValuePair&gt; nvps = new ArrayList&lt;NameValuePair&gt;();  
+    nvps.add(new BasicNameValuePair("fastloginfield", "username"));  
+    nvps.add(new BasicNameValuePair("username", ""));  
+    nvps.add(new BasicNameValuePair("cookietime", "2592000"));  
+    nvps.add(new BasicNameValuePair("password", ""));  
+    nvps.add(new BasicNameValuePair("quickforward", "yes"));  
+    nvps.add(new BasicNameValuePair("handlekey", "1s")); ` 
+
+    httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));  
+    response = httpclient.execute(httpost);  
+    List&lt;Cookie&gt; cookies = httpclient.getCookieStore().getCookies();
+    if (cookies.isEmpty()) {
+        System.out.println("None");
+    } else {
+        for (int i = 0; i &lt; cookies.size(); i++) {
+            System.out.println("- " + cookies.get(i).toString());
+        }
+    }
+    //Header locationHeader = response.getFirstHeader("Location"); 
+    //System.out.println(locationHeader.getValue());
+    httpost.abort(); 
+    HttpGet httpget = new HttpGet("http://www.biketo.com/bbs/home.php?mod=spacecp"); 
+    httpget.setHeader("User-Agent",
+</code></pre>
+
+<p><code>"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1");</code></p>
+
+<pre><code>    ResponseHandler&lt;String&gt; responseHandler = new BasicResponseHandler(); 
+    String responseBody = "";
+    responseBody = httpclient.execute(httpget, responseHandler);   
+    httpget.abort();  
+    httpclient.getConnectionManager().shutdown();  
+    System.out.println(responseBody);`
+</code></pre>
+
+<p>前面注释的一大段就是模仿3.x中缺少的那些浏览器信息了，可以根据正常登录抓回来的信息自己慢慢匹配。
+刚刚说的这些都是些很简单的东西，仔细看看不到一天就可以大概掌握了，下面的就是些自己遇到的问题。
+我第二个尝试的是一个房地产的网站，发现它的页面是会自动跳转的，再请求的话则会退回登录页面很是苦恼。</p>
+
+<p>`HttpPost httpost = new HttpPost(&ldquo;<a href="http://my.anjuke.com/usercenter/login.action">http://my.anjuke.com/usercenter/login.action</a>&rdquo;);</p>
+
+<pre><code>    httpost.setHeader("User-Agent",
+</code></pre>
+
+<p>&ldquo;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1&rdquo;);</p>
+
+<pre><code>   /* httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpost.setHeader("Referer", "http://my.anjuke.com/my/login?history=aHR0cDovL3NoZW56aGVuLmFuanVrZS5jb20v");
+    httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpost.setHeader("Cache-Control", "max-age=0");
+    httpost.setHeader("Origin", "http://my.anjuke.com");
+    httpost.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,\*\/*;q=0.8");
+    httpost.setHeader("Accept-Encoding", "gzip,deflate,sdch");
+    httpost.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
+    httpost.setHeader("Accept-Charset", "GBK,utf-8;q=0.7,*;q=0.3");*/
+    // All the parameters post to the web site  
+    List&lt;NameValuePair&gt; nvps = new ArrayList&lt;NameValuePair&gt;();  
+    nvps.add(new BasicNameValuePair("loginpost", "1"));  
+    nvps.add(new BasicNameValuePair("formhash", ""));  
+    nvps.add(new BasicNameValuePair("sid", "anjuke"));  
+    nvps.add(new BasicNameValuePair("url", "aHR0cDovL3NoZW56aGVuLmFuanVrZS5jb20v"));  
+    nvps.add(new BasicNameValuePair("systemtime", "1329038088"));  
+    nvps.add(new BasicNameValuePair("username", "")); 
+    nvps.add(new BasicNameValuePair("password", ""));
+    nvps.add(new BasicNameValuePair("remember", "1"));
+    nvps.add(new BasicNameValuePair("submit", ""));`
+
+    httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));  
+    response = httpclient.execute(httpost);  
+    List&lt;Cookie&gt; cookies = httpclient.getCookieStore().getCookies();
+    if (cookies.isEmpty()) {
+        System.out.println("None");
+    } else {
+        for (int i = 0; i &lt; cookies.size(); i++) {
+            System.out.println("- " + cookies.get(i).toString());
+        }
+    }
+    //Header locationHeader = response.getFirstHeader("Location"); 
+    //System.out.println(locationHeader.getValue());
+    httpost.abort(); 
+    HttpGet httpget = new HttpGet("http://shenzhen.anjuke.com/ajax/checklogin/"); 
+    httpget.setHeader("User-Agent",
+</code></pre>
+
+<p><code>"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1");</code></p>
+
+<pre><code>    ResponseHandler&lt;String&gt; responseHandler = new BasicResponseHandler(); 
+    String responseBody = "";
+    responseBody = httpclient.execute(httpget, responseHandler);  
+    httpget = new HttpGet("http://my.anjuke.com/marked/3221775");
+    responseBody = httpclient.execute(httpget, responseHandler);
+
+    httpget.abort();  
+    httpclient.getConnectionManager().shutdown();  
+    System.out.println(responseBody);
+</code></pre>
+
+<p>抓包是这样的</p>
+
+<p><code>POST /usercenter/login.action HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1
+Content-Length: 149
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+Host: my.anjuke.com
+Connection: Keep-Alive
+loginpost=1&amp;formhash=&amp;sid=anjuke&amp;url=aHR0cDovL3NoZW56aGVuLmFuanVrZS5jb20v&amp;systemtime=1329038088&amp;username=mxchenry&amp;password=mxc0818&amp;remember=1&amp;submit=
+HTTP/1.1 200 OK
+Server: ajk_server
+Date: Mon, 13 Feb 2012 10:04:18 GMT
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+Vary: Accept-Encoding
+X-Powered-By: PHP/5.2.14
+ajk: m=app10-102, v=2011_51_02
+P3P: CP=CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR
+Set-Cookie: ajk_member_id=3221775; expires=Tue, 12-Feb-2013 10:04:18 GMT; path=/; domain=.anjuke.com
+Set-Cookie: ajk_member_name=mxchenry; expires=Tue, 12-Feb-2013 10:04:18 GMT; path=/; domain=.anjuke.com
+Set-Cookie: ajk_member_key=84fb0dfc2a3c64f13c264cb39b072a65; expires=Tue, 12-Feb-2013 10:04:18 GMT; path=/; domain=.anjuke.com
+Set-Cookie: ajk_member_time=1360663440; expires=Tue, 12-Feb-2013 10:04:18 GMT; path=/; domain=.anjuke.com
+Content-Length: 3349</code></p>
+
+<p>可以看到是能正常取回cookie的，但当我尝试get去别的页面的时候都被弹到登录页面了，可是我已经是带上cookie访问的了，不知道这有没有扯上网站安全之类的，这方面没什么经验</p>
+
+<p><code>GET /marked/3221775 HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1
+Host: my.anjuke.com
+Connection: Keep-Alive
+Cookie: ajk_member_id=3221775; ajk_member_key=e04e5c298906768adaaa257013991b86; ajk_member_name=mxchenry; ajk_member_time=1360663920
+Cookie2: $Version=1</code></p>
+
+<p><code>HTTP/1.1 302 Found
+Server: ajk_server
+Date: Mon, 13 Feb 2012 10:12:50 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+ajk: m=app10-034, pv=2012_06_04, jv=ga
+Set-Cookie: sessid=1134ABF3-173C-AE40-DBA8-B2C3C1D4B30D; path=/; domain=.anjuke.com
+Set-Cookie: aQQ_ajkguid=B68D65A8-9F66-7F9D-7614-02590CB8BF8E; expires=Tue, 12-Feb-2013 10:12:50 GMT; path=/; domain=.anjuke.com
+Set-Cookie: aQQ_ajklogintime=1329127970; expires=Tue, 14-Feb-2012 10:12:50 GMT; path=/; domain=.anjuke.com
+Set-Cookie: ajk_mem_id=0; expires=Tue, 14-Feb-2012 10:12:50 GMT; path=/; domain=.anjuke.com
+Set-Cookie: lastlanded=1329127970; expires=Wed, 14-Mar-2012 10:12:50 GMT; path=/; domain=.anjuke.com
+P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"
+location: http://my.anjuke.com/my/login?history=aHR0cDovL215LmFuanVrZS5jb20vbWFya2VkLzMyMjE3NzU=
+GET /my/login?history=aHR0cDovL215LmFuanVrZS5jb20vbWFya2VkLzMyMjE3NzU= HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1
+Host: my.anjuke.com
+Connection: Keep-Alive
+Cookie: aQQ_ajkguid=B68D65A8-9F66-7F9D-7614-02590CB8BF8E; aQQ_ajklogintime=1329127970; ajk_mem_id=0; ajk_member_id=3221775; ajk_member_key=e04e5c298906768adaaa257013991b86; ajk_member_name=mxchenry; ajk_member_time=1360663920; lastlanded=1329127970; sessid=1134ABF3-173C-AE40-DBA8-B2C3C1D4B30D
+Cookie2: $Version=1</code></p>
+
+<p><code>HTTP/1.1 200 OK
+Server: ajk_server
+Date: Mon, 13 Feb 2012 10:12:50 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+ajk: m=app10-035, pv=2012_06_04, jv=ga
+Set-Cookie: ajk_mem_id=0; expires=Tue, 14-Feb-2012 10:12:50 GMT; path=/; domain=.anjuke.com
+Set-Cookie: lastlanded=1329127970; expires=Wed, 14-Mar-2012 10:12:50 GMT; path=/; domain=.anjuke.com</code>
+或是用session？个人猜测。</p>
 ]]></content>
   </entry>
   
@@ -648,371 +1722,6 @@ FileReader reader =new FileReader("d:\\product.dic"); </code></p>
 <p>历史有时候就像元稹的那短短四语，“寥落古行宫，宫花寂寞红。白头宫女在，闲坐说玄宗。”，细细想来也是很美的。</p>
 
 <p>就这样定了吧。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[胶片儿]]></title>
-    <link href="http://wanax.github.io/blog/2011/01/02/xiao-pian-er/"/>
-    <updated>2011-01-02T17:31:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2011/01/02/xiao-pian-er</id>
-    <content type="html"><![CDATA[<p>在地铁上看到对外国父女，孩子很皮，动来动去，父亲几次提醒都不听，最后说了句“I’ll fight you”，老实了，我也释然了，哪哪的都一样。</p>
-
-<p>走在书城那边，穿着个校服的扮成中学生的女子卖唱，脸上褶子就不说了，光那眼神一摆，坑爹呢。</p>
-
-<p>陈丹青辩论的英语四六级依旧在耳，他悲哀地说与制度的对弈倒在其次，意想不到的是与教育结果的相遇。就是考完四六级的那帮兔崽子的观点，很类似于千年的媳妇熬成了婆。</p>
-
-<!--more-->
-
-
-<p>一个拐角，熟悉的一个流动餐车不见了，很久的印象，卖些小吃，经常地路过，被替换成了一个牌子，“文明示范路”。</p>
-
-<p>电话回老家，零下12度了，这里快20度，一个夏天的距离。想到过几天就能飞过一个季节的距离有点兴奋。</p>
-
-<p>很小的时候，自己跟在部队，外面是村庄，基本不相往来的，和随军的一帮玩一起，农村里的孩子是另一帮，当时的感觉是两个团体。但有次不知怎么的就问妈妈，他们是老百姓其实我们也算是老百姓的吧，妈妈说是。看了《看上去很美》，突觉境界比方枪枪还是高一点的。</p>
-
-<p>文革之后老一辈重起，会上站一遛，蒋兆和，李可染，艾中信，罗工柳，戴泽，刘开渠，王合内，许幸之。一排站定有人看了后说气场上有点不一样，怎么不一样了，哦，都民国的。</p>
-
-<p>以前流行拔老根，能捡到的极品不多，竟突发奇想找了两个玻璃罐捡了很多大而饱满的叶根和着土填实了罐子，密封保存，放在桌脚下，暗暗自得自己的未雨绸缪，等待来年的拔老根（因为是每到秋季有落叶的才能玩，春季的叶根太嫩了），一展宏图，但随后搬家，不知所踪。</p>
-
-<p>玩弹子，跳绳，下河抓蟹，晚上烤地瓜，人小受虐，还贱一个劲儿地往上凑，屁颠儿屁颠儿的，大了想做老大的没人玩了，自己也没劲儿了。</p>
-
-<p>部队上学时，一个班两个老师，语文自然音乐算一个，数学体育是一个，有次数学老师请假，校长来当体育老师，带我们去后山，跟放羊似的。</p>
-
-<p>全校可以挤在五年级那个班看场电影，外带老师和放电影的小战士。不知谁在生着的炉子上烤地瓜，现在看铁道游击队都有那个味，算是拌严实了。</p>
-
-<p>小学数学老师看中我数学，去参加竞赛，考了两次，成绩老师都不好意思和我说；语文寒假作文写篇500字的，题目还记得，大公鸡，可恨不知道肯德基，不然啃死这帮狗日的；三年级前勉强会背26个英语字母，跟着我爸那台586学的，单词的话现在想想太佩服那台电脑了，dog的发音是“东阁”。</p>
-
-<p>刚到市内上学，家长吹我学习靠前，其实小学二三年级不搞奥数每年每人都能拿双百的，我头冒虚汗。一次提问说那篇文章的主人公有什么特点，叫我，心中一惊，不知为何就想起来之前存老根的玻璃罐子，上面的标签是“恒牌榨菜”，就答了个恒心，老师大加赞赏，因为那时候大部分人的词汇量还停留在真心，决心的层次之上。</p>
-
-<p>新调的位置，同桌的女生是一直喜欢的，当晚激动地没睡好觉，第二天上学感觉万里无云，十分高兴。结果当天下午同桌所在一列的最前的一个同学走了，老师说依次上移…我操他妈。</p>
-
-<p>老家的老师都揍人的，经常看见学生被揍得一佛出世二佛升天的，本人一贯老实，没被揍过。但有次跟一个靓妹妹聊天过猛被发现难免一顿，随从此得知妞也不是好泡的，想来算是醒悟地较早的了。</p>
-
-<p>小学有次教育局调查，老师特意派我去，跟那个鸟人说了会儿老实话，印象中似乎问我有本杂志是不是自愿买的，我说是老师介绍要买的，回来后可想而知，老师的话历历在目，“还以为你挺聪明的”…</p>
-
-<p>开始从山区上小学，后调入市内。山区的时候是一排平房，一个年级一个班一间房，说要是扫地那基本就是整列平房的土操场扫干净，还要浇门前一排的小花坛，淹死之列不在我责。到了市内，是那种楼房了，三年级下过去的，在三楼，整一层楼都是，有那么个十几个班吧，长长的走廊。一天没写作业罚我扫走廊，现在的小孩都知道扫的话就是门前雪，前门到后门，出了就是其它班的事了，与己无关。当时不知行情，走到楼梯口从头扫，扫了N个班后老师觉得时间有点长，伸头往外看见我在外面还没扫到自己班…随后叫回来一顿骂，“傻啊你”。</p>
-
-<p>初一一个班108人，当然，没一个好汉，老师一打就喊爹。前后严重分化，坐前面的成绩相当好，最后一排的就差进班牢。开始坐中间，逐月后退，眼看最后一排了也转学去了另一个城市，从头玩过。</p>
-
-<p>入学考试凭借着我扎实的26个英语字母的功底考了个30多分。记得是跟他们期末一起考的，然后考英语时旁边有个人说要抄我的，说进来后罩我，我说我英语很差，他说我谦虚，又加上他长得很凶悍而我本就不是小气的人，就全给他照抄了，也不知他现今过得怎样。</p>
-
-<p>考完写学校名，问老师写原来的还是现在的，说原来的，写了个“实验中学”，那监考的看我半天，因为这所学校就叫实验中学，而我原来那个也叫实验中学，全国连锁没办法。</p>
-
-<p>本没有希望的，结果数学爆发，学校决定再给个面试的机会，用英语和老师对对话，印象中只说了两句，“nice to meet you,my name is mxc”,老师问了个问题，不知怎么作答就回了句“may I speak Chinese?”，未果，后遂无问津者了。略带遗憾地去了家私立的初中，叫外国语。</p>
-
-<p>按照一般文章的结尾都叫过上了幸福的生活，不带假的，真真儿地过上了幸福的生活，没自习哟，下午4点多就放了，作业少得可怜，看上去真的很美。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[五年]]></title>
-    <link href="http://wanax.github.io/blog/2010/11/19/wu-nian/"/>
-    <updated>2010-11-19T12:04:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2010/11/19/wu-nian</id>
-    <content type="html"><![CDATA[<p>清晨睡梦中的一次转身，带来的是一阵清脆的卡啦声，就这样，我的小P关闭了他的世界，以这种方式和我说了再见。</p>
-
-<p>五年了，身边不少的物是人非，但小P一直在这里。从最初见面的新鲜刺激，整日整夜地耗在一起，到一种冲动持续着。那些白天的记挂，晚自习一回来便是和陈简曹智杰的联机闯关对打抑或是掌中的另一个国度的展现，无时无刻，在别人挑灯夜战的时候，是小P和我的逍遥自在，也可能是又一番在陈简手中的蹂躏。再到互相的不理睬，长久地停留在书桌中的抽屉里，和电池分离着，好像从诞生之日便是如此，今后的日子也同样日复一日。但真当有一天我又拉起了他，他从此便成为了我的一部分。归于平凡，互不相离，感觉不到他的存在，就像你不用时时刻刻地去感知着四肢，躯干和内脏。</p>
-
-<!--more-->
-
-
-<p>细细想来，身边超过五年的书不过几本，人更是屈指可数，我的小P，当你牢牢地扎根在我的世界，习惯你的存在，每天都会有你的养分的时候，却说了再见，一去不返。有些话总会憋在心里无法说出。</p>
-
-<p>记得最初相逢时还在为每次4,500字的作文而发愁，今天就用这4,500字的作文来纪念你吧。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[匆匆行]]></title>
-    <link href="http://wanax.github.io/blog/2010/11/07/cong-cong-xing/"/>
-    <updated>2010-11-07T22:09:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2010/11/07/cong-cong-xing</id>
-    <content type="html"><![CDATA[<p>人山人海开满地，形色匆匆去留无意，天下熙熙。</p>
-
-<p>今天跟常鹏去华强北就是这直观感受了，更严重的是我似乎还有点感同身受。想起小的时候爸爸带我来这里，也是同样的一番景象，对我说，“你说这些人瞎忙些什么”，那时作为一祖国的花朵，眼前的景象完全是另一个世界，没有半点的觉悟，唯一困扰我的只是街边那久久不去的臭豆腐的味道到底从何而来。今天看来，还真是一步一步地走向明天。</p>
-
-<p>坐地铁回来时，突然想起明天上课就是第10周，这学期17个教学周，这么一算来还有8周大二的一半就走完了，再算一算很快就大三了嘛。</p>
-
-<p>遂无奈地对常鹏说：“我们快毕业了”，常鹏：“嗯”。</p>
-
-<p>然后继续我的畅想，“你是你家老小，再过多3,4年你爸就60大寿了吧”，常鹏：“嗯”。</p>
-
-<p>“我爸也快50了，不几年也大寿”， “嗯”。</p>
-
-<p>“唉，放在以前的话，老子60大寿，你都要抱孙子了，看看现在的我们在干些什么”， “嗯”。</p>
-
-<p>“过段时间毕业没地方住，房子太贵了，老婆都难讨”，“嗯”。</p>
-
-<!--more-->
-
-
-<p>“其实深圳的也不算贵，青岛那边工资4000+的房价都小一万了，算起比例来还是便宜的”，“嗯”。</p>
-
-<p>“我认识的一个在藏大读书的毕业要去阿里，工资高不说估计每月还能整个零消费，我们应该向她学习”，“嗯”。</p>
-
-<p>“那我们毕业一起去延安挖窑洞住吧，估计每平米不会超过800，两个人挖一个，实惠”，“嗯？不要”。</p>
-
-<p>奶奶的，这原则还是很坚定的。</p>
-
-<p>生活的节奏是快了，但我爸爸这时候要抱的孙子去哪里了？</p>
-
-<p>一个亲戚跟着女儿在美国住了段时间，回来说还是那里好。为什么呢，那里人人有爱，谦让礼貌，警察做警察该做的事情，没有那种5000人就可以攻占火星的特种部队，人人都有爸爸，但最多叫Gungther，没有Gungli的。我想了想，你要让我每月吃得好睡得好，有房住而且不担心一早起来房子被挖成方圆5公里内唯一的一座碉堡，碰见个胃疼的能直接开车去到医院不用莫名其妙拐进公安局。真看到什么不过眼的网上发个帖投投票，也不担心什么该评论已关闭之类的，那我也能做到美国公民那样，没准儿还能更好，因为我们是五讲四美。</p>
-
-<p>都是浮云，饱了站起来好好做人，饿了全他妈四条腿的动物。八国兄弟来逛我们的公园时也没见他们爱护公物。</p>
-
-<p>但我们为填饱肚子所作出的牺牲太大了。愿望的迫切加快了生活的节奏，而那种快速真的落到了实处吗？</p>
-
-<p>现在很多喜欢旅游的人，名曰出去走走，一般都是上车睡觉下车撒尿地走走。到了一个地方猛拍照。来回挺快，回来就说累啊累，下次再也不去了，或是那里还不错，看看我拍的照，我帅吧。其实您去影楼也可以很帅的。</p>
-
-<p>昨天去南山书城，洛阳纸贵一夜飘红。什么冷读术，面对生活的苦恼，厚黑学，官场法则之类的书堂而皇之包装精美价格不菲，看似于情于理，其实跟好好学习天天向上有什么不同？也只剩下商务印书馆的那几本名著译丛封皮依旧价格熟悉。随便一本10元的小册子就能让你更新换代却无人理睬。</p>
-
-<p>读大学的人是幸运的，经济老师给我们算过帐，要正常地维持一所大学需要的费用靠收我们一人3000的学费是远远不够的，最起码是1.7万，也就是国家帮我们出剩下的1.4万。但我们就要感谢国家吗？老师又补充说是不用的，教育支出本就是国家职能也是税收名义之一。是社会上的所有人，包括那些没有上过大学的帮我们交了学费。其实现代教育培养的是人的第二天性，是当局者所需要的天性。与其说是科学知识的传授不如讲是对下一代的价值体系的树立。仔细想想，9年义务教育学的知识多还是能唱出来的革命歌曲多？</p>
-
-<p>其实我们反而是最矛盾的。看着社会的节奏一点点地加快，无数的雨点在我们面前洒满大地，犹豫是否加入。但结果往往像《兵临城下》的那部片子演的一样，大批的新兵投入战场，兵器不足一人只发子弹一人只发枪，冲锋的时候一波上去保险栓都不知道在哪就哈利路亚了。</p>
-
-<p>华强北那个有交叉人行道的地方安置了好多义工，组成人墙来阻挡人流的汹涌。那些义工，差不多都是爷爷辈的，笑政府的精明，笑自己。想起前几天的昆明血荒。调查来调查去发现献血的只有农民工和大学生，因为我们天真很傻吗？看来是的。且不说教育带给我们第二天性的优劣，但很大程度上他帮我们克服着第一天性，self love，爱己。照目前的态势来看，一进入社会学校国家费大力气搞的东西烟消云散了。因为不适合生存啊，谁有工夫跟你玩，都有事儿您先忙。</p>
-
-<p>何时才能心无旁骛地在午后慵懒地晒下太阳，任它云卷云舒；怎样才能做一个堂堂正正的人，面朝大海春暖花开。细细想来，我们离这种干净澄澈的日子越来越远。刚刚的华强北才是真实的世界，利来利往。</p>
-
-<p>只可惜人们不能幸运地找到一杯醇酒，借以忘怀。那本然的壮丽一去不返。</p>
-
-<p>潮起潮落风起浪，心有戚戚得失不想，天下攘攘。</p>
-
-<p>最后附上一首歌的歌词吧</p>
-
-<pre><code>向阳花
-
-谢天笑
-
-那美丽的天,总是一望无边
-
-有粒种子埋在云下面
-
-
-
-营养来自这满地污泥
-
-生根发芽,仍然顺从天意
-
-
-
-无数个雨点,在我面前洒满大地
-
-站在这里,只有一个问题
-
-
-
-向阳花!如果你生长在黑暗下
-
-向阳花,你会不会害怕
-
-
-
-向阳花!如果你生长在黑暗下
-
-向阳花,你会不会再继续开花
-
-
-
-会不会害怕,会不会害怕
-
-向阳花,你会不会再继续开花
-
-
-
-你会不会害怕,会不会害怕
-
-向阳花,你会不会再继续开花
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[新词汇老感觉]]></title>
-    <link href="http://wanax.github.io/blog/2010/10/09/xin-ci-hui-lao-gan-jue/"/>
-    <updated>2010-10-09T02:56:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2010/10/09/xin-ci-hui-lao-gan-jue</id>
-    <content type="html"><![CDATA[<p>看书看到个名词挺带感的，“制度性专家”。</p>
-
-<p>指的那种未必是掌握了所有使之能够判断该制度价值所在的知识的人士，而往往只是一些全面理解其组织构造并因此而变得不可或缺的人士。</p>
-
-<p>通俗一点讲就是狗屁虽懂但不是很通，而其个人价值主要体现于很熟悉当前制度的构造与运作，出现不和谐的地方可以较常人更快地指出来，但要问到这个制度本身怎样的话是就丈二和尚摸不到脑袋了。</p>
-
-<!--more-->
-
-
-<p>举个例子就更清楚了。吏就是一种典型的制度性专家。官吏官吏，从不分家。官是中央指派下来的，而且有规定不准到自己老家任职，怕有主场优势，从来都是南来北往地不亦乐乎。而吏则恰恰相反，一般都是就地拣几个人提拔下即当打手又当保姆的为上头下来的官跑跑腿。这里就存在一个问题了，官初来乍到，人生地不熟的，对当地的什么三老贤长的一概不知，最关键的还是什么人能榨出油水来什么人不能惹更是一窍不知，而这时，吏的作用便体现出来了。作为对当地制度最了解的人士，对于官来说是不可或缺的，这便是制度性专家。</p>
-
-<p>这类专家几乎无一例外地都有一个极为凸显的特征，即他们会毫不犹豫地拥戴或赞同他们据以成为专家的那个制度。道理不证自明，如果这个制度是错误的，那他算个JJ专家。</p>
-
-<p>而在承认了这一点后，事态发展的结果就是，在越来越多的政策领域，几乎所有那些被公认为“专家”的人，从定义上来讲，都是些对现行政策所赖以为基础的诸原则持赞同意见的人士。嘿嘿，从这里开始，有趣的地方出现了。</p>
-
-<p>我们会经常看到政治家在主张进一步推进现行政策的时候，往往会宣称“所有的专家都支持这一主张”；在很多情形下，作如此宣称的政治家确实是诚实的。因为通过上述的说明，简单地说来，只有那些支持这一发展的人士才能成为这一制度的专家，而那些反对且不信奉这种发展的不会被视作此一制度的专家。</p>
-
-<p>在我看的这本书上，说过关于专家之治的后果。书上所着重强调的是，专家们经由一系列连续的决策而支配的发展要比充满竞争的世界中更容易得到推进（你可以简单的认为：“玩儿蛋去，站着说话不腰疼，你干干试试”）。其实这还不是最严重的，毕竟意淫又不犯罪。但当我们处于一个自由裁量权和强制性权力得不到有效抑制的社会的时候，Z@F往往会过于果断地采取其意见。</p>
-
-<p>也就是说如果当医学专家说这件事是必要的从而“必须”要做的时候，他们的这种说法就成了行政专家进行决策所赖以为基础的根据；然后那些被行政专家决定为行政上的必要之事，也同样会成为起草法律的法律家进行决策的的根据，依次推进，会不断地继续下去。这些不同的专家根本不会认为他们有能力通观全局，只是变成了各种专家意见简单相加的产物。</p>
-
-<p>作者书中引用J.Schreiegg的话，他说，每一持续的进步都可以说是“无数的无名氏或历史上无数个人所做的巨大贡献的结果；正是这些逐渐的发展最终造就出了这样一种尽善尽美的制度，而且从整体上与这种制度的完美相比较，所有那些仅依凭权威智识而产生的充满了小智慧的观念，实难望其项背”。</p>
-
-<p>读到这里，无语凝噎了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[此情可问天]]></title>
-    <link href="http://wanax.github.io/blog/2010/08/06/ci-qing-ke-wen-tian/"/>
-    <updated>2010-08-06T21:34:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2010/08/06/ci-qing-ke-wen-tian</id>
-    <content type="html"><![CDATA[<p>区别于高速交通工具的直接空降和徒步的持久耐性，单车，以一种我所能承受的最适宜的速度，来渐进地接近。</p>
-
-<p>今天搭旅游团的车去看冰川，回来的路上有位藏民也搭了上来，包着红头布，斜坐在最前方的过道，有旁边的游客给他东西吃，吃了一口他憨憨地笑了，而旁边游客却爆出了更大的笑声，那一刻我蓦地感受到我们与他们的距离如此之远。</p>
-
-<p>然乌，藏语中的意思是死尸的堆积，灵魂的安息地，然乌湖自然就是他们的天然墓场，而对于我们，只因为它外表的风光旖旎便不吝言语的赞美它的美好，整日人头攒攒的挤在湖边酝酿着自己的无限诗意。</p>
-
-<!--more-->
-
-
-<p>买了件50块的雨衣披在身上逛着冰川景点，自我感觉不错地问北哥如果穿成这样回到学校会怎样，北哥不假思索地答道：“傻B”,旁边的大婶好心地说，出门在外玩的，不关心什么衣着的，穿着舒服就行。</p>
-
-<p>不正是这样吗，原来的地域标准已离我们远去，而我们又不属于现在的这片土地，我们是一群失去了衡量尺度的人类，自己所做的此时此刻便真的是只代表了自己而已。原本是想来找到自己的所在，最后却如此退步，这是为何？</p>
-
-<p>走在大雪山旁，听着悠闲的歌，想努力的找到一种合适的心情合适的感觉合适的意境来与之对称，却惊异地发现，越深入地思考，心中的那份飘渺的情意越发地淡然，待走过两个里程碑，便颓然地放弃了抵抗，面对连绵的群山，无际的草坪，心中是一无所有了。良久，我释然了，天若有情天亦老，我辛辛苦苦地拿着社会上所带来的感情妄与天地相应，渺小的我最终的结果注定是被化去一切的社会情愫，只留下一具皮囊，真正的天地不仁万物刍狗。</p>
-
-<p>车上的藏民汉子受不住乘客的建议，开始用藏语唱起了他们自己的歌。本身的嗓音雄厚宽广，待混进了扩音器却显得是如此的不伦不类，就如本来健康的人打进了鸡血，响亮却不再高亢。</p>
-
-<p>一路骑来，遇到了很多放在平时是根本无法理解的事情。为了放生，藏民们可以全家出动沿着公路拣毛毛虫拣一天，把它们放回草原，避免丧生车轮的命运；又或是在县里发达的路段诸如银行邮局门口席地而坐，盘腿嗑瓜子聊天，耗着一下午的时间。在我们看来这与浪费时间没有什么区别，但每当路过时看着他们洋溢着笑容的满足脸庞，这种念头便不由自主地消失。其实他们的生命才是真正地融入了这里的天地，我们是一瞬的过客，不属于这里，还妄图在这里找到自己的答案，殊不知，这里的天地精华早已化在了居住在这里人的抬眼举足中。我们的相机可以记录，但我们的记忆万万留不住。</p>
-
-<p>车子前面又传来笑声，“这个别吃啦，回去带给你儿子吃。”藏族汉子还是呵呵地笑答，看不出喜怒。</p>
-
-<p>人本自然而生，社会使人进步，脱离了自然的束缚。但久而久之，就会有不少人想重新体验自然地怀抱，只是体验而不是回去，旅游也应运而生。遗憾的是，景点相对于人数来说太少太少，不是自然净化了人，而是大批的人有污染了新的一个纯美的地方。</p>
-
-<p>车子开回了然乌，我也渐渐地从异世梦中醒来，但旁边的那个女生还在为一个小时前众游客指责她擅自把一个藏民带上车来而嘤嘤地哭泣。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[两瓶啤酒一支烟]]></title>
-    <link href="http://wanax.github.io/blog/2010/08/03/liang-ping-pi-jiu-%5B%3F%5D-zhi-yan/"/>
-    <updated>2010-08-03T22:12:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2010/08/03/liang-ping-pi-jiu-[?]-zhi-yan</id>
-    <content type="html"><![CDATA[<p>武侠小说看多了特别是金庸的小说会发现江湖上的人物正义指数是以酒量来衡量的，像鸠摩智那样的鸟人自然滴酒不沾，而乔峰这号把酒当水喝的汉子在剧中地位自然一目了然。</p>
-
-<p>事情还是发生在骑川藏的第一天，那是个阳光明媚，万里无云，天空上飘着朵朵白云的日子。我们一行人从成都进军雅安，刚出城不久就看见两个人在快悠悠地往前晃。之所以悠悠，实在是因为他们踏频太慢，慢到与我们的踏频成分针与秒针的关系，但我们又总也追不上他们&hellip;所以也就快悠悠了。而这也只是亮点之一，最令我们惊奇的是发现其中一人驮包上别着一支雪花，除此别无其它液体。此事非同小可，7月的成都太阳与我们亲热的很，它的良好愿景就是让我们成为肉干，其唯一的对抗手段便是多喝水了，而此人竟如此嚣张地与太阳作对，经过本人的认真考虑初步认定此人定是酒水过量，是以外出溜风的，遂不再理会。</p>
-
-<!--more-->
-
-
-<p>可事与愿违，到了中午时分，我们竟又碰上了他们，依旧是快悠悠的晃着&hellip;北哥与我似乎是感到了侮辱，因为毕竟我们2-7档快速地踩着，而这两厮拿超高扭矩一步一晃地优哉游哉地超过了我们，于情于理均不可原谅，遂决定爆他们一下，以消心头之恨。</p>
-
-<p>最后心头之恨完全消除，呃&hellip;.不是因为爆他们成功，而是由滔滔江水连绵不绝的敬佩取代了。期间我们一直在跟那个别着啤酒的人的风。据科学原理解释，跟风是可以省30%的力的，而就算如此也是生生地让我们给跟崩了，无奈地停了下来，继而感叹世上高人永无止境，生出自惭形愧之感。而这，只是故事序幕的开始&hellip;</p>
-
-<p>下午从邛崃出发，基本一路缓上坡地走着，又因上午的过度耗力感觉走得很吃力，便在这时，悲剧似乎又降临到了我们身上。那两个厮不知中午去哪里遛了一圈，现在又从我们身后杀出，还友好地跟我们打了一声招呼，但这声招呼在我们看来似乎是夺命催音，因为既然打了招呼就该礼貌地一起同行&hellip;.与你同行，以前感觉这是个多么浪漫的词汇啊，但此时看来俨然与日光的肉干光波晋升为同一水平的杀手锏。</p>
-
-<p>使着吃奶的劲跟着不说，还要和他们故作轻松地聊天，直引得我六气乱走，任督串烧。而其中有两句更差点搞得我走火入魔。一句是说，你看今天的路多好，你们起得很是轻松吧&hellip;还有一句是我自己找上门的，说这个坡真长啊，那汉子却来了一句：“这是坡吗？这就是平路”。刹那间便感觉到六月飞雪了。</p>
-
-<p>通过极耗真气的聊天，得知两人是从内蒙一路骑过来的，期间还翻越了秦岭，出来混了一个多月了。知道了这些我便有种死得其所的感觉了。当然，要去拉萨是要骑2000+KM的，真要死在离成都不过100KM的地方也太憋屈了。遂本着大无畏的精神，我们沉痛地与他们告别，目送着他们两骑绝尘，眼中不免泛着苦涩的泪光，奶奶的，你们跟骑摩托的有什么区别&hellip;</p>
-
-<p>以后的几天，我们便活在了这两个蒙古汉子的伟大精神当中，具体表现在一有人超我们的车我们便统一地低下地想，小样别张狂，见了蒙古汉子两个你都照爆不误。</p>
-
-<p>后来爆我们的人越来越多，我们便对蒙古汉子的思念与日俱增。</p>
-
-<p>又是一个晴朗的上午，早早的出发寂寞地骑着，便在此时后面的一声招呼又打开了我们的超体验骑行的序幕&hellip;蒙古的汉子又从后面杀出，因为我们是7:30走的，而他们是快9:00才出发，仅一上午便追上了我们。此时脑海中浮现出了一句歌词：“套马的汉子你威武雄壮”&hellip;你是真他妈的威武雄壮。不用细言，那天又是提前完成任务，超了N队人马，此时深刻地感受到什么是站在巨人的肩上的感觉。</p>
-
-<p>那晚上住在一家旅店，汉子请我们吃饭，上来便叫了一瓶白的，自己整了两杯，箸子未动，又让我想起了江湖上那则长久的传说。汉子自己说，路上基本不吃，休息时两瓶啤酒抽根烟足矣，顿时让我们产生了高山仰止之情，这是怎样的人物啊.</p>
-
-<p>饭后，我们计划巴塘去芒康，而他们则在中途的温泉山庄小酌怡情，我们便快了一天，但我坚信他们总会莫名奇妙地上我们的&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[扎西德勒与糖果的故事]]></title>
-    <link href="http://wanax.github.io/blog/2010/08/01/zha-xi-de-le-yu-tang-guo-de-gu-shi/"/>
-    <updated>2010-08-01T22:08:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2010/08/01/zha-xi-de-le-yu-tang-guo-de-gu-shi</id>
-    <content type="html"><![CDATA[<p>不知从什么时候藏区的大地上似乎流传起了一个美丽的传说。</p>
-
-<p>如果你面前飘过骑车的人，对他喊声“扎西德勒”就会有糖果飞入你的掌心。</p>
-
-<p>诚然，对于长久地生活在辽阔高原上整日与牛羊做伴的孩子来说，这是一个美丽的传说，但对于骑车的人来说却不折不扣地算是一种折磨。</p>
-
-<p>记得刚翻过折多山，下往新都桥的路上，风光秀丽，并且初次听到沿路的同胞跟我喊“扎西德勒”，心中欣喜万分，感慨这里的人民淳朴可爱。后来才终于明白想要能有这种心情是必须建立在车速35km/h之上的，否则的话，完全是另一种意境。</p>
-
-<!--more-->
-
-
-<p>越深入藏区山路越多，打小没见过糖果的孩子也越多，一种苦涩的心情也会渐渐地建立起来。</p>
-
-<p>第一次意外是发生在去理塘的路上。那是一个上坡，在龟速的爬坡时，突然从侧翼奔出一干人马，双臂飘舞，口喊“扎西德勒”。还没明白发生什么的时候瞬间抓住了我们的驮包，说要帮我们推车….我们愚钝时又开始后拉我们的车要糖…还在愚钝时北哥包的带子卷进车轮别断了辐条。一个体重逾200斤的物体对于一辆断了辐条的车子来说后果是很严重的，果然，骑到目的地时，车子的后轮已经变形。粗略的修理上路后，我们认识到了遇到小孩瞬间提速的重要性，从此噩梦也就开始了。</p>
-
-<p>如果是平原也就算了，如果是平路也就算了，如果是柏油路也就算了，可这里是海拔3000且土路上坡无尽…此时如果有小孩冲出仅凭肌肉的瞬间收缩来摆脱是远远不够的，只有当你的肾上腺激素呛到嗓子眼时才能够躲避开来，这便是兵法上的以逸待劳的奇效。黄河文明的伟大创造在这票广阔的高原恰如其分地应用于炎黄子孙身上。“奶奶的，操蛋”，这是每次我逃脱后想要说的话，但每次逃开来后，只剩下喘气的份…</p>
-
-<p>当然刚刚所诉的只是最基本的讨糖技巧，这里毕竟是青藏高原，是黄河的发源地，孙子兵法也是逃不出如来手掌心的。就个人而言试过被家长骑着摩托带着小孩慢慢跟在身后，这种是终极杀手，只能给糖了，还有停在树荫下休息被刹那包围，抑或结群堵路。简而言之，一听到小孩的“扎西德勒”要是手中没糖的话就准备跑吧。</p>
-
-<p>而最可怕的一次要数经过一片晒东西的地方，那里的几个孩子拿着木叉，在翻地上的谷物。我在想，妈的，一说扎西德勒要是不停的话给我来一下子吾命休矣，想我一世英名，被挂在木叉之上不给插死羞也羞死了。也算是人品爆发，他们那声蕴含吉祥如意的扎西德勒没有说出口，而我也真吉祥如意了一下。</p>
-
-<p>越往里走小孩的方式越直接：“扎西德勒，有糖没！有钱没！”中间不带停顿，语速连贯，个个倍儿溜，不知喊了多少遍，个人感觉这个传说已经可以和西方的圣诞老人媲美，当然他是鹿车，我们是单车。圣诞老人没来，西方的孩子会伤心，我们不给糖的话小厮会把怒气转换为动力继而向下一位车友努力，累加结果能传出抢劫的传闻也就不足为怪。</p>
-
-<p>小孩来要糖。</p>
-
-<p>小孩来抢糖。</p>
-
-<p>小孩来抢。</p>
-
-<p>来抢，</p>
-
-<p>抢….</p>
-
-<p>一个美丽的传说就此诞生。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[藏区无平路]]></title>
-    <link href="http://wanax.github.io/blog/2010/07/26/cang-qu-wu-ping-lu/"/>
-    <updated>2010-07-26T22:40:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2010/07/26/cang-qu-wu-ping-lu</id>
-    <content type="html"><![CDATA[<p>今晚到的理塘，海拔4000多也就算了，温度还低得可以，街上满是穿羽绒服的喇嘛，而我唯一的一条长裤因为要恢复它的英雄本色，顾早早地挂在了衣绳，遂当我上街时有种错觉自己是日本的那些冬天上学还穿裙子的女学生，当然我是男的，穿短裤，也就这么一说。</p>
-
-<p>如此天气，北哥给了建设性的意见，去吃火锅。自然想到成都吃的重庆火锅，虽说辣得受不了，不过对于一个在温度不到10度的地方穿短裤的人来说也不失为一个绝妙的主意。</p>
-
-<!--more-->
-
-
-<p>走进第一家馆子，牌子上说有火锅，可师傅的没有，遗憾离去。又去了第二家，门面堂皇，一狠心也走进去了。</p>
-
-<p>北哥：“老板，拿菜牌，吃火锅！”</p>
-
-<p>服务员：“来了！”</p>
-
-<p>北哥看了两眼，对我说：“吃炒菜吧&hellip;”</p>
-
-<p>我点了点头&hellip;</p>
-
-<p>北哥：“有什么牛肉的菜？”</p>
-
-<p>服务员：“萝卜炖的，还有炒的”</p>
-
-<p>我：“萝卜炖牛肉吧”</p>
-
-<p>北哥面部又抽搐了&hellip;</p>
-
-<p>服务员走后，北哥说猜炖牛肉多少钱，猜了个38，还少了两块，这下我的牙也疼了。望着北哥的眼神我知道，其实我们应该就在旅店楼下解决问题的。可事到如今也没办法了，只能开始幻想这份炖肉到底是否物美价不廉。</p>
-
-<p>在盘算着这顿饭亏了多大时房间的门开了，一双手和一个脸盆状物体飘了进来，一时还没反应过来，放到桌上后望着那悠悠的萝卜大肉，透过其散腾出来的白雾，我依稀看见北哥的眼神充满泪水。</p>
-
-<p>用“饱”来形容这顿饭已经境界太低了，用北哥的话来说叫“妈的，累死了”。在还未死透前，我们赶快结账，撤离战场，因为那脸盆里还飘着若干大肉，再不走这些肉会进入我们的肚子造反。</p>
-
-<p>出来时天空依稀下雨，这里8：20天还没黑透，广场上坐着一排排的汉子妇女，黝红的面庞排山倒海似地压来。骑车时一路闪过，最多一句“扎西德勒”，而在此时却有种逃也逃不掉的感觉，人在异乡之感也随之而来。</p>
-
-<p>一想到明天要休息一天，身子就说不出的舒畅，光是那久违的懒觉就足以让我陶醉不已。就好像以前上高中时，知道后天考试，相当惆怅，但又想到下午可以抽机娱乐顿时惆怅烟消云散。</p>
-
-<p>以前觉得骑车可以放松自己，可以给自己一个遐想的空间。但真正骑到这份上才发现，骑车就是一修身养性的活，老僧可以入定，控制思想，我们这号的入定不了，思想乱窜，怎么办？骑车&hellip;别的不说，25MIN登个TL就能让你在这一刻多钟的时间内四大皆空，人事不省。这几天登的折多，剪子弯基本上就是这种状况。30+公里的上坡，5km/h，纯踩就要6个多小时。理论上讲，对于这段时间我是没有记忆的。</p>
-
-<p>特别今天爬坡时远前方是个弯，北哥和我就开始猜了，北哥随口问道：“上坡之后是什么？”，习惯性地想回答下坡，客观逻辑上这种回答是完全正确的，但分明还可能是上坡，骤然间发现这似乎是一个文字陷阱，上坡或下坡？思考时却醒悟到根本没把平路放在考虑的范围之内，因为这几天感觉就没走过平路，便不在考虑范围之内了。但难道这世上就因为我们几天的接触便为之抹去平路的概念？</p>
-
-<p>嘿，藏区无平路。</p>
 ]]></content>
   </entry>
   

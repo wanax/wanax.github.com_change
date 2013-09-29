@@ -1,0 +1,245 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>iOS上js引擎的使用 - 陋室</title>
+	<meta name="author" content="Wanax">
+	
+	<meta name="description" content="iOS上js引擎的使用 如上篇文章所述ios折线图绘制，公司开发需要要用到一些字符串转公式的需求。自己实在有点惧自己写语法书啥的听公司大牛说可以使用js引擎试试，于是就抱着试试的态度调研了一把，感觉还不错。 这次试用了两个js引擎，一个是javascriptcore， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://wanax.github.io/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src='/images/avatar.png' alt='Profile Picture' style='width: 160px;' />
+</div>
+<hgroup>
+  <h1><a href="/">陋室</a></h1>
+  
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
+</ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
+<li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+
+  </ul>
+</section>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/wanax.github.com" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">iOS上js引擎的使用</h1>
+	<div class="entry-content" itemprop="articleBody"><p> 如上篇文章所述ios折线图绘制，公司开发需要要用到一些字符串转公式的需求。自己实在有点惧自己写语法书啥的听公司大牛说可以使用js引擎试试，于是就抱着试试的态度调研了一把，感觉还不错。</p>
+
+<p>这次试用了两个js引擎，一个是javascriptcore，这个比较方便可以直接引入便使用，另一个是google的v8引擎，这个有点麻烦要先编译通过才行，搞了好一阵才派上用场~倒是学到了好多新知识，哈哈。</p>
+
+<!--more-->
+
+
+<p>先说简单的javascriptcore吧，下载好库引入静态链接库和头文件便可以了。这里有时候会报错说找不到文件。google了一下发下一般是因为xcode本身对外来拷贝文件没有正确引用导致的，解决办法很简单，进入Build Phases 的Compile Source对新添加的头文件进行引用就好了。</p>
+
+<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607111925093_zps428cacd3.png" alt="image" /></p>
+
+<p>接下来便是怎样使用的问题。</p>
+
+<p>先在头文件里引用文件：</p>
+
+<pre><code>import "JavaScriptCore/JavaScriptCore.h" 
+</code></pre>
+
+<p>然后是构造js的上下文context，这个还蛮重要的东西，具体的原理大家可以自行google，因为我自己理解的也很肤浅，略知皮毛而已。</p>
+
+<pre><code>context = JSGlobalContextCreate(NULL);  
+</code></pre>
+
+<p>完了以后我把js运行的方法封装成了一个方法，如下：</p>
+
+<pre><code>- (NSString *)runsJS:(NSString *)aJSString  
+{  
+    if (!aJSString) {  
+        NSLog(@"[JSC] JS String is empty!");  
+        return nil;  
+    }  
+
+
+JSStringRef scriptJS = JSStringCreateWithUTF8CString([aJSString UTF8String]);  
+JSValueRef exception = NULL;  
+
+JSValueRef result = JSEvaluateScript(context, scriptJS, NULL, NULL, 0, &amp;exception);  
+NSString *res = nil;  
+
+JSStringRef jstrArg = JSValueToStringCopy(context, result, NULL);  
+res = (NSString*)JSStringCopyCFString(kCFAllocatorDefault, jstrArg);  
+
+JSStringRelease(jstrArg);  
+
+JSStringRelease(scriptJS);  
+
+return res;  }  
+</code></pre>
+
+<p>封装完毕便可以顺利使用啦：</p>
+
+<pre><code>NSString *str=[self.engine runJS:@"var str='';for(var i=0;i&lt;2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
+    //NSLog(@"%@",str);  
+</code></pre>
+
+<p>这便是大体的javascriptcore的使用方法了。</p>
+
+<p>接下来是v8引擎。</p>
+
+<p>v8引擎的编译很痛苦，网上一般比较常见的教程是编译成动态库，lib之类的，但苹果貌似只让用.a的静态库，无形中又增加了负担。我网上搜了好多编译的方法，无非都是些svn check下v8的文件，然后安装python和对应python的一个编译工具scons进行编译。看攻略说，google先在又不提倡用scons了，又开发了另外一种东西&hellip;.真是能折腾。</p>
+
+<p>我遇到的主要问题是好像编译的时候要搭配一个叫breakpad的东西一起，而这玩意儿又死活装不了，就一直卡在那里了。但比较意外的是最后经竟意外发现在v8根目录还有个make的命令，也可以直接编译&hellip;..就这样稀里糊涂的把静态库给整出来了，还隐藏得很深，search了一下才发现在哪里。</p>
+
+<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607113710843_zpsd81cc322.png" alt="image" /></p>
+
+<p>这便是粗略的使用方法啦。</p>
+
+<blockquote><p>一个简单的示例</p></blockquote>
+
+<pre><code>var test=function(){  
+var val=[];  
+val["1.0"]=1;  
+val["1.1"]=2;  
+val["1.2"]=3;  
+val["1.3"]=4;  
+val["2"]=34;  
+
+var str="var v=this.val; v[\"1.3\"]=v[\"1.0\"]*v[\"1.2\"];";  
+var fun=new Function(str);  
+val["0"]=5;  
+fun();  
+return val;  
+}  
+</code></pre>
+</div>
+
+</article>
+
+	<!--<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+-->
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Wanax -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'wanax';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://wanax.github.io/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong/';
+        var disqus_url = 'http://wanax.github.io/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+		</div>
+	</div>
+</body>
+</html>

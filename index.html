@@ -8,7 +8,7 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Mar 13th, 2013 OnTheRoad 但生不期遇 ABC徒步的最后一天，中午两点多吃过饭，东边的山头已经乌云笼罩，看那风向估计要不了多久便会追上我们的脚步。 跟Kim在Tadapani分手后，Jun和我加速下撤，想在雨前赶到下一个落脚的地方，Ghandruk。海拔已经下至2000多米 &hellip;">
+	<meta name="description" content="Jun 9th, 2013 Tec UIView三种动画笔记 [UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{ self.view.alpha = 0 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,7 +60,7 @@
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (3)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
 
   </ul>
 </section>
@@ -95,6 +95,125 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-09T10:30:00+08:00" data-updated="true" itemprop="datePublished">Jun 9<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/" itemprop="url">UIView三种动画笔记</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<pre><code>[UIView animateWithDuration:0.6f  
+                          delay:0  
+                        options:UIViewAnimationOptionCurveEaseOut  
+                     animations:^{  
+                         self.view.alpha = 0;  
+                     }  
+                     completion:^(BOOL finished) {  
+                         [self.view removeFromSuperview];  
+                     }];  
+</code></pre>
+
+<p>  
+		
+		<a href="/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T11:47:00+08:00" data-updated="true" itemprop="datePublished">Jun 7<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong/" itemprop="url">iOS上js引擎的使用</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p> 如上篇文章所述ios折线图绘制，公司开发需要要用到一些字符串转公式的需求。自己实在有点惧自己写语法书啥的听公司大牛说可以使用js引擎试试，于是就抱着试试的态度调研了一把，感觉还不错。</p>
+
+<p>这次试用了两个js引擎，一个是javascriptcore，这个比较方便可以直接引入便使用，另一个是google的v8引擎，这个有点麻烦要先编译通过才行，搞了好一阵才派上用场~倒是学到了好多新知识，哈哈。</p>
+
+
+		
+		<a href="/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T11:06:00+08:00" data-updated="true" itemprop="datePublished">Jun 7<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/06/07/ioskai-fa-zhi-shi-yong-coreplothui-zhi-zhe-xian-tu-bing-tian-jia-tuo-dong-gong-neng/" itemprop="url">iOS开发之使用CorePlot绘制折线图并添加拖动功能</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>做ios开发快两个月了 从基本的语法开始学起看看这个学学那个的。一开始对delegate controller view各种头大，就老老实实地跟着入门教程一步步的来。所幸之前做了一年多的java开发，熟悉了eclipse的界面和Deja的字体，换到mac下面用xcode也觉得很新鲜。</p>
+
+
+		
+		<a href="/blog/2013/06/07/ioskai-fa-zhi-shi-yong-coreplothui-zhi-zhe-xian-tu-bing-tian-jia-tuo-dong-gong-neng/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -193,6 +312,110 @@
   
 
 
+<time datetime="2012-11-01T16:04:00+08:00" data-updated="true" itemprop="datePublished">Nov 1<span>st</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/" itemprop="url">Java设置编码读写文件笔记</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<pre><code>public class Test {  
+        public static void main(String[] args) {  
+            try{  
+                BufferedReader br = new BufferedReader(  
+                        new InputStreamReader(new FileInputStream(url),"UTF-8"));  
+                String data = null;  
+                StringBuffer str=new StringBuffer();  
+                while((data = br.readLine())!=null)  
+                {  
+                    str.append(data+"\n");  
+                }  
+                System.out.println(str);  
+                br.close();  
+                Test test=new Test();  
+                test.ece(str.toString());  
+            }catch(Exception e){  
+                e.printStackTrace();  
+            }             
+        }  
+        public void ece(String str){  
+            try{  
+                BufferedWriter bw = new BufferedWriter(  
+                        new OutputStreamWriter(new FileOutputStream(url,false),"UTF-8"));  
+                bw.write(str);  
+                bw.flush();  
+                bw.close();  
+            }catch(Exception e){  
+                e.printStackTrace();  
+            }     
+        }  
+}  
+</code></pre>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-11T15:53:00+08:00" data-updated="true" itemprop="datePublished">Oct 11<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/" itemprop="url">Ajax对象数组传参方式</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>项目中一个页面需要的功能是动态添加信息列表，传至后台添加数据库。用的方式是ajax+struts2，因为struts本身的特性，在ajax的data里直接写数组名java后台是无法正常接收到的，最简单的理解便是它无法智能的一一匹配数组里的每一个值，所以我们在前台开始发action请求前便要组装好容易接收的数据格式。</p>
+
+<p>最简单的方法是直接拼接字符串，后台split出来，但有时候用的不是简单的字符串数组而是对象数组，这时候就需要一些其它方法了。</p>
+
+
+		
+		<a href="/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2012-08-23T17:55:00+08:00" data-updated="true" itemprop="datePublished">Aug 23<span>rd</span>, 2012</time></div>
 		<div class="tags">
 
@@ -231,6 +454,50 @@
   
 
 
+<time datetime="2012-06-28T01:55:00+08:00" data-updated="true" itemprop="datePublished">Jun 28<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/06/28/6ge-you-yong-de-mysqlyu-ju-zhuan/" itemprop="url">6个有用的MySQL语句(转)</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>1. 计算年数</h3>
+
+<blockquote><p>你想通过生日来计算这个人有几岁了。</p></blockquote>
+
+<pre><code>SELECT
+
+DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y')
+ + 0;
+</code></pre>
+
+
+		
+		<a href="/blog/2012/06/28/6ge-you-yong-de-mysqlyu-ju-zhuan/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2012-03-15T19:00:00+08:00" data-updated="true" itemprop="datePublished">Mar 15<span>th</span>, 2012</time></div>
 		<div class="tags">
 
@@ -248,256 +515,6 @@
 <p> 
 		
 		<a href="/blog/2012/03/15/ru-ci-er-yi/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-15T19:36:00+08:00" data-updated="true" itemprop="datePublished">Jan 15<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/tec/'>Tec</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/" itemprop="url">常用正则表达式(转)</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>正则表达式用于字符串处理、表单验证等场合，实用高效。现将一些常用的表达式收集于此，以备不时之需。</p>
-
-<p>匹配中文字符的正则表达式： <code>[\u4e00-\u9fa5]</code></p>
-
-<blockquote><p>评注：匹配中文还真是个头疼的事，有了这个表达式就好办了</p></blockquote>
-
-<p>匹配双字节字符(包括汉字在内)：<code>[^\x00-\xff]</code></p>
-
-<blockquote><p>评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）</p></blockquote>
-
-
-		
-		<a href="/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-04T17:10:00+08:00" data-updated="true" itemprop="datePublished">Jan 4<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/tec/'>Tec</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/01/04/luceneru-men-chu-bu/" itemprop="url">Lucene入门初步</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>简单地说，Lucene是两个java的程序包而已，通过引包调用接口函数我们可以很方便的对txt文档构建索引</p>
-
-<p>构建索引的大体顺序可由下图清晰可见</p>
-
-<p>即被索引的文档用Document对象表示</p>
-
-<p>IndexWriter通过函数addDocument将文档添加到索引，实现创建索引的过程</p>
-
-<p>Lucene的索引是应用反向索引</p>
-
-<p>当用户有请求是，Query代表用户的查询语句</p>
-
-
-		
-		<a href="/blog/2012/01/04/luceneru-men-chu-bu/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-04T17:08:00+08:00" data-updated="true" itemprop="datePublished">Jan 4<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/tec/'>Tec</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji/" itemprop="url">Struts跳转控制笔记</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<h3>当<code>namespace="/login"</code>时</h3>
-
-<p>===</p>
-
-<p>子路目中：有<code>login/</code>   <strong>no action mapped for</strong></p>
-
-<p>无<code>login/</code>   <strong>no result defined</strong></p>
-
-<p>根目录中：    <strong>no result defined</strong></p>
-
-<p><strong>no action mapped for</strong></p>
-
-
-		
-		<a href="/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-05T19:13:00+08:00" data-updated="true" itemprop="datePublished">Aug 5<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2011/08/05/che-hu/" itemprop="url">扯乎</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>送走一帮回广州的同伴，自己的火车却6个小时后再开，等在这里心中略觉忧伤，想来这股子弥漫着馕味的忧伤是从喀纳斯一路飘来的。</p>
-
-<p>本打算去湖边看湖怪，不想竟遇到一帮变异的陆地生物，他们在那里建了个大门说想进去先交150，迈过了这道坎又听说这个鸟JB大门距湖边还有30+km，90元的区间车被宰地无话可说。在心灵上饱受摧残时，肚皮也不失时机的闹起革命，看着笑眯眯的维族同胞和他旁边锅里金灿灿的手抓饭不禁一阵腹绞，上前询问40一份，我日你妈，你这样我很忧伤。</p>
-
-
-		
-		<a href="/blog/2011/08/05/che-hu/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-27T17:59:00+08:00" data-updated="true" itemprop="datePublished">Jul 27<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2011/07/27/dun-huang-zai-zhe-li/" itemprop="url">敦煌在这里</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>到玉门的晚上去唱k，直接导致众人惰性大涨，纷纷拿出玉门至瓜洲段路不好走天气炎热心情不好适逢大姨妈之类的借口搪塞不骑，鄙人也一度动摇搭车算完。但床上辗转想到搭车过去要40多元，我且骑它一天省下路费去到饱餐一顿也相当划算，狠狠心第二天也就爬起来了。</p>
-
-<p>一出门果然风就不小，先犒劳了自己四个韭菜包子，盖据说男生吃这个很有用处，女生还是少是食小心长胡子。走出玉门不到20km看见旁边的高速车辆飞驰，再看看自己这边残念的国道，大货车跟驴一样的前行，还卷起漫天黄沙气就不打一处来。毫不犹豫地找了处断开的铁丝网爬了进去，一上高速感觉果然不一样，看着下面沙石覆盖的国道整个人都觉得倍儿有面子。</p>
-
-
-		
-		<a href="/blog/2011/07/27/dun-huang-zai-zhe-li/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-21T21:30:00+08:00" data-updated="true" itemprop="datePublished">Jul 21<span>st</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ontheroad/'>OnTheRoad</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2011/07/21/zhe-bian-tai-yang-da-de-hen/" itemprop="url">这边太阳大得很</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>这边太阳大得很，今天骑了一上午脖子通红，菊花另算。</p>
-
-<p>西海镇出来也有六天，从大通城关翻达坂山到菜花茂盛的青石嘴，继而一路缓上爬去俄博，一个一眼望出的城镇，却有五六家川菜馆，着实费解，另一特点便是相当缺水，风尘而来却无水洗澡。只好打了一脸盆，在房间里自慰一下，另一随之而来的问题便是厕所。嗯，怎么说呢，除了入口的“公厕”尚含常理外，顺着那个箭头拐出胡同就会有那么一丝的诧异，公厕呢？然后地上如星罗散布的点点告诉了你答案。我们三个一人爬到一个小山坡上迎风洒泪，我找到一个酷似蹲坑的位置不亦乐乎，另一个则隐在了乱石岗中，云深不知。并相约明早继续，不得侵占对方领土。</p>
-
-
-		
-		<a href="/blog/2011/07/21/zhe-bian-tai-yang-da-de-hen/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -545,6 +562,7 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
 </script>
+
 		</div>
 	</div>
 </body>

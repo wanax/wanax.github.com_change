@@ -19,6 +19,8 @@ Lucene的索引是应用反向索引
 
 当用户有请求是，Query代表用户的查询语句
 
+<!--more-->
+
 IndexSearcher通过函数search搜索Lucene Index
 
 IndexSearcher计算term weight和sorce并且将结果返回给用户

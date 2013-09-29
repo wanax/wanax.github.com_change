@@ -8,7 +8,7 @@
 	<title>UIView三种动画笔记 - 陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="UIView三种动画笔记 [UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{ self.view.alpha = 0; } completion:^( &hellip;">
+	<meta name="description" content=" UIView三种动画笔记 --> Comments Please enable JavaScript to view the comments powered by Disqus. ">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,54 +95,13 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<h1 class="title" itemprop="name">UIView三种动画笔记</h1>
-	<div class="entry-content" itemprop="articleBody"><pre><code>[UIView animateWithDuration:0.6f  
-                          delay:0  
-                        options:UIViewAnimationOptionCurveEaseOut  
-                     animations:^{  
-                         self.view.alpha = 0;  
-                     }  
-                     completion:^(BOOL finished) {  
-                         [self.view removeFromSuperview];  
-                     }];  
-</code></pre>
+	<div class="entry-content" itemprop="articleBody"><script src="https://gist.github.com/wanax/6752309.js"></script>
+
 
 <p>  <!--more--></p>
 
-<pre><code>[UIView beginAnimations:@"animation" context:nil];  
-[UIView setAnimationDuration:0.8f];  
-[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];  
-[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:delegate.tabBarController.view cache:YES];  
-[UIView commitAnimations];  
+<script src="https://gist.github.com/wanax/6752318.js"></script>
 
-
-
-CATransition *animation = [CATransition animation];  
-    animation.duration = 0.8f;  
-    /*动画时间控制      
- UIViewAnimationCurveEaseInOut,         // slow at beginning and end      
- UIViewAnimationCurveEaseIn,            // slow at beginning      
- UIViewAnimationCurveEaseOut,           // slow at end     
- UIViewAnimationCurveLinear      
- */  
-animation.timingFunction = UIViewAnimationCurveEaseInOut;  
-animation.fillMode = kCAFillModeForwards;  
-/*动画类型      
- kCATransitionFade;      
- kCATransitionMoveIn;      
- kCATransitionPush;      
- kCATransitionReveal;      
- */  
-animation.type = kCATransitionMoveIn;  
-/*动画进入方式      
- kCATransitionFromRight;      
- kCATransitionFromLeft; 
- kCATransitionFromTop; 
- kCATransitionFromBottom; 
- */  
-animation.subtype = kCATransitionFromBottom;  
-[[self.view layer] addAnimation:animation forKey:@"animation"];  
-animation=nil; 
-</code></pre>
 </div>
 
 </article>

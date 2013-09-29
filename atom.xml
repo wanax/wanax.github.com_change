@@ -4,7 +4,7 @@
   <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-09-29T20:37:41+08:00</updated>
+  <updated>2013-09-29T21:29:16+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -18,54 +18,13 @@
     <link href="http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/"/>
     <updated>2013-06-09T10:30:00+08:00</updated>
     <id>http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji</id>
-    <content type="html"><![CDATA[<pre><code>[UIView animateWithDuration:0.6f  
-                          delay:0  
-                        options:UIViewAnimationOptionCurveEaseOut  
-                     animations:^{  
-                         self.view.alpha = 0;  
-                     }  
-                     completion:^(BOOL finished) {  
-                         [self.view removeFromSuperview];  
-                     }];  
-</code></pre>
+    <content type="html"><![CDATA[<script src="https://gist.github.com/wanax/6752309.js"></script>
+
 
 <p>  <!--more--></p>
 
-<pre><code>[UIView beginAnimations:@"animation" context:nil];  
-[UIView setAnimationDuration:0.8f];  
-[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];  
-[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:delegate.tabBarController.view cache:YES];  
-[UIView commitAnimations];  
+<script src="https://gist.github.com/wanax/6752318.js"></script>
 
-
-
-CATransition *animation = [CATransition animation];  
-    animation.duration = 0.8f;  
-    /*动画时间控制      
- UIViewAnimationCurveEaseInOut,         // slow at beginning and end      
- UIViewAnimationCurveEaseIn,            // slow at beginning      
- UIViewAnimationCurveEaseOut,           // slow at end     
- UIViewAnimationCurveLinear      
- */  
-animation.timingFunction = UIViewAnimationCurveEaseInOut;  
-animation.fillMode = kCAFillModeForwards;  
-/*动画类型      
- kCATransitionFade;      
- kCATransitionMoveIn;      
- kCATransitionPush;      
- kCATransitionReveal;      
- */  
-animation.type = kCATransitionMoveIn;  
-/*动画进入方式      
- kCATransitionFromRight;      
- kCATransitionFromLeft; 
- kCATransitionFromTop; 
- kCATransitionFromBottom; 
- */  
-animation.subtype = kCATransitionFromBottom;  
-[[self.view layer] addAnimation:animation forKey:@"animation"];  
-animation=nil; 
-</code></pre>
 ]]></content>
   </entry>
   
@@ -99,35 +58,17 @@ animation=nil;
 
 <p>完了以后我把js运行的方法封装成了一个方法，如下：</p>
 
-<pre><code>- (NSString *)runsJS:(NSString *)aJSString  
-{  
-    if (!aJSString) {  
-        NSLog(@"[JSC] JS String is empty!");  
-        return nil;  
-    }  
+<script src="https://gist.github.com/wanax/6752325.js"></script>
 
 
-JSStringRef scriptJS = JSStringCreateWithUTF8CString([aJSString UTF8String]);  
-JSValueRef exception = NULL;  
-
-JSValueRef result = JSEvaluateScript(context, scriptJS, NULL, NULL, 0, &amp;exception);  
-NSString *res = nil;  
-
-JSStringRef jstrArg = JSValueToStringCopy(context, result, NULL);  
-res = (NSString*)JSStringCopyCFString(kCFAllocatorDefault, jstrArg);  
-
-JSStringRelease(jstrArg);  
-
-JSStringRelease(scriptJS);  
-
-return res;  }  
-</code></pre>
+<p></p>
 
 <p>封装完毕便可以顺利使用啦：</p>
 
-<pre><code>NSString *str=[self.engine runJS:@"var str='';for(var i=0;i&lt;2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
-    //NSLog(@"%@",str);  
-</code></pre>
+<script src="https://gist.github.com/wanax/6752332.js"></script>
+
+
+<p></p>
 
 <p>这便是大体的javascriptcore的使用方法了。</p>
 
@@ -143,21 +84,8 @@ return res;  }
 
 <blockquote><p>一个简单的示例</p></blockquote>
 
-<pre><code>var test=function(){  
-var val=[];  
-val["1.0"]=1;  
-val["1.1"]=2;  
-val["1.2"]=3;  
-val["1.3"]=4;  
-val["2"]=34;  
+<script src="https://gist.github.com/wanax/6752335.js"></script>
 
-var str="var v=this.val; v[\"1.3\"]=v[\"1.0\"]*v[\"1.2\"];";  
-var fun=new Function(str);  
-val["0"]=5;  
-fun();  
-return val;  
-}  
-</code></pre>
 ]]></content>
   </entry>
   
@@ -186,315 +114,33 @@ fun();
 
 <p>先在头文件里定义几个后面要用到的量</p>
 
-<pre><code>//转换坐标系字典，与手指触摸点匹配  
-@property (nonatomic,retain) NSMutableDictionary *reverseDic;  
-//js引擎上下文  
-@property (nonatomic) JSGlobalContextRef context;  
-//绘图view  
-@property (nonatomic,retain) CPTGraphHostingView *hostView;  
+<script src="https://gist.github.com/wanax/6752336.js"></script>
 
-//坐标转换方法，实际坐标转化相对坐标  
-- (CGPoint)CoordinateTransformRealToAbstract:(CGPoint)point;  
-//坐标转换方法，相对坐标转化实际坐标  
-- (CGPoint)CoordinateTransformAbstractToReal:(CGPoint)point;  
-//判断手指触摸点是否在折点旁边  
--(BOOL)isNearByThePoint:(CGPoint)p;  
 
-//js代码运行  
-- (NSString *)runsJS:(NSString *)aJSString; 
-</code></pre>
-
-<p>因为要对图像上的折点拖动，而我没有找到合适的对点的事件绑定方法，所以先直接对整个view进行手势监听，通过实际坐标与坐标轴坐标相对转换来判定触摸点是否是在折点附近已达到合理拖动的目的。</p>
+<p>  <br/>
+因为要对图像上的折点拖动，而我没有找到合适的对点的事件绑定方法，所以先直接对整个view进行手势监听，通过实际坐标与坐标轴坐标相对转换来判定触摸点是否是在折点附近已达到合理拖动的目的。</p>
 
 <p>接下来便开始.m文件的编码工作啦。我先定义一个简单的折线图公式，y=x+n；把一些数据点塞到point数组里，做后面的datasource。接下来便是折线图的绘制，代码注释写得比较清楚，就不一一赘述了。值得注意的是，这里点的绘制也是使用ios里常用的datasource的方法，所以先别急着找那一系列点出现在哪里~</p>
 
-<pre><code>- (void)viewDidLoad  
-{  
-    [super viewDidLoad];  
-    UIButton *bt=[[UIButton alloc] init];  
-    [self.view addSubview:bt];  
-    points=[[NSMutableArray alloc] init];  
-    reverseDic=[[NSMutableDictionary alloc] init];  
-    NSUInteger i;  
-    for(i=0;i&lt;NUM;i++){  
-        id x=[NSNumber numberWithFloat:0+i];  
-        id y=[NSNumber numberWithFloat:3*i];  
-        [reverseDic setObject:y forKey:[NSString stringWithFormat:@"%.0f",[x floatValue]]];  
-        [points addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x,@"x",y,@"y",nil]];  
-    }  
-    // Do any additional setup after loading the view.  
-    //初始化图形视图  
-    graph=[[CPTXYGraph alloc] initWithFrame:CGRectZero];  
-    CPTTheme *theme=[CPTTheme themeNamed:kCPTDarkGradientTheme];  
-    [graph applyTheme:theme];  
-    self . view =[[ CPTGraphHostingView alloc ] initWithFrame :[ UIScreen mainScreen ]. bounds ];  
-    hostView=(CPTGraphHostingView *)self.view;  
+<script src="https://gist.github.com/wanax/6752339.js"></script>
 
-    [hostView setHostedGraph : graph ];  
-
-    NSLog(@"orgin:%.2f,%.2f",hostView.frame.origin.x,hostView.frame.origin.y);  
-    NSLog(@"size:%.2f,%.2f",hostView.frame.size.height,hostView.frame.size.width);  
-
-    // CPGraph 四边不留白  
-    graph . paddingLeft = 0.0f ;  
-    graph . paddingRight = 0.0f ;  
-    graph . paddingTop = 0.0f ;  
-    graph . paddingBottom = GRAPAHBOTTOMPAD ;  
-    // 绘图区 4 边留白  
-    graph . plotAreaFrame . paddingLeft = 0.0 ;  
-    graph . plotAreaFrame . paddingTop = 0.0 ;  
-    graph . plotAreaFrame . paddingRight = 0.0 ;  
-    graph . plotAreaFrame . paddingBottom = 00.0 ;  
-
-
-
-
-
-
-    //绘制图形空间  
-    CPTXYPlotSpace *plotSpace=(CPTXYPlotSpace *)graph.defaultPlotSpace;  
-    //plotSpace.allowsUserInteraction=YES;  
-
-    //设置x，y坐标范围  
-    plotSpace.xRange=[CPTPlotRange plotRangeWithLocation:  
-                      CPTDecimalFromCGFloat(XRANGEBEGIN)  
-                                                  length:CPTDecimalFromCGFloat(XRANGELENGTH)];  
-    plotSpace.yRange=[CPTPlotRange plotRangeWithLocation:  
-                      CPTDecimalFromCGFloat(YRANGEBEGIN)  length:CPTDecimalFromCGFloat(YRANGELENGTH)];  
-
-    //绘制坐标系  
-    CPTXYAxisSet *axisSet=(CPTXYAxisSet *)graph.axisSet;  
-    CPTXYAxis *x=axisSet.xAxis;  
-
-    CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];  
-    lineStyle.miterLimit = 1.0f;  
-    lineStyle.lineWidth = 2.0;  
-    lineStyle.lineColor = [CPTColor colorWithComponentRed:255/255.0 green:211/255.0 blue:155/255.0 alpha:1.0];  
-
-    x.majorIntervalLength=CPTDecimalFromFloat(XINTERVALLENGTH);  
-    x.orthogonalCoordinateDecimal=CPTDecimalFromFloat(XORTHOGONALCOORDINATE);  
-    x.minorTicksPerInterval=XTICKSPERINTERVAL;  
-    x.minorTickLineStyle = lineStyle;  
-
-    CPTXYAxis *y=axisSet.yAxis;  
-    y.majorIntervalLength=CPTDecimalFromFloat(YINTERVALLENGTH);  
-    y.orthogonalCoordinateDecimal=CPTDecimalFromFloat(YORTHOGONALCOORDINATE);  
-    y.minorTicksPerInterval=YTICKSPERINTERVAL;  
-    y.minorTickLineStyle = lineStyle;  
-
-
-    y. labelingPolicy = CPTAxisLabelingPolicyNone ;  
-
-
-    //修改折线图线段样式  
-    CPTScatterPlot *boundLinePlot=[[[CPTScatterPlot alloc] init] autorelease];  
-    //CPTMutableLineStyle *lineStyle=[CPTMutableLineStyle lineStyle];  
-    lineStyle.miterLimit=2.0f;  
-    lineStyle.lineWidth=2.0f;  
-    lineStyle.lineColor=[CPTColor whiteColor];  
-    boundLinePlot.dataLineStyle=lineStyle;  
-    boundLinePlot.identifier=@"Blue Plot";  
-    boundLinePlot.dataSource=self;//需实现委托  
-
-
-
-    // Do a red-blue gradient: 渐变色区域  
-    //  
-    /*CPTColor * blueColor        = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:0.8]; 
-    CPTColor * redColor         = [CPTColor colorWithComponentRed:1.0 green:0.3 blue:0.3 alpha:0.8]; 
-    CPTGradient * areaGradient1 = [CPTGradient gradientWithBeginningColor:blueColor 
-                                                              endingColor:redColor]; 
-    areaGradient1.angle = -120.0f; 
-    CPTFill * areaGradientFill  = [CPTFill fillWithGradient:areaGradient1]; 
-    boundLinePlot.areaFill      = areaGradientFill; 
-    boundLinePlot.areaBaseValue = [[NSDecimalNumber numberWithFloat:0.5] decimalValue]; // 渐变色的起点位置 
-    */  
-
-
-    // Add plot symbols: 表示数值的符号的形状  
-    //  
-    CPTMutableLineStyle * symbolLineStyle = [CPTMutableLineStyle lineStyle];  
-    symbolLineStyle.lineColor = [CPTColor colorWithComponentRed:102/255.0 green:204/255.0 blue:255/255.0 alpha:1.0];  
-    symbolLineStyle.lineWidth = 2.0;  
-
-    CPTPlotSymbol * plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];  
-    //plotSymbol.fill          = [CPTFill fillWithColor: [CPTColor colorWithComponentRed:102/255.0 green:204/255.0 blue:255/255.0 alpha:1.0]];  
-    plotSymbol.lineStyle     = symbolLineStyle;  
-    plotSymbol.size          = CGSizeMake(1.8, 1.8);  
-    boundLinePlot.plotSymbol = plotSymbol;  
-
-
-    // Animate in the new plot: 淡入动画  
-    boundLinePlot.opacity = 0.0f;  
-
-    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];  
-    fadeInAnimation.duration            = 3.0f;  
-    fadeInAnimation.removedOnCompletion = NO;  
-    fadeInAnimation.fillMode            = kCAFillModeForwards;  
-    fadeInAnimation.toValue             = [NSNumber numberWithFloat:1.0];  
-    [boundLinePlot addAnimation:fadeInAnimation forKey:@"shadowOffset"];  
-
-
-
-    [graph addPlot:boundLinePlot];  
-
-
-    //手势添加  
-    UIPanGestureRecognizer *panGr=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPan:)];  
-    [hostView addGestureRecognizer:panGr];  
-    [panGr release];  
-
-
-
-
-    //NSString *str=[self.engine runJS:@"var str='';for(var i=0;i&lt;2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
-    //NSLog(@"%@",str);  
-
-
-
-
-} 
-</code></pre>
 
 <h3>这样一个初步的折现图便绘制完毕啦。数据源委托和数据标签的实现如下：</h3>
 
-<pre><code>// 添加数据标签  
--( CPTLayer *)dataLabelForPlot:( CPTPlot *)plot recordIndex:( NSUInteger )index  
-{  
-    // 定义一个白色的 TextStyle  
-    static CPTMutableTextStyle *whiteText = nil ;  
-    if ( !whiteText ) {  
-        whiteText = [[ CPTMutableTextStyle alloc ] init ];  
-        whiteText.color=[CPTColor colorWithComponentRed:152/255.0 green:251/255.0 blue:152/255.0 alpha:1.0];  
-    }  
-
-    // 定义一个 TextLayer  
-    CPTTextLayer *newLayer = nil ;  
-    NSString * identifier=( NSString *)[plot identifier];  
-    if ([identifier isEqualToString : @"Blue Plot" ]) {  
-
-        newLayer=[[[CPTTextLayer alloc] initWithText:[[[NSString alloc] initWithFormat:@"%0.1f",[[[points objectAtIndex:index] objectForKey:@"y"] doubleValue]] autorelease] style:whiteText] autorelease];  
-    }  
-    return newLayer;  
-}  
+<script src="https://gist.github.com/wanax/6752340.js"></script>
 
 
-
-//散点数据源委托实现  
--(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot{  
-    return [points count];  
-}  
-
--(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger) index{  
-    NSString *key=(fieldEnum==CPTScatterPlotFieldX?@"x":@"y");  
-    NSNumber *num=[[points objectAtIndex:index] valueForKey:key];  
-   //NSLog(@"key:%@,num:%@",key,num);  
-    return  num;  
-}  
-</code></pre>
+<p></p>
 
 <h3>可以在代码里看到我实现了对页面的手势监听，以便实现折线图拖动的效果，具体方法如下：</h3>
 
-<pre><code>-(void)viewPan:(UIPanGestureRecognizer *)tapGr  
-{  
-    CGPoint now=[tapGr locationInView:self.view];  
+<script src="https://gist.github.com/wanax/6752346.js"></script>
 
-//手势变化并且接近折点旁边  
-if([tapGr state]==UIGestureRecognizerStateChanged&amp;&amp;[self isNearByThePoint:now]){  
-    CGPoint coordinate=[self CoordinateTransformRealToAbstract:now];  
-    [points removeAllObjects];  
-    [reverseDic removeAllObjects];  
-    NSUInteger i;  
-    for(i=0;i&lt;NUM;i++){  
-        id x=[NSNumber numberWithFloat:0+i];  
-        id y=[NSNumber numberWithFloat:3*i+coordinate.y];  
-        [reverseDic setObject:y forKey:[NSString stringWithFormat:@"%.0f",[x floatValue]]];  
-        [points addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x,@"x",y,@"y",nil]];  
-    }  
-    [graph reloadData];  
-}  
-
-
-}  
-
-//判断手指触摸点是否在折点旁边  
--(BOOL)isNearByThePoint:(CGPoint)p{  
-
-//从手指触摸点的实际坐标得到抽象坐标  
-CGPoint abstractCoordinate=[self CoordinateTransformRealToAbstract:p];  
-//获取临近坐标点  
-int acX=(int)(abstractCoordinate.x+0.5);  
-//判断临近坐标点是否存在折点，存在则取出  
-float acY=[[reverseDic objectForKey:[NSString stringWithFormat:@"%d",acX]] floatValue];  
-
-//构造临近坐标折点，并转化为实际屏幕坐标点  
-CGPoint temp=[self CoordinateTransformAbstractToReal:CGPointMake([[NSNumber numberWithInt:acX] floatValue], acY)];  
-//计算临近坐标点与手指触摸点的距离  
-double distance=sqrt(pow((p.x-temp.x),2)+pow((p.y-temp.y),2));  
-
-//NSLog(@"%f",distance);  
-return distance&gt;25?NO:YES;  
-
-}  
-
-
-//空间坐标转换:实际坐标转化自定义坐标  
--(CGPoint)CoordinateTransformRealToAbstract:(CGPoint)point{  
-
-float viewWidth=hostView.frame.size.width;  
-float viewHeight=hostView.frame.size.height;  
-
-float coordinateX=(XRANGELENGTH*point.x)/viewWidth+XRANGEBEGIN;  
-float coordinateY=YRANGELENGTH-((YRANGELENGTH*point.y)/(viewHeight-GRAPAHBOTTOMPAD))+YRANGEBEGIN;  
-
-return CGPointMake(coordinateX,coordinateY);  
-}  
-//空间坐标转换:自定义坐标转化实际坐标  
--(CGPoint)CoordinateTransformAbstractToReal:(CGPoint)point{  
-
-float viewWidth=hostView.frame.size.width;  
-float viewHeight=hostView.frame.size.height;  
-
-float coordinateX=(point.x-XRANGEBEGIN)*viewWidth/XRANGELENGTH;  
-float coordinateY=(-1)*(point.y-YRANGEBEGIN-YRANGELENGTH)*(viewHeight-GRAPAHBOTTOMPAD)/YRANGELENGTH;  
-
-return CGPointMake(coordinateX,coordinateY);  
-
-}  
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer  
-
-{  
-    return YES;  
-}  
-</code></pre>
 
 <p>下面是一些常量的定义</p>
 
-<pre><code>#define NUM 10  
-//绘图空间与底部距离  
-#define GRAPAHBOTTOMPAD 80.0f  
+<script src="https://gist.github.com/wanax/6752353.js"></script>
 
-//x轴起点  
-#define XRANGEBEGIN 0.0  
-//x轴在屏幕可视范围内的范围  
-#define XRANGELENGTH 5.0  
-//y轴起点  
-#define YRANGEBEGIN 0.0  
-//y轴在屏幕可视范围内的范围  
-#define YRANGELENGTH 100.0  
-
-
-//x轴屏幕范围内大坐标间距  
-#define XINTERVALLENGTH 1.0  
-//x轴坐标的原点（y轴将在此与x轴相交）  
-#define XORTHOGONALCOORDINATE 10.0  
-//x轴每两个大坐标间小坐标个数  
-#define XTICKSPERINTERVAL 2  
-
-#define YINTERVALLENGTH 1.0  
-#define YORTHOGONALCOORDINATE 1.0  
-#define YTICKSPERINTERVAL 0 
-</code></pre>
 
 <p>好了，这便是iphone上怎样绘制个折线图并实现拖动效果，其实是个很简陋的例子，离真正能用还有很长的一段路要走，但先贴在这里留个记号，也许你会看到中间有些js引擎的影子，这个留在下一章再讲吧。</p>
 
@@ -615,38 +261,10 @@ return CGPointMake(coordinateX,coordinateY);
     <link href="http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/"/>
     <updated>2012-11-01T16:04:00+08:00</updated>
     <id>http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji</id>
-    <content type="html"><![CDATA[<pre><code>public class Test {  
-        public static void main(String[] args) {  
-            try{  
-                BufferedReader br = new BufferedReader(  
-                        new InputStreamReader(new FileInputStream(url),"UTF-8"));  
-                String data = null;  
-                StringBuffer str=new StringBuffer();  
-                while((data = br.readLine())!=null)  
-                {  
-                    str.append(data+"\n");  
-                }  
-                System.out.println(str);  
-                br.close();  
-                Test test=new Test();  
-                test.ece(str.toString());  
-            }catch(Exception e){  
-                e.printStackTrace();  
-            }             
-        }  
-        public void ece(String str){  
-            try{  
-                BufferedWriter bw = new BufferedWriter(  
-                        new OutputStreamWriter(new FileOutputStream(url,false),"UTF-8"));  
-                bw.write(str);  
-                bw.flush();  
-                bw.close();  
-            }catch(Exception e){  
-                e.printStackTrace();  
-            }     
-        }  
-}  
-</code></pre>
+    <content type="html"><![CDATA[<script src="https://gist.github.com/wanax/6752273.js"></script>
+
+
+<p></p>
 ]]></content>
   </entry>
   
@@ -668,97 +286,15 @@ return CGPointMake(coordinateX,coordinateY);
 
 <p>前台页面的动态添加是这样的：</p>
 
-<pre><code>    var addNewSource = function(){  
-     var htmlStr =   
-      "&lt;tr class=\"sourcecontent\"&gt;"+  
-               "&lt;td&gt;&lt;input class=\"sourcename\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourceurl\" type=\"text\"/&gt;&lt;/td&gt;"+  
-               "&lt;td&gt;&lt;input class=\"sourcetype\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourcedes\" type=\"text\"/&gt;&lt;/td&gt;"+  
-               "&lt;td&gt;&lt;a href=\"#\" onclick=\"deleteNewSource(this);return false;\"&gt;&lt;img class=\"deleteBtn\" src=\"&lt;%=basePath%&gt;/img/delete.png\"/&gt;&lt;/a&gt;&lt;/td&gt;"+  
-            "&lt;/tr&gt;";  
-         $("#resourceInfo").append(htmlStr);  
+<script src="https://gist.github.com/wanax/6752390.js"></script>
 
-    };  
-    function deleteNewSource(obj){  
-     $(obj).parents('tr').remove();  
-    }  
-</code></pre>
+
+<p></p>
 
 <p>然后就是对对象数组的拼装与发送了</p>
 
-<pre><code>    var xhrBeforeSend = function(){ 
-        $('.status').fadeIn();
-    };
+<script src="https://gist.github.com/wanax/6752394.js"></script>
 
-    var xhrSuccess = function(data,status,xhr){
-        if(data.tag=="T"){
-            $('.status').css({"margin-left":"740px","color":"green"}).html("提交数据成功");
-            $('.status').fadeOut(1000);
-        }else{
-            $('.status').css({"margin-left":"760px","color":"#FF0000"}).html("提交失败！");
-        }     
-    };
-    KindEditor.ready(function(K) {
-           K('.submitBtn').click(function() {
-                        var screenWidth = $(document).width()-6;
-                        var sourceList = '&lt;ul&gt;';
-                        $("tr.sourcecontent").each(function(){
-                            sourceList +='&lt;li&gt;'+$(this).find('.sourcename').val()+'&lt;/li&gt;';
-                        });
-                        sourceList +='&lt;/ul&gt;';
-                        var htmlStr = '&lt;div class="dailogbox"&gt;'+
-                                       '&lt;table style="width:400px; margin:10px auto;color:#ffffff;font-size:15px;"&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;权限名&lt;/td&gt;&lt;td&gt;'+$("#authname").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;权限描述&lt;/td&gt;&lt;td&gt;'+$("#authdes").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;父级权限&lt;/td&gt;&lt;td&gt;'+$("#authparent").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;关联权限:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;/table&gt;'+
-                                       '&lt;div style="width:400px;margin:10px auto; color:#ffffff;"&gt;'+sourceList+ 
-                                       '&lt;/div&gt;'+
-                                       '&lt;/div&gt;';
-                        var dialog = KindEditor.dialog({
-                            width : screenWidth,
-                            height: 300,
-                            body  : htmlStr,
-                            closeBtn : {
-                                name : '关闭',
-                                click : function(e) {
-                                    dialog.remove();
-                                }
-                            },
-                            yesBtn : {
-                                name : '确定',
-                                click : function(e) {
-                                  var data = {
-                                              authName:$("#authname").val(),
-                                              authDes:$("#authdes").val(),
-                                              authParent:$("#authparent").val()
-                                   };
-                                  var n=0;
-                                  $("tr.sourcecontent").each(function(){
-                                      data["resList[" + n + "].resourceName"] = $(this).find('.sourcename').val();
-                                      data["resList[" + n + "].resourceType"] = $(this).find('.sourcetype').val();
-                                      data["resList[" + n + "].resourceDescription"] = $(this).find('.sourcedes').val();
-                                      data["resList[" + n + "].resourceURL"] = $(this).find('.sourceurl').val();
-                                      n++;
-                                  });
-                                  Pager.initUrl("insertauthority.action");
-                                  Pager.xhrBeforeSend=xhrBeforeSend;
-                                  Pager.xhrSuccess = xhrSuccess;
-                                  Pager.syncLoadData(data); 
-                                  dialog.remove();
-                                }
-                            },
-                            noBtn : {
-                                name : '取消',
-                                click : function(e) {
-                                    dialog.remove();
-                                }
-                            }
-                        });
-                    });
-         });
-</code></pre>
 ]]></content>
   </entry>
   
@@ -893,25 +429,10 @@ DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y')
     <id>http://wanax.github.io/blog/2012/02/23/struts-plus-jquery-plus-ajaxjian-dan-zheng-he-shi-li</id>
     <content type="html"><![CDATA[<p>jsp文件：</p>
 
-<pre><code>function clickButton()  
-            {      
-                $.ajax({  
-                   url :'../ajaxRequest.action',  //后台处理程序  
-                   type:'post',    //数据发送方式  
-                   dataType:'json',  //接受数据格式  
-                   data:{result:"RE",request:"REQ"},  //要传递的数据  
-                   success:callbackFun  //回传函数(这里是函数名)  
-                   });  
-             }   
-//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
-            function callbackFun(data)  
-            {  
-                 alert("SUCCESS");  
-                 alert(data.result);  
-                 alert(data.request);  
-                 alert(data.q[1]);  
-            }
-</code></pre>
+<script src="https://gist.github.com/wanax/6752399.js"></script>
+
+
+
 
 <!--more-->
 
@@ -919,77 +440,29 @@ DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y')
 <p>           <br/>
 或者：</p>
 
-<pre><code>function clickButton()  
-            {      
-                var url = '../ajaxRequest.action';  
-                var params = {result:"RESULT",request:"REQUEST" }; //通过id获得输入值  
-                 jQuery.post(url, params, callbackFun, 'json');  
-               }   
-//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
-            function callbackFun(data)  
-            {  
-                 alert("SUCCESS");  
-                 alert(data.result);  
-                 alert(data.request)  
-            } 
-</code></pre>
+<script src="https://gist.github.com/wanax/6752402.js"></script>
+
+
+<p></p>
 
 <p>html部分：</p>
 
-<pre><code>&lt;input type="button" onclick="clickButton();" value="clickButton"/&gt;             
-</code></pre>
+<script src="https://gist.github.com/wanax/6752404.js"></script>
+
+
+<p></p>
 
 <p>struts代码：</p>
 
-<pre><code>&lt;package name="ajax" extends="json-default"&gt;  
-        &lt;action name="ajaxRequest"  class="com.action.ajax" method="test"&gt;  
-            &lt;result type="json"&gt;&lt;/result&gt;  
-        &lt;/action&gt;  
-&lt;/package&gt;
-</code></pre>
+<script src="https://gist.github.com/wanax/6752407.js"></script>
+
 
 <p>java代码：</p>
 
-<pre><code>package com.action;  
-
-import com.opensymphony.xwork2.ActionSupport;  
-
-public class ajax extends ActionSupport{  
-    private String request;  
-    private String result;  
-    private String [] q={"a","b","c"};   
-
-    public String test(){  
-        System.out.println("ajax");  
-        request="request";  
-        result="result";  
-        return SUCCESS;  
-    }  
-
-    public String getRequest() {  
-        return request;  
-    }  
-    public void setRequest(String request) {  
-        this.request = request;  
-    }  
-    public String getResult() {  
-        return result;  
-    }  
-    public void setResult(String result) {  
-        this.result = result;  
-    }  
-
-    public String[] getQ() {  
-        return q;  
-    }  
-
-    public void setQ(String[] q) {  
-        this.q = q;  
-    }  
+<script src="https://gist.github.com/wanax/6752410.js"></script>
 
 
-}
-</code></pre>
+
 ]]></content>
   </entry>
   
@@ -1017,51 +490,18 @@ HttpURLConnection是java的标准类，HttpClient 是 Apache Jakarta Common 下�
 
 <p>这里我是用的biketo网站做的小白鼠，平常喜欢骑下单车再估计这网站也不会做得很有技术难度估计能好模拟一点就用这个了，哈哈。</p>
 
-<pre><code>POST /bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1 HTTP/1.1User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1Host: www.biketo.comContent-Length: 107Content-Type: application/x-www-form-urlencodedfastloginfield=username&amp;username=&amp;cookietime=2592000&amp;password=&amp;quickforward=yes&amp;handlekey=1s
-</code></pre>
+<script src="https://gist.github.com/wanax/6752363.js"></script>
+
 
 <p>首先正常登录时，发送的post是这个</p>
 
-<p><code>POST /bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1 HTTP/1.1
-Host: www.biketo.com
-Connection: keep-alive
-Content-Length: 107
-Cache-Control: max-age=0
-Origin: http://www.biketo.com
-User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1
-Content-Type: application/x-www-form-urlencoded
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Referer: http://www.biketo.com/bbs/forum-73-1.html
-Accept-Encoding: gzip,deflate,sdch
-Accept-Language: zh-CN,zh;q=0.8
-Accept-Charset: GBK,utf-8;q=0.7,*;q=0.3
-Cookie: rtime=5; ltime=1326617596891; cnzz_eid=83708416-1318074453-; pgv_pvi=8849333319; pgv_info=ssi=s8902215826; eucsfmldoactive=136495; XFJp_2132_lastvisit=1329121650; XFJp_2132_forum_lastvisit=D_73_1329125252; XFJp_2132_visitedfid=73; XFJp_2132_sid=Q3V96V; __utma=114141336.153132218.1318078021.1329105199.1329125251.12; __utmb=114141336.4.10.1329125251; __utmc=114141336; __utmz=114141336.1319874537.4.2.utmcsr=google.com.hk|utmccn=(referral)|utmcmd=referral|utmcct=/; XFJp_2132_lastact=1329125252%09home.php%09misc; XFJp_2132_sendmail=1
-fastloginfield=username&amp;username=&amp;cookietime=2592000&amp;password=&amp;quickforward=yes&amp;handlekey=ls</code></p>
+<script src="https://gist.github.com/wanax/6752367.js"></script>
+
 
 <p>然后就是模拟</p>
 
-<pre><code>PostMethod post = new PostMethod("http://www.biketo.com/bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1");
+<script src="https://gist.github.com/wanax/6752368.js"></script>
 
-post.addParameter("fastloginfield", "username");
-post.addParameter("username", "uername");
-post.addParameter("cookietime", "2592000");
-post.addParameter("password", "password");
-post.addParameter("quickforward", "yes");
-post.addParameter("handlekey", "1s");
-
-HttpClient client = new HttpClient();
-//client.getParams().setCookiePolicy(CookiePolicy.RFC_2109);
-client.getParams().setParameter(HttpMethodParams.USER_AGENT,"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1");//设置信息 
-client.executeMethod(post);
-GetMethod get = new GetMethod("http://www.biketo.com/bbs/home.php?mod=spacecp");
-CookieSpec cookiespec = CookiePolicy.getDefaultSpec();
-        Cookie[] cookies = cookiespec.match("www.biketo.com", 80/*端口*/, "/" , false , client.getState().getCookies());
-        for (Cookie cookie : cookies) {
-            System.out.println(cookie.getName() + ":" + cookie.getValue());
-        }
-client.executeMethod(get);
-System.out.println(new String(get.getResponseBody()));
-</code></pre>
 
 <p>这里要注意一下</p>
 
@@ -1069,198 +509,34 @@ System.out.println(new String(get.getResponseBody()));
 的那行代码，因为我们是用的java来发的，不是浏览器，所以默认的user-agent是Jakarta Commons-HttpClient/3.0.1，很多服务器看到这个就直接不鸟你了，不过biketo嘛，没有这层过滤，呵呵。但一般情况下还是要伪装成浏览器的信息，这样才容易得手~
 这个样子发出的包便是</p>
 
-<p><code>POST /bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1 HTTP/1.1User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1Host: www.biketo.comContent-Length: 107Content-Type: application/x-www-form-urlencodedfastloginfield=username&amp;username=&amp;cookietime=2592000&amp;password=&amp;quickforward=yes&amp;handlekey=1s</code></p>
+<script src="https://gist.github.com/wanax/6752370.js"></script>
+
 
 <p>对比之下会发现比正常的浏览器似乎少了很多信息，转了一篇文章写得很详细，大家有兴趣自己看下吧<a href="http://blog.csdn.net/mxiaochi/article/details/7252582">http://blog.csdn.net/mxiaochi/article/details/7252582</a>
 post是请求，get便是验证下登录有没有成功，找一个只有登录才能访问的页面放进GetMethod 里，发送请求，然后outprint出来，贴到记事本里用浏览器打开就可以验证一下啦
 这是同样功能4.x的代码，有兴趣也可以试一下</p>
 
-<p>`// The HttpClient is used in one session</p>
+<script src="https://gist.github.com/wanax/6752373.js"></script>
 
-<pre><code>private HttpResponse response;  
-private DefaultHttpClient httpclient = new DefaultHttpClient(); 
-</code></pre>
-
-<p>private boolean login() throws IOException{</p>
-
-<pre><code>    HttpPost httpost = new HttpPost("http://www.biketo.com/bbs/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1"); 
-    httpost.setHeader("User-Agent",
-</code></pre>
-
-<p>&ldquo;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1&rdquo;);</p>
-
-<pre><code>   /* httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpost.setHeader("Referer", "http://my.xxxxxx.com/my/login?history=aHR0cDovL3NoZW56aGVuLmFuanVrZS5jb20v");
-    httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpost.setHeader("Cache-Control", "max-age=0");
-    httpost.setHeader("Origin", "http://my.xxxxx.com");
-    httpost.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,\*\/*;q=0.8");
-    httpost.setHeader("Accept-Encoding", "gzip,deflate,sdch");
-    httpost.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
-    httpost.setHeader("Accept-Charset", "GBK,utf-8;q=0.7,*;q=0.3");*/
-    // All the parameters post to the web site  
-    List&lt;NameValuePair&gt; nvps = new ArrayList&lt;NameValuePair&gt;();  
-    nvps.add(new BasicNameValuePair("fastloginfield", "username"));  
-    nvps.add(new BasicNameValuePair("username", ""));  
-    nvps.add(new BasicNameValuePair("cookietime", "2592000"));  
-    nvps.add(new BasicNameValuePair("password", ""));  
-    nvps.add(new BasicNameValuePair("quickforward", "yes"));  
-    nvps.add(new BasicNameValuePair("handlekey", "1s")); ` 
-
-    httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));  
-    response = httpclient.execute(httpost);  
-    List&lt;Cookie&gt; cookies = httpclient.getCookieStore().getCookies();
-    if (cookies.isEmpty()) {
-        System.out.println("None");
-    } else {
-        for (int i = 0; i &lt; cookies.size(); i++) {
-            System.out.println("- " + cookies.get(i).toString());
-        }
-    }
-    //Header locationHeader = response.getFirstHeader("Location"); 
-    //System.out.println(locationHeader.getValue());
-    httpost.abort(); 
-    HttpGet httpget = new HttpGet("http://www.biketo.com/bbs/home.php?mod=spacecp"); 
-    httpget.setHeader("User-Agent",
-</code></pre>
-
-<p><code>"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1");</code></p>
-
-<pre><code>    ResponseHandler&lt;String&gt; responseHandler = new BasicResponseHandler(); 
-    String responseBody = "";
-    responseBody = httpclient.execute(httpget, responseHandler);   
-    httpget.abort();  
-    httpclient.getConnectionManager().shutdown();  
-    System.out.println(responseBody);`
-</code></pre>
 
 <p>前面注释的一大段就是模仿3.x中缺少的那些浏览器信息了，可以根据正常登录抓回来的信息自己慢慢匹配。
 刚刚说的这些都是些很简单的东西，仔细看看不到一天就可以大概掌握了，下面的就是些自己遇到的问题。
 我第二个尝试的是一个房地产的网站，发现它的页面是会自动跳转的，再请求的话则会退回登录页面很是苦恼。</p>
 
-<p>`HttpPost httpost = new HttpPost(&ldquo;<a href="http://my.anjuke.com/usercenter/login.action">http://my.anjuke.com/usercenter/login.action</a>&rdquo;);</p>
+<script src="https://gist.github.com/wanax/6752376.js"></script>
 
-<pre><code>    httpost.setHeader("User-Agent",
-</code></pre>
-
-<p>&ldquo;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1&rdquo;);</p>
-
-<pre><code>   /* httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpost.setHeader("Referer", "http://my.anjuke.com/my/login?history=aHR0cDovL3NoZW56aGVuLmFuanVrZS5jb20v");
-    httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpost.setHeader("Cache-Control", "max-age=0");
-    httpost.setHeader("Origin", "http://my.anjuke.com");
-    httpost.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,\*\/*;q=0.8");
-    httpost.setHeader("Accept-Encoding", "gzip,deflate,sdch");
-    httpost.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
-    httpost.setHeader("Accept-Charset", "GBK,utf-8;q=0.7,*;q=0.3");*/
-    // All the parameters post to the web site  
-    List&lt;NameValuePair&gt; nvps = new ArrayList&lt;NameValuePair&gt;();  
-    nvps.add(new BasicNameValuePair("loginpost", "1"));  
-    nvps.add(new BasicNameValuePair("formhash", ""));  
-    nvps.add(new BasicNameValuePair("sid", "anjuke"));  
-    nvps.add(new BasicNameValuePair("url", "aHR0cDovL3NoZW56aGVuLmFuanVrZS5jb20v"));  
-    nvps.add(new BasicNameValuePair("systemtime", "1329038088"));  
-    nvps.add(new BasicNameValuePair("username", "")); 
-    nvps.add(new BasicNameValuePair("password", ""));
-    nvps.add(new BasicNameValuePair("remember", "1"));
-    nvps.add(new BasicNameValuePair("submit", ""));`
-
-    httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));  
-    response = httpclient.execute(httpost);  
-    List&lt;Cookie&gt; cookies = httpclient.getCookieStore().getCookies();
-    if (cookies.isEmpty()) {
-        System.out.println("None");
-    } else {
-        for (int i = 0; i &lt; cookies.size(); i++) {
-            System.out.println("- " + cookies.get(i).toString());
-        }
-    }
-    //Header locationHeader = response.getFirstHeader("Location"); 
-    //System.out.println(locationHeader.getValue());
-    httpost.abort(); 
-    HttpGet httpget = new HttpGet("http://shenzhen.anjuke.com/ajax/checklogin/"); 
-    httpget.setHeader("User-Agent",
-</code></pre>
-
-<p><code>"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1");</code></p>
-
-<pre><code>    ResponseHandler&lt;String&gt; responseHandler = new BasicResponseHandler(); 
-    String responseBody = "";
-    responseBody = httpclient.execute(httpget, responseHandler);  
-    httpget = new HttpGet("http://my.anjuke.com/marked/3221775");
-    responseBody = httpclient.execute(httpget, responseHandler);
-
-    httpget.abort();  
-    httpclient.getConnectionManager().shutdown();  
-    System.out.println(responseBody);
-</code></pre>
 
 <p>抓包是这样的</p>
 
-<p><code>POST /usercenter/login.action HTTP/1.1
-User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1
-Content-Length: 149
-Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-Host: my.anjuke.com
-Connection: Keep-Alive
-loginpost=1&amp;formhash=&amp;sid=anjuke&amp;url=aHR0cDovL3NoZW56aGVuLmFuanVrZS5jb20v&amp;systemtime=1329038088&amp;username=mxchenry&amp;password=mxc0818&amp;remember=1&amp;submit=
-HTTP/1.1 200 OK
-Server: ajk_server
-Date: Mon, 13 Feb 2012 10:04:18 GMT
-Content-Type: text/html; charset=utf-8
-Connection: keep-alive
-Vary: Accept-Encoding
-X-Powered-By: PHP/5.2.14
-ajk: m=app10-102, v=2011_51_02
-P3P: CP=CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR
-Set-Cookie: ajk_member_id=3221775; expires=Tue, 12-Feb-2013 10:04:18 GMT; path=/; domain=.anjuke.com
-Set-Cookie: ajk_member_name=mxchenry; expires=Tue, 12-Feb-2013 10:04:18 GMT; path=/; domain=.anjuke.com
-Set-Cookie: ajk_member_key=84fb0dfc2a3c64f13c264cb39b072a65; expires=Tue, 12-Feb-2013 10:04:18 GMT; path=/; domain=.anjuke.com
-Set-Cookie: ajk_member_time=1360663440; expires=Tue, 12-Feb-2013 10:04:18 GMT; path=/; domain=.anjuke.com
-Content-Length: 3349</code></p>
+<script src="https://gist.github.com/wanax/6752381.js"></script>
+
 
 <p>可以看到是能正常取回cookie的，但当我尝试get去别的页面的时候都被弹到登录页面了，可是我已经是带上cookie访问的了，不知道这有没有扯上网站安全之类的，这方面没什么经验</p>
 
-<p><code>GET /marked/3221775 HTTP/1.1
-User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1
-Host: my.anjuke.com
-Connection: Keep-Alive
-Cookie: ajk_member_id=3221775; ajk_member_key=e04e5c298906768adaaa257013991b86; ajk_member_name=mxchenry; ajk_member_time=1360663920
-Cookie2: $Version=1</code></p>
+<script src="https://gist.github.com/wanax/6752384.js"></script>
 
-<p><code>HTTP/1.1 302 Found
-Server: ajk_server
-Date: Mon, 13 Feb 2012 10:12:50 GMT
-Content-Type: text/html; charset=UTF-8
-Transfer-Encoding: chunked
-Connection: keep-alive
-ajk: m=app10-034, pv=2012_06_04, jv=ga
-Set-Cookie: sessid=1134ABF3-173C-AE40-DBA8-B2C3C1D4B30D; path=/; domain=.anjuke.com
-Set-Cookie: aQQ_ajkguid=B68D65A8-9F66-7F9D-7614-02590CB8BF8E; expires=Tue, 12-Feb-2013 10:12:50 GMT; path=/; domain=.anjuke.com
-Set-Cookie: aQQ_ajklogintime=1329127970; expires=Tue, 14-Feb-2012 10:12:50 GMT; path=/; domain=.anjuke.com
-Set-Cookie: ajk_mem_id=0; expires=Tue, 14-Feb-2012 10:12:50 GMT; path=/; domain=.anjuke.com
-Set-Cookie: lastlanded=1329127970; expires=Wed, 14-Mar-2012 10:12:50 GMT; path=/; domain=.anjuke.com
-P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"
-location: http://my.anjuke.com/my/login?history=aHR0cDovL215LmFuanVrZS5jb20vbWFya2VkLzMyMjE3NzU=
-GET /my/login?history=aHR0cDovL215LmFuanVrZS5jb20vbWFya2VkLzMyMjE3NzU= HTTP/1.1
-User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.126 Safari/535.1
-Host: my.anjuke.com
-Connection: Keep-Alive
-Cookie: aQQ_ajkguid=B68D65A8-9F66-7F9D-7614-02590CB8BF8E; aQQ_ajklogintime=1329127970; ajk_mem_id=0; ajk_member_id=3221775; ajk_member_key=e04e5c298906768adaaa257013991b86; ajk_member_name=mxchenry; ajk_member_time=1360663920; lastlanded=1329127970; sessid=1134ABF3-173C-AE40-DBA8-B2C3C1D4B30D
-Cookie2: $Version=1</code></p>
 
-<p><code>HTTP/1.1 200 OK
-Server: ajk_server
-Date: Mon, 13 Feb 2012 10:12:50 GMT
-Content-Type: text/html; charset=utf-8
-Transfer-Encoding: chunked
-Connection: keep-alive
-Vary: Accept-Encoding
-ajk: m=app10-035, pv=2012_06_04, jv=ga
-Set-Cookie: ajk_mem_id=0; expires=Tue, 14-Feb-2012 10:12:50 GMT; path=/; domain=.anjuke.com
-Set-Cookie: lastlanded=1329127970; expires=Wed, 14-Mar-2012 10:12:50 GMT; path=/; domain=.anjuke.com</code>
-或是用session？个人猜测。</p>
+<p>或是用session？个人猜测。</p>
 ]]></content>
   </entry>
   
@@ -1394,50 +670,13 @@ Set-Cookie: lastlanded=1329127970; expires=Wed, 14-Mar-2012 10:12:50 GMT; path=/
 
 <p>构建索引可以用下面代码搞定：</p>
 
-<pre><code>// MMAnalyzer作为分词工具创建一个IndexWriter  
-//INDEX_STORE_PATH表示的是需要构建索引的文件路径  
-IndexWriter writer = new IndexWriter(INDEX_STORE_PATH,analyzer, true);  
-File filesDir = new File(inputDir);  
-// 取得所有需要建立索引的文件数组  
-File[] files = filesDir.listFiles();  
-writer.setMaxFieldLength(100000);  
-// 遍历数组  
-for (int i = 0; i &lt; files.length; i++) {  
-   // 获取文件名  
-   String fileName = files[i].getName();  
-   System.out.println(fileName);  
-   // 判断文件是否为txt类型的文件  
-   if (fileName.substring(fileName.lastIndexOf(".")).equals(".txt")) {  
-       // 创建一个新的Document  
-       Document doc = new Document();  
-       // 为文件名创建一个Field  
-       Field field = new Field("filename", files[i].getName(),  
-               Field.Store.YES, Field.Index.TOKENIZED);  
-       //System.out.println(files[i].getName());  
-       doc.add(field);  
-       // 为文件内容创建一个Filed  
-       field = new Field("content", loadFileToString(files[i]),  
-               Field.Store.NO, Field.Index.TOKENIZED);  
-       doc.add(field);  
-       // 把Document加入IndexWriter  
-       writer.addDocument(doc);  
-}
-</code></pre>
+<script src="https://gist.github.com/wanax/6752469.js"></script>
+
 
 <p>而对索引的查询也可以如下搞定：</p>
 
-<pre><code>      // 根据索引位置建立IndexSearcher  
-      IndexSearcher searcher = new IndexSearcher(INDEX_STORE_PATH);  
-      // 建立搜索单元，searchType代表要搜索的Filed，searchKey代表关键字  
-      Term t = new Term(searchType, searchKey);  
-      // 由Term生成一个Query  
-      Query q = new TermQuery(t);  
-      Hits hits=searcher.search(q);  
-      System.out.println(hits.length());  
-      // 搜索开始时间  
-      System.out.println("开始");  
-      Date beginTime = new Date();  
-</code></pre>
+<script src="https://gist.github.com/wanax/6752473.js"></script>
+
 
 <p>由此可以看出其实对Lucene的入门其实很简单，而真正的难点在于如何成功地使用词法分析器，因为Doug Cutting（Lucene的编写者）生于他国，所创建的词库是不针对伟大的象形文字的，这就给我们伟大的文明古国构建文档索引创造一定程度的挑战性。</p>
 
@@ -1453,15 +692,8 @@ for (int i = 0; i &lt; files.length; i++) {
 
 <p>2：</p>
 
-<blockquote><p>小区名：半岛城邦</p>
+<script src="https://gist.github.com/wanax/6752483.js"></script>
 
-<p>面积：299556㎡</p>
-
-<p>地址：深圳市南山区蛇口片区</p>
-
-<p>环境：西临蛇口渔港码头，北侧依托于蛇口山望海公园，东侧与东角头填海区相临，靠近西部通道口岸用>地，南侧凭借滨海步行长廊与深圳湾紧紧相连</p>
-
-<p>介绍：（1）学校分布。将原2、4、5期的学校、幼儿园整合在2、3期（2期36班初中及幼儿园，三期36班小学及幼儿园）；（2）建筑高度由山体向海面递增，形成建筑向蛇口山退让的城市意向，与蛇口山取得协调。（3）同时城市设计将地块抬高路面3m，以减少道路对小区内的影响。除上述教育设施外，商业设施集中在由西向东贯通的商业街及1、5期间商业街。另每个小区均有会所。每个小区均有地下停车库，且相互联通，互通有无。超高层住宅建筑特点，现代简洁而不失变化，选择以盒子的方式呈现凸窗和阳台。其意义在于：（1）以方盒会意“城邦”，城是一个特大的盒子，而盒子是城的缩影。（2）独特的建筑外观。（3）在中国传统建筑及园林中，镂空的花窗有其独特的美学观念：即选景和框景。而一个个面朝大海的盒子，正是建筑完整的取景器。随着四季的变化，时刻变幻的海景画面完美的呈现在我们面前。(4)有效发挥了檐板的作用，遮阳防雨，隔绝热带气候。盒子此时同时兼具屋檐和遮阳板的功能，有效的摒弃了炽热阳光的直射和暴雨的倾泻，同时减弱了海风对窗子和室内的影响。(5)减少了楼群之间的对视问题，使居住隐私得到保护。（6）色彩与一期看齐，白色外墙，灰色凸窗与阳台，透明玻璃。有模型在会所二楼可供参观。总体上，二期采用的建材品牌和品质较一期又有了很大的提升。</p></blockquote>
 
 <p>第一个是对整个区域做一个Field进行整合，第二个便是对这一信息通过各种Field进行描述，无需笔者提示，聪明的读者一眼便可以刻发现第二个文档的构建要明显优于第一个文档。</p>
 
@@ -1469,10 +701,8 @@ for (int i = 0; i &lt; files.length; i++) {
 
 <p>当然有时候MMAnalyzer也有力不从心的时候，比如说洒家不信它的词库中会收录“半岛城邦”“天上人间”这么邪门歪道的词语，于是当我们需要分割这些词汇的时候便需要自己往词库中添加单词进行分割， Cutting兄很绅士地想到了这一点，为我们提供了方便的接口添加词库，代码如下：</p>
 
-<p><code>
-FileReader reader =new FileReader("d:\\product.dic"); </code></p>
+<script src="https://gist.github.com/wanax/6752479.js"></script>
 
-<p><code>MMAnalyzer.addDictionary(reader);</code></p>
 
 <p>这样我们就可以简单地对一些特定的词语做分割了。</p>
 ]]></content>

@@ -118,50 +118,13 @@
 
 <p>构建索引可以用下面代码搞定：</p>
 
-<pre><code>// MMAnalyzer作为分词工具创建一个IndexWriter  
-//INDEX_STORE_PATH表示的是需要构建索引的文件路径  
-IndexWriter writer = new IndexWriter(INDEX_STORE_PATH,analyzer, true);  
-File filesDir = new File(inputDir);  
-// 取得所有需要建立索引的文件数组  
-File[] files = filesDir.listFiles();  
-writer.setMaxFieldLength(100000);  
-// 遍历数组  
-for (int i = 0; i &lt; files.length; i++) {  
-   // 获取文件名  
-   String fileName = files[i].getName();  
-   System.out.println(fileName);  
-   // 判断文件是否为txt类型的文件  
-   if (fileName.substring(fileName.lastIndexOf(".")).equals(".txt")) {  
-       // 创建一个新的Document  
-       Document doc = new Document();  
-       // 为文件名创建一个Field  
-       Field field = new Field("filename", files[i].getName(),  
-               Field.Store.YES, Field.Index.TOKENIZED);  
-       //System.out.println(files[i].getName());  
-       doc.add(field);  
-       // 为文件内容创建一个Filed  
-       field = new Field("content", loadFileToString(files[i]),  
-               Field.Store.NO, Field.Index.TOKENIZED);  
-       doc.add(field);  
-       // 把Document加入IndexWriter  
-       writer.addDocument(doc);  
-}
-</code></pre>
+<script src="https://gist.github.com/wanax/6752469.js"></script>
+
 
 <p>而对索引的查询也可以如下搞定：</p>
 
-<pre><code>      // 根据索引位置建立IndexSearcher  
-      IndexSearcher searcher = new IndexSearcher(INDEX_STORE_PATH);  
-      // 建立搜索单元，searchType代表要搜索的Filed，searchKey代表关键字  
-      Term t = new Term(searchType, searchKey);  
-      // 由Term生成一个Query  
-      Query q = new TermQuery(t);  
-      Hits hits=searcher.search(q);  
-      System.out.println(hits.length());  
-      // 搜索开始时间  
-      System.out.println("开始");  
-      Date beginTime = new Date();  
-</code></pre>
+<script src="https://gist.github.com/wanax/6752473.js"></script>
+
 
 <p>由此可以看出其实对Lucene的入门其实很简单，而真正的难点在于如何成功地使用词法分析器，因为Doug Cutting（Lucene的编写者）生于他国，所创建的词库是不针对伟大的象形文字的，这就给我们伟大的文明古国构建文档索引创造一定程度的挑战性。</p>
 
@@ -177,15 +140,8 @@ for (int i = 0; i &lt; files.length; i++) {
 
 <p>2：</p>
 
-<blockquote><p>小区名：半岛城邦</p>
+<script src="https://gist.github.com/wanax/6752483.js"></script>
 
-<p>面积：299556㎡</p>
-
-<p>地址：深圳市南山区蛇口片区</p>
-
-<p>环境：西临蛇口渔港码头，北侧依托于蛇口山望海公园，东侧与东角头填海区相临，靠近西部通道口岸用>地，南侧凭借滨海步行长廊与深圳湾紧紧相连</p>
-
-<p>介绍：（1）学校分布。将原2、4、5期的学校、幼儿园整合在2、3期（2期36班初中及幼儿园，三期36班小学及幼儿园）；（2）建筑高度由山体向海面递增，形成建筑向蛇口山退让的城市意向，与蛇口山取得协调。（3）同时城市设计将地块抬高路面3m，以减少道路对小区内的影响。除上述教育设施外，商业设施集中在由西向东贯通的商业街及1、5期间商业街。另每个小区均有会所。每个小区均有地下停车库，且相互联通，互通有无。超高层住宅建筑特点，现代简洁而不失变化，选择以盒子的方式呈现凸窗和阳台。其意义在于：（1）以方盒会意“城邦”，城是一个特大的盒子，而盒子是城的缩影。（2）独特的建筑外观。（3）在中国传统建筑及园林中，镂空的花窗有其独特的美学观念：即选景和框景。而一个个面朝大海的盒子，正是建筑完整的取景器。随着四季的变化，时刻变幻的海景画面完美的呈现在我们面前。(4)有效发挥了檐板的作用，遮阳防雨，隔绝热带气候。盒子此时同时兼具屋檐和遮阳板的功能，有效的摒弃了炽热阳光的直射和暴雨的倾泻，同时减弱了海风对窗子和室内的影响。(5)减少了楼群之间的对视问题，使居住隐私得到保护。（6）色彩与一期看齐，白色外墙，灰色凸窗与阳台，透明玻璃。有模型在会所二楼可供参观。总体上，二期采用的建材品牌和品质较一期又有了很大的提升。</p></blockquote>
 
 <p>第一个是对整个区域做一个Field进行整合，第二个便是对这一信息通过各种Field进行描述，无需笔者提示，聪明的读者一眼便可以刻发现第二个文档的构建要明显优于第一个文档。</p>
 
@@ -193,10 +149,8 @@ for (int i = 0; i &lt; files.length; i++) {
 
 <p>当然有时候MMAnalyzer也有力不从心的时候，比如说洒家不信它的词库中会收录“半岛城邦”“天上人间”这么邪门歪道的词语，于是当我们需要分割这些词汇的时候便需要自己往词库中添加单词进行分割， Cutting兄很绅士地想到了这一点，为我们提供了方便的接口添加词库，代码如下：</p>
 
-<p><code>
-FileReader reader =new FileReader("d:\\product.dic"); </code></p>
+<script src="https://gist.github.com/wanax/6752479.js"></script>
 
-<p><code>MMAnalyzer.addDictionary(reader);</code></p>
 
 <p>这样我们就可以简单地对一些特定的词语做分割了。</p>
 </div>

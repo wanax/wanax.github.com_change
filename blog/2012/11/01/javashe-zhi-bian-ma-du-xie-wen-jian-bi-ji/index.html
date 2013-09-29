@@ -8,7 +8,7 @@
 	<title>java设置编码读写文件笔记 - 陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Java设置编码读写文件笔记 public class Test { public static void main(String[] args) { try{ BufferedReader br = new BufferedReader( new InputStreamReader(new &hellip;">
+	<meta name="description" content=" Java设置编码读写文件笔记 --> Comments Please enable JavaScript to view the comments powered by Disqus. ">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,38 +95,10 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<h1 class="title" itemprop="name">Java设置编码读写文件笔记</h1>
-	<div class="entry-content" itemprop="articleBody"><pre><code>public class Test {  
-        public static void main(String[] args) {  
-            try{  
-                BufferedReader br = new BufferedReader(  
-                        new InputStreamReader(new FileInputStream(url),"UTF-8"));  
-                String data = null;  
-                StringBuffer str=new StringBuffer();  
-                while((data = br.readLine())!=null)  
-                {  
-                    str.append(data+"\n");  
-                }  
-                System.out.println(str);  
-                br.close();  
-                Test test=new Test();  
-                test.ece(str.toString());  
-            }catch(Exception e){  
-                e.printStackTrace();  
-            }             
-        }  
-        public void ece(String str){  
-            try{  
-                BufferedWriter bw = new BufferedWriter(  
-                        new OutputStreamWriter(new FileOutputStream(url,false),"UTF-8"));  
-                bw.write(str);  
-                bw.flush();  
-                bw.close();  
-            }catch(Exception e){  
-                e.printStackTrace();  
-            }     
-        }  
-}  
-</code></pre>
+	<div class="entry-content" itemprop="articleBody"><script src="https://gist.github.com/wanax/6752273.js"></script>
+
+
+<p></p>
 </div>
 
 </article>

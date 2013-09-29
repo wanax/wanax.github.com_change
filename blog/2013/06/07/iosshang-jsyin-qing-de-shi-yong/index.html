@@ -120,35 +120,17 @@
 
 <p>完了以后我把js运行的方法封装成了一个方法，如下：</p>
 
-<pre><code>- (NSString *)runsJS:(NSString *)aJSString  
-{  
-    if (!aJSString) {  
-        NSLog(@"[JSC] JS String is empty!");  
-        return nil;  
-    }  
+<script src="https://gist.github.com/wanax/6752325.js"></script>
 
 
-JSStringRef scriptJS = JSStringCreateWithUTF8CString([aJSString UTF8String]);  
-JSValueRef exception = NULL;  
-
-JSValueRef result = JSEvaluateScript(context, scriptJS, NULL, NULL, 0, &amp;exception);  
-NSString *res = nil;  
-
-JSStringRef jstrArg = JSValueToStringCopy(context, result, NULL);  
-res = (NSString*)JSStringCopyCFString(kCFAllocatorDefault, jstrArg);  
-
-JSStringRelease(jstrArg);  
-
-JSStringRelease(scriptJS);  
-
-return res;  }  
-</code></pre>
+<p></p>
 
 <p>封装完毕便可以顺利使用啦：</p>
 
-<pre><code>NSString *str=[self.engine runJS:@"var str='';for(var i=0;i&lt;2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
-    //NSLog(@"%@",str);  
-</code></pre>
+<script src="https://gist.github.com/wanax/6752332.js"></script>
+
+
+<p></p>
 
 <p>这便是大体的javascriptcore的使用方法了。</p>
 
@@ -164,21 +146,8 @@ return res;  }
 
 <blockquote><p>一个简单的示例</p></blockquote>
 
-<pre><code>var test=function(){  
-var val=[];  
-val["1.0"]=1;  
-val["1.1"]=2;  
-val["1.2"]=3;  
-val["1.3"]=4;  
-val["2"]=34;  
+<script src="https://gist.github.com/wanax/6752335.js"></script>
 
-var str="var v=this.val; v[\"1.3\"]=v[\"1.0\"]*v[\"1.2\"];";  
-var fun=new Function(str);  
-val["0"]=5;  
-fun();  
-return val;  
-}  
-</code></pre>
 </div>
 
 </article>

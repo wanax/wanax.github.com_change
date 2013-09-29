@@ -108,97 +108,15 @@
 
 <p>前台页面的动态添加是这样的：</p>
 
-<pre><code>    var addNewSource = function(){  
-     var htmlStr =   
-      "&lt;tr class=\"sourcecontent\"&gt;"+  
-               "&lt;td&gt;&lt;input class=\"sourcename\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourceurl\" type=\"text\"/&gt;&lt;/td&gt;"+  
-               "&lt;td&gt;&lt;input class=\"sourcetype\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourcedes\" type=\"text\"/&gt;&lt;/td&gt;"+  
-               "&lt;td&gt;&lt;a href=\"#\" onclick=\"deleteNewSource(this);return false;\"&gt;&lt;img class=\"deleteBtn\" src=\"&lt;%=basePath%&gt;/img/delete.png\"/&gt;&lt;/a&gt;&lt;/td&gt;"+  
-            "&lt;/tr&gt;";  
-         $("#resourceInfo").append(htmlStr);  
+<script src="https://gist.github.com/wanax/6752390.js"></script>
 
-    };  
-    function deleteNewSource(obj){  
-     $(obj).parents('tr').remove();  
-    }  
-</code></pre>
+
+<p></p>
 
 <p>然后就是对对象数组的拼装与发送了</p>
 
-<pre><code>    var xhrBeforeSend = function(){ 
-        $('.status').fadeIn();
-    };
+<script src="https://gist.github.com/wanax/6752394.js"></script>
 
-    var xhrSuccess = function(data,status,xhr){
-        if(data.tag=="T"){
-            $('.status').css({"margin-left":"740px","color":"green"}).html("提交数据成功");
-            $('.status').fadeOut(1000);
-        }else{
-            $('.status').css({"margin-left":"760px","color":"#FF0000"}).html("提交失败！");
-        }     
-    };
-    KindEditor.ready(function(K) {
-           K('.submitBtn').click(function() {
-                        var screenWidth = $(document).width()-6;
-                        var sourceList = '&lt;ul&gt;';
-                        $("tr.sourcecontent").each(function(){
-                            sourceList +='&lt;li&gt;'+$(this).find('.sourcename').val()+'&lt;/li&gt;';
-                        });
-                        sourceList +='&lt;/ul&gt;';
-                        var htmlStr = '&lt;div class="dailogbox"&gt;'+
-                                       '&lt;table style="width:400px; margin:10px auto;color:#ffffff;font-size:15px;"&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;权限名&lt;/td&gt;&lt;td&gt;'+$("#authname").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;权限描述&lt;/td&gt;&lt;td&gt;'+$("#authdes").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;父级权限&lt;/td&gt;&lt;td&gt;'+$("#authparent").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;关联权限:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;/table&gt;'+
-                                       '&lt;div style="width:400px;margin:10px auto; color:#ffffff;"&gt;'+sourceList+ 
-                                       '&lt;/div&gt;'+
-                                       '&lt;/div&gt;';
-                        var dialog = KindEditor.dialog({
-                            width : screenWidth,
-                            height: 300,
-                            body  : htmlStr,
-                            closeBtn : {
-                                name : '关闭',
-                                click : function(e) {
-                                    dialog.remove();
-                                }
-                            },
-                            yesBtn : {
-                                name : '确定',
-                                click : function(e) {
-                                  var data = {
-                                              authName:$("#authname").val(),
-                                              authDes:$("#authdes").val(),
-                                              authParent:$("#authparent").val()
-                                   };
-                                  var n=0;
-                                  $("tr.sourcecontent").each(function(){
-                                      data["resList[" + n + "].resourceName"] = $(this).find('.sourcename').val();
-                                      data["resList[" + n + "].resourceType"] = $(this).find('.sourcetype').val();
-                                      data["resList[" + n + "].resourceDescription"] = $(this).find('.sourcedes').val();
-                                      data["resList[" + n + "].resourceURL"] = $(this).find('.sourceurl').val();
-                                      n++;
-                                  });
-                                  Pager.initUrl("insertauthority.action");
-                                  Pager.xhrBeforeSend=xhrBeforeSend;
-                                  Pager.xhrSuccess = xhrSuccess;
-                                  Pager.syncLoadData(data); 
-                                  dialog.remove();
-                                }
-                            },
-                            noBtn : {
-                                name : '取消',
-                                click : function(e) {
-                                    dialog.remove();
-                                }
-                            }
-                        });
-                    });
-         });
-</code></pre>
 </div>
 
 </article>

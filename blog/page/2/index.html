@@ -8,7 +8,7 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Feb 23rd, 2012 Tec Struts+jquery+ajax简单整合示例 jsp文件： function clickButton() { $.ajax({ url :'../ajaxRequest.action', //后台处理程序 type:'post', //数据发送方式 &hellip;">
+	<meta name="description" content="Feb 23rd, 2012 Tec Struts+jquery+ajax简单整合示例 jsp文件： Read on &rarr; Feb 13th, 2012 Tec 垂直发布—Httpclient模拟登陆获取页面信息 过年回了趟老家，回来后寒假还有好大一截， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -125,25 +125,10 @@
 	<div class="entry-content" itemprop="articleBody">
 		<p>jsp文件：</p>
 
-<pre><code>function clickButton()  
-            {      
-                $.ajax({  
-                   url :'../ajaxRequest.action',  //后台处理程序  
-                   type:'post',    //数据发送方式  
-                   dataType:'json',  //接受数据格式  
-                   data:{result:"RE",request:"REQ"},  //要传递的数据  
-                   success:callbackFun  //回传函数(这里是函数名)  
-                   });  
-             }   
-//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
-            function callbackFun(data)  
-            {  
-                 alert("SUCCESS");  
-                 alert(data.result);  
-                 alert(data.request);  
-                 alert(data.q[1]);  
-            }
-</code></pre>
+<script src="https://gist.github.com/wanax/6752399.js"></script>
+
+
+
 
 
 		

@@ -8,7 +8,7 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Jun 9th, 2013 Tec UIView三种动画笔记 [UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{ self.view.alpha = 0 &hellip;">
+	<meta name="description" content="Jun 9th, 2013 Tec UIView三种动画笔记 Read on &rarr; Jun 7th, 2013 Tec iOS上js引擎的使用 如上篇文章所述ios折线图绘制，公司开发需要要用到一些字符串转公式的需求。自己实在有点惧自己写语法书啥的听公司大牛说可以使用js引擎试试， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -123,16 +123,8 @@
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/" itemprop="url">UIView三种动画笔记</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<pre><code>[UIView animateWithDuration:0.6f  
-                          delay:0  
-                        options:UIViewAnimationOptionCurveEaseOut  
-                     animations:^{  
-                         self.view.alpha = 0;  
-                     }  
-                     completion:^(BOOL finished) {  
-                         [self.view removeFromSuperview];  
-                     }];  
-</code></pre>
+		<script src="https://gist.github.com/wanax/6752309.js"></script>
+
 
 <p>  
 		
@@ -324,38 +316,10 @@
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/" itemprop="url">Java设置编码读写文件笔记</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<pre><code>public class Test {  
-        public static void main(String[] args) {  
-            try{  
-                BufferedReader br = new BufferedReader(  
-                        new InputStreamReader(new FileInputStream(url),"UTF-8"));  
-                String data = null;  
-                StringBuffer str=new StringBuffer();  
-                while((data = br.readLine())!=null)  
-                {  
-                    str.append(data+"\n");  
-                }  
-                System.out.println(str);  
-                br.close();  
-                Test test=new Test();  
-                test.ece(str.toString());  
-            }catch(Exception e){  
-                e.printStackTrace();  
-            }             
-        }  
-        public void ece(String str){  
-            try{  
-                BufferedWriter bw = new BufferedWriter(  
-                        new OutputStreamWriter(new FileOutputStream(url,false),"UTF-8"));  
-                bw.write(str);  
-                bw.flush();  
-                bw.close();  
-            }catch(Exception e){  
-                e.printStackTrace();  
-            }     
-        }  
-}  
-</code></pre>
+		<script src="https://gist.github.com/wanax/6752273.js"></script>
+
+
+<p></p>
 
 		
 		

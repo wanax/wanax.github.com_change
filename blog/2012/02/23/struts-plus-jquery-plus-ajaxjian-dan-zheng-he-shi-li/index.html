@@ -8,7 +8,7 @@
 	<title>Struts+jquery+ajax简单整合示例 - 陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Struts+jquery+ajax简单整合示例 jsp文件： function clickButton() { $.ajax({ url :'../ajaxRequest.action', //后台处理程序 type:'post', //数据发送方式 dataType:'json', // &hellip;">
+	<meta name="description" content=" Struts+jquery+ajax简单整合示例 jsp文件： 或者： html部分： struts代码： java代码： --> Comments Please enable JavaScript to view the comments powered by Disqus. ">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,25 +97,10 @@
 	<h1 class="title" itemprop="name">Struts+jquery+ajax简单整合示例</h1>
 	<div class="entry-content" itemprop="articleBody"><p>jsp文件：</p>
 
-<pre><code>function clickButton()  
-            {      
-                $.ajax({  
-                   url :'../ajaxRequest.action',  //后台处理程序  
-                   type:'post',    //数据发送方式  
-                   dataType:'json',  //接受数据格式  
-                   data:{result:"RE",request:"REQ"},  //要传递的数据  
-                   success:callbackFun  //回传函数(这里是函数名)  
-                   });  
-             }   
-//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
-            function callbackFun(data)  
-            {  
-                 alert("SUCCESS");  
-                 alert(data.result);  
-                 alert(data.request);  
-                 alert(data.q[1]);  
-            }
-</code></pre>
+<script src="https://gist.github.com/wanax/6752399.js"></script>
+
+
+
 
 <!--more-->
 
@@ -123,77 +108,29 @@
 <p>           <br/>
 或者：</p>
 
-<pre><code>function clickButton()  
-            {      
-                var url = '../ajaxRequest.action';  
-                var params = {result:"RESULT",request:"REQUEST" }; //通过id获得输入值  
-                 jQuery.post(url, params, callbackFun, 'json');  
-               }   
-//url：响应aciton；params：传入参数；callbackFun：响应完成后的回调函数；  
-            function callbackFun(data)  
-            {  
-                 alert("SUCCESS");  
-                 alert(data.result);  
-                 alert(data.request)  
-            } 
-</code></pre>
+<script src="https://gist.github.com/wanax/6752402.js"></script>
+
+
+<p></p>
 
 <p>html部分：</p>
 
-<pre><code>&lt;input type="button" onclick="clickButton();" value="clickButton"/&gt;             
-</code></pre>
+<script src="https://gist.github.com/wanax/6752404.js"></script>
+
+
+<p></p>
 
 <p>struts代码：</p>
 
-<pre><code>&lt;package name="ajax" extends="json-default"&gt;  
-        &lt;action name="ajaxRequest"  class="com.action.ajax" method="test"&gt;  
-            &lt;result type="json"&gt;&lt;/result&gt;  
-        &lt;/action&gt;  
-&lt;/package&gt;
-</code></pre>
+<script src="https://gist.github.com/wanax/6752407.js"></script>
+
 
 <p>java代码：</p>
 
-<pre><code>package com.action;  
-
-import com.opensymphony.xwork2.ActionSupport;  
-
-public class ajax extends ActionSupport{  
-    private String request;  
-    private String result;  
-    private String [] q={"a","b","c"};   
-
-    public String test(){  
-        System.out.println("ajax");  
-        request="request";  
-        result="result";  
-        return SUCCESS;  
-    }  
-
-    public String getRequest() {  
-        return request;  
-    }  
-    public void setRequest(String request) {  
-        this.request = request;  
-    }  
-    public String getResult() {  
-        return result;  
-    }  
-    public void setResult(String result) {  
-        this.result = result;  
-    }  
-
-    public String[] getQ() {  
-        return q;  
-    }  
-
-    public void setQ(String[] q) {  
-        this.q = q;  
-    }  
+<script src="https://gist.github.com/wanax/6752410.js"></script>
 
 
-}
-</code></pre>
+
 </div>
 
 </article>

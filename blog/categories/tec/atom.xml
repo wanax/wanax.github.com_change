@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tec | 陋室]]></title>
   <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-09-29T20:37:41+08:00</updated>
+  <updated>2013-09-29T21:29:16+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -18,54 +18,13 @@
     <link href="http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/"/>
     <updated>2013-06-09T10:30:00+08:00</updated>
     <id>http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji</id>
-    <content type="html"><![CDATA[<pre><code>[UIView animateWithDuration:0.6f  
-                          delay:0  
-                        options:UIViewAnimationOptionCurveEaseOut  
-                     animations:^{  
-                         self.view.alpha = 0;  
-                     }  
-                     completion:^(BOOL finished) {  
-                         [self.view removeFromSuperview];  
-                     }];  
-</code></pre>
+    <content type="html"><![CDATA[<script src="https://gist.github.com/wanax/6752309.js"></script>
+
 
 <p>  <!--more--></p>
 
-<pre><code>[UIView beginAnimations:@"animation" context:nil];  
-[UIView setAnimationDuration:0.8f];  
-[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];  
-[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:delegate.tabBarController.view cache:YES];  
-[UIView commitAnimations];  
+<script src="https://gist.github.com/wanax/6752318.js"></script>
 
-
-
-CATransition *animation = [CATransition animation];  
-    animation.duration = 0.8f;  
-    /*动画时间控制      
- UIViewAnimationCurveEaseInOut,         // slow at beginning and end      
- UIViewAnimationCurveEaseIn,            // slow at beginning      
- UIViewAnimationCurveEaseOut,           // slow at end     
- UIViewAnimationCurveLinear      
- */  
-animation.timingFunction = UIViewAnimationCurveEaseInOut;  
-animation.fillMode = kCAFillModeForwards;  
-/*动画类型      
- kCATransitionFade;      
- kCATransitionMoveIn;      
- kCATransitionPush;      
- kCATransitionReveal;      
- */  
-animation.type = kCATransitionMoveIn;  
-/*动画进入方式      
- kCATransitionFromRight;      
- kCATransitionFromLeft; 
- kCATransitionFromTop; 
- kCATransitionFromBottom; 
- */  
-animation.subtype = kCATransitionFromBottom;  
-[[self.view layer] addAnimation:animation forKey:@"animation"];  
-animation=nil; 
-</code></pre>
 ]]></content>
   </entry>
   
@@ -99,35 +58,17 @@ animation=nil;
 
 <p>完了以后我把js运行的方法封装成了一个方法，如下：</p>
 
-<pre><code>- (NSString *)runsJS:(NSString *)aJSString  
-{  
-    if (!aJSString) {  
-        NSLog(@"[JSC] JS String is empty!");  
-        return nil;  
-    }  
+<script src="https://gist.github.com/wanax/6752325.js"></script>
 
 
-JSStringRef scriptJS = JSStringCreateWithUTF8CString([aJSString UTF8String]);  
-JSValueRef exception = NULL;  
-
-JSValueRef result = JSEvaluateScript(context, scriptJS, NULL, NULL, 0, &amp;exception);  
-NSString *res = nil;  
-
-JSStringRef jstrArg = JSValueToStringCopy(context, result, NULL);  
-res = (NSString*)JSStringCopyCFString(kCFAllocatorDefault, jstrArg);  
-
-JSStringRelease(jstrArg);  
-
-JSStringRelease(scriptJS);  
-
-return res;  }  
-</code></pre>
+<p></p>
 
 <p>封装完毕便可以顺利使用啦：</p>
 
-<pre><code>NSString *str=[self.engine runJS:@"var str='';for(var i=0;i&lt;2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
-    //NSLog(@"%@",str);  
-</code></pre>
+<script src="https://gist.github.com/wanax/6752332.js"></script>
+
+
+<p></p>
 
 <p>这便是大体的javascriptcore的使用方法了。</p>
 
@@ -143,21 +84,8 @@ return res;  }
 
 <blockquote><p>一个简单的示例</p></blockquote>
 
-<pre><code>var test=function(){  
-var val=[];  
-val["1.0"]=1;  
-val["1.1"]=2;  
-val["1.2"]=3;  
-val["1.3"]=4;  
-val["2"]=34;  
+<script src="https://gist.github.com/wanax/6752335.js"></script>
 
-var str="var v=this.val; v[\"1.3\"]=v[\"1.0\"]*v[\"1.2\"];";  
-var fun=new Function(str);  
-val["0"]=5;  
-fun();  
-return val;  
-}  
-</code></pre>
 ]]></content>
   </entry>
   
@@ -186,315 +114,33 @@ fun();
 
 <p>先在头文件里定义几个后面要用到的量</p>
 
-<pre><code>//转换坐标系字典，与手指触摸点匹配  
-@property (nonatomic,retain) NSMutableDictionary *reverseDic;  
-//js引擎上下文  
-@property (nonatomic) JSGlobalContextRef context;  
-//绘图view  
-@property (nonatomic,retain) CPTGraphHostingView *hostView;  
+<script src="https://gist.github.com/wanax/6752336.js"></script>
 
-//坐标转换方法，实际坐标转化相对坐标  
-- (CGPoint)CoordinateTransformRealToAbstract:(CGPoint)point;  
-//坐标转换方法，相对坐标转化实际坐标  
-- (CGPoint)CoordinateTransformAbstractToReal:(CGPoint)point;  
-//判断手指触摸点是否在折点旁边  
--(BOOL)isNearByThePoint:(CGPoint)p;  
 
-//js代码运行  
-- (NSString *)runsJS:(NSString *)aJSString; 
-</code></pre>
-
-<p>因为要对图像上的折点拖动，而我没有找到合适的对点的事件绑定方法，所以先直接对整个view进行手势监听，通过实际坐标与坐标轴坐标相对转换来判定触摸点是否是在折点附近已达到合理拖动的目的。</p>
+<p>  <br/>
+因为要对图像上的折点拖动，而我没有找到合适的对点的事件绑定方法，所以先直接对整个view进行手势监听，通过实际坐标与坐标轴坐标相对转换来判定触摸点是否是在折点附近已达到合理拖动的目的。</p>
 
 <p>接下来便开始.m文件的编码工作啦。我先定义一个简单的折线图公式，y=x+n；把一些数据点塞到point数组里，做后面的datasource。接下来便是折线图的绘制，代码注释写得比较清楚，就不一一赘述了。值得注意的是，这里点的绘制也是使用ios里常用的datasource的方法，所以先别急着找那一系列点出现在哪里~</p>
 
-<pre><code>- (void)viewDidLoad  
-{  
-    [super viewDidLoad];  
-    UIButton *bt=[[UIButton alloc] init];  
-    [self.view addSubview:bt];  
-    points=[[NSMutableArray alloc] init];  
-    reverseDic=[[NSMutableDictionary alloc] init];  
-    NSUInteger i;  
-    for(i=0;i&lt;NUM;i++){  
-        id x=[NSNumber numberWithFloat:0+i];  
-        id y=[NSNumber numberWithFloat:3*i];  
-        [reverseDic setObject:y forKey:[NSString stringWithFormat:@"%.0f",[x floatValue]]];  
-        [points addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x,@"x",y,@"y",nil]];  
-    }  
-    // Do any additional setup after loading the view.  
-    //初始化图形视图  
-    graph=[[CPTXYGraph alloc] initWithFrame:CGRectZero];  
-    CPTTheme *theme=[CPTTheme themeNamed:kCPTDarkGradientTheme];  
-    [graph applyTheme:theme];  
-    self . view =[[ CPTGraphHostingView alloc ] initWithFrame :[ UIScreen mainScreen ]. bounds ];  
-    hostView=(CPTGraphHostingView *)self.view;  
+<script src="https://gist.github.com/wanax/6752339.js"></script>
 
-    [hostView setHostedGraph : graph ];  
-
-    NSLog(@"orgin:%.2f,%.2f",hostView.frame.origin.x,hostView.frame.origin.y);  
-    NSLog(@"size:%.2f,%.2f",hostView.frame.size.height,hostView.frame.size.width);  
-
-    // CPGraph 四边不留白  
-    graph . paddingLeft = 0.0f ;  
-    graph . paddingRight = 0.0f ;  
-    graph . paddingTop = 0.0f ;  
-    graph . paddingBottom = GRAPAHBOTTOMPAD ;  
-    // 绘图区 4 边留白  
-    graph . plotAreaFrame . paddingLeft = 0.0 ;  
-    graph . plotAreaFrame . paddingTop = 0.0 ;  
-    graph . plotAreaFrame . paddingRight = 0.0 ;  
-    graph . plotAreaFrame . paddingBottom = 00.0 ;  
-
-
-
-
-
-
-    //绘制图形空间  
-    CPTXYPlotSpace *plotSpace=(CPTXYPlotSpace *)graph.defaultPlotSpace;  
-    //plotSpace.allowsUserInteraction=YES;  
-
-    //设置x，y坐标范围  
-    plotSpace.xRange=[CPTPlotRange plotRangeWithLocation:  
-                      CPTDecimalFromCGFloat(XRANGEBEGIN)  
-                                                  length:CPTDecimalFromCGFloat(XRANGELENGTH)];  
-    plotSpace.yRange=[CPTPlotRange plotRangeWithLocation:  
-                      CPTDecimalFromCGFloat(YRANGEBEGIN)  length:CPTDecimalFromCGFloat(YRANGELENGTH)];  
-
-    //绘制坐标系  
-    CPTXYAxisSet *axisSet=(CPTXYAxisSet *)graph.axisSet;  
-    CPTXYAxis *x=axisSet.xAxis;  
-
-    CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];  
-    lineStyle.miterLimit = 1.0f;  
-    lineStyle.lineWidth = 2.0;  
-    lineStyle.lineColor = [CPTColor colorWithComponentRed:255/255.0 green:211/255.0 blue:155/255.0 alpha:1.0];  
-
-    x.majorIntervalLength=CPTDecimalFromFloat(XINTERVALLENGTH);  
-    x.orthogonalCoordinateDecimal=CPTDecimalFromFloat(XORTHOGONALCOORDINATE);  
-    x.minorTicksPerInterval=XTICKSPERINTERVAL;  
-    x.minorTickLineStyle = lineStyle;  
-
-    CPTXYAxis *y=axisSet.yAxis;  
-    y.majorIntervalLength=CPTDecimalFromFloat(YINTERVALLENGTH);  
-    y.orthogonalCoordinateDecimal=CPTDecimalFromFloat(YORTHOGONALCOORDINATE);  
-    y.minorTicksPerInterval=YTICKSPERINTERVAL;  
-    y.minorTickLineStyle = lineStyle;  
-
-
-    y. labelingPolicy = CPTAxisLabelingPolicyNone ;  
-
-
-    //修改折线图线段样式  
-    CPTScatterPlot *boundLinePlot=[[[CPTScatterPlot alloc] init] autorelease];  
-    //CPTMutableLineStyle *lineStyle=[CPTMutableLineStyle lineStyle];  
-    lineStyle.miterLimit=2.0f;  
-    lineStyle.lineWidth=2.0f;  
-    lineStyle.lineColor=[CPTColor whiteColor];  
-    boundLinePlot.dataLineStyle=lineStyle;  
-    boundLinePlot.identifier=@"Blue Plot";  
-    boundLinePlot.dataSource=self;//需实现委托  
-
-
-
-    // Do a red-blue gradient: 渐变色区域  
-    //  
-    /*CPTColor * blueColor        = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:0.8]; 
-    CPTColor * redColor         = [CPTColor colorWithComponentRed:1.0 green:0.3 blue:0.3 alpha:0.8]; 
-    CPTGradient * areaGradient1 = [CPTGradient gradientWithBeginningColor:blueColor 
-                                                              endingColor:redColor]; 
-    areaGradient1.angle = -120.0f; 
-    CPTFill * areaGradientFill  = [CPTFill fillWithGradient:areaGradient1]; 
-    boundLinePlot.areaFill      = areaGradientFill; 
-    boundLinePlot.areaBaseValue = [[NSDecimalNumber numberWithFloat:0.5] decimalValue]; // 渐变色的起点位置 
-    */  
-
-
-    // Add plot symbols: 表示数值的符号的形状  
-    //  
-    CPTMutableLineStyle * symbolLineStyle = [CPTMutableLineStyle lineStyle];  
-    symbolLineStyle.lineColor = [CPTColor colorWithComponentRed:102/255.0 green:204/255.0 blue:255/255.0 alpha:1.0];  
-    symbolLineStyle.lineWidth = 2.0;  
-
-    CPTPlotSymbol * plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];  
-    //plotSymbol.fill          = [CPTFill fillWithColor: [CPTColor colorWithComponentRed:102/255.0 green:204/255.0 blue:255/255.0 alpha:1.0]];  
-    plotSymbol.lineStyle     = symbolLineStyle;  
-    plotSymbol.size          = CGSizeMake(1.8, 1.8);  
-    boundLinePlot.plotSymbol = plotSymbol;  
-
-
-    // Animate in the new plot: 淡入动画  
-    boundLinePlot.opacity = 0.0f;  
-
-    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];  
-    fadeInAnimation.duration            = 3.0f;  
-    fadeInAnimation.removedOnCompletion = NO;  
-    fadeInAnimation.fillMode            = kCAFillModeForwards;  
-    fadeInAnimation.toValue             = [NSNumber numberWithFloat:1.0];  
-    [boundLinePlot addAnimation:fadeInAnimation forKey:@"shadowOffset"];  
-
-
-
-    [graph addPlot:boundLinePlot];  
-
-
-    //手势添加  
-    UIPanGestureRecognizer *panGr=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPan:)];  
-    [hostView addGestureRecognizer:panGr];  
-    [panGr release];  
-
-
-
-
-    //NSString *str=[self.engine runJS:@"var str='';for(var i=0;i&lt;2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
-    //NSLog(@"%@",str);  
-
-
-
-
-} 
-</code></pre>
 
 <h3>这样一个初步的折现图便绘制完毕啦。数据源委托和数据标签的实现如下：</h3>
 
-<pre><code>// 添加数据标签  
--( CPTLayer *)dataLabelForPlot:( CPTPlot *)plot recordIndex:( NSUInteger )index  
-{  
-    // 定义一个白色的 TextStyle  
-    static CPTMutableTextStyle *whiteText = nil ;  
-    if ( !whiteText ) {  
-        whiteText = [[ CPTMutableTextStyle alloc ] init ];  
-        whiteText.color=[CPTColor colorWithComponentRed:152/255.0 green:251/255.0 blue:152/255.0 alpha:1.0];  
-    }  
-
-    // 定义一个 TextLayer  
-    CPTTextLayer *newLayer = nil ;  
-    NSString * identifier=( NSString *)[plot identifier];  
-    if ([identifier isEqualToString : @"Blue Plot" ]) {  
-
-        newLayer=[[[CPTTextLayer alloc] initWithText:[[[NSString alloc] initWithFormat:@"%0.1f",[[[points objectAtIndex:index] objectForKey:@"y"] doubleValue]] autorelease] style:whiteText] autorelease];  
-    }  
-    return newLayer;  
-}  
+<script src="https://gist.github.com/wanax/6752340.js"></script>
 
 
-
-//散点数据源委托实现  
--(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot{  
-    return [points count];  
-}  
-
--(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger) index{  
-    NSString *key=(fieldEnum==CPTScatterPlotFieldX?@"x":@"y");  
-    NSNumber *num=[[points objectAtIndex:index] valueForKey:key];  
-   //NSLog(@"key:%@,num:%@",key,num);  
-    return  num;  
-}  
-</code></pre>
+<p></p>
 
 <h3>可以在代码里看到我实现了对页面的手势监听，以便实现折线图拖动的效果，具体方法如下：</h3>
 
-<pre><code>-(void)viewPan:(UIPanGestureRecognizer *)tapGr  
-{  
-    CGPoint now=[tapGr locationInView:self.view];  
+<script src="https://gist.github.com/wanax/6752346.js"></script>
 
-//手势变化并且接近折点旁边  
-if([tapGr state]==UIGestureRecognizerStateChanged&amp;&amp;[self isNearByThePoint:now]){  
-    CGPoint coordinate=[self CoordinateTransformRealToAbstract:now];  
-    [points removeAllObjects];  
-    [reverseDic removeAllObjects];  
-    NSUInteger i;  
-    for(i=0;i&lt;NUM;i++){  
-        id x=[NSNumber numberWithFloat:0+i];  
-        id y=[NSNumber numberWithFloat:3*i+coordinate.y];  
-        [reverseDic setObject:y forKey:[NSString stringWithFormat:@"%.0f",[x floatValue]]];  
-        [points addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x,@"x",y,@"y",nil]];  
-    }  
-    [graph reloadData];  
-}  
-
-
-}  
-
-//判断手指触摸点是否在折点旁边  
--(BOOL)isNearByThePoint:(CGPoint)p{  
-
-//从手指触摸点的实际坐标得到抽象坐标  
-CGPoint abstractCoordinate=[self CoordinateTransformRealToAbstract:p];  
-//获取临近坐标点  
-int acX=(int)(abstractCoordinate.x+0.5);  
-//判断临近坐标点是否存在折点，存在则取出  
-float acY=[[reverseDic objectForKey:[NSString stringWithFormat:@"%d",acX]] floatValue];  
-
-//构造临近坐标折点，并转化为实际屏幕坐标点  
-CGPoint temp=[self CoordinateTransformAbstractToReal:CGPointMake([[NSNumber numberWithInt:acX] floatValue], acY)];  
-//计算临近坐标点与手指触摸点的距离  
-double distance=sqrt(pow((p.x-temp.x),2)+pow((p.y-temp.y),2));  
-
-//NSLog(@"%f",distance);  
-return distance&gt;25?NO:YES;  
-
-}  
-
-
-//空间坐标转换:实际坐标转化自定义坐标  
--(CGPoint)CoordinateTransformRealToAbstract:(CGPoint)point{  
-
-float viewWidth=hostView.frame.size.width;  
-float viewHeight=hostView.frame.size.height;  
-
-float coordinateX=(XRANGELENGTH*point.x)/viewWidth+XRANGEBEGIN;  
-float coordinateY=YRANGELENGTH-((YRANGELENGTH*point.y)/(viewHeight-GRAPAHBOTTOMPAD))+YRANGEBEGIN;  
-
-return CGPointMake(coordinateX,coordinateY);  
-}  
-//空间坐标转换:自定义坐标转化实际坐标  
--(CGPoint)CoordinateTransformAbstractToReal:(CGPoint)point{  
-
-float viewWidth=hostView.frame.size.width;  
-float viewHeight=hostView.frame.size.height;  
-
-float coordinateX=(point.x-XRANGEBEGIN)*viewWidth/XRANGELENGTH;  
-float coordinateY=(-1)*(point.y-YRANGEBEGIN-YRANGELENGTH)*(viewHeight-GRAPAHBOTTOMPAD)/YRANGELENGTH;  
-
-return CGPointMake(coordinateX,coordinateY);  
-
-}  
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer  
-
-{  
-    return YES;  
-}  
-</code></pre>
 
 <p>下面是一些常量的定义</p>
 
-<pre><code>#define NUM 10  
-//绘图空间与底部距离  
-#define GRAPAHBOTTOMPAD 80.0f  
+<script src="https://gist.github.com/wanax/6752353.js"></script>
 
-//x轴起点  
-#define XRANGEBEGIN 0.0  
-//x轴在屏幕可视范围内的范围  
-#define XRANGELENGTH 5.0  
-//y轴起点  
-#define YRANGEBEGIN 0.0  
-//y轴在屏幕可视范围内的范围  
-#define YRANGELENGTH 100.0  
-
-
-//x轴屏幕范围内大坐标间距  
-#define XINTERVALLENGTH 1.0  
-//x轴坐标的原点（y轴将在此与x轴相交）  
-#define XORTHOGONALCOORDINATE 10.0  
-//x轴每两个大坐标间小坐标个数  
-#define XTICKSPERINTERVAL 2  
-
-#define YINTERVALLENGTH 1.0  
-#define YORTHOGONALCOORDINATE 1.0  
-#define YTICKSPERINTERVAL 0 
-</code></pre>
 
 <p>好了，这便是iphone上怎样绘制个折线图并实现拖动效果，其实是个很简陋的例子，离真正能用还有很长的一段路要走，但先贴在这里留个记号，也许你会看到中间有些js引擎的影子，这个留在下一章再讲吧。</p>
 
@@ -507,38 +153,10 @@ return CGPointMake(coordinateX,coordinateY);
     <link href="http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/"/>
     <updated>2012-11-01T16:04:00+08:00</updated>
     <id>http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji</id>
-    <content type="html"><![CDATA[<pre><code>public class Test {  
-        public static void main(String[] args) {  
-            try{  
-                BufferedReader br = new BufferedReader(  
-                        new InputStreamReader(new FileInputStream(url),"UTF-8"));  
-                String data = null;  
-                StringBuffer str=new StringBuffer();  
-                while((data = br.readLine())!=null)  
-                {  
-                    str.append(data+"\n");  
-                }  
-                System.out.println(str);  
-                br.close();  
-                Test test=new Test();  
-                test.ece(str.toString());  
-            }catch(Exception e){  
-                e.printStackTrace();  
-            }             
-        }  
-        public void ece(String str){  
-            try{  
-                BufferedWriter bw = new BufferedWriter(  
-                        new OutputStreamWriter(new FileOutputStream(url,false),"UTF-8"));  
-                bw.write(str);  
-                bw.flush();  
-                bw.close();  
-            }catch(Exception e){  
-                e.printStackTrace();  
-            }     
-        }  
-}  
-</code></pre>
+    <content type="html"><![CDATA[<script src="https://gist.github.com/wanax/6752273.js"></script>
+
+
+<p></p>
 ]]></content>
   </entry>
   
@@ -560,97 +178,15 @@ return CGPointMake(coordinateX,coordinateY);
 
 <p>前台页面的动态添加是这样的：</p>
 
-<pre><code>    var addNewSource = function(){  
-     var htmlStr =   
-      "&lt;tr class=\"sourcecontent\"&gt;"+  
-               "&lt;td&gt;&lt;input class=\"sourcename\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourceurl\" type=\"text\"/&gt;&lt;/td&gt;"+  
-               "&lt;td&gt;&lt;input class=\"sourcetype\" type=\"text\"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=\"resourcedes\" type=\"text\"/&gt;&lt;/td&gt;"+  
-               "&lt;td&gt;&lt;a href=\"#\" onclick=\"deleteNewSource(this);return false;\"&gt;&lt;img class=\"deleteBtn\" src=\"&lt;%=basePath%&gt;/img/delete.png\"/&gt;&lt;/a&gt;&lt;/td&gt;"+  
-            "&lt;/tr&gt;";  
-         $("#resourceInfo").append(htmlStr);  
+<script src="https://gist.github.com/wanax/6752390.js"></script>
 
-    };  
-    function deleteNewSource(obj){  
-     $(obj).parents('tr').remove();  
-    }  
-</code></pre>
+
+<p></p>
 
 <p>然后就是对对象数组的拼装与发送了</p>
 
-<pre><code>    var xhrBeforeSend = function(){ 
-        $('.status').fadeIn();
-    };
+<script src="https://gist.github.com/wanax/6752394.js"></script>
 
-    var xhrSuccess = function(data,status,xhr){
-        if(data.tag=="T"){
-            $('.status').css({"margin-left":"740px","color":"green"}).html("提交数据成功");
-            $('.status').fadeOut(1000);
-        }else{
-            $('.status').css({"margin-left":"760px","color":"#FF0000"}).html("提交失败！");
-        }     
-    };
-    KindEditor.ready(function(K) {
-           K('.submitBtn').click(function() {
-                        var screenWidth = $(document).width()-6;
-                        var sourceList = '&lt;ul&gt;';
-                        $("tr.sourcecontent").each(function(){
-                            sourceList +='&lt;li&gt;'+$(this).find('.sourcename').val()+'&lt;/li&gt;';
-                        });
-                        sourceList +='&lt;/ul&gt;';
-                        var htmlStr = '&lt;div class="dailogbox"&gt;'+
-                                       '&lt;table style="width:400px; margin:10px auto;color:#ffffff;font-size:15px;"&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;权限名&lt;/td&gt;&lt;td&gt;'+$("#authname").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;权限描述&lt;/td&gt;&lt;td&gt;'+$("#authdes").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;父级权限&lt;/td&gt;&lt;td&gt;'+$("#authparent").val()+'&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;tr&gt;&lt;td&gt;关联权限:&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;'+
-                                       '&lt;/table&gt;'+
-                                       '&lt;div style="width:400px;margin:10px auto; color:#ffffff;"&gt;'+sourceList+ 
-                                       '&lt;/div&gt;'+
-                                       '&lt;/div&gt;';
-                        var dialog = KindEditor.dialog({
-                            width : screenWidth,
-                            height: 300,
-                            body  : htmlStr,
-                            closeBtn : {
-                                name : '关闭',
-                                click : function(e) {
-                                    dialog.remove();
-                                }
-                            },
-                            yesBtn : {
-                                name : '确定',
-                                click : function(e) {
-                                  var data = {
-                                              authName:$("#authname").val(),
-                                              authDes:$("#authdes").val(),
-                                              authParent:$("#authparent").val()
-                                   };
-                                  var n=0;
-                                  $("tr.sourcecontent").each(function(){
-                                      data["resList[" + n + "].resourceName"] = $(this).find('.sourcename').val();
-                                      data["resList[" + n + "].resourceType"] = $(this).find('.sourcetype').val();
-                                      data["resList[" + n + "].resourceDescription"] = $(this).find('.sourcedes').val();
-                                      data["resList[" + n + "].resourceURL"] = $(this).find('.sourceurl').val();
-                                      n++;
-                                  });
-                                  Pager.initUrl("insertauthority.action");
-                                  Pager.xhrBeforeSend=xhrBeforeSend;
-                                  Pager.xhrSuccess = xhrSuccess;
-                                  Pager.syncLoadData(data); 
-                                  dialog.remove();
-                                }
-                            },
-                            noBtn : {
-                                name : '取消',
-                                click : function(e) {
-                                    dialog.remove();
-                                }
-                            }
-                        });
-                    });
-         });
-</code></pre>
 ]]></content>
   </entry>
   

@@ -15,26 +15,46 @@ categories: Tec
 
 ![image](http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607111925093_zps428cacd3.png)
 
-
 接下来便是怎样使用的问题。
 
 先在头文件里引用文件：
-
+``` c
 	import "JavaScriptCore/JavaScriptCore.h" 
+```
 	
 然后是构造js的上下文context，这个还蛮重要的东西，具体的原理大家可以自行google，因为我自己理解的也很肤浅，略知皮毛而已。
 
+```	c
 	context = JSGlobalContextCreate(NULL);  
+```
 	
 完了以后我把js运行的方法封装成了一个方法，如下：
   
-<script src="https://gist.github.com/wanax/6752325.js"></script>  
+``` c
+- (NSString *)runsJS:(NSString *)aJSString {  
+    if (!aJSString) {  
+        NSLog(@"[JSC] JS String is empty!");  
+        return nil;  
+	}
+    JSStringRef scriptJS = JSStringCreateWithUTF8CString([aJSString UTF8String]);  
+    JSValueRef exception = NULL;        
+    JSValueRef result = JSEvaluateScript(context, scriptJS, NULL, NULL, 0, &exception);  
+    NSString *res = nil;        
+    JSStringRef jstrArg = JSValueToStringCopy(context, result, NULL);  
+    res = (NSString*)JSStringCopyCFString(kCFAllocatorDefault, jstrArg);       
+    JSStringRelease(jstrArg);        
+    JSStringRelease(scriptJS);        
+    return res;  
+}
+``` 
 
     
 封装完毕便可以顺利使用啦：
 
-<script src="https://gist.github.com/wanax/6752332.js"></script> 
-	   
+``` c
+NSString *str=[self.engine runJS:@"var str='';for(var i=0;i<2;i++){str= str + '\\n' + i + ' :Hello' + ', World!';}"];  
+      //NSLog(@"%@",str);   
+```
 	   
 这便是大体的javascriptcore的使用方法了。
 
@@ -50,4 +70,19 @@ v8引擎的编译很痛苦，网上一般比较常见的教程是编译成动态
 
 >一个简单的示例
 
-<script src="https://gist.github.com/wanax/6752335.js"></script>
+
+```javascript
+	   var test=function(){  
+		   var val=[];  
+		   val["1.0"]=1;  
+		   val["1.1"]=2;  
+		   val["1.2"]=3;  
+		   val["1.3"]=4;  
+		   val["2"]=34;  	 
+		   var str="var v=this.val; v[\"1.3\"]=v[\"1.0\"]*v[\"1.2\"];";  
+		   var fun=new Function(str);  
+		   val["0"]=5;  
+		   fun();  
+		   return val;  
+	 }  
+```

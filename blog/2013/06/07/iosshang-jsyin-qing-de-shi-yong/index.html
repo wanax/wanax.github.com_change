@@ -46,7 +46,7 @@
 <hgroup>
   <h1><a href="/">陋室</a></h1>
   
-    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰123</h2>
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
   
 </hgroup>
 
@@ -109,38 +109,67 @@
 
 <p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607111925093_zps428cacd3.png" alt="image" /></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">$</span> <span class="nx">git</span> <span class="nx">clone</span> <span class="nx">git</span><span class="err">@</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">:</span><span class="nx">imathis</span><span class="o">/</span><span class="nx">octopress</span><span class="p">.</span><span class="nx">git</span> <span class="err">#</span> <span class="nx">fork</span> <span class="nx">octopress</span>
-</span><span class='line'> <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
 <p>接下来便是怎样使用的问题。</p>
 
 <p>先在头文件里引用文件：</p>
 
-<pre><code>import "JavaScriptCore/JavaScriptCore.h" 
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">import</span> <span class="s">&quot;JavaScriptCore/JavaScriptCore.h&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>然后是构造js的上下文context，这个还蛮重要的东西，具体的原理大家可以自行google，因为我自己理解的也很肤浅，略知皮毛而已。</p>
 
-<pre><code>context = JSGlobalContextCreate(NULL);  
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">context</span> <span class="o">=</span> <span class="n">JSGlobalContextCreate</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>完了以后我把js运行的方法封装成了一个方法，如下：</p>
 
-<script src="https://gist.github.com/wanax/6752325.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">runsJS</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">aJSString</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aJSString</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">&quot;[JSC] JS String is empty!&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">nil</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>    <span class="n">JSStringRef</span> <span class="n">scriptJS</span> <span class="o">=</span> <span class="n">JSStringCreateWithUTF8CString</span><span class="p">([</span><span class="n">aJSString</span> <span class="n">UTF8String</span><span class="p">]);</span>
+</span><span class='line'>    <span class="n">JSValueRef</span> <span class="n">exception</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">JSValueRef</span> <span class="n">result</span> <span class="o">=</span> <span class="n">JSEvaluateScript</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scriptJS</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exception</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">res</span> <span class="o">=</span> <span class="n">nil</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">JSStringRef</span> <span class="n">jstrArg</span> <span class="o">=</span> <span class="n">JSValueToStringCopy</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">JSStringCopyCFString</span><span class="p">(</span><span class="n">kCFAllocatorDefault</span><span class="p">,</span> <span class="n">jstrArg</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">JSStringRelease</span><span class="p">(</span><span class="n">jstrArg</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">JSStringRelease</span><span class="p">(</span><span class="n">scriptJS</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p></p>
 
 <p>封装完毕便可以顺利使用啦：</p>
 
-<script src="https://gist.github.com/wanax/6752332.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">str</span><span class="o">=</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">engine</span> <span class="n">runJS</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;var str=&#39;&#39;;for(var i=0;i&lt;2;i++){str= str + &#39;</span><span class="se">\\</span><span class="s">n&#39; + i + &#39; :Hello&#39; + &#39;, World!&#39;;}&quot;</span><span class="p">];</span>
+</span><span class='line'>      <span class="c1">//NSLog(@&quot;%@&quot;,str);   </span>
+</span></code></pre></td></tr></table></div></figure>
 
-
-<p></p>
 
 <p>这便是大体的javascriptcore的使用方法了。</p>
 
@@ -156,7 +185,33 @@
 
 <blockquote><p>一个简单的示例</p></blockquote>
 
-<script src="https://gist.github.com/wanax/6752335.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>   <span class="kd">var</span> <span class="nx">test</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">val</span><span class="o">=</span><span class="p">[];</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;1.0&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;1.1&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;1.2&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;1.3&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;2&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">34</span><span class="p">;</span>   
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">str</span><span class="o">=</span><span class="s2">&quot;var v=this.val; v[\&quot;1.3\&quot;]=v[\&quot;1.0\&quot;]*v[\&quot;1.2\&quot;];&quot;</span><span class="p">;</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">fun</span><span class="o">=</span><span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">fun</span><span class="p">();</span>
+</span><span class='line'>     <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+</span><span class='line'> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 

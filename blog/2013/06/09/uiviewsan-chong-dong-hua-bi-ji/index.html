@@ -8,7 +8,16 @@
 	<title>UIView三种动画笔记 - 陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content=" UIView三种动画笔记 --> Comments Please enable JavaScript to view the comments powered by Disqus. ">
+	<meta name="description" content="UIView三种动画笔记 1
+2
+3
+4
+5
+6
+7
+8
+9
+[UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{ self.view.alpha = 0 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -46,7 +55,7 @@
 <hgroup>
   <h1><a href="/">陋室</a></h1>
   
-    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰123</h2>
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
   
 </hgroup>
 
@@ -98,12 +107,92 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<h1 class="title" itemprop="name">UIView三种动画笔记</h1>
-	<div class="entry-content" itemprop="articleBody"><script src="https://gist.github.com/wanax/6752309.js"></script>
+	<div class="entry-content" itemprop="articleBody"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="o">:</span><span class="mf">0.6f</span>
+</span><span class='line'>                          <span class="n">delay</span><span class="o">:</span><span class="mi">0</span>
+</span><span class='line'>                        <span class="n">options</span><span class="o">:</span><span class="n">UIViewAnimationOptionCurveEaseOut</span>
+</span><span class='line'>                     <span class="n">animations</span><span class="o">:^</span><span class="p">{</span>
+</span><span class='line'>                         <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>                     <span class="p">}</span>
+</span><span class='line'>                     <span class="n">completion</span><span class="o">:^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                         <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
+</span><span class='line'>                     <span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>  <!--more--></p>
 
-<script src="https://gist.github.com/wanax/6752318.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">beginAnimations</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;animation&quot;</span> <span class="n">context</span><span class="o">:</span><span class="n">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationDuration</span><span class="o">:</span><span class="mf">0.8f</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationCurve</span><span class="o">:</span><span class="n">UIViewAnimationCurveEaseOut</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationTransition</span><span class="o">:</span><span class="n">UIViewAnimationTransitionCurlDown</span> <span class="n">forView</span><span class="o">:</span><span class="n">delegate</span><span class="p">.</span><span class="n">tabBarController</span><span class="p">.</span><span class="n">view</span> <span class="n">cache</span><span class="o">:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">commitAnimations</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">CATransition</span> <span class="o">*</span><span class="n">animation</span> <span class="o">=</span> <span class="p">[</span><span class="n">CATransition</span> <span class="n">animation</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">animation</span><span class="p">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">0.8f</span><span class="p">;</span>
+</span><span class='line'> <span class="cm">/*动画时间控制      </span>
+</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseInOut,         // slow at beginning and end      </span>
+</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseIn,            // slow at beginning      </span>
+</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseOut,           // slow at end     </span>
+</span><span class='line'><span class="cm"> UIViewAnimationCurveLinear      </span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">timingFunction</span> <span class="o">=</span> <span class="n">UIViewAnimationCurveEaseInOut</span><span class="p">;</span>
+</span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">fillMode</span> <span class="o">=</span> <span class="n">kCAFillModeForwards</span><span class="p">;</span>
+</span><span class='line'><span class="cm">/*动画类型      </span>
+</span><span class='line'><span class="cm"> kCATransitionFade;      </span>
+</span><span class='line'><span class="cm"> kCATransitionMoveIn;      </span>
+</span><span class='line'><span class="cm"> kCATransitionPush;      </span>
+</span><span class='line'><span class="cm"> kCATransitionReveal;      </span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">kCATransitionMoveIn</span><span class="p">;</span>
+</span><span class='line'> <span class="cm">/*动画进入方式      </span>
+</span><span class='line'><span class="cm"> kCATransitionFromRight;      </span>
+</span><span class='line'><span class="cm"> kCATransitionFromLeft; </span>
+</span><span class='line'><span class="cm"> kCATransitionFromTop; </span>
+</span><span class='line'><span class="cm"> kCATransitionFromBottom; </span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'> <span class="n">animation</span><span class="p">.</span><span class="n">subtype</span> <span class="o">=</span> <span class="n">kCATransitionFromBottom</span><span class="p">;</span>
+</span><span class='line'> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">layer</span><span class="p">]</span> <span class="n">addAnimation</span><span class="o">:</span><span class="n">animation</span> <span class="n">forKey</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;animation&quot;</span><span class="p">];</span>
+</span><span class='line'> <span class="n">animation</span><span class="o">=</span><span class="n">nil</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 

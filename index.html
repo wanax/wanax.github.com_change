@@ -8,7 +8,16 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Jun 9th, 2013 Tec UIView三种动画笔记 Read on &rarr; Jun 7th, 2013 Tec iOS上js引擎的使用 如上篇文章所述ios折线图绘制，公司开发需要要用到一些字符串转公式的需求。自己实在有点惧自己写语法书啥的听公司大牛说可以使用js引擎试试， &hellip;">
+	<meta name="description" content="Jun 9th, 2013 Tec UIView三种动画笔记 1
+2
+3
+4
+5
+6
+7
+8
+9
+[UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{ &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -46,7 +55,7 @@
 <hgroup>
   <h1><a href="/">陋室</a></h1>
   
-    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰123</h2>
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
   
 </hgroup>
 
@@ -126,7 +135,25 @@
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/" itemprop="url">UIView三种动画笔记</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<script src="https://gist.github.com/wanax/6752309.js"></script>
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="o">:</span><span class="mf">0.6f</span>
+</span><span class='line'>                          <span class="n">delay</span><span class="o">:</span><span class="mi">0</span>
+</span><span class='line'>                        <span class="n">options</span><span class="o">:</span><span class="n">UIViewAnimationOptionCurveEaseOut</span>
+</span><span class='line'>                     <span class="n">animations</span><span class="o">:^</span><span class="p">{</span>
+</span><span class='line'>                         <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>                     <span class="p">}</span>
+</span><span class='line'>                     <span class="n">completion</span><span class="o">:^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                         <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
+</span><span class='line'>                     <span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>  
@@ -319,10 +346,70 @@
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/" itemprop="url">Java设置编码读写文件笔记</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<script src="https://gist.github.com/wanax/6752273.js"></script>
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">try</span><span class="o">{</span>
+</span><span class='line'>                <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+</span><span class='line'>                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">url</span><span class="o">),</span><span class="s">&quot;UTF-8&quot;</span><span class="o">));</span>
+</span><span class='line'>                <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">StringBuffer</span> <span class="n">str</span><span class="o">=</span><span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+</span><span class='line'>                <span class="k">while</span><span class="o">((</span><span class="n">data</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">())!=</span><span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>                <span class="o">{</span>
+</span><span class='line'>                    <span class="n">str</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">data</span><span class="o">+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">Test</span> <span class="n">test</span><span class="o">=</span><span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">test</span><span class="o">.</span><span class="na">ece</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+</span><span class='line'>                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ece</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>            <span class="k">try</span><span class="o">{</span>
+</span><span class='line'>                <span class="n">BufferedWriter</span> <span class="n">bw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedWriter</span><span class="o">(</span>
+</span><span class='line'>                        <span class="k">new</span> <span class="nf">OutputStreamWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">url</span><span class="o">,</span><span class="kc">false</span><span class="o">),</span><span class="s">&quot;UTF-8&quot;</span><span class="o">));</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+</span><span class='line'>                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-
-<p></p>
 
 		
 		
@@ -437,11 +524,16 @@
 
 <blockquote><p>你想通过生日来计算这个人有几岁了。</p></blockquote>
 
-<pre><code>SELECT
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> 
+</span><span class='line'><span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">FROM_DAYS</span><span class="p">(</span><span class="n">TO_DAYS</span><span class="p">(</span><span class="n">now</span><span class="p">())</span> <span class="o">-</span> <span class="n">TO_DAYS</span><span class="p">(</span><span class="o">@</span><span class="n">dateofbirth</span><span class="p">)),</span> <span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y')
- + 0;
-</code></pre>
+
+<p></p>
 
 
 		

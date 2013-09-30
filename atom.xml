@@ -4,7 +4,7 @@
   <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-09-30T16:02:02+08:00</updated>
+  <updated>2013-09-30T17:24:17+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -18,12 +18,92 @@
     <link href="http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/"/>
     <updated>2013-06-09T10:30:00+08:00</updated>
     <id>http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji</id>
-    <content type="html"><![CDATA[<script src="https://gist.github.com/wanax/6752309.js"></script>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="o">:</span><span class="mf">0.6f</span>
+</span><span class='line'>                          <span class="n">delay</span><span class="o">:</span><span class="mi">0</span>
+</span><span class='line'>                        <span class="n">options</span><span class="o">:</span><span class="n">UIViewAnimationOptionCurveEaseOut</span>
+</span><span class='line'>                     <span class="n">animations</span><span class="o">:^</span><span class="p">{</span>
+</span><span class='line'>                         <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>                     <span class="p">}</span>
+</span><span class='line'>                     <span class="n">completion</span><span class="o">:^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                         <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
+</span><span class='line'>                     <span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>  <!--more--></p>
 
-<script src="https://gist.github.com/wanax/6752318.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">beginAnimations</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;animation&quot;</span> <span class="n">context</span><span class="o">:</span><span class="n">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationDuration</span><span class="o">:</span><span class="mf">0.8f</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationCurve</span><span class="o">:</span><span class="n">UIViewAnimationCurveEaseOut</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationTransition</span><span class="o">:</span><span class="n">UIViewAnimationTransitionCurlDown</span> <span class="n">forView</span><span class="o">:</span><span class="n">delegate</span><span class="p">.</span><span class="n">tabBarController</span><span class="p">.</span><span class="n">view</span> <span class="n">cache</span><span class="o">:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">commitAnimations</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">CATransition</span> <span class="o">*</span><span class="n">animation</span> <span class="o">=</span> <span class="p">[</span><span class="n">CATransition</span> <span class="n">animation</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">animation</span><span class="p">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">0.8f</span><span class="p">;</span>
+</span><span class='line'> <span class="cm">/*动画时间控制      </span>
+</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseInOut,         // slow at beginning and end      </span>
+</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseIn,            // slow at beginning      </span>
+</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseOut,           // slow at end     </span>
+</span><span class='line'><span class="cm"> UIViewAnimationCurveLinear      </span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">timingFunction</span> <span class="o">=</span> <span class="n">UIViewAnimationCurveEaseInOut</span><span class="p">;</span>
+</span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">fillMode</span> <span class="o">=</span> <span class="n">kCAFillModeForwards</span><span class="p">;</span>
+</span><span class='line'><span class="cm">/*动画类型      </span>
+</span><span class='line'><span class="cm"> kCATransitionFade;      </span>
+</span><span class='line'><span class="cm"> kCATransitionMoveIn;      </span>
+</span><span class='line'><span class="cm"> kCATransitionPush;      </span>
+</span><span class='line'><span class="cm"> kCATransitionReveal;      </span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">kCATransitionMoveIn</span><span class="p">;</span>
+</span><span class='line'> <span class="cm">/*动画进入方式      </span>
+</span><span class='line'><span class="cm"> kCATransitionFromRight;      </span>
+</span><span class='line'><span class="cm"> kCATransitionFromLeft; </span>
+</span><span class='line'><span class="cm"> kCATransitionFromTop; </span>
+</span><span class='line'><span class="cm"> kCATransitionFromBottom; </span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'> <span class="n">animation</span><span class="p">.</span><span class="n">subtype</span> <span class="o">=</span> <span class="n">kCATransitionFromBottom</span><span class="p">;</span>
+</span><span class='line'> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">layer</span><span class="p">]</span> <span class="n">addAnimation</span><span class="o">:</span><span class="n">animation</span> <span class="n">forKey</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;animation&quot;</span><span class="p">];</span>
+</span><span class='line'> <span class="n">animation</span><span class="o">=</span><span class="n">nil</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
@@ -44,38 +124,67 @@
 
 <p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607111925093_zps428cacd3.png" alt="image" /></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">$</span> <span class="nx">git</span> <span class="nx">clone</span> <span class="nx">git</span><span class="err">@</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">:</span><span class="nx">imathis</span><span class="o">/</span><span class="nx">octopress</span><span class="p">.</span><span class="nx">git</span> <span class="err">#</span> <span class="nx">fork</span> <span class="nx">octopress</span>
-</span><span class='line'> <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
 <p>接下来便是怎样使用的问题。</p>
 
 <p>先在头文件里引用文件：</p>
 
-<pre><code>import "JavaScriptCore/JavaScriptCore.h" 
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">import</span> <span class="s">&quot;JavaScriptCore/JavaScriptCore.h&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>然后是构造js的上下文context，这个还蛮重要的东西，具体的原理大家可以自行google，因为我自己理解的也很肤浅，略知皮毛而已。</p>
 
-<pre><code>context = JSGlobalContextCreate(NULL);  
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">context</span> <span class="o">=</span> <span class="n">JSGlobalContextCreate</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>完了以后我把js运行的方法封装成了一个方法，如下：</p>
 
-<script src="https://gist.github.com/wanax/6752325.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">runsJS</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">aJSString</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aJSString</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">&quot;[JSC] JS String is empty!&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">nil</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>    <span class="n">JSStringRef</span> <span class="n">scriptJS</span> <span class="o">=</span> <span class="n">JSStringCreateWithUTF8CString</span><span class="p">([</span><span class="n">aJSString</span> <span class="n">UTF8String</span><span class="p">]);</span>
+</span><span class='line'>    <span class="n">JSValueRef</span> <span class="n">exception</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">JSValueRef</span> <span class="n">result</span> <span class="o">=</span> <span class="n">JSEvaluateScript</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">scriptJS</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exception</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">res</span> <span class="o">=</span> <span class="n">nil</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">JSStringRef</span> <span class="n">jstrArg</span> <span class="o">=</span> <span class="n">JSValueToStringCopy</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">JSStringCopyCFString</span><span class="p">(</span><span class="n">kCFAllocatorDefault</span><span class="p">,</span> <span class="n">jstrArg</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">JSStringRelease</span><span class="p">(</span><span class="n">jstrArg</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">JSStringRelease</span><span class="p">(</span><span class="n">scriptJS</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p></p>
 
 <p>封装完毕便可以顺利使用啦：</p>
 
-<script src="https://gist.github.com/wanax/6752332.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">str</span><span class="o">=</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">engine</span> <span class="n">runJS</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;var str=&#39;&#39;;for(var i=0;i&lt;2;i++){str= str + &#39;</span><span class="se">\\</span><span class="s">n&#39; + i + &#39; :Hello&#39; + &#39;, World!&#39;;}&quot;</span><span class="p">];</span>
+</span><span class='line'>      <span class="c1">//NSLog(@&quot;%@&quot;,str);   </span>
+</span></code></pre></td></tr></table></div></figure>
 
-
-<p></p>
 
 <p>这便是大体的javascriptcore的使用方法了。</p>
 
@@ -91,7 +200,33 @@
 
 <blockquote><p>一个简单的示例</p></blockquote>
 
-<script src="https://gist.github.com/wanax/6752335.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>   <span class="kd">var</span> <span class="nx">test</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">val</span><span class="o">=</span><span class="p">[];</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;1.0&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;1.1&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;1.2&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;1.3&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;2&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">34</span><span class="p">;</span>   
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">str</span><span class="o">=</span><span class="s2">&quot;var v=this.val; v[\&quot;1.3\&quot;]=v[\&quot;1.0\&quot;]*v[\&quot;1.2\&quot;];&quot;</span><span class="p">;</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">fun</span><span class="o">=</span><span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+</span><span class='line'>     <span class="nx">val</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">fun</span><span class="p">();</span>
+</span><span class='line'>     <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+</span><span class='line'> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
@@ -110,9 +245,12 @@
 
 <p>公司的需求是对数据解析进行折线图绘制，并且用户可以通过触摸调整数据点通过公式计算使折线图重新绘制。数据与公式都是服务器端获取的并且是打包成了一个json的字符串。这里面还牵扯到了字符串解析成公式的问题。上网搜了下，oc下并没有很好的解决方案，像这样做的话似乎只能自己写方法，让我想起了上学时候学编译原理写过的语法树，满满的都是泪啊~妥妥的能不写就不写。后来公司大牛说有js引擎可以拿过来用，因为公司这边也有做网页端的折线图绘制，在js下公式转换异常简单</p>
 
-<pre><code>var fun=new fun(str);  
-fun();  
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">fun</span><span class="o">=</span><span class="k">new</span> <span class="nx">fun</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+</span><span class='line'><span class="nx">fun</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>如上所示，两行代码就把str代表的字符串公式解析并计算一遍了，实在是太无解了，妥妥必须使用，这个东西下篇文章再讲吧。
 图像绘制的话google出来ios上比较常用的是CorePlot和PowerPlot，看了下两者的用法，感觉CorePlot会使用更多的代理之类的东西，感觉比较符合苹果的编码思路，就选了它来用了。</p>
@@ -121,32 +259,462 @@ fun();
 
 <p>先在头文件里定义几个后面要用到的量</p>
 
-<script src="https://gist.github.com/wanax/6752336.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="c1">//转换坐标系字典，与手指触摸点匹配  </span>
+</span><span class='line'><span class="err">@</span><span class="n">property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span><span class="n">retain</span><span class="p">)</span> <span class="n">NSMutableDictionary</span> <span class="o">*</span><span class="n">reverseDic</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//js引擎上下文  </span>
+</span><span class='line'><span class="err">@</span><span class="n">property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">)</span> <span class="n">JSGlobalContextRef</span> <span class="n">context</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//绘图view  </span>
+</span><span class='line'><span class="err">@</span><span class="n">property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span><span class="n">retain</span><span class="p">)</span> <span class="n">CPTGraphHostingView</span> <span class="o">*</span><span class="n">hostView</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//坐标转换方法，实际坐标转化相对坐标  </span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">CoordinateTransformRealToAbstract</span><span class="o">:</span><span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">point</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//坐标转换方法，相对坐标转化实际坐标  </span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">CoordinateTransformAbstractToReal</span><span class="o">:</span><span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">point</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//判断手指触摸点是否在折点旁边  </span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="n">isNearByThePoint</span><span class="o">:</span><span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">p</span><span class="p">;</span>      
+</span><span class='line'><span class="c1">//js代码运行  </span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">runsJS</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">aJSString</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>  <br/>
+<p>
 因为要对图像上的折点拖动，而我没有找到合适的对点的事件绑定方法，所以先直接对整个view进行手势监听，通过实际坐标与坐标轴坐标相对转换来判定触摸点是否是在折点附近已达到合理拖动的目的。</p>
 
 <p>接下来便开始.m文件的编码工作啦。我先定义一个简单的折线图公式，y=x+n；把一些数据点塞到point数组里，做后面的datasource。接下来便是折线图的绘制，代码注释写得比较清楚，就不一一赘述了。值得注意的是，这里点的绘制也是使用ios里常用的datasource的方法，所以先别急着找那一系列点出现在哪里~</p>
 
-<script src="https://gist.github.com/wanax/6752339.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span>  <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">UIButton</span> <span class="o">*</span><span class="n">bt</span><span class="o">=</span><span class="p">[[</span><span class="n">UIButton</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">addSubview</span><span class="o">:</span><span class="n">bt</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">points</span><span class="o">=</span><span class="p">[[</span><span class="n">NSMutableArray</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">reverseDic</span><span class="o">=</span><span class="p">[[</span><span class="n">NSMutableDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">NSUInteger</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">NUM</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class='line'>          <span class="n">id</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">NSNumber</span> <span class="n">numberWithFloat</span><span class="o">:</span><span class="mi">0</span><span class="o">+</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>          <span class="n">id</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">NSNumber</span> <span class="n">numberWithFloat</span><span class="o">:</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>          <span class="p">[</span><span class="n">reverseDic</span> <span class="n">setObject</span><span class="o">:</span><span class="n">y</span> <span class="n">forKey</span><span class="o">:</span><span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;%.0f&quot;</span><span class="p">,[</span><span class="n">x</span> <span class="n">floatValue</span><span class="p">]]];</span>
+</span><span class='line'>          <span class="p">[</span><span class="n">points</span> <span class="n">addObject</span><span class="o">:</span><span class="p">[</span><span class="n">NSMutableDictionary</span> <span class="n">dictionaryWithObjectsAndKeys</span><span class="o">:</span><span class="n">x</span><span class="p">,</span><span class="err">@</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="err">@</span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="n">nil</span><span class="p">]];</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="c1">// Do any additional setup after loading the view.  </span>
+</span><span class='line'>      <span class="c1">//初始化图形视图  </span>
+</span><span class='line'>      <span class="n">graph</span><span class="o">=</span><span class="p">[[</span><span class="n">CPTXYGraph</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithFrame</span><span class="o">:</span><span class="n">CGRectZero</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">CPTTheme</span> <span class="o">*</span><span class="n">theme</span><span class="o">=</span><span class="p">[</span><span class="n">CPTTheme</span> <span class="n">themeNamed</span><span class="o">:</span><span class="n">kCPTDarkGradientTheme</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">graph</span> <span class="n">applyTheme</span><span class="o">:</span><span class="n">theme</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">self</span> <span class="p">.</span> <span class="n">view</span> <span class="o">=</span><span class="p">[[</span> <span class="n">CPTGraphHostingView</span> <span class="n">alloc</span> <span class="p">]</span> <span class="n">initWithFrame</span> <span class="o">:</span><span class="p">[</span> <span class="n">UIScreen</span> <span class="n">mainScreen</span> <span class="p">].</span> <span class="n">bounds</span> <span class="p">];</span>
+</span><span class='line'>      <span class="n">hostView</span><span class="o">=</span><span class="p">(</span><span class="n">CPTGraphHostingView</span> <span class="o">*</span><span class="p">)</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">hostView</span> <span class="n">setHostedGraph</span> <span class="o">:</span> <span class="n">graph</span> <span class="p">];</span>
+</span><span class='line'>      <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">&quot;orgin:%.2f,%.2f&quot;</span><span class="p">,</span><span class="n">hostView</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">hostView</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">&quot;size:%.2f,%.2f&quot;</span><span class="p">,</span><span class="n">hostView</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">,</span><span class="n">hostView</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">);</span>
+</span><span class='line'>      <span class="c1">// CPGraph 四边不留白  </span>
+</span><span class='line'>      <span class="n">graph</span> <span class="p">.</span> <span class="n">paddingLeft</span> <span class="o">=</span> <span class="mf">0.0f</span> <span class="p">;</span>
+</span><span class='line'>      <span class="n">graph</span> <span class="p">.</span> <span class="n">paddingRight</span> <span class="o">=</span> <span class="mf">0.0f</span> <span class="p">;</span>
+</span><span class='line'>      <span class="n">graph</span> <span class="p">.</span> <span class="n">paddingTop</span> <span class="o">=</span> <span class="mf">0.0f</span> <span class="p">;</span>
+</span><span class='line'>      <span class="n">graph</span> <span class="p">.</span> <span class="n">paddingBottom</span> <span class="o">=</span> <span class="n">GRAPAHBOTTOMPAD</span> <span class="p">;</span>
+</span><span class='line'>      <span class="c1">// 绘图区 4 边留白  </span>
+</span><span class='line'>      <span class="n">graph</span> <span class="p">.</span> <span class="n">plotAreaFrame</span> <span class="p">.</span> <span class="n">paddingLeft</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="p">;</span>
+</span><span class='line'>      <span class="n">graph</span> <span class="p">.</span> <span class="n">plotAreaFrame</span> <span class="p">.</span> <span class="n">paddingTop</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="p">;</span>
+</span><span class='line'>      <span class="n">graph</span> <span class="p">.</span> <span class="n">plotAreaFrame</span> <span class="p">.</span> <span class="n">paddingRight</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="p">;</span>
+</span><span class='line'>      <span class="n">graph</span> <span class="p">.</span> <span class="n">plotAreaFrame</span> <span class="p">.</span> <span class="n">paddingBottom</span> <span class="o">=</span> <span class="mf">00.0</span> <span class="p">;</span>
+</span><span class='line'>      <span class="c1">//绘制图形空间  </span>
+</span><span class='line'>      <span class="n">CPTXYPlotSpace</span> <span class="o">*</span><span class="n">plotSpace</span><span class="o">=</span><span class="p">(</span><span class="n">CPTXYPlotSpace</span> <span class="o">*</span><span class="p">)</span><span class="n">graph</span><span class="p">.</span><span class="n">defaultPlotSpace</span><span class="p">;</span>
+</span><span class='line'>      <span class="c1">//plotSpace.allowsUserInteraction=YES;    </span>
+</span><span class='line'>      <span class="c1">//设置x，y坐标范围  </span>
+</span><span class='line'>      <span class="n">plotSpace</span><span class="p">.</span><span class="n">xRange</span><span class="o">=</span><span class="p">[</span><span class="n">CPTPlotRange</span> <span class="n">plotRangeWithLocation</span><span class="o">:</span>
+</span><span class='line'>                        <span class="n">CPTDecimalFromCGFloat</span><span class="p">(</span><span class="n">XRANGEBEGIN</span><span class="p">)</span>                                                  <span class="n">length</span><span class="o">:</span><span class="n">CPTDecimalFromCGFloat</span><span class="p">(</span><span class="n">XRANGELENGTH</span><span class="p">)];</span>
+</span><span class='line'>      <span class="n">plotSpace</span><span class="p">.</span><span class="n">yRange</span><span class="o">=</span><span class="p">[</span><span class="n">CPTPlotRange</span> <span class="n">plotRangeWithLocation</span><span class="o">:</span>
+</span><span class='line'>                        <span class="n">CPTDecimalFromCGFloat</span><span class="p">(</span><span class="n">YRANGEBEGIN</span><span class="p">)</span>  <span class="n">length</span><span class="o">:</span><span class="n">CPTDecimalFromCGFloat</span><span class="p">(</span><span class="n">YRANGELENGTH</span><span class="p">)];</span>
+</span><span class='line'>      <span class="c1">//绘制坐标系  </span>
+</span><span class='line'>      <span class="n">CPTXYAxisSet</span> <span class="o">*</span><span class="n">axisSet</span><span class="o">=</span><span class="p">(</span><span class="n">CPTXYAxisSet</span> <span class="o">*</span><span class="p">)</span><span class="n">graph</span><span class="p">.</span><span class="n">axisSet</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">CPTXYAxis</span> <span class="o">*</span><span class="n">x</span><span class="o">=</span><span class="n">axisSet</span><span class="p">.</span><span class="n">xAxis</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">CPTMutableLineStyle</span> <span class="o">*</span><span class="n">lineStyle</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPTMutableLineStyle</span> <span class="n">lineStyle</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">lineStyle</span><span class="p">.</span><span class="n">miterLimit</span> <span class="o">=</span> <span class="mf">1.0f</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">lineStyle</span><span class="p">.</span><span class="n">lineWidth</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">lineStyle</span><span class="p">.</span><span class="n">lineColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPTColor</span> <span class="n">colorWithComponentRed</span><span class="o">:</span><span class="mi">255</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">green</span><span class="o">:</span><span class="mi">211</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">blue</span><span class="o">:</span><span class="mi">155</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">alpha</span><span class="o">:</span><span class="mf">1.0</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">majorIntervalLength</span><span class="o">=</span><span class="n">CPTDecimalFromFloat</span><span class="p">(</span><span class="n">XINTERVALLENGTH</span><span class="p">);</span>
+</span><span class='line'> <span class="n">x</span><span class="p">.</span><span class="n">orthogonalCoordinateDecimal</span><span class="o">=</span><span class="n">CPTDecimalFromFloat</span><span class="p">(</span><span class="n">XORTHOGONALCOORDINATE</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">minorTicksPerInterval</span><span class="o">=</span><span class="n">XTICKSPERINTERVAL</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">minorTickLineStyle</span> <span class="o">=</span> <span class="n">lineStyle</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">CPTXYAxis</span> <span class="o">*</span><span class="n">y</span><span class="o">=</span><span class="n">axisSet</span><span class="p">.</span><span class="n">yAxis</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">y</span><span class="p">.</span><span class="n">majorIntervalLength</span><span class="o">=</span><span class="n">CPTDecimalFromFloat</span><span class="p">(</span><span class="n">YINTERVALLENGTH</span><span class="p">);</span> <span class="n">y</span><span class="p">.</span><span class="n">orthogonalCoordinateDecimal</span><span class="o">=</span><span class="n">CPTDecimalFromFloat</span><span class="p">(</span><span class="n">YORTHOGONALCOORDINATE</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">y</span><span class="p">.</span><span class="n">minorTicksPerInterval</span><span class="o">=</span><span class="n">YTICKSPERINTERVAL</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">y</span><span class="p">.</span><span class="n">minorTickLineStyle</span> <span class="o">=</span> <span class="n">lineStyle</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">y</span><span class="p">.</span> <span class="n">labelingPolicy</span> <span class="o">=</span> <span class="n">CPTAxisLabelingPolicyNone</span> <span class="p">;</span>
+</span><span class='line'>      <span class="c1">//修改折线图线段样式  </span>
+</span><span class='line'>      <span class="n">CPTScatterPlot</span> <span class="o">*</span><span class="n">boundLinePlot</span><span class="o">=</span><span class="p">[[[</span><span class="n">CPTScatterPlot</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">]</span> <span class="n">autorelease</span><span class="p">];</span>
+</span><span class='line'>      <span class="c1">//CPTMutableLineStyle *lineStyle=[CPTMutableLineStyle lineStyle];  </span>
+</span><span class='line'>      <span class="n">lineStyle</span><span class="p">.</span><span class="n">miterLimit</span><span class="o">=</span><span class="mf">2.0f</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">lineStyle</span><span class="p">.</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">2.0f</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">lineStyle</span><span class="p">.</span><span class="n">lineColor</span><span class="o">=</span><span class="p">[</span><span class="n">CPTColor</span> <span class="n">whiteColor</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">boundLinePlot</span><span class="p">.</span><span class="n">dataLineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">boundLinePlot</span><span class="p">.</span><span class="n">identifier</span><span class="o">=</span><span class="err">@</span><span class="s">&quot;Blue Plot&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">boundLinePlot</span><span class="p">.</span><span class="n">dataSource</span><span class="o">=</span><span class="n">self</span><span class="p">;</span><span class="c1">//需实现委托        </span>
+</span><span class='line'>      <span class="c1">// Do a red-blue gradient: 渐变色区域  </span>
+</span><span class='line'>      <span class="c1">//  </span>
+</span><span class='line'>      <span class="cm">/*CPTColor * blueColor        = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:0.8]; </span>
+</span><span class='line'><span class="cm">     CPTColor * redColor         = [CPTColor colorWithComponentRed:1.0 green:0.3 blue:0.3 alpha:0.8]; </span>
+</span><span class='line'><span class="cm">     CPTGradient * areaGradient1 = [CPTGradient gradientWithBeginningColor:blueColor </span>
+</span><span class='line'><span class="cm">                                                               endingColor:redColor]; </span>
+</span><span class='line'><span class="cm">     areaGradient1.angle = -120.0f; </span>
+</span><span class='line'><span class="cm">     CPTFill * areaGradientFill  = [CPTFill fillWithGradient:areaGradient1]; </span>
+</span><span class='line'><span class="cm">     boundLinePlot.areaFill      = areaGradientFill; </span>
+</span><span class='line'><span class="cm">     boundLinePlot.areaBaseValue = [[NSDecimalNumber numberWithFloat:0.5] decimalValue]; // 渐变色的起点位置 </span>
+</span><span class='line'><span class="cm">     */</span>   
+</span><span class='line'>      <span class="c1">// Add plot symbols: 表示数值的符号的形状  </span>
+</span><span class='line'>      <span class="c1">//  </span>
+</span><span class='line'>      <span class="n">CPTMutableLineStyle</span> <span class="o">*</span> <span class="n">symbolLineStyle</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPTMutableLineStyle</span> <span class="n">lineStyle</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">symbolLineStyle</span><span class="p">.</span><span class="n">lineColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPTColor</span> <span class="n">colorWithComponentRed</span><span class="o">:</span><span class="mi">102</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">green</span><span class="o">:</span><span class="mi">204</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">blue</span><span class="o">:</span><span class="mi">255</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">alpha</span><span class="o">:</span><span class="mf">1.0</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">symbolLineStyle</span><span class="p">.</span><span class="n">lineWidth</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">;</span>     
+</span><span class='line'>      <span class="n">CPTPlotSymbol</span> <span class="o">*</span> <span class="n">plotSymbol</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPTPlotSymbol</span> <span class="n">ellipsePlotSymbol</span><span class="p">];</span>
+</span><span class='line'>      <span class="c1">//plotSymbol.fill          = [CPTFill fillWithColor: [CPTColor colorWithComponentRed:102/255.0 green:204/255.0 blue:255/255.0 alpha:1.0]];  </span>
+</span><span class='line'>      <span class="n">plotSymbol</span><span class="p">.</span><span class="n">lineStyle</span>     <span class="o">=</span> <span class="n">symbolLineStyle</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">plotSymbol</span><span class="p">.</span><span class="n">size</span>          <span class="o">=</span> <span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">boundLinePlot</span><span class="p">.</span><span class="n">plotSymbol</span> <span class="o">=</span> <span class="n">plotSymbol</span><span class="p">;</span>    
+</span><span class='line'>      <span class="c1">// Animate in the new plot: 淡入动画  </span>
+</span><span class='line'>      <span class="n">boundLinePlot</span><span class="p">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>    
+</span><span class='line'>      <span class="n">CABasicAnimation</span> <span class="o">*</span><span class="n">fadeInAnimation</span> <span class="o">=</span> <span class="p">[</span><span class="n">CABasicAnimation</span> <span class="n">animationWithKeyPath</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;opacity&quot;</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">fadeInAnimation</span><span class="p">.</span><span class="n">duration</span>            <span class="o">=</span> <span class="mf">3.0f</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">fadeInAnimation</span><span class="p">.</span><span class="n">removedOnCompletion</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">fadeInAnimation</span><span class="p">.</span><span class="n">fillMode</span>            <span class="o">=</span> <span class="n">kCAFillModeForwards</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">fadeInAnimation</span><span class="p">.</span><span class="n">toValue</span>             <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="n">numberWithFloat</span><span class="o">:</span><span class="mf">1.0</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">boundLinePlot</span> <span class="n">addAnimation</span><span class="o">:</span><span class="n">fadeInAnimation</span> <span class="n">forKey</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;shadowOffset&quot;</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">graph</span> <span class="n">addPlot</span><span class="o">:</span><span class="n">boundLinePlot</span><span class="p">];</span>    
+</span><span class='line'>      <span class="c1">//手势添加  </span>
+</span><span class='line'>      <span class="n">UIPanGestureRecognizer</span> <span class="o">*</span><span class="n">panGr</span><span class="o">=</span><span class="p">[[</span><span class="n">UIPanGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span><span class="n">initWithTarget</span><span class="o">:</span><span class="n">self</span> <span class="n">action</span><span class="o">:</span><span class="err">@</span><span class="n">selector</span><span class="p">(</span><span class="n">viewPan</span><span class="o">:</span><span class="p">)];</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">hostView</span> <span class="n">addGestureRecognizer</span><span class="o">:</span><span class="n">panGr</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">panGr</span> <span class="n">release</span><span class="p">];</span>
+</span><span class='line'>      <span class="c1">//NSString *str=[self.engine runJS:@&quot;var str=&#39;&#39;;for(var i=0;i&lt;2;i++){str= str + &#39;\\n&#39; + i + &#39; :Hello&#39; + &#39;, World!&#39;;}&quot;];  </span>
+</span><span class='line'>      <span class="c1">//NSLog(@&quot;%@&quot;,str);        </span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>这样一个初步的折现图便绘制完毕啦。数据源委托和数据标签的实现如下：</h3>
 
-<script src="https://gist.github.com/wanax/6752340.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="c1">// 添加数据标签  </span>
+</span><span class='line'>  <span class="o">-</span><span class="p">(</span> <span class="n">CPTLayer</span> <span class="o">*</span><span class="p">)</span><span class="n">dataLabelForPlot</span><span class="o">:</span><span class="p">(</span> <span class="n">CPTPlot</span> <span class="o">*</span><span class="p">)</span><span class="n">plot</span> <span class="n">recordIndex</span><span class="o">:</span><span class="p">(</span> <span class="n">NSUInteger</span> <span class="p">)</span><span class="n">index</span>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// 定义一个白色的 TextStyle  </span>
+</span><span class='line'>    <span class="k">static</span> <span class="n">CPTMutableTextStyle</span> <span class="o">*</span><span class="n">whiteText</span> <span class="o">=</span> <span class="n">nil</span> <span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">whiteText</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">whiteText</span> <span class="o">=</span> <span class="p">[[</span> <span class="n">CPTMutableTextStyle</span> <span class="n">alloc</span> <span class="p">]</span> <span class="n">init</span> <span class="p">];</span>
+</span><span class='line'>        <span class="n">whiteText</span><span class="p">.</span><span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">CPTColor</span> <span class="n">colorWithComponentRed</span><span class="o">:</span><span class="mi">152</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">green</span><span class="o">:</span><span class="mi">251</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">blue</span><span class="o">:</span><span class="mi">152</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">alpha</span><span class="o">:</span><span class="mf">1.0</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="c1">// 定义一个 TextLayer  </span>
+</span><span class='line'>    <span class="n">CPTTextLayer</span> <span class="o">*</span><span class="n">newLayer</span> <span class="o">=</span> <span class="n">nil</span> <span class="p">;</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span> <span class="n">identifier</span><span class="o">=</span><span class="p">(</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)[</span><span class="n">plot</span> <span class="n">identifier</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">([</span><span class="n">identifier</span> <span class="n">isEqualToString</span> <span class="o">:</span> <span class="err">@</span><span class="s">&quot;Blue Plot&quot;</span> <span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">newLayer</span><span class="o">=</span><span class="p">[[[</span><span class="n">CPTTextLayer</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithText</span><span class="o">:</span><span class="p">[[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithFormat</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;%0.1f&quot;</span><span class="p">,[[[</span><span class="n">points</span> <span class="n">objectAtIndex</span><span class="o">:</span><span class="n">index</span><span class="p">]</span> <span class="n">objectForKey</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;y&quot;</span><span class="p">]</span> <span class="n">doubleValue</span><span class="p">]]</span> <span class="n">autorelease</span><span class="p">]</span> <span class="n">style</span><span class="o">:</span><span class="n">whiteText</span><span class="p">]</span> <span class="n">autorelease</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">newLayer</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//散点数据源委托实现  </span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="n">numberOfRecordsForPlot</span><span class="o">:</span><span class="p">(</span><span class="n">CPTPlot</span> <span class="o">*</span><span class="p">)</span><span class="n">plot</span><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">points</span> <span class="n">count</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="n">NSNumber</span> <span class="o">*</span><span class="p">)</span><span class="n">numberForPlot</span><span class="o">:</span><span class="p">(</span><span class="n">CPTPlot</span> <span class="o">*</span><span class="p">)</span><span class="n">plot</span> <span class="n">field</span><span class="o">:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="n">fieldEnum</span> <span class="n">recordIndex</span><span class="o">:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span> <span class="n">index</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="n">fieldEnum</span><span class="o">==</span><span class="n">CPTScatterPlotFieldX</span><span class="o">?</span><span class="err">@</span><span class="s">&quot;x&quot;</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;y&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">NSNumber</span> <span class="o">*</span><span class="n">num</span><span class="o">=</span><span class="p">[[</span><span class="n">points</span> <span class="n">objectAtIndex</span><span class="o">:</span><span class="n">index</span><span class="p">]</span> <span class="n">valueForKey</span><span class="o">:</span><span class="n">key</span><span class="p">];</span>
+</span><span class='line'>   <span class="c1">//NSLog(@&quot;key:%@,num:%@&quot;,key,num);  </span>
+</span><span class='line'>    <span class="k">return</span>  <span class="n">num</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p></p>
 
 <h3>可以在代码里看到我实现了对页面的手势监听，以便实现折线图拖动的效果，具体方法如下：</h3>
 
-<script src="https://gist.github.com/wanax/6752346.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewPan</span><span class="o">:</span><span class="p">(</span><span class="n">UIPanGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="n">tapGr</span>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">CGPoint</span> <span class="n">now</span><span class="o">=</span><span class="p">[</span><span class="n">tapGr</span> <span class="n">locationInView</span><span class="o">:</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">];</span>
+</span><span class='line'>    <span class="c1">//手势变化并且接近折点旁边  </span>
+</span><span class='line'>    <span class="k">if</span><span class="p">([</span><span class="n">tapGr</span> <span class="n">state</span><span class="p">]</span><span class="o">==</span><span class="n">UIGestureRecognizerStateChanged</span><span class="o">&amp;&amp;</span><span class="p">[</span><span class="n">self</span> <span class="n">isNearByThePoint</span><span class="o">:</span><span class="n">now</span><span class="p">]){</span>
+</span><span class='line'>        <span class="n">CGPoint</span> <span class="n">coordinate</span><span class="o">=</span><span class="p">[</span><span class="n">self</span> <span class="n">CoordinateTransformRealToAbstract</span><span class="o">:</span><span class="n">now</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">points</span> <span class="n">removeAllObjects</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">reverseDic</span> <span class="n">removeAllObjects</span><span class="p">];</span>
+</span><span class='line'>        <span class="n">NSUInteger</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">NUM</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class='line'>            <span class="n">id</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">NSNumber</span> <span class="n">numberWithFloat</span><span class="o">:</span><span class="mi">0</span><span class="o">+</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>            <span class="n">id</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">NSNumber</span> <span class="n">numberWithFloat</span><span class="o">:</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="n">coordinate</span><span class="p">.</span><span class="n">y</span><span class="p">];</span>
+</span><span class='line'>            <span class="p">[</span><span class="n">reverseDic</span> <span class="n">setObject</span><span class="o">:</span><span class="n">y</span> <span class="n">forKey</span><span class="o">:</span><span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;%.0f&quot;</span><span class="p">,[</span><span class="n">x</span> <span class="n">floatValue</span><span class="p">]]];</span>
+</span><span class='line'>            <span class="p">[</span><span class="n">points</span> <span class="n">addObject</span><span class="o">:</span><span class="p">[</span><span class="n">NSMutableDictionary</span> <span class="n">dictionaryWithObjectsAndKeys</span><span class="o">:</span><span class="n">x</span><span class="p">,</span><span class="err">@</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="err">@</span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="n">nil</span><span class="p">]];</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">graph</span> <span class="n">reloadData</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">//判断手指触摸点是否在折点旁边  </span>
+</span><span class='line'>  <span class="o">-</span><span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="n">isNearByThePoint</span><span class="o">:</span><span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">p</span><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//从手指触摸点的实际坐标得到抽象坐标  </span>
+</span><span class='line'>    <span class="n">CGPoint</span> <span class="n">abstractCoordinate</span><span class="o">=</span><span class="p">[</span><span class="n">self</span> <span class="n">CoordinateTransformRealToAbstract</span><span class="o">:</span><span class="n">p</span><span class="p">];</span>
+</span><span class='line'>    <span class="c1">//获取临近坐标点  </span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">acX</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">abstractCoordinate</span><span class="p">.</span><span class="n">x</span><span class="o">+</span><span class="mf">0.5</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">//判断临近坐标点是否存在折点，存在则取出  </span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">acY</span><span class="o">=</span><span class="p">[[</span><span class="n">reverseDic</span> <span class="n">objectForKey</span><span class="o">:</span><span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">acX</span><span class="p">]]</span> <span class="n">floatValue</span><span class="p">];</span>
+</span><span class='line'>    <span class="c1">//构造临近坐标折点，并转化为实际屏幕坐标点  </span>
+</span><span class='line'>    <span class="n">CGPoint</span> <span class="n">temp</span><span class="o">=</span><span class="p">[</span><span class="n">self</span> <span class="n">CoordinateTransformAbstractToReal</span><span class="o">:</span><span class="n">CGPointMake</span><span class="p">([[</span><span class="n">NSNumber</span> <span class="n">numberWithInt</span><span class="o">:</span><span class="n">acX</span><span class="p">]</span> <span class="n">floatValue</span><span class="p">],</span> <span class="n">acY</span><span class="p">)];</span>
+</span><span class='line'>    <span class="c1">//计算临近坐标点与手指触摸点的距离  </span>
+</span><span class='line'>    <span class="kt">double</span> <span class="n">distance</span><span class="o">=</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">((</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">temp</span><span class="p">.</span><span class="n">x</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">pow</span><span class="p">((</span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="n">temp</span><span class="p">.</span><span class="n">y</span><span class="p">),</span><span class="mi">2</span><span class="p">));</span>
+</span><span class='line'>    <span class="c1">//NSLog(@&quot;%f&quot;,distance);  </span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">distance</span><span class="o">&gt;</span><span class="mi">25</span><span class="o">?</span><span class="n">NO</span><span class="o">:</span><span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">//空间坐标转换:实际坐标转化自定义坐标  </span>
+</span><span class='line'>  <span class="o">-</span><span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">CoordinateTransformRealToAbstract</span><span class="o">:</span><span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">point</span><span class="p">{</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">viewWidth</span><span class="o">=</span><span class="n">hostView</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">viewHeight</span><span class="o">=</span><span class="n">hostView</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">coordinateX</span><span class="o">=</span><span class="p">(</span><span class="n">XRANGELENGTH</span><span class="o">*</span><span class="n">point</span><span class="p">.</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">viewWidth</span><span class="o">+</span><span class="n">XRANGEBEGIN</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">coordinateY</span><span class="o">=</span><span class="n">YRANGELENGTH</span><span class="o">-</span><span class="p">((</span><span class="n">YRANGELENGTH</span><span class="o">*</span><span class="n">point</span><span class="p">.</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">viewHeight</span><span class="o">-</span><span class="n">GRAPAHBOTTOMPAD</span><span class="p">))</span><span class="o">+</span><span class="n">YRANGEBEGIN</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nf">CGPointMake</span><span class="p">(</span><span class="n">coordinateX</span><span class="p">,</span><span class="n">coordinateY</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">//空间坐标转换:自定义坐标转化实际坐标  </span>
+</span><span class='line'>  <span class="o">-</span><span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">CoordinateTransformAbstractToReal</span><span class="o">:</span><span class="p">(</span><span class="n">CGPoint</span><span class="p">)</span><span class="n">point</span><span class="p">{</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">viewWidth</span><span class="o">=</span><span class="n">hostView</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">viewHeight</span><span class="o">=</span><span class="n">hostView</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">coordinateX</span><span class="o">=</span><span class="p">(</span><span class="n">point</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">XRANGEBEGIN</span><span class="p">)</span><span class="o">*</span><span class="n">viewWidth</span><span class="o">/</span><span class="n">XRANGELENGTH</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">float</span> <span class="n">coordinateY</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">point</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="n">YRANGEBEGIN</span><span class="o">-</span><span class="n">YRANGELENGTH</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">viewHeight</span><span class="o">-</span><span class="n">GRAPAHBOTTOMPAD</span><span class="p">)</span><span class="o">/</span><span class="n">YRANGELENGTH</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nf">CGPointMake</span><span class="p">(</span><span class="n">coordinateX</span><span class="p">,</span><span class="n">coordinateY</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="o">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="n">gestureRecognizer</span><span class="o">:</span><span class="p">(</span><span class="n">UIGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="n">gestureRecognizer</span> <span class="n">shouldRecognizeSimultaneouslyWithGestureRecognizer</span><span class="o">:</span><span class="p">(</span><span class="n">UIGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="n">otherGestureRecognizer</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>下面是一些常量的定义</p>
 
-<script src="https://gist.github.com/wanax/6752353.js"></script>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#define NUM 10  </span>
+</span><span class='line'><span class="c1">//绘图空间与底部距离  </span>
+</span><span class='line'><span class="cp">#define GRAPAHBOTTOMPAD 80.0f  </span>
+</span><span class='line'><span class="c1">//x轴起点  </span>
+</span><span class='line'><span class="cp">#define XRANGEBEGIN 0.0  </span>
+</span><span class='line'><span class="c1">//x轴在屏幕可视范围内的范围  </span>
+</span><span class='line'><span class="cp">#define XRANGELENGTH 5.0  </span>
+</span><span class='line'><span class="c1">//y轴起点  </span>
+</span><span class='line'><span class="cp">#define YRANGEBEGIN 0.0  </span>
+</span><span class='line'><span class="c1">//y轴在屏幕可视范围内的范围  </span>
+</span><span class='line'><span class="cp">#define YRANGELENGTH 100.0  </span>
+</span><span class='line'><span class="c1">//x轴屏幕范围内大坐标间距  </span>
+</span><span class='line'><span class="cp">#define XINTERVALLENGTH 1.0  </span>
+</span><span class='line'><span class="c1">//x轴坐标的原点（y轴将在此与x轴相交）  </span>
+</span><span class='line'><span class="cp">#define XORTHOGONALCOORDINATE 10.0  </span>
+</span><span class='line'><span class="c1">//x轴每两个大坐标间小坐标个数  </span>
+</span><span class='line'><span class="cp">#define XTICKSPERINTERVAL 2  </span>
+</span><span class='line'><span class="cp">#define YINTERVALLENGTH 1.0  </span>
+</span><span class='line'><span class="cp">#define YORTHOGONALCOORDINATE 1.0  </span>
+</span><span class='line'><span class="cp">#define YTICKSPERINTERVAL 0 </span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>好了，这便是iphone上怎样绘制个折线图并实现拖动效果，其实是个很简陋的例子，离真正能用还有很长的一段路要走，但先贴在这里留个记号，也许你会看到中间有些js引擎的影子，这个留在下一章再讲吧。</p>
@@ -268,10 +836,70 @@ fun();
     <link href="http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/"/>
     <updated>2012-11-01T16:04:00+08:00</updated>
     <id>http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji</id>
-    <content type="html"><![CDATA[<script src="https://gist.github.com/wanax/6752273.js"></script>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">try</span><span class="o">{</span>
+</span><span class='line'>                <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+</span><span class='line'>                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">url</span><span class="o">),</span><span class="s">&quot;UTF-8&quot;</span><span class="o">));</span>
+</span><span class='line'>                <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">StringBuffer</span> <span class="n">str</span><span class="o">=</span><span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+</span><span class='line'>                <span class="k">while</span><span class="o">((</span><span class="n">data</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">())!=</span><span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>                <span class="o">{</span>
+</span><span class='line'>                    <span class="n">str</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">data</span><span class="o">+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">Test</span> <span class="n">test</span><span class="o">=</span><span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">test</span><span class="o">.</span><span class="na">ece</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+</span><span class='line'>                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ece</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>            <span class="k">try</span><span class="o">{</span>
+</span><span class='line'>                <span class="n">BufferedWriter</span> <span class="n">bw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedWriter</span><span class="o">(</span>
+</span><span class='line'>                        <span class="k">new</span> <span class="nf">OutputStreamWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">url</span><span class="o">,</span><span class="kc">false</span><span class="o">),</span><span class="s">&quot;UTF-8&quot;</span><span class="o">));</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+</span><span class='line'>                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-
-<p></p>
 ]]></content>
   </entry>
   
@@ -362,11 +990,16 @@ fun();
 
 <blockquote><p>你想通过生日来计算这个人有几岁了。</p></blockquote>
 
-<pre><code>SELECT
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> 
+</span><span class='line'><span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">FROM_DAYS</span><span class="p">(</span><span class="n">TO_DAYS</span><span class="p">(</span><span class="n">now</span><span class="p">())</span> <span class="o">-</span> <span class="n">TO_DAYS</span><span class="p">(</span><span class="o">@</span><span class="n">dateofbirth</span><span class="p">)),</span> <span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y')
- + 0;
-</code></pre>
+
+<p></p>
 
 <!--more-->
 
@@ -375,34 +1008,46 @@ DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y')
 
 <blockquote><p>取得两个 datetime 值的差。假设 dt1 和 dt2 是 datetime 类型，其格式为 ‘yyyy-mm-dd hh:mm:ss’，那么它们之间所差的秒数为：</p></blockquote>
 
-<pre><code>UNIX_TIMESTAMP(
- dt2 ) - UNIX_TIMESTAMP( dt1 )
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="n">UNIX_TIMESTAMP</span><span class="p">(</span>
+</span><span class='line'> <span class="n">dt2</span> <span class="p">)</span> <span class="o">-</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(</span> <span class="n">dt1</span> <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>除以60就是所差的分钟数，除以3600就是所差的小时数，再除以24就是所差的天数。</p>
 
 <h3>3. 显示某一列出现过N次的值</h3>
 
-<pre><code>SELECT id FROM tbl GROUP BY id HAVING COUNT(*) = N;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="n">tbl</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">id</span> <span class="k">HAVING</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>4. 计算两个日子间的工作日</h3>
 
 <blockquote><p>所谓工作日就是除出周六周日和节假日。</p></blockquote>
 
-<pre><code>SELECT COUNT(*) FROM calendar WHERE d BETWEEN Start AND Stop  AND DAYOFWEEK(d) NOT IN(1,7) AND holiday=0
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">calendar</span> <span class="k">WHERE</span> <span class="n">d</span> <span class="k">BETWEEN</span> <span class="k">Start</span> <span class="k">AND</span> <span class="n">Stop</span>  <span class="k">AND</span> <span class="n">DAYOFWEEK</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">IN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="k">AND</span> <span class="n">holiday</span><span class="o">=</span><span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>5. 查找表中的主键</h3>
 
-<pre><code>SELECT k.column_name FROM information_schema.table_constraints t JOIN information_schema.key_column_usage k USING  (constraint_name,table_schema,table_name) WHERE t.constraint_type='PRIMARY
- KEY' AND t.table_schema='db' AND t.table_name=tbl'
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">k</span><span class="p">.</span><span class="k">column_name</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">table_constraints</span> <span class="n">t</span> <span class="k">JOIN</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">key_column_usage</span> <span class="n">k</span> <span class="k">USING</span>  <span class="p">(</span><span class="k">constraint_name</span><span class="p">,</span><span class="n">table_schema</span><span class="p">,</span><span class="k">table_name</span><span class="p">)</span> <span class="k">WHERE</span> <span class="n">t</span><span class="p">.</span><span class="n">constraint_type</span><span class="o">=</span><span class="s1">&#39;PRIMARY</span>
+</span><span class='line'><span class="s1"> KEY&#39;</span> <span class="k">AND</span> <span class="n">t</span><span class="p">.</span><span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;db&#39;</span> <span class="k">AND</span> <span class="n">t</span><span class="p">.</span><span class="k">table_name</span><span class="o">=</span><span class="n">tbl</span><span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>6. 查看你的数库有多大</h3>
 
-<pre><code>SELECT table_schema AS 'Db Name',  Round(Sum( data_length + index_length ) / 1024 / 1024, 3 ) AS 'Db Size (MB)',  Round( Sum( data_free ) / 1024 / 1024, 3 ) AS 'Free Space (MB)' FROM information_schema.tables GROUP BY table_schema ;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">table_schema</span> <span class="k">AS</span> <span class="s1">&#39;Db Name&#39;</span><span class="p">,</span>  <span class="n">Round</span><span class="p">(</span><span class="k">Sum</span><span class="p">(</span> <span class="n">data_length</span> <span class="o">+</span> <span class="n">index_length</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">3</span> <span class="p">)</span> <span class="k">AS</span> <span class="s1">&#39;Db Size (MB)&#39;</span><span class="p">,</span>  <span class="n">Round</span><span class="p">(</span> <span class="k">Sum</span><span class="p">(</span> <span class="n">data_free</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">3</span> <span class="p">)</span> <span class="k">AS</span> <span class="s1">&#39;Free Space (MB)&#39;</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">table_schema</span> <span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>转自<a href="http://coolshell.cn/articles/3433.html">这里</a></p>
 ]]></content>

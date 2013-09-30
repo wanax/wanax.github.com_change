@@ -949,16 +949,7 @@ article pre code {
 	margin:0;
 
 }
-figure.code {
-	border:1px solid #ccc;
-	margin-top:10px;
-	padding:5px 15px;
-	display: block;
-	-webkit-margin-before: 1em;
-	-webkit-margin-after: 1em;
-	-webkit-margin-start: 40px;
-	-webkit-margin-end: 40px;
-}
+
 figure.code figcaption {
 	font-size:0.9em;
 	position:relative
@@ -1008,7 +999,7 @@ figure.code table td {
 }
 figure.code td.code {
 	width:100%;
-	padding-left:15px
+	padding-left:10px;
 }
 .entry-content .gist {
 	color:#666;
@@ -1233,6 +1224,7 @@ figure.code {
 	border: 1px solid #ccc;
 	margin-top: 10px;
 	padding: 5px 15px;
+	margin-left: 0px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-ms-border-radius: 5px;

@@ -46,7 +46,7 @@
 <hgroup>
   <h1><a href="/">陋室</a></h1>
   
-    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰123</h2>
   
 </hgroup>
 
@@ -134,53 +134,6 @@
 
 
 <p></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'>   <span class="o">-</span> <span class="p">(</span><span class="nx">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nx">runsJS</span><span class="o">:</span><span class="p">(</span><span class="nx">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nx">aJSString</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">aJSString</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="nx">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">&quot;[JSC] JS String is empty!&quot;</span><span class="p">);</span>
-</span><span class='line'>          <span class="k">return</span> <span class="nx">nil</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">JSStringRef</span> <span class="nx">scriptJS</span> <span class="o">=</span> <span class="nx">JSStringCreateWithUTF8CString</span><span class="p">([</span><span class="nx">aJSString</span> <span class="nx">UTF8String</span><span class="p">]);</span>
-</span><span class='line'>    <span class="nx">JSValueRef</span> <span class="nx">exception</span> <span class="o">=</span> <span class="nx">NULL</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">JSValueRef</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">JSEvaluateScript</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">scriptJS</span><span class="p">,</span> <span class="nx">NULL</span><span class="p">,</span> <span class="nx">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">exception</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">NSString</span> <span class="o">*</span><span class="nx">res</span> <span class="o">=</span> <span class="nx">nil</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">JSStringRef</span> <span class="nx">jstrArg</span> <span class="o">=</span> <span class="nx">JSValueToStringCopy</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">result</span><span class="p">,</span> <span class="nx">NULL</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">res</span> <span class="o">=</span> <span class="p">(</span><span class="nx">NSString</span><span class="o">*</span><span class="p">)</span><span class="nx">JSStringCopyCFString</span><span class="p">(</span><span class="nx">kCFAllocatorDefault</span><span class="p">,</span> <span class="nx">jstrArg</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">JSStringRelease</span><span class="p">(</span><span class="nx">jstrArg</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">JSStringRelease</span><span class="p">(</span><span class="nx">scriptJS</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
 
 <p>封装完毕便可以顺利使用啦：</p>
 

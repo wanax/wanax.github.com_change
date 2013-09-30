@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tec | 陋室]]></title>
   <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-09-30T15:07:28+08:00</updated>
+  <updated>2013-09-30T16:00:07+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -44,6 +44,14 @@
 
 <p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607111925093_zps428cacd3.png" alt="image" /></p>
 
+<p>``` javascript</p>
+
+<pre><code> $ git clone git@github.com:imathis/octopress.git # fork octopress
+ alert("hello");
+</code></pre>
+
+<p>```</p>
+
 <p>接下来便是怎样使用的问题。</p>
 
 <p>先在头文件里引用文件：</p>
@@ -62,6 +70,34 @@
 
 
 <p></p>
+
+<p>```Object-c test</p>
+
+<pre><code>- (NSString *)runsJS:(NSString *)aJSString  
+{  
+    if (!aJSString) {  
+        NSLog(@"[JSC] JS String is empty!");  
+        return nil;  
+}  
+
+
+JSStringRef scriptJS = JSStringCreateWithUTF8CString([aJSString UTF8String]);  
+JSValueRef exception = NULL;  
+
+JSValueRef result = JSEvaluateScript(context, scriptJS, NULL, NULL, 0, &amp;exception);  
+NSString *res = nil;  
+
+JSStringRef jstrArg = JSValueToStringCopy(context, result, NULL);  
+res = (NSString*)JSStringCopyCFString(kCFAllocatorDefault, jstrArg);  
+
+JSStringRelease(jstrArg);  
+
+JSStringRelease(scriptJS);  
+
+return res;  }
+</code></pre>
+
+<p>```</p>
 
 <p>封装完毕便可以顺利使用啦：</p>
 

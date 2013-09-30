@@ -952,7 +952,12 @@ article pre code {
 figure.code {
 	border:1px solid #ccc;
 	margin-top:10px;
-	padding:5px 15px
+	padding:5px 15px;
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 40px;
+	-webkit-margin-end: 40px;
 }
 figure.code figcaption {
 	font-size:0.9em;
@@ -973,10 +978,14 @@ figure.code figcaption a {
 	right:0
 }
 figure.code code,figure.code pre {
-	background:none;
-	border:none;
-	padding:0;
-	margin:0
+	border: none;
+	padding: 0;
+	margin: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-ms-border-radius: 0;
+	-o-border-radius: 0;
+	border-radius: 0;
 }
 figure.code .highlight {
 	overflow-x:auto
@@ -994,7 +1003,8 @@ figure.code table {
 	margin-top:0
 }
 figure.code table td {
-	text-align:left
+	text-align:left;
+	background: #ddd;
 }
 figure.code td.code {
 	width:100%;

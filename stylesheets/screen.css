@@ -111,21 +111,16 @@ a {
 	transition:color 0.3s
 }
 #header a:hover {
-	color:#a34318
+	color: #A13933;
+}
+.container .left-col #header a:hover{
+	color: #A13933;
 }
 #header h1 {
 	float:left;
 	font-weight:300;
 	font-size:30px
 }
-
-#header h2 {
-	padding-top: 10px;
-	color:#999;
-	font-style:italic;
-	font-size:14px;
-}
-
 @media screen and (max-width:1040px) {
 	#header h1 {
 	float:none
@@ -474,7 +469,8 @@ a {
 	zoom:1;
 	*display:inline;
 	text-indent:-9999px;
-	margin:0 15px 15px 0;
+	margin-right:5px;
+	margin-bottom:15px;
 	opacity:0.5;
 	width:28px;
 	height:28px;
@@ -485,6 +481,20 @@ a {
 }
 #sub-nav .social a:hover {
 	opacity:1
+}
+#sub-nav .social a.weibo {
+	background:url('/images/social/weibo.png?1380521965') center no-repeat #e32529;
+	border:1px solid #e32529
+}
+#sub-nav .social a.weibo:hover {
+	border:1px solid #bd181c
+}
+#sub-nav .social a.dribbble {
+	background:url('/images/social/dribbble.png') center no-repeat #c5376d;
+	border:1px solid #c5376d
+}
+#sub-nav .social a.dribbble:hover {
+	border:1px solid #9d2c57
 }
 #sub-nav .social a.facebook {
 	background:url('/images/social/facebook.png?1380008831') center no-repeat #3b5998;
@@ -514,23 +524,12 @@ a {
 #sub-nav .social a.github:hover {
 	border:1px solid #909ab6
 }
-#sub-nav .social a.coderwall {
-	background:url('/images/social/coderwall.png?1380008831') center no-repeat #3e8dcc;
-	border:1px solid #3E8DCC
-}
-#sub-nav .social a.coderwall:hover {
-	border:1px solid #2d73aa
-}
-#sub-nav .social a.stackoverflow {
-	background:url('/images/social/stackoverflow.png?1380008831') center no-repeat #ef7522;
-	border:1px solid #EF7522
-}
-#sub-nav .social a.stackoverflow:hover {
-	border:1px solid #CC7A00
-}
 #sub-nav .social a.linkedin {
 	background:url('/images/social/linkedin.png?1380008831') center no-repeat #005a87;
 	border:1px solid #005A87
+}
+#sub-nav .social a.linkedin:hover {
+	border:1px solid #003854
 }
 #sub-nav .social a.pinterest {
 	background:url('/images/social/pinterest.png?1380008831') center no-repeat #be4037;
@@ -624,6 +623,12 @@ a {
 }
 article h1.title a {
 	color:#666
+}
+article h1.title a:hover {
+	color:#A13933;
+}
+.container .mid-col .mid-col-container #content article h1.title a:hover{
+	color:#A13933;
 }
 article .entry-content {
 	line-height:2;
@@ -722,8 +727,6 @@ article .entry-content .caption:before {
 	position:absolute;
 	left:0
 }
-
-
 article .entry-content .video-container {
 	position:relative;
 	padding-bottom:56.25%;
@@ -928,20 +931,23 @@ article code,article pre {
 article code {
 	font-size:0.9em;
 	padding:1px 3px;
-	margin:0 3px
+	margin:0 3px;
+	border-radius: 5px
 }
 article pre {
 	font-size:1 / 0.9em;
 	line-height:1.5;
 	margin-top:10px;
 	padding:5px 15px;
-	overflow-x:auto
+	overflow-x:auto;
+	border-radius: 5px;
 }
 article pre code {
 	background:none;
 	border:none;
 	padding:0;
-	margin:0
+	margin:0;
+
 }
 figure.code {
 	border:1px solid #ccc;
@@ -1211,6 +1217,19 @@ figure.code .sr,.gist-highlight .sr {
 figure.code .s1,.gist-highlight .s1 {
 	color:#2aa198 !important
 }
+
+figure.code {
+	background: #ddd;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	padding: 5px 15px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+}
+
 #banner {
 	color:#999;
 	padding:30px 0;
@@ -1482,7 +1501,8 @@ body {
 }
 #header .subtitle {
 	color:#999;
-	font-style:italic
+	font-style:italic;
+	font-size: 14px;
 }
 #header #sub-nav {
 	float:none;
@@ -1652,7 +1672,7 @@ body {
 	text-shadow:0 1px #333
 }
 .container .left-col #header a:hover {
-	color:#a34318
+	color:color
 }
 .container .left-col #header #sub-nav {
 	margin-top:10px
@@ -1719,9 +1739,4 @@ a:hover {
 .container .mid-col .mid-col-container #content article .meta {
 	float:none
 }
-}
-h3.catag {
-	padding-top: 10px;
-	font-size: 18px;
-	color: #ff5e4d;
 }

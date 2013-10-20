@@ -984,7 +984,7 @@ figure.code .highlight {
 figure.code .line-numbers {
 	border-right:1px solid #ccc;
 	font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
-	padding-right:15px;
+	padding-right:10px;
 	text-align:right
 }
 figure.code table {
@@ -999,7 +999,7 @@ figure.code table td {
 }
 figure.code td.code {
 	width:100%;
-	padding-left:15px;
+	padding-left:12px;
 }
 .entry-content .gist {
 	color:#666;
@@ -1223,7 +1223,7 @@ figure.code {
 	background: #ddd;
 	border: 1px solid #ccc;
 	margin-top: 10px;
-	padding: 5px 15px;
+	padding: 5px 10px;
 	margin-left: 0px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;

@@ -49,3 +49,9 @@ categories: OnTheRoad
 特别今天爬坡时远前方是个弯，北哥和我就开始猜了，北哥随口问道：“上坡之后是什么？”，习惯性地想回答下坡，客观逻辑上这种回答是完全正确的，但分明还可能是上坡，骤然间发现这似乎是一个文字陷阱，上坡或下坡？思考时却醒悟到根本没把平路放在考虑的范围之内，因为这几天感觉就没走过平路，便不在考虑范围之内了。但难道这世上就因为我们几天的接触便为之抹去平路的概念？
 
 嘿，藏区无平路。
+
+![image](http://i1001.photobucket.com/albums/af134/mxiaochi/tibet/p_large_umej_4a42000633fc2d12_zps5cf000d7.jpg)
+>*__有没有觉得洒家的袜子潮爆了__*
+
+![image](http://i1001.photobucket.com/albums/af134/mxiaochi/tibet/p_large_jki4_2cb70000697e2d0e_zpsa8616ed8.jpg)
+>*__太阳多大__*

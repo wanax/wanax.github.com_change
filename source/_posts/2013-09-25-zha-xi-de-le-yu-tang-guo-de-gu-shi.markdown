@@ -38,3 +38,8 @@ categories: OnTheRoad
 抢….
 
 一个美丽的传说就此诞生。
+
+![image](http://i1001.photobucket.com/albums/af134/mxiaochi/tibet/p_large_7lXS_45190000787f2d10_zpsca561e5b.jpg)
+>*__北哥那时候多瘦 哈哈__*
+
+![image](http://i1001.photobucket.com/albums/af134/mxiaochi/tibet/p_large_G7rk_1ee30004bf1b2d0b_zpsb125f1f2.jpg)

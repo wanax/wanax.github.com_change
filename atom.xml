@@ -4,7 +4,7 @@
   <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-10-20T17:25:28+08:00</updated>
+  <updated>2013-10-25T15:47:20+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scala在Mac下的安装方法]]></title>
+    <link href="http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/"/>
+    <updated>2013-10-25T14:36:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa</id>
+    <content type="html"><![CDATA[<h3>第一种方法</h3>
+
+<p>1.访问scala的官网<a href="http://www.scala-lang.org/">这里</a>下载最新版的scala。</p>
+
+<p>2.解压缩文件包，可将其移动至<code>/usr/local/share</code>下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mv /download/scalapath /usr/local/share</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.修改环境变量，在mac下使用<code>sudo su</code>进入管理员权限，修改配置文件profile，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vim /etc/profile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在文件的末尾加入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH="$PATH:/usr/local/share/scala/bin"</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>:wq!</code>保存退出，重启终端，完成scala的配置安装。</p>
+
+<h3>第二种方法</h3>
+
+<p>如果本机有安装Ruby的话则安装更加简单，可以借助Homebrew进行安装。
+首先安装Homebrew</p>
+
+<blockquote><p>ruby -e “$(curl -fsSL <a href="https://raw.github.com/mxcl/homebrew/go">https://raw.github.com/mxcl/homebrew/go</a>)”</p></blockquote>
+
+<p>再进行scala的安装<code>brew install scala</code></p>
+
+<p>大功告成~</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UIView三种动画笔记]]></title>
@@ -27,15 +69,15 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="o">:</span><span class="mf">0.6f</span>
-</span><span class='line'>                          <span class="n">delay</span><span class="o">:</span><span class="mi">0</span>
-</span><span class='line'>                        <span class="n">options</span><span class="o">:</span><span class="n">UIViewAnimationOptionCurveEaseOut</span>
-</span><span class='line'>                     <span class="n">animations</span><span class="o">:^</span><span class="p">{</span>
-</span><span class='line'>                         <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>                     <span class="p">}</span>
-</span><span class='line'>                     <span class="n">completion</span><span class="o">:^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                         <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-</span><span class='line'>                     <span class="p">}];</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="nl">animateWithDuration:</span><span class="mf">0.6f</span>
+</span><span class='line'>        <span class="nl">delay:</span><span class="mi">0</span>
+</span><span class='line'>        <span class="nl">options:</span><span class="n">UIViewAnimationOptionCurveEaseOut</span>
+</span><span class='line'>      <span class="nl">animations:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>         <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nl">completion:</span><span class="o">^</span><span class="p">(</span><span class="kt">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>         <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -46,63 +88,32 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="nl">beginAnimations:</span><span class="s">@&quot;animation&quot;</span> <span class="nl">context:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="nl">setAnimationDuration:</span><span class="mf">0.8f</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="nl">setAnimationCurve:</span><span class="n">UIViewAnimationCurveEaseOut</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="nl">setAnimationTransition:</span><span class="n">UIViewAnimationTransitionCurlDown</span> <span class="nl">forView:</span><span class="n">delegate</span><span class="p">.</span><span class="n">tabBarController</span><span class="p">.</span><span class="n">view</span> <span class="nl">cache:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">commitAnimations</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">beginAnimations</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;animation&quot;</span> <span class="n">context</span><span class="o">:</span><span class="n">nil</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationDuration</span><span class="o">:</span><span class="mf">0.8f</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationCurve</span><span class="o">:</span><span class="n">UIViewAnimationCurveEaseOut</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationTransition</span><span class="o">:</span><span class="n">UIViewAnimationTransitionCurlDown</span> <span class="n">forView</span><span class="o">:</span><span class="n">delegate</span><span class="p">.</span><span class="n">tabBarController</span><span class="p">.</span><span class="n">view</span> <span class="n">cache</span><span class="o">:</span><span class="n">YES</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">commitAnimations</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">CATransition</span> <span class="o">*</span><span class="n">animation</span> <span class="o">=</span> <span class="p">[</span><span class="n">CATransition</span> <span class="n">animation</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">animation</span><span class="p">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">0.8f</span><span class="p">;</span>
-</span><span class='line'> <span class="cm">/*动画时间控制      </span>
-</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseInOut,         // slow at beginning and end      </span>
-</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseIn,            // slow at beginning      </span>
-</span><span class='line'><span class="cm"> UIViewAnimationCurveEaseOut,           // slow at end     </span>
-</span><span class='line'><span class="cm"> UIViewAnimationCurveLinear      </span>
-</span><span class='line'><span class="cm"> */</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">CATransition</span> <span class="o">*</span><span class="n">animation</span> <span class="o">=</span> <span class="p">[</span><span class="n">CATransition</span> <span class="n">animation</span><span class="p">];</span>
+</span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">0.8f</span><span class="p">;</span>
 </span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">timingFunction</span> <span class="o">=</span> <span class="n">UIViewAnimationCurveEaseInOut</span><span class="p">;</span>
 </span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">fillMode</span> <span class="o">=</span> <span class="n">kCAFillModeForwards</span><span class="p">;</span>
-</span><span class='line'><span class="cm">/*动画类型      </span>
-</span><span class='line'><span class="cm"> kCATransitionFade;      </span>
-</span><span class='line'><span class="cm"> kCATransitionMoveIn;      </span>
-</span><span class='line'><span class="cm"> kCATransitionPush;      </span>
-</span><span class='line'><span class="cm"> kCATransitionReveal;      </span>
-</span><span class='line'><span class="cm"> */</span>
 </span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">kCATransitionMoveIn</span><span class="p">;</span>
-</span><span class='line'> <span class="cm">/*动画进入方式      </span>
-</span><span class='line'><span class="cm"> kCATransitionFromRight;      </span>
-</span><span class='line'><span class="cm"> kCATransitionFromLeft; </span>
-</span><span class='line'><span class="cm"> kCATransitionFromTop; </span>
-</span><span class='line'><span class="cm"> kCATransitionFromBottom; </span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'> <span class="n">animation</span><span class="p">.</span><span class="n">subtype</span> <span class="o">=</span> <span class="n">kCATransitionFromBottom</span><span class="p">;</span>
-</span><span class='line'> <span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">layer</span><span class="p">]</span> <span class="n">addAnimation</span><span class="o">:</span><span class="n">animation</span> <span class="n">forKey</span><span class="o">:</span><span class="err">@</span><span class="s">&quot;animation&quot;</span><span class="p">];</span>
-</span><span class='line'> <span class="n">animation</span><span class="o">=</span><span class="n">nil</span><span class="p">;</span>
+</span><span class='line'><span class="n">animation</span><span class="p">.</span><span class="n">subtype</span> <span class="o">=</span> <span class="n">kCATransitionFromBottom</span><span class="p">;</span>
+</span><span class='line'><span class="p">[[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">layer</span><span class="p">]</span> <span class="nl">addAnimation:</span><span class="n">animation</span> <span class="nl">forKey:</span><span class="s">@&quot;animation&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="n">animation</span><span class="o">=</span><span class="nb">nil</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
@@ -1328,6 +1339,51 @@ post是请求，get便是验证下登录有没有成功，找一个只有登录�
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[黄金时代的午夜巴黎]]></title>
+    <link href="http://wanax.github.io/blog/2012/01/05/huang-jin-shi-dai-de-wu-ye-ba-li/"/>
+    <updated>2012-01-05T15:43:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2012/01/05/huang-jin-shi-dai-de-wu-ye-ba-li</id>
+    <content type="html"><![CDATA[<blockquote><p>价值取向的多元化使得人们更加关统一的价值，历经沧桑后的回忆总是那么令人感慨美好。对现实的不满与欲求的无诉逼迫着人们找寻幸福的彼岸。出于某种对未来的不可知，我们往往会选择追忆自己民族的古老记忆以求安慰。无论那些历史上的事实是怎样的残酷，我们总会天真的相信比我们生活的早前的人类过的是一种田园般幸福的生活。宛如午夜下的巴黎如此地令人魂牵梦绕。</p></blockquote>
+
+<p>柏拉图脑子里乱乱的，无心听苏格拉底喋喋不休的理论，转而注意到老师脚下的一双快要断了带的绳鞋，鞋底的边缘磨得快平了，脚趾上也沾满了灰尘，不知道这双鞋还能撑多久，也许下一次的跺脚就能宣告其使命的终结吧。苏格拉底则毫无留心到学生早已不耐久矣，还是依旧沉醉在自己的理论逻辑里，亚麻的布料披在身上，有几处残破，似乎是一些人反复拉扯下的成果。柏拉图看到这里不禁会心一笑。苏格拉底以为学生如此心领神会更加的心花怒放，丝毫没有注意到日薄西山，过了晚饭的时候。那时候吃晚饭是不点灯的，所以家家都要赶在天黑前解决。而柏拉图依稀已经看见师母映照在落日下的那分外高大的身影正渐行渐近。</p>
+
+<!--more-->
+
+
+<p>看着老师与师母纠缠着离去，柏拉图轻呼一口气，畅想自己要是能生在黄金的英雄年代，可以跟佩尔修斯一般跨上佩加索斯，也砍下美杜莎的头拯救万民，该是一件多么荣耀的作为。</p>
+
+<p>孔老二依旧奔波在列国的路上，刚刚因为问路却被一个隐者诘难，虽然在弟子面前若无其事，但在心里还是觉得有点隐隐的不快，感叹世道多艰人心不古。想想尧舜贤才，民风淳朴，对比当下战争分离，民生多艰，看看跟在身后的弟子们那营养不良而略显浮肿的脸上布满疲惫，不禁感到任重而道远。礼乐在手，但何时还能再回复到上古时期的田园农家，仍是个未知数。</p>
+
+<p>莫名其妙的又想起了南子，多么美好的女子，子路那小子还多管闲事，老师的事也是你能插手的吗，不知礼，下次要好好地教训一下。恩，对了，之前说唯女子小人难养也不知道学生记录了没有，记下的话要嘱咐他们删掉吧。哎，还是算了，徒留别人的口舌。“子路，子路！慢点，慢点！驾得这么快想颠死老朽吗，臭小子。还是尧舜禹的时代好啊，老夫生也晚矣。”</p>
+
+<p>黄金时代的晨光就在那里，但巴黎的午夜不是谁都能碰上。</p>
+
+<p>物质制度总在不紧不慢地进化，一论及人的比较却是无一例外地以前好过现在，这却是个有趣的现象，东西皆不例外。简单分析起来无外乎制度科技之类东西都是有文字记录经过同意认定的规范，并且一代代的从这些规范上一而再地演化，每一步都有其坚实的理论基础，后人也方便在其之上进一步地拓展。</p>
+
+<p>反观人类本身，则是一个更抽象的问题。涉及到人类理性与感性的话题，从来就没有统一的观点，更不会像科学技术一样会在经过一定的选择后得到最终的答案，并被多数所认同，成为公理。相反的，很多类似的问题都是出现在一些异类的身上有所突破，便是我们经常所说的不疯魔不成活，或者说是一种循环往复的行为。</p>
+
+<p>更进一步地，现在愈来愈多的是一种多元文化，统一的道德标准经常为人们所唾弃，对于什么是“恶”的标准也更加难以界定。像《在路上》一书便是描写的二战后一代青年人的生活，他们被称为垮掉的一代，但即便如此，他们很多精神上的追求也渐渐被人们所接受甚或推崇。而这在那从军的父辈看来却是不折不扣的颓废的象征。</p>
+
+<p>后现代的多元文化提倡的是人与人的互相尊重，每个人都有自己的一套伦理体系，在不违反大法律的背景下各行其是也无为不可。但同时引发的另一个问题却是我们因为如此地感到与社会格格不入而产生的古幽思之情的泛滥。其实这种状况自古便有，甚至可以从一个侧面展示当时社会的思想潮流，不论何种情况，我们记忆中的故事永远比当下要美好地多。</p>
+
+<p>从神话时代便是这样，本土的先是盘古开天辟地，整个大地便只有这一位仁兄瞎折腾，折腾死了这世界才初具规模，当然都是这位老兄的功劳，山川河海无不如此。再近一点便是共工怒触不周山，天倾一角，则星辰就西北，尘溢河流驻东南。或是女娲补天造人，人类就此而有，昆仑天池上住着神仙眷侣。希腊神话概不例外，大地之母天下第一号，亚当夏娃活塞运动也和一条坏蛇有关，那终年积雪的奥林匹斯山还是各类神仙的住所，琼瑶浆液瓜果玉蔬，陈列其间，仙境大体都是如此。</p>
+
+<p>未开化的人总是觉得有比他们更优秀的一帮人存在，而且必定住在那高山之上。把他们想象地神力无边。正是那一群人指导着下界的人民的繁衍与进化。而且在他们看来，简单的人形已经不能满足需求，而需要与各种动物结合才能达到他们图腾崇拜的目的，不知为何，蛇无一例外都成了最普遍的选择。看过的一本书中说到，看一个民族的优劣与否看他们的神话是否够完备够系统。中华民族的神话跟西欧的文明一样，都有人形，都有系统的逻辑故事，很明显是比较高级的了。而看非洲的一些部落，现在还在流传的是一些蚂蚱传世的神话。</p>
+
+<p>神话里的人物事件无一例外都是美好的，纵希腊神话中悲剧的成分不可抹去，但就如我们向往古时之人的生活一样，那时的人看来这才是光明傲岸的。</p>
+
+<p>我们总是迫切地想要去找寻一些美好，酒神对自由的狂暴故必不可少，但阿波罗的对美的向往却也是深深地根植于内心深处，而当我们发现其实自身的力量无法与社会相抗衡时选择的往往是避开酒神的暴力，转而取向日神，或者是一种妥协。</p>
+
+<p>我们无奈于现实且对未来的不可知，就本能地去想象先古的时代。隐去了若干细节与真实，记忆中的世界变成了一堆美好符号的堆砌。所有我们在现实生活中无法实现的梦想与追求都寄托于那飘渺的之前。不怪乎现在各种回忆录口述记纷至沓来，当一个人熬过了一段痛苦的岁月后，每当回想起来更多的却是甜蜜充斥其间，在他的描述之下往事固然困难不易，但因为所有的都已化成记忆能留下的都是奋斗的记号与历经困苦后的满足静谧，以至于在他的笔下或口中人们尝到了现实生活中未曾品尝的人世之甜。</p>
+
+<p>而上面只是个最简单的例子，还是我们身边的人所记录的事情。让时间的尺幅拉至千年，继而更会发现所有的美好都藏匿其中，惟其当下最不堪入目。这也许是所有人都会有过的感觉。看屈原的一首首辞篇，多少神话古老的传说在他的笔下变得婀娜多姿，那《山鬼》中的主角，本来籍籍无名，却因“若有人兮山之阿，被薜荔兮带女萝。既含睇兮又宜笑，子慕予兮善窈窕”，一句留在了多少人的心中。想来屈大夫也不是因为政治上的不得意而如此的向往那古老的传说。</p>
+
+<p>研究古代神话就像研究一段似乎存在又不能肯定的历史，究其原头不外乎是借以了解其对自己民族发展的影响，抑或是对当今世道的迷惑。文化越多元则对神话的解读则越加丰富。从最原始的恐怖到近代的唯美，神话正以人们所需要的目的以各种不同的表现所展示。归其原因则无疑是人们对当下的不信任所致。
+每人都有所寄托，因对当下的不满而去向往记忆的古老也许还是很好的选择，但别忘了now is now。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Lucene入门初步]]></title>
     <link href="http://wanax.github.io/blog/2012/01/04/luceneru-men-chu-bu/"/>
     <updated>2012-01-04T17:10:00+08:00</updated>
@@ -1599,96 +1655,6 @@ post是请求，get便是验证下登录有没有成功，找一个只有登录�
 <p>因为这边太阳大，所以计划早起赶路，争取中午到玉门。4点便起身去永和大王喝豆浆，一路路况不好且风尘滚滚，春风没有全是罡风，少说吃下半斤灰。前天认识个哥们，很有喜感，更兼志同道合，相约一起，欢乐不已。奈何这哥们出门时不知受谁欺骗前轮搞了个1.5的细胎碰上今天这种我都爆了次胎的沙子路他也就更不在话下，爆到最后仰天长叹，天不佑我，打道回府。幸好家住兰州来一次也近，权当安慰吧。</p>
 
 <p>虽认识短短两天，但我已给定外号，二子也，嗯&hellip;怎么说呢，他也是这样叫我的，同名上路还真是缘分。刚收到短信说下次还能见到的话喝喝小酒，一定的，这点猿粪还是可以有的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[西海镇]]></title>
-    <link href="http://wanax.github.io/blog/2011/07/17/xi-hai-zhen/"/>
-    <updated>2011-07-17T21:35:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2011/07/17/xi-hai-zhen</id>
-    <content type="html"><![CDATA[<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/xinjiang/p_large_MuaR_66aa000417f75c43_zps86cbc46e.jpg" alt="image" /></p>
-
-<blockquote><p><em><em>青海湖畔</em></em></p></blockquote>
-
-<p>兰州出来过了海石湾去到西宁，由甘肃奔到青海，空气好了很多外温度也是相差很大。早上的时候要把带来的衣服全部穿上才将将御寒。</p>
-
-<!--more-->
-
-
-<p>出发时遇到华工出来的一队人马，也是经青海往新疆去，路线一样多几个人骑车也不寂寞索性同行了。</p>
-
-<p>去到西宁后他们的计划是休息一天再往大通走，蔡力跟我则想既然来到西宁，不去趟青海湖太不过划算，遂决定第二天搭车去青海湖边骑上一遭，第三天再与他们汇合。</p>
-
-<p>早上起来却收到短信他们中的两个人也想这样玩一下，既然有女生同行也乐得答应了。出来门口，吃过早饭开始找车，在必经之路上拦到辆面包车，也算是顺路，收了一人60，去到倒趟河往江西沟骑。</p>
-
-<p>这段路亦属青藏线，不消说碰到很多要翻唐古拉的哥们。中间休息的时候看到个穿深圳中学校裤的，问了下竟然还是深大的，当时第一反应是深大还有骑长途的，再还没反应的时候就见到伟哥了。</p>
-
-<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/xinjiang/p_large_QMPq_6693000407f45c43_zps6c003a15.jpg" alt="image" /></p>
-
-<p>之前我们有互相通过信说暑假的计划，但丝毫没想到会这样遇到。浩浩青海，茂茂油菜，没有比这时碰到朋友更好的感觉了。伟哥那天的目的地是黑马河，尚有70公里的波浪，而我们则往前骑到有住宿的地方便可，所以同行一段便各自散伙，已属不易了。</p>
-
-<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/xinjiang/p_large_Sxpm_66a70004146f5c43_zps88cde4d5.jpg" alt="image" /></p>
-
-<p>骑行约30+公里后便见到青年旅社，窗口可见青海湖，环境很好让我想起了去年的然乌湖，虽然到达的方式相差很大。因为中午便结束骑行，故睡了个奢侈的午觉。这边靠近湖岸所以气温比西宁还低，加上阵阵的凉风，不过15度吧。但太阳很大，又晒得人暖洋洋的，可以想象成在空调房里烤火，一种近乎奢侈的享受，上床盖被，醒来便是3点多了。倚床懒腰遍体通泰，自不胜言。</p>
-
-<p>这边晚上近九点才日落，所以六点多骑着空车往湖边转转，景色还好。</p>
-
-<p>第二天计划先走青海湖东路去到海晏再搭车去大通，与他们汇合，因不知海晏情况所以想早点去到那里，所以早上五点多就起床，六点开始往那边赶，见了个日出，湖东的沙漠地貌，中午11点多到达海晏旁边的西海镇。</p>
-
-<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/xinjiang/p_large_2ieZ_66970004035a5c43_zps298d641c.jpg" alt="image" /></p>
-
-<blockquote><p><em><strong>清早起来赶路</strong></em></p></blockquote>
-
-<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/xinjiang/p_large_WrCs_66a7000414735c43_zps68c68cc7.jpg" alt="image" /></p>
-
-<blockquote><p><em><strong>东西两岸的风景差距很大</strong></em></p></blockquote>
-
-<p>在镇中骑行时有种错觉，这不是一个镇而是一个小区。镇中央播放着当地的歌曲，近乎全镇都可以听到。建筑规划层次有秩，汽车站便坐落在镇的东头，各种小店不多但一应俱全。一条马路直贯东西，树木参差，行人不多。路过辆警车，问汽车站位置，帮我们指出来不算，开走后经过汽车站时还特意停车闪灯示意。一栋平常的建筑，后面便是发车的地方，虽然刚刚也有经过但丝毫没有看出来。</p>
-
-<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/xinjiang/p_large_CPJc_66c0000405a95c43_zpsc886100c.jpg" alt="image" /></p>
-
-<blockquote><p><em><strong>寂寞四人组</strong></em></p></blockquote>
-
-<p>去到一问，没有直达大通的车，还要转车去西宁，司机建议我们直接骑过去，说不超过90公里，路况尚可，前40缓上后面缓下，同行都觉得还可以，便出来找地方吃饭准备下午骑行。</p>
-
-<p>饭店老板很热情，一家人开的，回民。大女儿粗通普通话，当我们询问去大通的路况时权当与她父亲的翻译，甚或遇到父亲都不知道的时候还会跑到厨房去问不知道谁再回来解答。</p>
-
-<p>午饭一过，本准备立马出发，但因上午已骑了80+公里的波浪，同行的女生要稍作休息，我便自己搬个椅子坐到门口的炉边烤火打盹，镇中的民乐还在不知疲倦地放着。</p>
-
-<p>迷糊中恍惚见到个人影往这边来，再仔细瞧来一副藏民的装束，腰间束着个大棉袄，黑乎乎的，面庞红黑，头发蓬乱。竟自跑到这个饭店门口，让我借道，要打热水。因我坐炉边，烧出来的热水均在我的另一侧，遂赶忙抬起脚来让路，也不含糊拿起暖瓶往手里的一个东西里倒水，细看来却是一包打开了的方便面。倒满起身说了声谢谢便转身迈着藏民特有的霸王步走掉了。</p>
-
-<p>下午开始骑车，最后发现据说的40公里的缓上坡通向个近4000米的垭口，叫苦不迭。天黑前赶到目的地也算圆满。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[此间]]></title>
-    <link href="http://wanax.github.io/blog/2011/07/11/ci-jian/"/>
-    <updated>2011-07-11T21:19:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2011/07/11/ci-jian</id>
-    <content type="html"><![CDATA[<p>这学期选了门数据库的课程，不用考试，各自搭伙造饭，期末搞个网站做演示，前三还有奖，一听之下很是兴致勃勃。早早地开始规划，各种点子，准备大展身手。有想过做个成人的玩玩但念及最后是公投，这么一搞女生的选票是很危险的便立马放弃了。确定主题后选好语言，数据库，统一编码，迫不及待。最后期末大功告成。</p>
-
-<!--more-->
-
-
-<p>其实之所以有以上叙述乃是伏笔，从小到大老是分析文章，阅读理解，什么为后文做铺垫之类的，自己写作文从来没用过，细细想来相当不划算，故而我也把第一段写成伏笔铺垫，目的在引出下文——自己的作品没进前三，与前面的兴致勃勃做下对比，突出作者的失落之情。恩，分析是比较中肯的，我当时看到选票结果确实相当伤心，开始是因为自己志得意满后的落差，但过会看到第一名被奖励了300元后而自己没有又伤心了起来，到了最后，竟分不清究竟是为了自己的作品没入选而伤心还是因没拿到钱而伤心后就更加地伤心了。</p>
-
-<p>思来想去，前者伤心乃名也，后者伤心乃利也，我一心两伤很是不起，又没有削发脱俗的决心遂决定换个环境溜之大吉。</p>
-
-<p>赏景游玩当以西南为上，说句俗套的便是去到那里感觉自己都是一景，这些地方当把妹为上，三人一行全是男的忒煞风景。</p>
-
-<p>记得高中语文课时，老妖曾说过沿着黄河走上一遭，评品历史，大话古今，实乃人生一大乐趣追求。鄙人生自北方，最有历史气息的泰山也没少爬，但当时在我眼里不过跟梧桐山等价，毫无乐趣。心道估计是没妹子陪才出此下策。黄土漫漫，也就一帮黑山嫡系才能站在沙尖迎着风尘滔滔不绝。</p>
-
-<p>再往后升入大学，慕名的西南之地也跑了跑，当真是很煞风景，穷极思变，没有妹子只能向黄沙靠近，美其名曰历史的情人。</p>
-
-<p>自古以来师出必要有名，管它三七二十一，别人搪不过去后说，自己先要说服自己往北边奔是值得的。化用李清照的诗句来说叫看的就是个物是人非。</p>
-
-<p>就好比有两个人去到河北满城看那个刘胜的墓，一人看那出土的玩意儿啧啧称奇，这厮还真是有钱，另一人嘿嘿直笑，称奇不怪为何嘿嘿怪笑？盖中山靖王爱好广泛，迄今为止，发掘出来最早的铜制阳具便是这哥们墓里的。也许有人觉得这例子太牵强，没办法，鄙人说服自己时蹦出来的第一例子便是这哥们，这也是没有办法的事情。那来个恰当一点的吧，有人去看万历的墓，阴阴森森一具干尸，了无生气，但在另一人眼中却早已幻出了当时的万历，想干什么什么不顺丝儿，要讨好一下自家的老婆就被大臣整了几十年，当真如黄仁宇所说，是个活着的祖宗，一个符号存在着，人却如那冰冷的石棺早已封尘。</p>
-
-<p>历史有时候就像元稹的那短短四语，“寥落古行宫，宫花寂寞红。白头宫女在，闲坐说玄宗。”，细细想来也是很美的。</p>
-
-<p>就这样定了吧。</p>
 ]]></content>
   </entry>
   

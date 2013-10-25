@@ -8,16 +8,8 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Jun 9th, 2013 Tec UIView三种动画笔记 1
-2
-3
-4
-5
-6
-7
-8
-9
-[UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{ &hellip;">
+	<meta name="description" content="Oct 25th, 2013 Tec Scala在Mac下的安装方法 第一种方法 1.访问scala的官网这里下载最新版的scala。 2.解压缩文件包，可将其移动至/usr/local/share下 1
+mv /download/scalapath /usr/local/share 3. &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -40,6 +32,17 @@
 -->
 
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+	      $(this).attr('target', '_blank');
+	  });
+	}
+
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
   
 
 </head>
@@ -69,7 +72,8 @@
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+<li class='category'><a href='/blog/categories/read/'>Read (1)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (12)</a></li>
 
   </ul>
 </section>
@@ -123,6 +127,74 @@
   
 
 
+<time datetime="2013-10-25T14:36:00+08:00" data-updated="true" itemprop="datePublished">Oct 25<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/" itemprop="url">Scala在Mac下的安装方法</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>第一种方法</h3>
+
+<p>1.访问scala的官网<a href="http://www.scala-lang.org/">这里</a>下载最新版的scala。</p>
+
+<p>2.解压缩文件包，可将其移动至<code>/usr/local/share</code>下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mv /download/scalapath /usr/local/share</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.修改环境变量，在mac下使用<code>sudo su</code>进入管理员权限，修改配置文件profile，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vim /etc/profile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在文件的末尾加入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH="$PATH:/usr/local/share/scala/bin"</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>:wq!</code>保存退出，重启终端，完成scala的配置安装。</p>
+
+<h3>第二种方法</h3>
+
+<p>如果本机有安装Ruby的话则安装更加简单，可以借助Homebrew进行安装。
+首先安装Homebrew</p>
+
+<blockquote><p>ruby -e “$(curl -fsSL <a href="https://raw.github.com/mxcl/homebrew/go">https://raw.github.com/mxcl/homebrew/go</a>)”</p></blockquote>
+
+<p>再进行scala的安装<code>brew install scala</code></p>
+
+<p>大功告成~</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2013-06-09T10:30:00+08:00" data-updated="true" itemprop="datePublished">Jun 9<span>th</span>, 2013</time></div>
 		<div class="tags">
 
@@ -144,15 +216,15 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="o">:</span><span class="mf">0.6f</span>
-</span><span class='line'>                          <span class="n">delay</span><span class="o">:</span><span class="mi">0</span>
-</span><span class='line'>                        <span class="n">options</span><span class="o">:</span><span class="n">UIViewAnimationOptionCurveEaseOut</span>
-</span><span class='line'>                     <span class="n">animations</span><span class="o">:^</span><span class="p">{</span>
-</span><span class='line'>                         <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>                     <span class="p">}</span>
-</span><span class='line'>                     <span class="n">completion</span><span class="o">:^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                         <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-</span><span class='line'>                     <span class="p">}];</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">UIView</span> <span class="nl">animateWithDuration:</span><span class="mf">0.6f</span>
+</span><span class='line'>        <span class="nl">delay:</span><span class="mi">0</span>
+</span><span class='line'>        <span class="nl">options:</span><span class="n">UIViewAnimationOptionCurveEaseOut</span>
+</span><span class='line'>      <span class="nl">animations:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>         <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nl">completion:</span><span class="o">^</span><span class="p">(</span><span class="kt">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>         <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -544,42 +616,6 @@
 
 		
 		<a href="/blog/2012/06/28/6ge-you-yong-de-mysqlyu-ju-zhuan/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-15T19:00:00+08:00" data-updated="true" itemprop="datePublished">Mar 15<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/life/'>Life</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/03/15/ru-ci-er-yi/" itemprop="url">如此而已</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p> 2000年的石佛来到2012告诉我们他也有战斧式的梦，海布里跪吻的国王远赴加泰罗尼亚劈棘未竟的功勋，风华滚滚，手中新酿的美酒回荡在酒樽。开始的激情万丈至于后来的云淡风轻，曾经的高亢嘹亮不知觉中融入生活，成为意识的一分子，甚或连自己都不曾注意何时可以如此地如水流淌。告诉自己我们在等，等到不能再等，至于沧海桑田，握笔的手都在颤抖，依旧可以写下自己的最爱。便也可能是在此时突然一泻千里，那么一瞬的快感摊开来是一刻一划的尺度，每一个凿痕都无比熟悉而又慢慢模糊，沉沉地呼出一口浊气，仰鼻深吸，胸中吐纳的却是天地。</p>
-
-<p> 
-		
-		<a href="/blog/2012/03/15/ru-ci-er-yi/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

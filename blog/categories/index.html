@@ -8,7 +8,7 @@
 	<title>Categories - 陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content=" Life [ 14 ] Ontheroad [ 9 ] Tec [ 11 ] ">
+	<meta name="description" content=" Life [ 14 ] Ontheroad [ 9 ] Tec [ 12 ] Read [ 1 ] ">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,6 +31,17 @@
 -->
 
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+	      $(this).attr('target', '_blank');
+	  });
+	}
+
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
   
 
 </head>
@@ -60,7 +71,8 @@
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+<li class='category'><a href='/blog/categories/read/'>Read (1)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (12)</a></li>
 
   </ul>
 </section>
@@ -106,7 +118,9 @@
 
     <li><a href="/blog/categories/OnTheRoad/">Ontheroad</a> [ 9 ]</li>
 
-    <li><a href="/blog/categories/Tec/">Tec</a> [ 11 ]</li>
+    <li><a href="/blog/categories/Tec/">Tec</a> [ 12 ]</li>
+
+    <li><a href="/blog/categories/Read/">Read</a> [ 1 ]</li>
 
 </ul>
 

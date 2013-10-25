@@ -5,10 +5,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>莫名问 - 陋室</title>
+	<title>Scala在Mac下的安装方法 - 陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="莫名问 桥边红药为谁生，极天青鸟为谁来? 常山采薇为谁食，楚地湘江为谁投？ 红粉妆黛为谁容，寒水一别为谁赴? 歌来正气为谁吟，曲自虞姬为谁叹？ 沉舟侧畔为谁过，病树前头哪般春？ 横刀向天为谁笑，昆仑肝胆为谁留？ 朱雀同台为谁起，骊山阿房为谁营？ 弹指一瞬红颜老，刹那芳华总是春。 --> &hellip;">
+	<meta name="description" content="Scala在Mac下的安装方法 第一种方法 1.访问scala的官网这里下载最新版的scala。 2.解压缩文件包，可将其移动至/usr/local/share下 1
+mv /download/scalapath /usr/local/share 3.修改环境变量，在mac下使用sudo &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://wanax.github.io/blog/2009/12/21/mo-ming-wen/">
+	<link rel="canonical" href="http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -109,22 +110,41 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">莫名问</h1>
-	<div class="entry-content" itemprop="articleBody"><blockquote><h3>桥边红药为谁生，极天青鸟为谁来?</h3>
+	<h1 class="title" itemprop="name">Scala在Mac下的安装方法</h1>
+	<div class="entry-content" itemprop="articleBody"><h3>第一种方法</h3>
 
-<h3>常山采薇为谁食，楚地湘江为谁投？</h3>
+<p>1.访问scala的官网<a href="http://www.scala-lang.org/">这里</a>下载最新版的scala。</p>
 
-<h3>红粉妆黛为谁容，寒水一别为谁赴?</h3>
+<p>2.解压缩文件包，可将其移动至<code>/usr/local/share</code>下</p>
 
-<h3>歌来正气为谁吟，曲自虞姬为谁叹？</h3>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mv /download/scalapath /usr/local/share</span></code></pre></td></tr></table></div></figure>
 
-<h3>沉舟侧畔为谁过，病树前头哪般春？</h3>
 
-<h3>横刀向天为谁笑，昆仑肝胆为谁留？</h3>
+<p>3.修改环境变量，在mac下使用<code>sudo su</code>进入管理员权限，修改配置文件profile，</p>
 
-<h3>朱雀同台为谁起，骊山阿房为谁营？</h3>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vim /etc/profile</span></code></pre></td></tr></table></div></figure>
 
-<h3>弹指一瞬红颜老，刹那芳华总是春。</h3></blockquote>
+
+<p>在文件的末尾加入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH="$PATH:/usr/local/share/scala/bin"</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>:wq!</code>保存退出，重启终端，完成scala的配置安装。</p>
+
+<h3>第二种方法</h3>
+
+<p>如果本机有安装Ruby的话则安装更加简单，可以借助Homebrew进行安装。
+首先安装Homebrew</p>
+
+<blockquote><p>ruby -e “$(curl -fsSL <a href="https://raw.github.com/mxcl/homebrew/go">https://raw.github.com/mxcl/homebrew/go</a>)”</p></blockquote>
+
+<p>再进行scala的安装<code>brew install scala</code></p>
+
+<p>大功告成~</p>
 </div>
 
 </article>
@@ -161,8 +181,8 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://wanax.github.io/blog/2009/12/21/mo-ming-wen/';
-        var disqus_url = 'http://wanax.github.io/blog/2009/12/21/mo-ming-wen/';
+        var disqus_identifier = 'http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/';
+        var disqus_url = 'http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/';
         var disqus_script = 'embed.js';
       
     (function () {

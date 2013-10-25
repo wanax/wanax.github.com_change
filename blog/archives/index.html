@@ -8,7 +8,7 @@
 	<title>Blog Archives - 陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="2013 Jun 9 Tec UIView三种动画笔记 Jun 7 Tec iOS上js引擎的使用 Jun 7 Tec iOS开发之使用CorePlot绘制折线图并添加拖动功能 Mar 13 OnTheRoad 但生不期遇 2012 Nov 9 Life 包子 Nov 1 Tec &hellip;">
+	<meta name="description" content="2013 Oct 25 Tec Scala在Mac下的安装方法 Jun 9 Tec UIView三种动画笔记 Jun 7 Tec iOS上js引擎的使用 Jun 7 Tec iOS开发之使用CorePlot绘制折线图并添加拖动功能 Mar 13 OnTheRoad 但生不期遇 2012 Nov &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,6 +31,17 @@
 -->
 
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+	      $(this).attr('target', '_blank');
+	  });
+	}
+
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
   
 
 </head>
@@ -60,7 +71,8 @@
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+<li class='category'><a href='/blog/categories/read/'>Read (1)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (12)</a></li>
 
   </ul>
 </section>
@@ -104,6 +116,25 @@
 	
 	
 	<section class="archives"><h1 class="year">2013</h1>
+
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-10-25T14:36:00+08:00" itemprop="datePublished">Oct 25</time></span>
+		<br>
+		<span class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/">Scala在Mac下的安装方法</a></h1>
+</article>
+
+	
+
 
 <article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="meta">
@@ -353,6 +384,25 @@
 	    
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/">常用正则表达式(转)</a></h1>
+</article>
+
+	
+
+
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-01-05T15:43:00+08:00" itemprop="datePublished">Jan  5</time></span>
+		<br>
+		<span class="tags">
+
+
+	<a class='category' href='/blog/categories/read/'>Read</a>
+
+
+</span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/01/05/huang-jin-shi-dai-de-wu-ye-ba-li/">黄金时代的午夜巴黎</a></h1>
 </article>
 
 	

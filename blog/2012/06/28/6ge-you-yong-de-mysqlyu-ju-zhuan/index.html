@@ -34,6 +34,17 @@ SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), &#39;%Y&#3
 -->
 
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+	      $(this).attr('target', '_blank');
+	  });
+	}
+
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
   
 
 </head>
@@ -63,7 +74,8 @@ SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), &#39;%Y&#3
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+<li class='category'><a href='/blog/categories/read/'>Read (1)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (12)</a></li>
 
   </ul>
 </section>

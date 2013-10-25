@@ -31,6 +31,17 @@
 -->
 
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+	      $(this).attr('target', '_blank');
+	  });
+	}
+
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
   
 
 </head>
@@ -60,7 +71,8 @@
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (9)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (11)</a></li>
+<li class='category'><a href='/blog/categories/read/'>Read (1)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (12)</a></li>
 
   </ul>
 </section>
@@ -103,6 +115,25 @@
 	
 	
 	<section class="archives"><h1 class="year">2013</h1>
+
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-10-25T14:36:00+08:00" itemprop="datePublished">Oct 25</time></span>
+		<br>
+		<span class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/">Scala在Mac下的安装方法</a></h1>
+</article>
+
+	
+
 
 <article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="meta">

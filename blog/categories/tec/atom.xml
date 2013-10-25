@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tec | 陋室]]></title>
   <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-10-20T17:25:28+08:00</updated>
+  <updated>2013-10-25T15:47:20+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -14,62 +14,89 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Scala在Mac下的安装方法]]></title>
+    <link href="http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/"/>
+    <updated>2013-10-25T14:36:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa</id>
+    <content type="html"><![CDATA[<h3>第一种方法</h3>
+
+<p>1.访问scala的官网<a href="http://www.scala-lang.org/">这里</a>下载最新版的scala。</p>
+
+<p>2.解压缩文件包，可将其移动至<code>/usr/local/share</code>下</p>
+
+<p><code>
+mv /download/scalapath /usr/local/share
+</code></p>
+
+<p>3.修改环境变量，在mac下使用<code>sudo su</code>进入管理员权限，修改配置文件profile，</p>
+
+<p><code>
+vim /etc/profile
+</code></p>
+
+<p>在文件的末尾加入</p>
+
+<p><code>
+export PATH="$PATH:/usr/local/share/scala/bin"
+</code></p>
+
+<p><code>:wq!</code>保存退出，重启终端，完成scala的配置安装。</p>
+
+<h3>第二种方法</h3>
+
+<p>如果本机有安装Ruby的话则安装更加简单，可以借助Homebrew进行安装。
+首先安装Homebrew</p>
+
+<blockquote><p>ruby -e “$(curl -fsSL <a href="https://raw.github.com/mxcl/homebrew/go">https://raw.github.com/mxcl/homebrew/go</a>)”</p></blockquote>
+
+<p>再进行scala的安装<code>brew install scala</code></p>
+
+<p>大功告成~</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[UIView三种动画笔记]]></title>
     <link href="http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji/"/>
     <updated>2013-06-09T10:30:00+08:00</updated>
     <id>http://wanax.github.io/blog/2013/06/09/uiviewsan-chong-dong-hua-bi-ji</id>
-    <content type="html"><![CDATA[<p>``` c
+    <content type="html"><![CDATA[<p>``` objc
 [UIView animateWithDuration:0.6f</p>
 
-<pre><code>                      delay:0  
-                    options:UIViewAnimationOptionCurveEaseOut  
-                 animations:^{  
-                     self.view.alpha = 0;  
-                 }  
-                 completion:^(BOOL finished) {  
-                     [self.view removeFromSuperview];  
-                 }];  
+<pre><code>    delay:0  
+    options:UIViewAnimationOptionCurveEaseOut  
+    animations:^{  
+       self.view.alpha = 0;  
+    }  
+    completion:^(BOOL finished) {  
+       [self.view removeFromSuperview];  
 </code></pre>
 
-<p>```
+<p>}];<br/>
+```
   <!--more--></p>
 
-<p>``` c</p>
+<p>``` objc</p>
 
 <pre><code>[UIView beginAnimations:@"animation" context:nil];  
 [UIView setAnimationDuration:0.8f];  
 [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];  
 [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:delegate.tabBarController.view cache:YES];  
-[UIView commitAnimations];  
+[UIView commitAnimations];
 </code></pre>
 
-<p>  CATransition *animation = [CATransition animation];</p>
+<p>```</p>
 
-<pre><code>    animation.duration = 0.8f;  
- /*动画时间控制      
- UIViewAnimationCurveEaseInOut,         // slow at beginning and end      
- UIViewAnimationCurveEaseIn,            // slow at beginning      
- UIViewAnimationCurveEaseOut,           // slow at end     
- UIViewAnimationCurveLinear      
- */  
+<p>```objc</p>
+
+<pre><code>CATransition *animation = [CATransition animation];  
+animation.duration = 0.8f;  
 animation.timingFunction = UIViewAnimationCurveEaseInOut;  
 animation.fillMode = kCAFillModeForwards;  
-/*动画类型      
- kCATransitionFade;      
- kCATransitionMoveIn;      
- kCATransitionPush;      
- kCATransitionReveal;      
- */  
-animation.type = kCATransitionMoveIn;  
- /*动画进入方式      
- kCATransitionFromRight;      
- kCATransitionFromLeft; 
- kCATransitionFromTop; 
- kCATransitionFromBottom; 
- */  
- animation.subtype = kCATransitionFromBottom;  
- [[self.view layer] addAnimation:animation forKey:@"animation"];  
- animation=nil; 
+animation.type = kCATransitionMoveIn;   
+animation.subtype = kCATransitionFromBottom;  
+[[self.view layer] addAnimation:animation forKey:@"animation"];  
+animation=nil; 
 </code></pre>
 
 <p>```</p>
@@ -514,36 +541,6 @@ public class Test {</p>
 
 <p>}
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ajax对象数组传参方式]]></title>
-    <link href="http://wanax.github.io/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/"/>
-    <updated>2012-10-11T15:53:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi</id>
-    <content type="html"><![CDATA[<p>项目中一个页面需要的功能是动态添加信息列表，传至后台添加数据库。用的方式是ajax+struts2，因为struts本身的特性，在ajax的data里直接写数组名java后台是无法正常接收到的，最简单的理解便是它无法智能的一一匹配数组里的每一个值，所以我们在前台开始发action请求前便要组装好容易接收的数据格式。</p>
-
-<p>最简单的方法是直接拼接字符串，后台split出来，但有时候用的不是简单的字符串数组而是对象数组，这时候就需要一些其它方法了。</p>
-
-<!--more-->
-
-
-<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/1349941967_9520_zpsbbaf2803.png" alt="image" /></p>
-
-<p>如上图所示，每次提交是权限一个对象，然后关于资源对象是动态添加与删除的，很明显，这就需要一个对象数组来装这些东西</p>
-
-<p>前台页面的动态添加是这样的：</p>
-
-<script src="https://gist.github.com/wanax/6752390.js"></script>
-
-
-<p></p>
-
-<p>然后就是对对象数组的拼装与发送了</p>
-
-<script src="https://gist.github.com/wanax/6752394.js"></script>
-
 ]]></content>
   </entry>
   

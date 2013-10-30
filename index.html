@@ -8,7 +8,18 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Oct 28th, 2013 OnTheRoad 西冲行记 又是一年花开日，江上数青峰。 记得第一次去西冲是大一，那时刚加入励志社，因为在招新的时候看到说励志社中有骑行队。 高三的时候跟CJ骑着7,80一辆的二手单车差不多快游遍了深圳，比如说推车推上了梧桐山顶，吸着八百里的尘与土跑到CZJ家蹭饭 &hellip;">
+	<meta name="description" content="Oct 30th, 2013 Tec iOS开发小技巧笔记 字体粗度的设置 1
+button.titlelabel.font = [uifont boldSystemFontOfSize:xx]; UINavigation中间隔button的设置 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,7 +83,7 @@
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (10)</a></li>
 <li class='category'><a href='/blog/categories/read/'>Read (2)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (12)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (13)</a></li>
 
   </ul>
 </section>
@@ -110,6 +121,88 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-30T16:03:00+08:00" data-updated="true" itemprop="datePublished">Oct 30<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/30/ioskai-fa-xiao-ji-qiao-bi-ji/" itemprop="url">iOS开发小技巧笔记</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>字体粗度的设置</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">button</span><span class="p">.</span><span class="n">titlelabel</span><span class="p">.</span><span class="n">font</span> <span class="o">=</span> <span class="p">[</span><span class="n">uifont</span> <span class="nl">boldSystemFontOfSize:</span><span class="n">xx</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>UINavigation中间隔button的设置</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UIBarButtonItem</span> <span class="o">*</span><span class="n">fontListBt</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>                                <span class="nl">initWithTitle:</span><span class="s">@&quot;Font&quot;</span>
+</span><span class='line'>                                <span class="nl">style:</span><span class="n">UIBarButtonItemStyleBordered</span>
+</span><span class='line'>                                <span class="nl">target:</span><span class="n">self</span>
+</span><span class='line'>                                <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">rightBtClicked:</span><span class="p">)];</span>
+</span><span class='line'><span class="n">UIBarButtonItem</span> <span class="o">*</span><span class="n">fontSizeBt</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>                                 <span class="nl">initWithTitle:</span><span class="s">@&quot;Size&quot;</span>
+</span><span class='line'>                                 <span class="nl">style:</span><span class="n">UIBarButtonItemStyleBordered</span>
+</span><span class='line'>                                 <span class="nl">target:</span><span class="n">self</span>
+</span><span class='line'>                                 <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">popoverFontSize:</span><span class="p">)];</span>
+</span><span class='line'><span class="n">UIBarButtonItem</span> <span class="o">*</span><span class="n">flexibleSpace</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>          <span class="nl">initWithBarButtonSystemItem:</span><span class="n">UIBarButtonSystemItemFlexibleSpace</span>
+</span><span class='line'>          <span class="nl">target:</span><span class="nb">nil</span>
+</span><span class='line'>          <span class="nl">action:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">toolBar</span><span class="o">=</span><span class="p">[[</span><span class="n">UIToolbar</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">SCREEN_HEIGHT</span><span class="o">-</span><span class="mi">320</span><span class="p">,</span><span class="mi">44</span><span class="p">)];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">toolBar</span> <span class="nl">setItems:</span><span class="p">[</span><span class="n">NSArray</span> <span class="nl">arrayWithObjects:</span><span class="n">flexibleSpace</span><span class="p">,</span><span class="n">fontSizeBt</span><span class="p">,</span><span class="n">fontListBt</span><span class="p">,</span> <span class="nb">nil</span><span class="p">]];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addSubview:</span><span class="n">self</span><span class="p">.</span><span class="n">toolBar</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+
+		
+		<a href="/blog/2013/10/30/ioskai-fa-xiao-ji-qiao-bi-ji/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -570,46 +663,6 @@
 
 		
 		<a href="/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-23T17:55:00+08:00" data-updated="true" itemprop="datePublished">Aug 23<span>rd</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/life/'>Life</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/08/23/hu-yan/" itemprop="url">胡言</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img src="http://i424.photobucket.com/albums/pp326/xoxomayra94/HDR/hdrp4.jpg" alt="image" /></p>
-
-<p>拱门里还是一样的景色，马扎蒲扇三五成群，树荫石桌四人一组，走时是这个样子，每次回来仿若只是离开了一小会儿。</p>
-
-<p>跟姥爷一起坐在门口乘凉，身旁放着几盆蚊怕草，类似于薄荷的气味若有若无。姥爷说这是今年刚栽上的，驱蚊。姥姥在院子里洗衣服蚊子也少咬了，面有得色。</p>
-
-
-		
-		<a href="/blog/2012/08/23/hu-yan/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

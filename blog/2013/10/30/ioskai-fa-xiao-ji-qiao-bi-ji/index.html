@@ -1,0 +1,299 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>iOS开发小技巧笔记 - 陋室</title>
+	<meta name="author" content="Wanax">
+	
+	<meta name="description" content="iOS开发小技巧笔记 字体粗度的设置 1
+button.titlelabel.font = [uifont boldSystemFontOfSize:xx]; UINavigation中间隔button的设置 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://wanax.github.io/blog/2013/10/30/ioskai-fa-xiao-ji-qiao-bi-ji/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+	      $(this).attr('target', '_blank');
+	  });
+	}
+
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src='/images/avatar.png' alt='Profile Picture' style='width: 160px;' />
+</div>
+<hgroup>
+  <h1><a href="/">陋室</a></h1>
+  
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <!--<li><a href="/">首页</a></li>-->
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
+</ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
+<li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (10)</a></li>
+<li class='category'><a href='/blog/categories/read/'>Read (2)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (13)</a></li>
+
+  </ul>
+</section>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="weibo" href="http://www.weibo.com/1829617555" title="Weibo">Weibo</a>
+		
+		
+		
+		
+		
+		<a class="github" href="https://github.com/wanax" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">iOS开发小技巧笔记</h1>
+	<div class="entry-content" itemprop="articleBody"><h3>字体粗度的设置</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">button</span><span class="p">.</span><span class="n">titlelabel</span><span class="p">.</span><span class="n">font</span> <span class="o">=</span> <span class="p">[</span><span class="n">uifont</span> <span class="nl">boldSystemFontOfSize:</span><span class="n">xx</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>UINavigation中间隔button的设置</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UIBarButtonItem</span> <span class="o">*</span><span class="n">fontListBt</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>                                <span class="nl">initWithTitle:</span><span class="s">@&quot;Font&quot;</span>
+</span><span class='line'>                                <span class="nl">style:</span><span class="n">UIBarButtonItemStyleBordered</span>
+</span><span class='line'>                                <span class="nl">target:</span><span class="n">self</span>
+</span><span class='line'>                                <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">rightBtClicked:</span><span class="p">)];</span>
+</span><span class='line'><span class="n">UIBarButtonItem</span> <span class="o">*</span><span class="n">fontSizeBt</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>                                 <span class="nl">initWithTitle:</span><span class="s">@&quot;Size&quot;</span>
+</span><span class='line'>                                 <span class="nl">style:</span><span class="n">UIBarButtonItemStyleBordered</span>
+</span><span class='line'>                                 <span class="nl">target:</span><span class="n">self</span>
+</span><span class='line'>                                 <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">popoverFontSize:</span><span class="p">)];</span>
+</span><span class='line'><span class="n">UIBarButtonItem</span> <span class="o">*</span><span class="n">flexibleSpace</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>          <span class="nl">initWithBarButtonSystemItem:</span><span class="n">UIBarButtonSystemItemFlexibleSpace</span>
+</span><span class='line'>          <span class="nl">target:</span><span class="nb">nil</span>
+</span><span class='line'>          <span class="nl">action:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">toolBar</span><span class="o">=</span><span class="p">[[</span><span class="n">UIToolbar</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">SCREEN_HEIGHT</span><span class="o">-</span><span class="mi">320</span><span class="p">,</span><span class="mi">44</span><span class="p">)];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">toolBar</span> <span class="nl">setItems:</span><span class="p">[</span><span class="n">NSArray</span> <span class="nl">arrayWithObjects:</span><span class="n">flexibleSpace</span><span class="p">,</span><span class="n">fontSizeBt</span><span class="p">,</span><span class="n">fontListBt</span><span class="p">,</span> <span class="nb">nil</span><span class="p">]];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addSubview:</span><span class="n">self</span><span class="p">.</span><span class="n">toolBar</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<h3>UILabel的圆角设置</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">label</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">cornerRadius</span><span class="o">=</span><span class="mf">3.0</span><span class="p">;</span>
+</span><span class='line'><span class="n">label</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">borderWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>UILabel自动换行</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">label</span><span class="p">.</span><span class="n">lineBreakMode</span><span class="o">=</span><span class="n">NSLineBreakByCharWrapping</span><span class="p">;</span>
+</span><span class='line'><span class="n">label</span><span class="p">.</span><span class="n">numberOfLines</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>UILabel行间距设置的取巧解决方案</h3>
+
+<h4>将原本要放入的UILabel替换成同大小的UIWebView</h4>
+
+<h4>大致思路是使用webView里内置的JS引擎解析插入的JS代码，以达到调整行间距的目的。</h4>
+
+<h4>缺点为若嵌入在Cell中，对Cell的点击事件这一区域无法正常响应，现在的解决思路是对此webView添加独立的事件监听，达到同等目的</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">cell</span><span class="p">.</span><span class="n">webView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">clearColor</span><span class="p">];</span>
+</span><span class='line'><span class="n">cell</span><span class="p">.</span><span class="n">webView</span><span class="p">.</span><span class="n">opaque</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'><span class="n">cell</span><span class="p">.</span><span class="n">webView</span><span class="p">.</span><span class="n">dataDetectorTypes</span> <span class="o">=</span> <span class="n">UIDataDetectorTypeNone</span><span class="p">;</span>\
+</span><span class='line'><span class="p">[(</span><span class="n">UIScrollView</span> <span class="o">*</span><span class="p">)[[</span><span class="n">cell</span><span class="p">.</span><span class="n">webView</span> <span class="n">subviews</span><span class="p">]</span> <span class="nl">objectAtIndex:</span><span class="mi">0</span><span class="p">]</span> <span class="nl">setBounces:</span><span class="n">NO</span><span class="p">];</span><span class="c1">//禁止webView的滚动</span>
+</span><span class='line'><span class="c1">//16px/18px:前者为行间距，后者为字体大小</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">webviewText</span> <span class="o">=</span> <span class="s">@&quot;&lt;style&gt;body{margin:0;color:#967c6c;background-color:transparent;font:16px/18px Custom-Font-Name}&lt;/style&gt;&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">htmlString</span> <span class="o">=</span> <span class="p">[</span><span class="n">webviewText</span> <span class="nl">stringByAppendingFormat:</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">webView</span> <span class="nl">loadHTMLString:</span><span class="n">htmlString</span> <span class="nl">baseURL:</span><span class="nb">nil</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>URL路径的UTF-8转码</h3>
+
+<h4>在一些通过url路径显示图片的页面中，会出现部分图片无法正常显示的问题。有一种可能是抓包分析可以看出这些无法正常显示的图片的url中有中文字体的嵌入，这便涉及到了URL转码的问题，可根据具体的字体编码设置进行转码，大致code如下</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="p">[</span><span class="n">strUrl</span> <span class="nl">stringByAddingPercentEscapesUsingEncoding:</span><span class="n">NSUTF8StringEncoding</span><span class="p">]];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+</article>
+
+	<!--<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+-->
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Wanax -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'wanax';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://wanax.github.io/blog/2013/10/30/ioskai-fa-xiao-ji-qiao-bi-ji/';
+        var disqus_url = 'http://wanax.github.io/blog/2013/10/30/ioskai-fa-xiao-ji-qiao-bi-ji/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+		</div>
+	</div>
+</body>
+</html>

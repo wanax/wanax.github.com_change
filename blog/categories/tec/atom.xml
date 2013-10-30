@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tec | 陋室]]></title>
   <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-10-28T09:10:58+08:00</updated>
+  <updated>2013-10-30T16:27:31+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS开发小技巧笔记]]></title>
+    <link href="http://wanax.github.io/blog/2013/10/30/ioskai-fa-xiao-ji-qiao-bi-ji/"/>
+    <updated>2013-10-30T16:03:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/10/30/ioskai-fa-xiao-ji-qiao-bi-ji</id>
+    <content type="html"><![CDATA[<h3>字体粗度的设置</h3>
+
+<p><code>objc
+button.titlelabel.font = [uifont boldSystemFontOfSize:xx];
+</code></p>
+
+<h3>UINavigation中间隔button的设置</h3>
+
+<p>```objc</p>
+
+<pre><code>UIBarButtonItem *fontListBt = [[UIBarButtonItem alloc]
+                                initWithTitle:@"Font"
+                                style:UIBarButtonItemStyleBordered
+                                target:self
+                                action:@selector(rightBtClicked:)];
+UIBarButtonItem *fontSizeBt = [[UIBarButtonItem alloc]
+                                 initWithTitle:@"Size"
+                                 style:UIBarButtonItemStyleBordered
+                                 target:self
+                                 action:@selector(popoverFontSize:)];    
+UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] 
+            initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+            target:nil
+            action:nil];
+self.toolBar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,0,SCREEN_HEIGHT-320,44)];
+[self.toolBar setItems:[NSArray arrayWithObjects:flexibleSpace,fontSizeBt,fontListBt, nil]];
+[self.view addSubview:self.toolBar];
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<h3>UILabel的圆角设置</h3>
+
+<p>```objc</p>
+
+<pre><code>label.layer.cornerRadius=3.0;
+label.layer.borderWidth=1.0;
+</code></pre>
+
+<p>```</p>
+
+<h3>UILabel自动换行</h3>
+
+<p>```objc</p>
+
+<pre><code>label.lineBreakMode=NSLineBreakByCharWrapping;
+label.numberOfLines=2;
+</code></pre>
+
+<p>```</p>
+
+<h3>UILabel行间距设置的取巧解决方案</h3>
+
+<h4>将原本要放入的UILabel替换成同大小的UIWebView</h4>
+
+<h4>大致思路是使用webView里内置的JS引擎解析插入的JS代码，以达到调整行间距的目的。</h4>
+
+<h4>缺点为若嵌入在Cell中，对Cell的点击事件这一区域无法正常响应，现在的解决思路是对此webView添加独立的事件监听，达到同等目的</h4>
+
+<p>```objc</p>
+
+<pre><code>cell.webView.backgroundColor = [UIColor clearColor];
+cell.webView.opaque = NO;
+cell.webView.dataDetectorTypes = UIDataDetectorTypeNone;\
+[(UIScrollView *)[[cell.webView subviews] objectAtIndex:0] setBounces:NO];//禁止webView的滚动
+//16px/18px:前者为行间距，后者为字体大小
+NSString *webviewText = @"&lt;style&gt;body{margin:0;color:#967c6c;background-color:transparent;font:16px/18px Custom-Font-Name}&lt;/style&gt;";
+NSString *htmlString = [webviewText stringByAppendingFormat:@"%@", str];
+[cell.webView loadHTMLString:htmlString baseURL:nil];
+</code></pre>
+
+<p>```</p>
+
+<h3>URL路径的UTF-8转码</h3>
+
+<h4>在一些通过url路径显示图片的页面中，会出现部分图片无法正常显示的问题。有一种可能是抓包分析可以看出这些无法正常显示的图片的url中有中文字体的嵌入，这便涉及到了URL转码的问题，可根据具体的字体编码设置进行转码，大致code如下</h4>
+
+<p><code>objc
+NSURL *url = [NSURL URLWithString:[strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Scala在Mac下的安装方法]]></title>
@@ -497,50 +588,6 @@ return CGPointMake(coordinateX,coordinateY);
 <p>好了，这便是iphone上怎样绘制个折线图并实现拖动效果，其实是个很简陋的例子，离真正能用还有很长的一段路要走，但先贴在这里留个记号，也许你会看到中间有些js引擎的影子，这个留在下一章再讲吧。</p>
 
 <p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/20130607110518093_zps1865da13.png" alt="image" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[java设置编码读写文件笔记]]></title>
-    <link href="http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/"/>
-    <updated>2012-11-01T16:04:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji</id>
-    <content type="html"><![CDATA[<p>``` java
-public class Test {</p>
-
-<pre><code>    public static void main(String[] args) {  
-        try{  
-            BufferedReader br = new BufferedReader(  
-                    new InputStreamReader(new FileInputStream(url),"UTF-8"));  
-            String data = null;  
-            StringBuffer str=new StringBuffer();  
-            while((data = br.readLine())!=null)  
-            {  
-                str.append(data+"\n");  
-            }  
-            System.out.println(str);  
-            br.close();  
-            Test test=new Test();  
-            test.ece(str.toString());  
-        }catch(Exception e){  
-            e.printStackTrace();  
-        }             
-    }  
-    public void ece(String str){  
-        try{  
-            BufferedWriter bw = new BufferedWriter(  
-                    new OutputStreamWriter(new FileOutputStream(url,false),"UTF-8"));  
-            bw.write(str);  
-            bw.flush();  
-            bw.close();  
-        }catch(Exception e){  
-            e.printStackTrace();  
-        }     
-    }  
-</code></pre>
-
-<p>}
-```</p>
 ]]></content>
   </entry>
   

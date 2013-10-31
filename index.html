@@ -8,18 +8,7 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Oct 30th, 2013 Tec iOS开发小技巧笔记 字体粗度的设置 1
-button.titlelabel.font = [uifont boldSystemFontOfSize:xx]; UINavigation中间隔button的设置 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11 &hellip;">
+	<meta name="description" content="Oct 31st, 2013 Tec UICollectionView与CXPhotoBrowser配合使用示例 UICollection是在iOS6.0中新加的功能，用于图片的集中展示，大概就是图片墙的意思。基本的使用类似于UITableView，也是设置代理，数据源， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,7 +72,7 @@ button.titlelabel.font = [uifont boldSystemFontOfSize:xx]; UINavigation中间隔
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (10)</a></li>
 <li class='category'><a href='/blog/categories/read/'>Read (2)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (13)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (14)</a></li>
 
   </ul>
 </section>
@@ -121,6 +110,52 @@ button.titlelabel.font = [uifont boldSystemFontOfSize:xx]; UINavigation中间隔
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-31T15:56:00+08:00" data-updated="true" itemprop="datePublished">Oct 31<span>st</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/31/uicollectionviewyu-cxphotobrowserpei-he-shi-yong-shi-li/" itemprop="url">UICollectionView与CXPhotoBrowser配合使用示例</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>UICollection是在iOS6.0中新加的功能，用于图片的集中展示，大概就是图片墙的意思。基本的使用类似于UITableView，也是设置代理，数据源，对单个的Cell可以自行定制样式。稍有不同的是在UITableView中整体样式的设置只有两种，一种是Group和Plain，而在UICollection中则有较多的选择方案，具体的实现方式需要编码人员对UICollectionViewFlowLayout自行调整。</p>
+
+<p>开发的App中有用到这种功能，结合一个台湾哥儿们Chris Xu的开源插件CXPhotoBrower，可以达到比较好的展示图片的效果。</p>
+
+<p>具体效果图如下：</p>
+
+<p><img src="/images/tec/uicollectionImg.png" alt="image" /></p>
+
+<p><img src="/images/tec/cxphotobrowserImg.png" alt="image" /></p>
+
+<p>现在开始一步步搭建吧。</p>
+
+
+		
+		<a href="/blog/2013/10/31/uicollectionviewyu-cxphotobrowserpei-he-shi-yong-shi-li/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -625,44 +660,6 @@ button.titlelabel.font = [uifont boldSystemFontOfSize:xx]; UINavigation中间隔
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-11T15:53:00+08:00" data-updated="true" itemprop="datePublished">Oct 11<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/tec/'>Tec</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/" itemprop="url">Ajax对象数组传参方式</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>项目中一个页面需要的功能是动态添加信息列表，传至后台添加数据库。用的方式是ajax+struts2，因为struts本身的特性，在ajax的data里直接写数组名java后台是无法正常接收到的，最简单的理解便是它无法智能的一一匹配数组里的每一个值，所以我们在前台开始发action请求前便要组装好容易接收的数据格式。</p>
-
-<p>最简单的方法是直接拼接字符串，后台split出来，但有时候用的不是简单的字符串数组而是对象数组，这时候就需要一些其它方法了。</p>
-
-
-		
-		<a href="/blog/2012/10/11/ajaxdui-xiang-shu-zu-chuan-can-fang-shi/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

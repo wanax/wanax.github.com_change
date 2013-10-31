@@ -1,0 +1,453 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>UICollectionView与CXPhotoBrowser配合使用示例 - 陋室</title>
+	<meta name="author" content="Wanax">
+	
+	<meta name="description" content="UICollectionView与CXPhotoBrowser配合使用示例 UICollection是在iOS6.0中新加的功能，用于图片的集中展示，大概就是图片墙的意思。基本的使用类似于UITableView，也是设置代理，数据源，对单个的Cell可以自行定制样式。 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://wanax.github.io/blog/2013/10/31/uicollectionviewyu-cxphotobrowserpei-he-shi-yong-shi-li/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+	      $(this).attr('target', '_blank');
+	  });
+	}
+
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src='/images/avatar.png' alt='Profile Picture' style='width: 160px;' />
+</div>
+<hgroup>
+  <h1><a href="/">陋室</a></h1>
+  
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <!--<li><a href="/">首页</a></li>-->
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
+</ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
+<li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (10)</a></li>
+<li class='category'><a href='/blog/categories/read/'>Read (2)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (14)</a></li>
+
+  </ul>
+</section>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="weibo" href="http://www.weibo.com/1829617555" title="Weibo">Weibo</a>
+		
+		
+		
+		
+		
+		<a class="github" href="https://github.com/wanax" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">UICollectionView与CXPhotoBrowser配合使用示例</h1>
+	<div class="entry-content" itemprop="articleBody"><p>UICollection是在iOS6.0中新加的功能，用于图片的集中展示，大概就是图片墙的意思。基本的使用类似于UITableView，也是设置代理，数据源，对单个的Cell可以自行定制样式。稍有不同的是在UITableView中整体样式的设置只有两种，一种是Group和Plain，而在UICollection中则有较多的选择方案，具体的实现方式需要编码人员对UICollectionViewFlowLayout自行调整。</p>
+
+<p>开发的App中有用到这种功能，结合一个台湾哥儿们Chris Xu的开源插件CXPhotoBrower，可以达到比较好的展示图片的效果。</p>
+
+<p>具体效果图如下：</p>
+
+<p><img src="/images/tec/uicollectionImg.png" alt="image" /></p>
+
+<p><img src="/images/tec/cxphotobrowserImg.png" alt="image" /></p>
+
+<p>现在开始一步步搭建吧。</p>
+
+<!--more-->
+
+
+<h3>一.备齐原料</h3>
+
+<p>UICollection是系统自带的，这个不用关心，CXPhotoBrowser需要自行下载引入。建议使用CocoaPods进行配置，<code>pod 'CXPhotoBrowser'</code>即可，没有用过的话那进入下面的页面按指引搭建吧。</p>
+
+<blockquote><p><a href="https://github.com/ChrisXu1221/CXPhotoBrowser">https://github.com/ChrisXu1221/CXPhotoBrowser</a></p></blockquote>
+
+<h3>二.UICollection的使用</h3>
+
+<h4>1.新建一个UICollectionViewController的VC</h4>
+
+<h4>2.初始化配置UICollectionViewFlowLayout，内嵌于UICollectionViewController中对CollectionCell进行样式管理。</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UICollectionViewFlowLayout</span> <span class="o">*</span><span class="n">flowLayout</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UICollectionViewFlowLayout</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">对四方边界与cell之间的距离进行设置，也可以通过代理设置</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="p">[</span><span class="n">flowLayout</span> <span class="nl">setItemSize:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mi">163</span><span class="p">,</span> <span class="mi">309</span><span class="p">)];</span>
+</span><span class='line'><span class="n">flowLayout</span><span class="p">.</span><span class="n">sectionInset</span> <span class="o">=</span> <span class="n">UIEdgeInsetsMake</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">);</span>
+</span><span class='line'><span class="p">[</span><span class="n">flowLayout</span> <span class="nl">setMinimumLineSpacing:</span><span class="mf">5.0</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">flowLayout</span> <span class="nl">setMinimumInteritemSpacing:</span><span class="mf">5.0</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">flowLayout</span> <span class="nl">setScrollDirection:</span><span class="n">UICollectionViewScrollDirectionVertical</span><span class="p">];</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">collectionView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UICollectionView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="n">CGRectZero</span> <span class="nl">collectionViewLayout:</span><span class="n">flowLayout</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//使用自定义的CollectionCell，出队列，与UITableView的思路相近</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">collectionView</span> <span class="nl">registerNib:</span><span class="p">[</span><span class="n">UINib</span> <span class="nl">nibWithNibName:</span><span class="s">@&quot;PicCollectionCell&quot;</span> <span class="nl">bundle:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">forCellWithReuseIdentifier:</span><span class="n">GraphExcCellIdentifier</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">collectionView</span> <span class="nl">setBackgroundColor:</span><span class="p">[</span><span class="n">Utiles</span> <span class="nl">colorWithHexString:</span><span class="s">@&quot;#5b4d41&quot;</span><span class="p">]];</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">collectionView</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">collectionView</span><span class="p">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//使用开源插件进行下拉分页的功能，读者自行谷歌</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">collectionView</span> <span class="nl">addInfiniteScrollingWithActionHandler:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="nl">addPics:</span><span class="s">@&quot;&quot;</span> <span class="nl">reset:</span><span class="n">NO</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">collectionView</span><span class="p">.</span><span class="n">indicatorStyle</span> <span class="o">=</span> <span class="n">UIScrollViewIndicatorStyleWhite</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3.CollectionCell的创建</h4>
+
+<p>使用nib创建Cell，过程类似于tableCell，不再赘述了。</p>
+
+<h4>4.Delegate与DataSource的设置</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nf">collectionView:</span><span class="p">(</span><span class="n">UICollectionView</span> <span class="o">*</span><span class="p">)</span><span class="nv">collectionView</span> <span class="nf">numberOfItemsInSection:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">section</span><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">images</span> <span class="n">count</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="n">UICollectionViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">collectionView:</span><span class="p">(</span><span class="n">UICollectionView</span> <span class="o">*</span><span class="p">)</span><span class="nv">collectionView</span> <span class="nf">cellForItemAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">FinanPicCollectCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">FinanPicCollectCell</span> <span class="o">*</span><span class="p">)[</span><span class="n">collectionView</span> <span class="nl">dequeueReusableCellWithReuseIdentifier:</span><span class="n">GraphExcCellIdentifier</span> <span class="nl">forIndexPath:</span><span class="n">indexPath</span><span class="p">];</span>
+</span><span class='line'>    <span class="kt">id</span> <span class="n">model</span><span class="o">=</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">images</span> <span class="nl">objectAtIndex:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">];</span>
+</span><span class='line'>    <span class="c1">//使用SDWebImage进行图片加载</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">imageView</span> <span class="nl">setImageWithURL:</span><span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="p">[</span><span class="n">model</span> <span class="nl">objectForKey:</span><span class="s">@&quot;smallImage&quot;</span><span class="p">]]</span>
+</span><span class='line'>                   <span class="nl">placeholderImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;LOADING.png&quot;</span><span class="p">]];</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">等同于</span>
+</span><span class='line'><span class="cm">[flowLayout setMinimumLineSpacing:5.0];</span>
+</span><span class='line'><span class="cm">[flowLayout setMinimumInteritemSpacing:5.0];</span>
+</span><span class='line'><span class="cm">但可针对每个Cell单独定制</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nf">collectionView:</span><span class="p">(</span><span class="n">UICollectionView</span> <span class="o">*</span><span class="p">)</span><span class="nv">collectionView</span> <span class="nf">layout:</span><span class="p">(</span><span class="n">UICollectionViewLayout</span><span class="o">*</span><span class="p">)</span><span class="nv">collectionViewLayout</span> <span class="nf">minimumLineSpacingForSectionAtIndex:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">section</span><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mf">10.0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nf">collectionView:</span><span class="p">(</span><span class="n">UICollectionView</span> <span class="o">*</span><span class="p">)</span><span class="nv">collectionView</span> <span class="nf">layout:</span><span class="p">(</span><span class="n">UICollectionViewLayout</span><span class="o">*</span><span class="p">)</span><span class="nv">collectionViewLayout</span> <span class="nf">minimumInteritemSpacingForSectionAtIndex:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">section</span><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mf">2.0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>至此，一个基本的UICollection便简单的搭建完毕了。下面使用CXPhotoBrowser实现图片的单张浏览功能，支持左右切换与捏合放大缩小。</h3>
+
+<h3>三.CXPhotoBrowser的使用</h3>
+
+<p>此插件也是使用数据源代理的思路实现的，我们在载入UICollection的同时也一起对CX进行数据源的设置，另外实现两个代理方法，一个是点击单张图片获取index一遍进行此图片的放大浏览，另一个是在单张浏览功能里左右滑动时获取前后图片的index用于最上面信息栏的展示。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">//pragma mark -</span>
+</span><span class='line'><span class="c1">//pragma mark CXPhotoBrowserDelegate</span>
+</span><span class='line'><span class="c1">//点击图片弹出详细页面</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">collectionView:</span><span class="p">(</span><span class="n">UICollectionView</span> <span class="o">*</span><span class="p">)</span><span class="nv">collectionView</span> <span class="nf">didSelectItemAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">browser</span> <span class="nl">setInitialPageIndex:</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="nl">presentViewController:</span><span class="n">self</span><span class="p">.</span><span class="n">browser</span> <span class="nl">animated:</span><span class="n">YES</span> <span class="nl">completion:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>    <span class="p">}];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//左右切换视图事件</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">photoBrowser:</span><span class="p">(</span><span class="n">CXPhotoBrowser</span> <span class="o">*</span><span class="p">)</span><span class="nv">photoBrowser</span> <span class="nf">didChangedToPageAtIndex:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="nl">setText:</span><span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;%d/%d&quot;</span><span class="p">,(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">),[</span><span class="n">self</span><span class="p">.</span><span class="n">images</span> <span class="n">count</span><span class="p">]]];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//pragma mark - CXPhotoBrowserDataSource</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nf">numberOfPhotosInPhotoBrowser:</span><span class="p">(</span><span class="n">CXPhotoBrowser</span> <span class="o">*</span><span class="p">)</span><span class="nv">photoBrowser</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">photoDataSource</span> <span class="n">count</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span> <span class="o">&lt;</span><span class="n">CXPhotoProtocol</span><span class="o">&gt;</span><span class="p">)</span><span class="nf">photoBrowser:</span><span class="p">(</span><span class="n">CXPhotoBrowser</span> <span class="o">*</span><span class="p">)</span><span class="nv">photoBrowser</span> <span class="nf">photoAtIndex:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">index</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">photoDataSource</span><span class="p">.</span><span class="n">count</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">photoDataSource</span> <span class="nl">objectAtIndex:</span><span class="n">index</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//对上方信息栏进行设置</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">CXBrowserNavBarView</span> <span class="o">*</span><span class="p">)</span><span class="nf">browserNavigationBarViewOfOfPhotoBrowser:</span><span class="p">(</span><span class="n">CXPhotoBrowser</span> <span class="o">*</span><span class="p">)</span><span class="nv">photoBrowser</span> <span class="nf">withSize:</span><span class="p">(</span><span class="n">CGSize</span><span class="p">)</span><span class="nv">size</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">CGRect</span> <span class="n">frame</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">frame</span><span class="p">.</span><span class="n">origin</span> <span class="o">=</span> <span class="n">CGPointZero</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">frame</span><span class="p">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">navBarView</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">navBarView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CXBrowserNavBarView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="n">frame</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">navBarView</span> <span class="nl">setBackgroundColor:</span><span class="p">[</span><span class="n">UIColor</span> <span class="n">clearColor</span><span class="p">]];</span>
+</span><span class='line'>        <span class="n">UIView</span> <span class="o">*</span><span class="n">bkgView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="n">CGRectMake</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">bkgView</span> <span class="nl">setBackgroundColor:</span><span class="p">[</span><span class="n">UIColor</span> <span class="n">blackColor</span><span class="p">]];</span>
+</span><span class='line'>        <span class="n">bkgView</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">bkgView</span><span class="p">.</span><span class="n">autoresizingMask</span> <span class="o">=</span> <span class="n">UIViewAutoresizingFlexibleWidth</span> <span class="o">|</span> <span class="n">UIViewAutoresizingFlexibleHeight</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">navBarView</span> <span class="nl">addSubview:</span><span class="n">bkgView</span><span class="p">];</span>
+</span><span class='line'>        <span class="n">UIButton</span> <span class="o">*</span><span class="n">doneButton</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIButton</span> <span class="nl">buttonWithType:</span><span class="n">UIButtonTypeCustom</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">doneButton</span><span class="p">.</span><span class="n">titleLabel</span> <span class="nl">setFont:</span><span class="p">[</span><span class="n">UIFont</span> <span class="nl">boldSystemFontOfSize:</span><span class="mf">12.0</span><span class="p">]];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">doneButton</span> <span class="nl">setTitle:</span><span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">@&quot;返回&quot;</span><span class="p">,</span><span class="s">@&quot;Dismiss button title&quot;</span><span class="p">)</span> <span class="nl">forState:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">doneButton</span> <span class="nl">setFrame:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="n">size</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">)];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">doneButton</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">photoBrowserDidTapDoneButton:</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">doneButton</span><span class="p">.</span><span class="n">layer</span> <span class="nl">setMasksToBounds:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">doneButton</span><span class="p">.</span><span class="n">layer</span> <span class="nl">setCornerRadius:</span><span class="mf">4.0</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">doneButton</span><span class="p">.</span><span class="n">layer</span> <span class="nl">setBorderWidth:</span><span class="mf">1.0</span><span class="p">];</span>
+</span><span class='line'>        <span class="n">CGColorSpaceRef</span> <span class="n">colorSpace</span> <span class="o">=</span> <span class="n">CGColorSpaceCreateDeviceRGB</span><span class="p">();</span>
+</span><span class='line'>        <span class="n">CGColorRef</span> <span class="n">colorref</span> <span class="o">=</span> <span class="n">CGColorCreate</span><span class="p">(</span><span class="n">colorSpace</span><span class="p">,(</span><span class="n">CGFloat</span><span class="p">[]){</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="p">});</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">doneButton</span><span class="p">.</span><span class="n">layer</span> <span class="nl">setBorderColor:</span><span class="n">colorref</span><span class="p">];</span>
+</span><span class='line'>        <span class="n">doneButton</span><span class="p">.</span><span class="n">autoresizingMask</span> <span class="o">=</span> <span class="n">UIViewAutoresizingFlexibleLeftMargin</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">navBarView</span> <span class="nl">addSubview:</span><span class="n">doneButton</span><span class="p">];</span>
+</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UILabel</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="nl">setFrame:</span><span class="n">CGRectMake</span><span class="p">((</span><span class="n">size</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">60</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">40</span><span class="p">)];</span>
+</span><span class='line'>        <span class="c1">//[self.imageTitleLabel setCenter:navBarView.center];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="nl">setTextAlignment:</span><span class="n">NSTextAlignmentCenter</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="nl">setFont:</span><span class="p">[</span><span class="n">UIFont</span> <span class="nl">boldSystemFontOfSize:</span><span class="mf">20.</span><span class="p">]];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="nl">setTextColor:</span><span class="p">[</span><span class="n">UIColor</span> <span class="n">whiteColor</span><span class="p">]];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="nl">setBackgroundColor:</span><span class="p">[</span><span class="n">UIColor</span> <span class="n">clearColor</span><span class="p">]];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="nl">setText:</span><span class="s">@&quot;&quot;</span><span class="p">];</span>
+</span><span class='line'>        <span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span><span class="p">.</span><span class="n">autoresizingMask</span> <span class="o">=</span> <span class="n">UIViewAutoresizingFlexibleHeight</span> <span class="o">|</span> <span class="n">UIViewAutoresizingFlexibleRightMargin</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span> <span class="nl">setTag:</span><span class="n">BROWSER_TITLE_LBL_TAG</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">navBarView</span> <span class="nl">addSubview:</span><span class="n">self</span><span class="p">.</span><span class="n">imageTitleLabel</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">navBarView</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//pragma mark - PhotBrower Actions</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">photoBrowserDidTapDoneButton:</span><span class="p">(</span><span class="n">UIButton</span> <span class="o">*</span><span class="p">)</span><span class="nv">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="nl">dismissViewControllerAnimated:</span><span class="n">YES</span> <span class="nl">completion:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>至此一个简答的图片墙加详细浏览的功能便做完了，欢迎交流新的想法。</h3>
+</div>
+
+</article>
+
+	<!--<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+-->
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Wanax -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'wanax';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://wanax.github.io/blog/2013/10/31/uicollectionviewyu-cxphotobrowserpei-he-shi-yong-shi-li/';
+        var disqus_url = 'http://wanax.github.io/blog/2013/10/31/uicollectionviewyu-cxphotobrowserpei-he-shi-yong-shi-li/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+		</div>
+	</div>
+</body>
+</html>

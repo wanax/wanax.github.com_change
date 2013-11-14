@@ -65,7 +65,17 @@ button.titlelabel.font = [uifont boldSystemFontOfSize:xx];
 NSURL *url = [NSURL URLWithString:[strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 ```
 
-
+###获取文本的长宽尺寸
+```objc
+CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);  
+NSDictionary * attributes = [NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:FONT_SIZE] forKey:NSFontAttributeName];
+NSAttributedString *attributedText =[[NSAttributedString alloc]
+									     initWithString:text
+									     attributes:attributes];									     
+CGRect rect = [attributedText boundingRectWithSize:constraint
+								options:NSStringDrawingUsesLineFragmentOrigin
+								context:nil];
+```
 
 
 

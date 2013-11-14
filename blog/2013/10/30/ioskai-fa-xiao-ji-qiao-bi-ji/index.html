@@ -89,7 +89,7 @@ button.titlelabel.font = [uifont boldSystemFontOfSize:xx]; UINavigation中间隔
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (10)</a></li>
 <li class='category'><a href='/blog/categories/read/'>Read (2)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (14)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (15)</a></li>
 
   </ul>
 </section>
@@ -229,6 +229,27 @@ button.titlelabel.font = [uifont boldSystemFontOfSize:xx]; UINavigation中间隔
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="p">[</span><span class="n">strUrl</span> <span class="nl">stringByAddingPercentEscapesUsingEncoding:</span><span class="n">NSUTF8StringEncoding</span><span class="p">]];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>获取文本的长宽尺寸</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">CGSize</span> <span class="n">constraint</span> <span class="o">=</span> <span class="n">CGSizeMake</span><span class="p">(</span><span class="n">CELL_CONTENT_WIDTH</span> <span class="o">-</span> <span class="p">(</span><span class="n">CELL_CONTENT_MARGIN</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">20000.0f</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span> <span class="n">attributes</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObject:</span><span class="p">[</span><span class="n">UIFont</span> <span class="nl">systemFontOfSize:</span><span class="n">FONT_SIZE</span><span class="p">]</span> <span class="nl">forKey:</span><span class="n">NSFontAttributeName</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSAttributedString</span> <span class="o">*</span><span class="n">attributedText</span> <span class="o">=</span><span class="p">[[</span><span class="n">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>                                       <span class="nl">initWithString:</span><span class="n">text</span>
+</span><span class='line'>                                       <span class="nl">attributes:</span><span class="n">attributes</span><span class="p">];</span>                                  
+</span><span class='line'><span class="n">CGRect</span> <span class="n">rect</span> <span class="o">=</span> <span class="p">[</span><span class="n">attributedText</span> <span class="nl">boundingRectWithSize:</span><span class="n">constraint</span>
+</span><span class='line'>                              <span class="nl">options:</span><span class="n">NSStringDrawingUsesLineFragmentOrigin</span>
+</span><span class='line'>                              <span class="nl">context:</span><span class="nb">nil</span><span class="p">];</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

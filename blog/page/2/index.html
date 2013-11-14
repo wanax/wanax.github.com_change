@@ -8,7 +8,38 @@
 	<title>陋室</title>
 	<meta name="author" content="Wanax">
 	
-	<meta name="description" content="Oct 11th, 2012 Tec Ajax对象数组传参方式 项目中一个页面需要的功能是动态添加信息列表，传至后台添加数据库。用的方式是ajax+struts2，因为struts本身的特性，在ajax的data里直接写数组名java后台是无法正常接收到的， &hellip;">
+	<meta name="description" content="Nov 1st, 2012 Tec Java设置编码读写文件笔记 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+public class Test { public &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,7 +103,7 @@
     <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
 <li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (10)</a></li>
 <li class='category'><a href='/blog/categories/read/'>Read (2)</a></li>
-<li class='category'><a href='/blog/categories/tec/'>Tec (14)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (15)</a></li>
 
   </ul>
 </section>
@@ -110,6 +141,104 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-01T16:04:00+08:00" data-updated="true" itemprop="datePublished">Nov 1<span>st</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tec/'>Tec</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/11/01/javashe-zhi-bian-ma-du-xie-wen-jian-bi-ji/" itemprop="url">Java设置编码读写文件笔记</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">try</span><span class="o">{</span>
+</span><span class='line'>                <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+</span><span class='line'>                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">url</span><span class="o">),</span><span class="s">&quot;UTF-8&quot;</span><span class="o">));</span>
+</span><span class='line'>                <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">StringBuffer</span> <span class="n">str</span><span class="o">=</span><span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+</span><span class='line'>                <span class="k">while</span><span class="o">((</span><span class="n">data</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">())!=</span><span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>                <span class="o">{</span>
+</span><span class='line'>                    <span class="n">str</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">data</span><span class="o">+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">Test</span> <span class="n">test</span><span class="o">=</span><span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">test</span><span class="o">.</span><span class="na">ece</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+</span><span class='line'>                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ece</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>            <span class="k">try</span><span class="o">{</span>
+</span><span class='line'>                <span class="n">BufferedWriter</span> <span class="n">bw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedWriter</span><span class="o">(</span>
+</span><span class='line'>                        <span class="k">new</span> <span class="nf">OutputStreamWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">url</span><span class="o">,</span><span class="kc">false</span><span class="o">),</span><span class="s">&quot;UTF-8&quot;</span><span class="o">));</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">bw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+</span><span class='line'>                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -476,52 +605,6 @@ HttpURLConnection是java的标准类，HttpClient 是 Apache Jakarta Common 下�
 
 		
 		<a href="/blog/2012/01/04/luceneru-men-chu-bu/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-04T17:08:00+08:00" data-updated="true" itemprop="datePublished">Jan 4<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/tec/'>Tec</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji/" itemprop="url">Struts跳转控制笔记</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<h3>当<code>namespace="/login"</code>时</h3>
-
-<p>===</p>
-
-<p>子路目中：有<code>login/</code>   <strong>no action mapped for</strong></p>
-
-<p>无<code>login/</code>   <strong>no result defined</strong></p>
-
-<p>根目录中：    <strong>no result defined</strong></p>
-
-<p><strong>no action mapped for</strong></p>
-
-
-		
-		<a href="/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

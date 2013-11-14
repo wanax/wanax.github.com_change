@@ -4,7 +4,7 @@
   <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-11-14T09:33:00+08:00</updated>
+  <updated>2013-11-14T17:30:53+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -12,6 +12,140 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用Octopress搭建个人博客]]></title>
+    <link href="http://wanax.github.io/blog/2013/11/14/shi-yong-octopressda-jian-ge-ren-bo-ke/"/>
+    <updated>2013-11-14T16:45:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/11/14/shi-yong-octopressda-jian-ge-ren-bo-ke</id>
+    <content type="html"><![CDATA[<p><img src="http://wanax.github.io/images/octopress-header.png" alt="image" /></p>
+
+<p>十月份用octopress搭建了一个个人博客，现在把大概的流程介绍一下，常用的几个命令也在这里记下来。</p>
+
+<p><a href="http://http://octopress.org/">Octopress</a>是个利用<a href="https://github.com/mojombo/jekyll">Jekyll</a>引擎开发的博客系统。它将生成的静态页面push到我们自己的github上，可以很好的在github page上展示。号称程序员博客逼格利器</p>
+
+<blockquote><p>A blogging framework for hackers.</p></blockquote>
+
+<!--more-->
+
+
+<h3>首先是搭建发布环境</h3>
+
+<p>Octopress需要Ruby环境，前几天自己电脑上装的Ubantu10.0自带的Ruby1.8.7试过了不行，起码要更新到Ruby1.9.1吧，官方的建议是1.9.3.</p>
+
+<p>安装Ruby有两个方法，一个是直接去官网下载Ruby包，解压缩，安装。另一个是使用RVM(Ruby Version Manager)来负责安装和管理Ruby的环境。</p>
+
+<p>在Mac电脑上我直接下载安装了Rvm</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L https://get.rvm.io | bash -s stable --ruby</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3
+</span><span class='line'>rvm use 1.9.3
+</span><span class='line'>rvm rubygems latest</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参见<a href="http://octopress.org/docs/setup/rvm/">Installing Ruby With RVM</a></p>
+
+<p>这样便简单搞定，但Ubantu上rvm死活搞不定，网上搜了下使用第一种方法直接安装算完了，也不麻烦。</p>
+
+<h3>然后便是安装Octopress</h3>
+
+<p>先把Octopress从网上down下来</p>
+
+<p><a href="https://github.com/imathis/octopress">Octopress</a></p>
+
+<p>电脑上有git的话简单一点</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解压进入项目目录安装相关依赖</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+</span><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参见<a href="http://octopress.org/docs/setup/">Octopress Setup</a></p>
+
+<p>这几步是把发布Octopress的环境搞定，还没有正式开始搭建Octopress，我在Mac上发布的博客，在Ubantu从git上check下来，也要这么来一遍才能正式使用Octopress。</p>
+
+<p>最后安装默认的Octopress 主题。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>接下来是配置Octopress</h3>
+
+<p>主要是对<code>_config.yml</code>进行修改，其它的话自行研究吧。</p>
+
+<p>具体配置参见<a href="http://octopress.org/docs/configuring/">Configuring Octopress</a>写得很详细了。</p>
+
+<p>搞定配置后可以先大体的看下样式</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate//通过引擎生成静态网页
+</span><span class='line'>rake preview//本地预览</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="localhost:4000">localhost:4000</a>进行本地预览</p>
+
+<h3>觉得差不多了就可以把Octopress发到github上了</h3>
+
+<p>首先需要在GitHub上创建一个仓库，并将仓库名称按照：username.github.com的方式命名。待发布完毕可以直接使用<code>http://username.github.com</code>来访问博客。同时可以把博客的源码放到source分支下，并把生成的内容提交到master分支。这样随便换到哪里的电脑上都可以check下来接着写了。</p>
+
+<p>第一步是对我们新建的目录进行建立与初始化，会提示输入你的git的账号和密码，一次确认完毕以后你每次提交都会跑到你确认的git账号下的github.com/username/username.github.com下了。</p>
+
+<p>本地生成一下静态Html发上去就妥了</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate//生成
+</span><span class='line'>rake deploy//发布</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>最后说下写博客的常用命令</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["title"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这是新建一篇文章，存放在<code>source/_posts</code>目录下面，使用的是markdown语法，具体规则不麻烦，大家可以自己谷歌下。Mac下用Mou进行编辑很方便，Linux的话线上编辑会好一点，chrome有不少插件，其中一个叫Ma‘de，好像是作者用以表达对母亲的爱…</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> rake generate
+</span><span class='line'> git add .
+</span><span class='line'> git commit -am "Some comment here." 
+</span><span class='line'> git push origin source
+</span><span class='line'> rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用上面几条命令生成与发布博客，中间的三条git命令是把博客的源码放到source的分支上，以便在不同的电脑上编辑博客。</p>
+
+<p>参见<a href="http://octopress.org/docs/blogging/">Blogging Basics</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UICollectionView与CXPhotoBrowser配合使用示例]]></title>
@@ -405,6 +539,27 @@
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="p">[</span><span class="n">strUrl</span> <span class="nl">stringByAddingPercentEscapesUsingEncoding:</span><span class="n">NSUTF8StringEncoding</span><span class="p">]];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>获取文本的长宽尺寸</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">CGSize</span> <span class="n">constraint</span> <span class="o">=</span> <span class="n">CGSizeMake</span><span class="p">(</span><span class="n">CELL_CONTENT_WIDTH</span> <span class="o">-</span> <span class="p">(</span><span class="n">CELL_CONTENT_MARGIN</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">20000.0f</span><span class="p">);</span>
+</span><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span> <span class="n">attributes</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObject:</span><span class="p">[</span><span class="n">UIFont</span> <span class="nl">systemFontOfSize:</span><span class="n">FONT_SIZE</span><span class="p">]</span> <span class="nl">forKey:</span><span class="n">NSFontAttributeName</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSAttributedString</span> <span class="o">*</span><span class="n">attributedText</span> <span class="o">=</span><span class="p">[[</span><span class="n">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span>
+</span><span class='line'>                                       <span class="nl">initWithString:</span><span class="n">text</span>
+</span><span class='line'>                                       <span class="nl">attributes:</span><span class="n">attributes</span><span class="p">];</span>                                  
+</span><span class='line'><span class="n">CGRect</span> <span class="n">rect</span> <span class="o">=</span> <span class="p">[</span><span class="n">attributedText</span> <span class="nl">boundingRectWithSize:</span><span class="n">constraint</span>
+</span><span class='line'>                              <span class="nl">options:</span><span class="n">NSStringDrawingUsesLineFragmentOrigin</span>
+</span><span class='line'>                              <span class="nl">context:</span><span class="nb">nil</span><span class="p">];</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -1885,65 +2040,6 @@ post是请求，get便是验证下登录有没有成功，找一个只有登录�
 
 
 <p>这样我们就可以简单地对一些特定的词语做分割了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[struts跳转控制笔记]]></title>
-    <link href="http://wanax.github.io/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji/"/>
-    <updated>2012-01-04T17:08:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2012/01/04/strutstiao-zhuan-kong-zhi-bi-ji</id>
-    <content type="html"><![CDATA[<h3>当<code>namespace="/login"</code>时</h3>
-
-<p>===</p>
-
-<p>子路目中：有<code>login/</code>   <strong>no action mapped for</strong></p>
-
-<p>无<code>login/</code>   <strong>no result defined</strong></p>
-
-<p>根目录中：    <strong>no result defined</strong></p>
-
-<p><strong>no action mapped for</strong></p>
-
-<!--more-->
-
-
-<h3>当<code>namespace="/"</code>时</h3>
-
-<p>===</p>
-
-<p>子目录中：      <strong>可跳转，无样式，URL重复发送</strong></p>
-
-<p><strong>no result defined</strong></p>
-
-<p>根目录中：    <strong>no result defined</strong></p>
-
-<p>跳转成功</p>
-
-<p>结果跳转位置为“namespace+result”</p>
-
-<p>===</p>
-
-<h3>struts.xml 匹配action方式：</h3>
-
-<p>===
-1.当各目录jsp页面发送action时，系统首先在其加上所在目录                                               名，与namespace匹配。</p>
-
-<p><code>namespace=“/”</code>与不写有区别，不写则匹配所有，写等同于<code>“/test”</code>之类，<code>“/”</code>表示根目录</p>
-
-<p>故当<code>namespace=“/test”</code>时，根目录的action应写<code>test/*.action，所发出的全称即"test/*.action"</code>，即可找到对应struts，但服务器会记录信息，使URL叠加，不推荐使用。</p>
-
-<p>另：同子目录下发<code>action="*.action"，会自动加上对应文件名，即"test/*action"</code>，可与namespace匹配。</p>
-
-<p>故总体来说，推荐使用重定向的方式，不论再哪级目录下，均返回根目录对应配置文件填写action</p>
-
-<p>ex.   二级目录下，可写成<code>"../../test/test/*action"</code>重新定向。</p>
-
-<p>在匹配过程中有时候结果返回页面会发现css全部无法加载，此为因为重定向后URL改变，对应不上原来的css加载路径，此时应应变对应尝试各种更改action的发送URL。</p>
-
-<p>result 前加<code>/</code> 表返回根目录，再依具体位置写目录</p>
-
-<p>通配符的使用 ex. <code>action="jump*"    result=/test{1}/test{1}Success.jsp</code></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tec | 陋室]]></title>
   <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-11-14T09:33:00+08:00</updated>
+  <updated>2013-11-14T17:30:53+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用Octopress搭建个人博客]]></title>
+    <link href="http://wanax.github.io/blog/2013/11/14/shi-yong-octopressda-jian-ge-ren-bo-ke/"/>
+    <updated>2013-11-14T16:45:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2013/11/14/shi-yong-octopressda-jian-ge-ren-bo-ke</id>
+    <content type="html"><![CDATA[<p><img src="/images/octopress-header.png" alt="image" /></p>
+
+<p>十月份用octopress搭建了一个个人博客，现在把大概的流程介绍一下，常用的几个命令也在这里记下来。</p>
+
+<p><a href="http://http://octopress.org/">Octopress</a>是个利用<a href="https://github.com/mojombo/jekyll">Jekyll</a>引擎开发的博客系统。它将生成的静态页面push到我们自己的github上，可以很好的在github page上展示。号称程序员博客逼格利器</p>
+
+<blockquote><p>A blogging framework for hackers.</p></blockquote>
+
+<!--more-->
+
+
+<h3>首先是搭建发布环境</h3>
+
+<p>Octopress需要Ruby环境，前几天自己电脑上装的Ubantu10.0自带的Ruby1.8.7试过了不行，起码要更新到Ruby1.9.1吧，官方的建议是1.9.3.</p>
+
+<p>安装Ruby有两个方法，一个是直接去官网下载Ruby包，解压缩，安装。另一个是使用RVM(Ruby Version Manager)来负责安装和管理Ruby的环境。</p>
+
+<p>在Mac电脑上我直接下载安装了Rvm</p>
+
+<p><code>
+curl -L https://get.rvm.io | bash -s stable --ruby
+</code></p>
+
+<p><code>
+rvm install 1.9.3
+rvm use 1.9.3
+rvm rubygems latest
+</code></p>
+
+<p>参见<a href="http://octopress.org/docs/setup/rvm/">Installing Ruby With RVM</a></p>
+
+<p>这样便简单搞定，但Ubantu上rvm死活搞不定，网上搜了下使用第一种方法直接安装算完了，也不麻烦。</p>
+
+<h3>然后便是安装Octopress</h3>
+
+<p>先把Octopress从网上down下来</p>
+
+<p><a href="https://github.com/imathis/octopress">Octopress</a></p>
+
+<p>电脑上有git的话简单一点</p>
+
+<p><code>
+git clone git://github.com/imathis/octopress.git octopress
+</code></p>
+
+<p>解压进入项目目录安装相关依赖</p>
+
+<p><code>
+cd octopress
+gem install bundler
+rbenv rehash
+bundle install
+</code>
+参见<a href="http://octopress.org/docs/setup/">Octopress Setup</a></p>
+
+<p>这几步是把发布Octopress的环境搞定，还没有正式开始搭建Octopress，我在Mac上发布的博客，在Ubantu从git上check下来，也要这么来一遍才能正式使用Octopress。</p>
+
+<p>最后安装默认的Octopress 主题。</p>
+
+<p><code>
+rake install
+</code></p>
+
+<h3>接下来是配置Octopress</h3>
+
+<p>主要是对<code>_config.yml</code>进行修改，其它的话自行研究吧。</p>
+
+<p>具体配置参见<a href="http://octopress.org/docs/configuring/">Configuring Octopress</a>写得很详细了。</p>
+
+<p>搞定配置后可以先大体的看下样式</p>
+
+<p><code>
+rake generate//通过引擎生成静态网页
+rake preview//本地预览
+</code>
+<a href="localhost:4000">localhost:4000</a>进行本地预览</p>
+
+<h3>觉得差不多了就可以把Octopress发到github上了</h3>
+
+<p>首先需要在GitHub上创建一个仓库，并将仓库名称按照：username.github.com的方式命名。待发布完毕可以直接使用<code>http://username.github.com</code>来访问博客。同时可以把博客的源码放到source分支下，并把生成的内容提交到master分支。这样随便换到哪里的电脑上都可以check下来接着写了。</p>
+
+<p>第一步是对我们新建的目录进行建立与初始化，会提示输入你的git的账号和密码，一次确认完毕以后你每次提交都会跑到你确认的git账号下的github.com/username/username.github.com下了。</p>
+
+<p>本地生成一下静态Html发上去就妥了</p>
+
+<p><code>
+rake generate//生成
+rake deploy//发布
+</code></p>
+
+<h3>最后说下写博客的常用命令</h3>
+
+<p><code>
+rake new_post["title"]
+</code></p>
+
+<p>这是新建一篇文章，存放在<code>source/_posts</code>目录下面，使用的是markdown语法，具体规则不麻烦，大家可以自己谷歌下。Mac下用Mou进行编辑很方便，Linux的话线上编辑会好一点，chrome有不少插件，其中一个叫Ma‘de，好像是作者用以表达对母亲的爱…</p>
+
+<p><code>
+ rake generate
+ git add .
+ git commit -am "Some comment here."
+ git push origin source
+ rake deploy
+</code></p>
+
+<p>使用上面几条命令生成与发布博客，中间的三条git命令是把博客的源码放到source的分支上，以便在不同的电脑上编辑博客。</p>
+
+<p>参见<a href="http://octopress.org/docs/blogging/">Blogging Basics</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UICollectionView与CXPhotoBrowser配合使用示例]]></title>
@@ -304,6 +421,25 @@ NSString *htmlString = [webviewText stringByAppendingFormat:@"%@", str];
 <p><code>objc
 NSURL *url = [NSURL URLWithString:[strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 </code></p>
+
+<h3>获取文本的长宽尺寸</h3>
+
+<p>```objc
+CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH &ndash; (CELL_CONTENT_MARGIN * 2), 20000.0f);<br/>
+NSDictionary * attributes = [NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:FONT_SIZE] forKey:NSFontAttributeName];
+NSAttributedString *attributedText =[[NSAttributedString alloc]</p>
+
+<pre><code>                                     initWithString:text
+                                     attributes:attributes];                                         
+</code></pre>
+
+<p>CGRect rect = [attributedText boundingRectWithSize:constraint</p>
+
+<pre><code>                            options:NSStringDrawingUsesLineFragmentOrigin
+                            context:nil];
+</code></pre>
+
+<p>```</p>
 ]]></content>
   </entry>
   
@@ -391,109 +527,6 @@ animation.type = kCATransitionMoveIn;
 animation.subtype = kCATransitionFromBottom;  
 [[self.view layer] addAnimation:animation forKey:@"animation"];  
 animation=nil; 
-</code></pre>
-
-<p>```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS上js引擎的使用]]></title>
-    <link href="http://wanax.github.io/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong/"/>
-    <updated>2013-06-07T11:47:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2013/06/07/iosshang-jsyin-qing-de-shi-yong</id>
-    <content type="html"><![CDATA[<p> 如上篇文章所述ios折线图绘制，公司开发需要要用到一些字符串转公式的需求。自己实在有点惧自己写语法书啥的听公司大牛说可以使用js引擎试试，于是就抱着试试的态度调研了一把，感觉还不错。</p>
-
-<p>这次试用了两个js引擎，一个是javascriptcore，这个比较方便可以直接引入便使用，另一个是google的v8引擎，这个有点麻烦要先编译通过才行，搞了好一阵才派上用场~倒是学到了好多新知识，哈哈。</p>
-
-<!--more-->
-
-
-<p>先说简单的javascriptcore吧，下载好库引入静态链接库和头文件便可以了。这里有时候会报错说找不到文件。google了一下发下一般是因为xcode本身对外来拷贝文件没有正确引用导致的，解决办法很简单，进入Build Phases 的Compile Source对新添加的头文件进行引用就好了。</p>
-
-<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607111925093_zps428cacd3.png" alt="image" /></p>
-
-<p>接下来便是怎样使用的问题。</p>
-
-<p>先在头文件里引用文件：
-``` c</p>
-
-<pre><code>import "JavaScriptCore/JavaScriptCore.h" 
-</code></pre>
-
-<p>```</p>
-
-<p>然后是构造js的上下文context，这个还蛮重要的东西，具体的原理大家可以自行google，因为我自己理解的也很肤浅，略知皮毛而已。</p>
-
-<p>``` c</p>
-
-<pre><code>context = JSGlobalContextCreate(NULL);  
-</code></pre>
-
-<p>```</p>
-
-<p>完了以后我把js运行的方法封装成了一个方法，如下：</p>
-
-<p>``` c
-&ndash; (NSString <em>)runsJS:(NSString </em>)aJSString {</p>
-
-<pre><code>if (!aJSString) {  
-    NSLog(@"[JSC] JS String is empty!");  
-    return nil;  
-}
-JSStringRef scriptJS = JSStringCreateWithUTF8CString([aJSString UTF8String]);  
-JSValueRef exception = NULL;        
-JSValueRef result = JSEvaluateScript(context, scriptJS, NULL, NULL, 0, &amp;exception);  
-NSString *res = nil;        
-JSStringRef jstrArg = JSValueToStringCopy(context, result, NULL);  
-res = (NSString*)JSStringCopyCFString(kCFAllocatorDefault, jstrArg);       
-JSStringRelease(jstrArg);        
-JSStringRelease(scriptJS);        
-return res;  
-</code></pre>
-
-<p>}
-```</p>
-
-<p>封装完毕便可以顺利使用啦：</p>
-
-<p>`&ldquo; c
-NSString *str=[self.engine runJS:@&ldquo;var str=&rdquo;;for(var i=0;i&lt;2;i++){str= str + &lsquo;\n&rsquo; + i + &lsquo; :Hello&rsquo; + &lsquo;, World!&rsquo;;}&ldquo;];</p>
-
-<pre><code>  //NSLog(@"%@",str);   
-</code></pre>
-
-<p>```</p>
-
-<p>这便是大体的javascriptcore的使用方法了。</p>
-
-<p>接下来是v8引擎。</p>
-
-<p>v8引擎的编译很痛苦，网上一般比较常见的教程是编译成动态库，lib之类的，但苹果貌似只让用.a的静态库，无形中又增加了负担。我网上搜了好多编译的方法，无非都是些svn check下v8的文件，然后安装python和对应python的一个编译工具scons进行编译。看攻略说，google先在又不提倡用scons了，又开发了另外一种东西&hellip;.真是能折腾。</p>
-
-<p>我遇到的主要问题是好像编译的时候要搭配一个叫breakpad的东西一起，而这玩意儿又死活装不了，就一直卡在那里了。但比较意外的是最后经竟意外发现在v8根目录还有个make的命令，也可以直接编译&hellip;..就这样稀里糊涂的把静态库给整出来了，还隐藏得很深，search了一下才发现在哪里。</p>
-
-<p><img src="http://i1001.photobucket.com/albums/af134/mxiaochi/blogsource/20130607113710843_zpsd81cc322.png" alt="image" /></p>
-
-<p>这便是粗略的使用方法啦。</p>
-
-<blockquote><p>一个简单的示例</p></blockquote>
-
-<p>```javascript</p>
-
-<pre><code>   var test=function(){  
-       var val=[];  
-       val["1.0"]=1;  
-       val["1.1"]=2;  
-       val["1.2"]=3;  
-       val["1.3"]=4;  
-       val["2"]=34;      
-       var str="var v=this.val; v[\"1.3\"]=v[\"1.0\"]*v[\"1.2\"];";  
-       var fun=new Function(str);  
-       val["0"]=5;  
-       fun();  
-       return val;  
- }  
 </code></pre>
 
 <p>```</p>

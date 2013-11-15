@@ -172,11 +172,17 @@
     </url>
     <url>
         <loc>http://wanax.github.io/blog/2013/11/14/shi-yong-octopressda-jian-ge-ren-bo-ke/</loc>
-        <lastmod>2013-11-14T17:30:52+08:00</lastmod>
+        <lastmod>2013-11-15T16:47:59+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://wanax.github.io/blog/2013/11/15/python-djangokuang-jia-wang-zhan-da-jian-ru-men/
+        </loc>
+        <lastmod>2013-11-15T18:02:34+08:00</lastmod>
     </url>
     <url>
         <loc>http://wanax.github.io/blog/archives/</loc>
-        <lastmod>2013-11-14T17:30:52+08:00</lastmod>
+        <lastmod>2013-11-15T18:02:34+08:00</lastmod>
     </url>
     <url>
         <loc>http://wanax.github.io/blog/categories/</loc>
@@ -184,7 +190,7 @@
     </url>
     <url>
         <loc>http://wanax.github.io/</loc>
-        <lastmod>2013-11-14T17:30:52+08:00</lastmod>
+        <lastmod>2013-11-15T18:02:34+08:00</lastmod>
     </url>
     <url>
         <loc>http://wanax.github.io/robots.txt</loc>

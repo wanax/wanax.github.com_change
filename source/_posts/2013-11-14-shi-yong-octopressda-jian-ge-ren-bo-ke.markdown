@@ -6,7 +6,7 @@ comments: true
 categories: Tec
 ---
 
-![image](/images/octopress-header.png)
+![image](/images/tec/octopress-header.png)
 
 十月份用octopress搭建了一个个人博客，现在把大概的流程介绍一下，常用的几个命令也在这里记下来。
 

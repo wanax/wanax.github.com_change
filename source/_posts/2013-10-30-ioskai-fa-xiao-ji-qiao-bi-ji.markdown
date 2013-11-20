@@ -77,6 +77,47 @@ CGRect rect = [attributedText boundingRectWithSize:constraint
 								context:nil];
 ```
 
+###NSNumberFormatter的一些使用方法
+
+[学习一](http://objc.toodarkpark.net/Foundation/Classes/NSNumberFormatter.html)
+[学习二](https://developer.apple.com/library/ios/documentation/cocoa/Conceptual/DataFormatting/Articles/dfNumberFormatting10_4.html)
+
+现在主要是对setPositiveFormat的使用总结，比较常用的有下面的场景
+
+```objc
+if([obj[@"unit"] isEqualToString:@"1000.0"]){
+	    [formatter setPositiveFormat:@"$#,###0.00"];//大整数三位一个逗号+小数取舍
+	    //还可以添加诸如￥的字符，若要添加0需‘0’包裹
+	}else if([obj[@"unit"] isEqualToString:@"%"]){
+	    [formatter setPositiveFormat:@"0.00%;0.00%;-0.00%"];//百分数小数取舍
+	}else if([obj[@"unit"] isEqualToString:@"1.0"]){
+	    [formatter setPositiveFormat:@"##0.0"];//一般浮点的小数取舍
+}
+NSMutableDictionary *dic=[[[NSMutableDictionary alloc] init] autorelease];
+for(id valueData in obj[@"array"]){
+	   [dic setValue:[formatter stringFromNumber:valueData[@"v"]] forKey:valueData[@"y"]];
+}
+```
+
+```objc
+NSNumberFormatter *formatter=[[[NSNumberFormatter alloc] init] autorelease];[formatter setPositiveFormat:@"00"];//年份补足的用法，表示至少两位整数。不足左添0
+NSMutableArray *temp=[[[NSMutableArray alloc] init] autorelease];
+for(int i=[rangeDic[@"begin"] integerValue];i<=[rangeDic[@"end"] integerValue];i++){
+	    [temp addObject:[formatter stringFromNumber:[NSNumber numberWithFloat:(6.0+i)]]];
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

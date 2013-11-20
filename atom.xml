@@ -4,7 +4,7 @@
   <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-11-15T18:02:08+08:00</updated>
+  <updated>2013-11-20T16:45:11+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -789,6 +789,55 @@
 </span><span class='line'><span class="n">CGRect</span> <span class="n">rect</span> <span class="o">=</span> <span class="p">[</span><span class="n">attributedText</span> <span class="nl">boundingRectWithSize:</span><span class="n">constraint</span>
 </span><span class='line'>                              <span class="nl">options:</span><span class="n">NSStringDrawingUsesLineFragmentOrigin</span>
 </span><span class='line'>                              <span class="nl">context:</span><span class="nb">nil</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>NSNumberFormatter的一些使用方法</h3>
+
+<p><a href="http://objc.toodarkpark.net/Foundation/Classes/NSNumberFormatter.html">学习一</a>
+<a href="https://developer.apple.com/library/ios/documentation/cocoa/Conceptual/DataFormatting/Articles/dfNumberFormatting10_4.html">学习二</a></p>
+
+<p>现在主要是对setPositiveFormat的使用总结，比较常用的有下面的场景</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">if</span><span class="p">([</span><span class="n">obj</span><span class="p">[</span><span class="s">@&quot;unit&quot;</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;1000.0&quot;</span><span class="p">]){</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">formatter</span> <span class="nl">setPositiveFormat:</span><span class="s">@&quot;$#,###0.00&quot;</span><span class="p">];</span><span class="c1">//大整数三位一个逗号+小数取舍</span>
+</span><span class='line'>      <span class="c1">//还可以添加诸如￥的字符，若要添加0需‘0’包裹</span>
+</span><span class='line'>  <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">([</span><span class="n">obj</span><span class="p">[</span><span class="s">@&quot;unit&quot;</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;%&quot;</span><span class="p">]){</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">formatter</span> <span class="nl">setPositiveFormat:</span><span class="s">@&quot;0.00%;0.00%;-0.00%&quot;</span><span class="p">];</span><span class="c1">//百分数小数取舍</span>
+</span><span class='line'>  <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">([</span><span class="n">obj</span><span class="p">[</span><span class="s">@&quot;unit&quot;</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;1.0&quot;</span><span class="p">]){</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">formatter</span> <span class="nl">setPositiveFormat:</span><span class="s">@&quot;##0.0&quot;</span><span class="p">];</span><span class="c1">//一般浮点的小数取舍</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">NSMutableDictionary</span> <span class="o">*</span><span class="n">dic</span><span class="o">=</span><span class="p">[[[</span><span class="n">NSMutableDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">]</span> <span class="n">autorelease</span><span class="p">];</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">id</span> <span class="n">valueData</span> <span class="k">in</span> <span class="n">obj</span><span class="p">[</span><span class="s">@&quot;array&quot;</span><span class="p">]){</span>
+</span><span class='line'>     <span class="p">[</span><span class="n">dic</span> <span class="nl">setValue:</span><span class="p">[</span><span class="n">formatter</span> <span class="nl">stringFromNumber:</span><span class="n">valueData</span><span class="p">[</span><span class="s">@&quot;v&quot;</span><span class="p">]]</span> <span class="nl">forKey:</span><span class="n">valueData</span><span class="p">[</span><span class="s">@&quot;y&quot;</span><span class="p">]];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSNumberFormatter</span> <span class="o">*</span><span class="n">formatter</span><span class="o">=</span><span class="p">[[[</span><span class="n">NSNumberFormatter</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">]</span> <span class="n">autorelease</span><span class="p">];[</span><span class="n">formatter</span> <span class="nl">setPositiveFormat:</span><span class="s">@&quot;00&quot;</span><span class="p">];</span><span class="c1">//年份补足的用法，表示至少两位整数。不足左添0</span>
+</span><span class='line'><span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">temp</span><span class="o">=</span><span class="p">[[[</span><span class="n">NSMutableArray</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">]</span> <span class="n">autorelease</span><span class="p">];</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="p">[</span><span class="n">rangeDic</span><span class="p">[</span><span class="s">@&quot;begin&quot;</span><span class="p">]</span> <span class="n">integerValue</span><span class="p">];</span><span class="n">i</span><span class="o">&lt;=</span><span class="p">[</span><span class="n">rangeDic</span><span class="p">[</span><span class="s">@&quot;end&quot;</span><span class="p">]</span> <span class="n">integerValue</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">temp</span> <span class="nl">addObject:</span><span class="p">[</span><span class="n">formatter</span> <span class="nl">stringFromNumber:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="p">(</span><span class="mf">6.0</span><span class="o">+</span><span class="n">i</span><span class="p">)]]];</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tec | 陋室]]></title>
   <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2013-11-15T18:02:35+08:00</updated>
+  <updated>2013-11-20T16:45:11+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -650,6 +650,45 @@ NSAttributedString *attributedText =[[NSAttributedString alloc]</p>
 </code></pre>
 
 <p>```</p>
+
+<h3>NSNumberFormatter的一些使用方法</h3>
+
+<p><a href="http://objc.toodarkpark.net/Foundation/Classes/NSNumberFormatter.html">学习一</a>
+<a href="https://developer.apple.com/library/ios/documentation/cocoa/Conceptual/DataFormatting/Articles/dfNumberFormatting10_4.html">学习二</a></p>
+
+<p>现在主要是对setPositiveFormat的使用总结，比较常用的有下面的场景</p>
+
+<p>```objc
+if([obj[@&ldquo;unit&rdquo;] isEqualToString:@&ldquo;1000.0&rdquo;]){</p>
+
+<pre><code>    [formatter setPositiveFormat:@"$#,###0.00"];//大整数三位一个逗号+小数取舍
+    //还可以添加诸如￥的字符，若要添加0需‘0’包裹
+}else if([obj[@"unit"] isEqualToString:@"%"]){
+    [formatter setPositiveFormat:@"0.00%;0.00%;-0.00%"];//百分数小数取舍
+}else if([obj[@"unit"] isEqualToString:@"1.0"]){
+    [formatter setPositiveFormat:@"##0.0"];//一般浮点的小数取舍
+</code></pre>
+
+<p>}
+NSMutableDictionary *dic=[[[NSMutableDictionary alloc] init] autorelease];
+for(id valueData in obj[@&ldquo;array&rdquo;]){</p>
+
+<pre><code>   [dic setValue:[formatter stringFromNumber:valueData[@"v"]] forKey:valueData[@"y"]];
+</code></pre>
+
+<p>}
+```</p>
+
+<p>```objc
+NSNumberFormatter <em>formatter=[[[NSNumberFormatter alloc] init] autorelease];[formatter setPositiveFormat:@&ldquo;00&rdquo;];//年份补足的用法，表示至少两位整数。不足左添0
+NSMutableArray </em>temp=[[[NSMutableArray alloc] init] autorelease];
+for(int i=[rangeDic[@&ldquo;begin&rdquo;] integerValue];i&lt;=[rangeDic[@&ldquo;end&rdquo;] integerValue];i++){</p>
+
+<pre><code>    [temp addObject:[formatter stringFromNumber:[NSNumber numberWithFloat:(6.0+i)]]];
+</code></pre>
+
+<p>}
+```</p>
 ]]></content>
   </entry>
   

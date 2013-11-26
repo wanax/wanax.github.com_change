@@ -50,8 +50,5 @@ categories: OnTheRoad
 
 嘿，藏区无平路。
 
-![image](http://i1001.photobucket.com/albums/af134/mxiaochi/tibet/p_large_umej_4a42000633fc2d12_zps5cf000d7.jpg)
->*__有没有觉得洒家的袜子潮爆了__*
-
 ![image](http://i1001.photobucket.com/albums/af134/mxiaochi/tibet/p_large_jki4_2cb70000697e2d0e_zpsa8616ed8.jpg)
 >*__太阳多大__*

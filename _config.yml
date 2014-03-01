@@ -95,8 +95,8 @@ weibo_share: true # 是否开启微博分享按钮
 # delicious_count: 3
 
 # Disqus Comments
-disqus_short_name: wanax
-disqus_show_comment_count: false
+#disqus_short_name: wanax
+#disqus_show_comment_count: false
 
 # Google Analytics
 # google_analytics_tracking_id:

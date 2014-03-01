@@ -14,13 +14,13 @@ categories: Tec
 
 它们的相互关系如下图所示，
 
-![image](/images/tec/iOSPub/pic_1.png)
+![image](/images/tec/IOSPub/pic_1.png)
 
 简单说来便是用户身份验证书（Certificates），App应用身份ID（Identifiers），可用于开发的Devices三者合一生成一份Provisioning Profile，并将此profile下载到本机双击安装后就自然可以在xcode中找到了(注意左上角的“GooGuu”在配置发布时应将Target与Project的设置调未相同选项，以避免发布失败)。
 
 <!--more-->
 
-![image](/images/tec/iOSPub/pic_3.png)
+![image](/images/tec/IOSPub/pic_3.png)
 
 
 
@@ -40,7 +40,7 @@ Certificates是表明你开发者身份的东西，花了近100的大洋肯定�
 
 可以简单的理解为Certificates的苹果公司给你的身份证，而App ID是你给自己开发的App的一个身份证。
 
-![image](/images/tec/iOSPub/pic_4.png)
+![image](/images/tec/IOSPub/pic_4.png)
 
 ####三.Devices的用处
 
@@ -48,11 +48,11 @@ Certificates是表明你开发者身份的东西，花了近100的大洋肯定�
 
 当你将外置设备连入苹果电脑，进入Xcode的Window->Organizer->Devices中便会发现自己的设备名称：
 
-![image](/images/tec/iOSPub/pic_5.png)
+![image](/images/tec/IOSPub/pic_5.png)
 
 现在的Xcode已经集成了添加Device的功能，点击连接后的设备名称，你会在右边的窗口中发现诸如“添加该设备到开发机”之类的选项。
 
-![image](/images/tec/iOSPub/pic_6.png)
+![image](/images/tec/IOSPub/pic_6.png)
 
 之后到Device里简单的验证一下便可以了，你会发现自己的设备序列号已经添加到了该列表里面。
 
@@ -82,9 +82,9 @@ Certificates是表明你开发者身份的东西，花了近100的大洋肯定�
 
 如果之前已经有旧的版本了那很简单，进入“Manage Your Apps”的页面，点击你要更新的App进入一个新的页面，里面有个Button叫“Add Version”点击进入，有一个流程页面，唯一需要注意的是*填写的新的版本号需要跟本地项目的Target->General的下图位置处的版本号填写相同*，不然在最后打包完毕验证时会发生错误导致无法提交。
 
-![image](/images/tec/iOSPub/pic_10.png)
+![image](/images/tec/IOSPub/pic_10.png)
 
-![image](/images/tec/iOSPub/pic_9.png)
+![image](/images/tec/IOSPub/pic_9.png)
 
 如果是第一次发布App则稍微有点麻烦，具体的还是参见刚刚那位姐姐的文章吧...
 
@@ -94,10 +94,10 @@ Certificates是表明你开发者身份的东西，花了近100的大洋肯定�
 
 将发布设备调节到下图的位置，前提是没有外置的设备连在苹果机上，其实连上也无所谓，只是文字显示不一样。
 
-![image](/images/tec/iOSPub/pic_7.png)
+![image](/images/tec/IOSPub/pic_7.png)
 
 然后点击Product->Archive来静待二进制文件的生成吧。
 
 生成后会自动跳转到Window->Organizer->Archives，然后分别对打包好的App进行验证与最后的提交，就是这样了~
 
-![image](/images/tec/iOSPub/pic_8.png)
+![image](/images/tec/IOSPub/pic_8.png)

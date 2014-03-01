@@ -1,0 +1,248 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>iOS应用发布流程 - 陋室</title>
+	<meta name="author" content="Wanax">
+	
+	<meta name="description" content="iOS应用发布流程 iOS应用发布流程 概述 整个发布流程有四个关键词，Certificates，Identifiers，Devices与Provisioning Profiles. 它们的相互关系如下图所示， 简单说来便是用户身份验证书（Certificates），App应用身份ID（ &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="陋室" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://wanax.github.io/blog/2014/03/01/iosying-yong-fa-bu-liu-cheng/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts 
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+	      $(this).attr('target', '_blank');
+	  });
+	}
+
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src='/images/avatar.png' alt='Profile Picture' style='width: 160px;' />
+</div>
+<hgroup>
+  <h1><a href="/">陋室</a></h1>
+  
+    <h2 class="subtitle">碌碌二十余载,自思无益于国家,每念及此,万念俱灰</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <!--<li><a href="/">首页</a></li>-->
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/intro/index.html">关于我</a></li>
+</ul>
+<section>
+  <h3 class="catag">文章类别</h3>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/life/'>Life (14)</a></li>
+<li class='category'><a href='/blog/categories/ontheroad/'>OnTheRoad (10)</a></li>
+<li class='category'><a href='/blog/categories/read/'>Read (3)</a></li>
+<li class='category'><a href='/blog/categories/tec/'>Tec (17)</a></li>
+
+  </ul>
+</section>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="weibo" href="http://www.weibo.com/1829617555" title="Weibo">Weibo</a>
+		
+		
+		
+		
+		
+		<a class="github" href="https://github.com/wanax" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">iOS应用发布流程</h1>
+	<div class="entry-content" itemprop="articleBody"><h2>iOS应用发布流程</h2>
+
+<h3>概述</h3>
+
+<p>整个发布流程有四个关键词，<em>Certificates</em>，<em>Identifiers</em>，<em>Devices</em>与<em>Provisioning Profiles</em>.</p>
+
+<p>它们的相互关系如下图所示，</p>
+
+<p><img src="/images/tec/iOSPub/pic_1.png" alt="image" /></p>
+
+<p>简单说来便是用户身份验证书（Certificates），App应用身份ID（Identifiers），可用于开发的Devices三者合一生成一份Provisioning Profile，并将此profile下载到本机双击安装后就自然可以在xcode中找到了(注意左上角的“GooGuu”在配置发布时应将Target与Project的设置调未相同选项，以避免发布失败)。</p>
+
+<!--more-->
+
+
+<p><img src="/images/tec/iOSPub/pic_3.png" alt="image" /></p>
+
+<h3>步骤分解</h3>
+
+<h4>一.Certificates证书申请</h4>
+
+<p>付费申请到开发者账号后首先要做的便是使用它来生成一个开发或者发布的证书，这个证书是App发布的起点，有了它便表明你是名已经被苹果公司认证过的开发人员并有权力发布自己开发的App到AppStore上去。</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133624">iOS开发者申请发布证书</a></p>
+
+<p>证书申请的步骤这位姐姐讲解地很详细了，不需要再一一赘述，看到第J步&mdash;<em>下载证书，双击安装</em>便可以停一下，先来看Identifier。</p>
+
+<h4>二.Identifiers-App ID的申请</h4>
+
+<p>Certificates是表明你开发者身份的东西，花了近100的大洋肯定不可能只满足用来开发一款App，而是会进行多方面的尝试，这时候就需要通过App ID来对我们开发出的各种应用进行唯一的标示。</p>
+
+<p>可以简单的理解为Certificates的苹果公司给你的身份证，而App ID是你给自己开发的App的一个身份证。</p>
+
+<p><img src="/images/tec/iOSPub/pic_4.png" alt="image" /></p>
+
+<h4>三.Devices的用处</h4>
+
+<p>开发的App可以在Xcode自带的模拟器下运行调试，想要进行真机测试的话则需要用到Devices的配置选项了。</p>
+
+<p>当你将外置设备连入苹果电脑，进入Xcode的Window->Organizer->Devices中便会发现自己的设备名称：</p>
+
+<p><img src="/images/tec/iOSPub/pic_5.png" alt="image" /></p>
+
+<p>现在的Xcode已经集成了添加Device的功能，点击连接后的设备名称，你会在右边的窗口中发现诸如“添加该设备到开发机”之类的选项。</p>
+
+<p><img src="/images/tec/iOSPub/pic_6.png" alt="image" /></p>
+
+<p>之后到Device里简单的验证一下便可以了，你会发现自己的设备序列号已经添加到了该列表里面。</p>
+
+<p>这个Devices列表按照第二张图的样子看应该是会在最后跟AppID与Certificate打包在一起来生成Profile文件，这样开发者身份信息，App的身份信息，可用测试的设备信息都可以随时的调用。</p>
+
+<h4>四.Provisioning Profiles的生成与使用</h4>
+
+<p>还是继续从第K步&mdash;<em>生成证书对应的provision File</em> 看刚刚那位姐姐的讲解吧。</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133624">iOS开发者申请发布证书</a></p>
+
+<h3>发布</h3>
+
+<p>这样一步步下来，一份完成的Profile便拿在了手上，分为Development和Distribution两种，分别用于开发与发布的使用。</p>
+
+<p>还不清楚的话可以看下这位哥儿们的讲解，更加的专业与细致。</p>
+
+<p><a href="http://www.cnblogs.com/cywin888/p/3263027.html">关于Certificate、Provisioning Profile、App ID的介绍及其之间的关系</a></p>
+
+<p>接下来还剩下两步工作，一个是本地二进制文件的打包验证，一个是苹果网站的新App申请或者旧App版本更新的申请。</p>
+
+<h4>1.苹果网站上的相关工作</h4>
+
+<p>我们去到<a href="https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa">App Product</a>这里，在网站上对App进行配置。</p>
+
+<p>大致可以理解为通知苹果公司我将会有一个App通过Xcode进行上传，你要注意接收啊之类云云。</p>
+
+<p>如果之前已经有旧的版本了那很简单，进入“Manage Your Apps”的页面，点击你要更新的App进入一个新的页面，里面有个Button叫“Add Version”点击进入，有一个流程页面，唯一需要注意的是<em>填写的新的版本号需要跟本地项目的Target->General的下图位置处的版本号填写相同</em>，不然在最后打包完毕验证时会发生错误导致无法提交。</p>
+
+<p><img src="/images/tec/iOSPub/pic_10.png" alt="image" /></p>
+
+<p><img src="/images/tec/iOSPub/pic_9.png" alt="image" /></p>
+
+<p>如果是第一次发布App则稍微有点麻烦，具体的还是参见刚刚那位姐姐的文章吧&hellip;</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133642">iOS 发布应用程序到App Store</a></p>
+
+<h4>2.本地Xcode的相关工作</h4>
+
+<p>将发布设备调节到下图的位置，前提是没有外置的设备连在苹果机上，其实连上也无所谓，只是文字显示不一样。</p>
+
+<p><img src="/images/tec/iOSPub/pic_7.png" alt="image" /></p>
+
+<p>然后点击Product->Archive来静待二进制文件的生成吧。</p>
+
+<p>生成后会自动跳转到Window->Organizer->Archives，然后分别对打包好的App进行验证与最后的提交，就是这样了~</p>
+
+<p><img src="/images/tec/iOSPub/pic_8.png" alt="image" /></p>
+</div>
+
+</article>
+
+	<!--<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+-->
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Wanax -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6e9d609916419478e19b64e7fcbc720c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+		</div>
+	</div>
+</body>
+</html>

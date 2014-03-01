@@ -4,7 +4,7 @@
   <title><![CDATA[陋室]]></title>
   <link href="http://wanax.github.io/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2014-01-20T16:16:01+08:00</updated>
+  <updated>2014-03-01T17:26:44+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS应用发布流程]]></title>
+    <link href="http://wanax.github.io/blog/2014/03/01/iosying-yong-fa-bu-liu-cheng/"/>
+    <updated>2014-03-01T17:20:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2014/03/01/iosying-yong-fa-bu-liu-cheng</id>
+    <content type="html"><![CDATA[<h2>iOS应用发布流程</h2>
+
+<h3>概述</h3>
+
+<p>整个发布流程有四个关键词，<em>Certificates</em>，<em>Identifiers</em>，<em>Devices</em>与<em>Provisioning Profiles</em>.</p>
+
+<p>它们的相互关系如下图所示，</p>
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_1.png" alt="image" /></p>
+
+<p>简单说来便是用户身份验证书（Certificates），App应用身份ID（Identifiers），可用于开发的Devices三者合一生成一份Provisioning Profile，并将此profile下载到本机双击安装后就自然可以在xcode中找到了(注意左上角的“GooGuu”在配置发布时应将Target与Project的设置调未相同选项，以避免发布失败)。</p>
+
+<!--more-->
+
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_3.png" alt="image" /></p>
+
+<h3>步骤分解</h3>
+
+<h4>一.Certificates证书申请</h4>
+
+<p>付费申请到开发者账号后首先要做的便是使用它来生成一个开发或者发布的证书，这个证书是App发布的起点，有了它便表明你是名已经被苹果公司认证过的开发人员并有权力发布自己开发的App到AppStore上去。</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133624">iOS开发者申请发布证书</a></p>
+
+<p>证书申请的步骤这位姐姐讲解地很详细了，不需要再一一赘述，看到第J步&mdash;<em>下载证书，双击安装</em>便可以停一下，先来看Identifier。</p>
+
+<h4>二.Identifiers-App ID的申请</h4>
+
+<p>Certificates是表明你开发者身份的东西，花了近100的大洋肯定不可能只满足用来开发一款App，而是会进行多方面的尝试，这时候就需要通过App ID来对我们开发出的各种应用进行唯一的标示。</p>
+
+<p>可以简单的理解为Certificates的苹果公司给你的身份证，而App ID是你给自己开发的App的一个身份证。</p>
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_4.png" alt="image" /></p>
+
+<h4>三.Devices的用处</h4>
+
+<p>开发的App可以在Xcode自带的模拟器下运行调试，想要进行真机测试的话则需要用到Devices的配置选项了。</p>
+
+<p>当你将外置设备连入苹果电脑，进入Xcode的Window->Organizer->Devices中便会发现自己的设备名称：</p>
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_5.png" alt="image" /></p>
+
+<p>现在的Xcode已经集成了添加Device的功能，点击连接后的设备名称，你会在右边的窗口中发现诸如“添加该设备到开发机”之类的选项。</p>
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_6.png" alt="image" /></p>
+
+<p>之后到Device里简单的验证一下便可以了，你会发现自己的设备序列号已经添加到了该列表里面。</p>
+
+<p>这个Devices列表按照第二张图的样子看应该是会在最后跟AppID与Certificate打包在一起来生成Profile文件，这样开发者身份信息，App的身份信息，可用测试的设备信息都可以随时的调用。</p>
+
+<h4>四.Provisioning Profiles的生成与使用</h4>
+
+<p>还是继续从第K步&mdash;<em>生成证书对应的provision File</em> 看刚刚那位姐姐的讲解吧。</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133624">iOS开发者申请发布证书</a></p>
+
+<h3>发布</h3>
+
+<p>这样一步步下来，一份完成的Profile便拿在了手上，分为Development和Distribution两种，分别用于开发与发布的使用。</p>
+
+<p>还不清楚的话可以看下这位哥儿们的讲解，更加的专业与细致。</p>
+
+<p><a href="http://www.cnblogs.com/cywin888/p/3263027.html">关于Certificate、Provisioning Profile、App ID的介绍及其之间的关系</a></p>
+
+<p>接下来还剩下两步工作，一个是本地二进制文件的打包验证，一个是苹果网站的新App申请或者旧App版本更新的申请。</p>
+
+<h4>1.苹果网站上的相关工作</h4>
+
+<p>我们去到<a href="https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa">App Product</a>这里，在网站上对App进行配置。</p>
+
+<p>大致可以理解为通知苹果公司我将会有一个App通过Xcode进行上传，你要注意接收啊之类云云。</p>
+
+<p>如果之前已经有旧的版本了那很简单，进入“Manage Your Apps”的页面，点击你要更新的App进入一个新的页面，里面有个Button叫“Add Version”点击进入，有一个流程页面，唯一需要注意的是<em>填写的新的版本号需要跟本地项目的Target->General的下图位置处的版本号填写相同</em>，不然在最后打包完毕验证时会发生错误导致无法提交。</p>
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_10.png" alt="image" /></p>
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_9.png" alt="image" /></p>
+
+<p>如果是第一次发布App则稍微有点麻烦，具体的还是参见刚刚那位姐姐的文章吧&hellip;</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133642">iOS 发布应用程序到App Store</a></p>
+
+<h4>2.本地Xcode的相关工作</h4>
+
+<p>将发布设备调节到下图的位置，前提是没有外置的设备连在苹果机上，其实连上也无所谓，只是文字显示不一样。</p>
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_7.png" alt="image" /></p>
+
+<p>然后点击Product->Archive来静待二进制文件的生成吧。</p>
+
+<p>生成后会自动跳转到Window->Organizer->Archives，然后分别对打包好的App进行验证与最后的提交，就是这样了~</p>
+
+<p><img src="http://wanax.github.io/images/tec/iOSPub/pic_8.png" alt="image" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[女先生们的书]]></title>
@@ -2188,108 +2290,6 @@ post是请求，get便是验证下登录有没有成功，找一个只有登录�
 
 
 <p>或是用session？个人猜测。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[常用正则表达式(转)]]></title>
-    <link href="http://wanax.github.io/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan/"/>
-    <updated>2012-01-15T19:36:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2012/01/15/chang-yong-zheng-ze-biao-da-shi-zhuan</id>
-    <content type="html"><![CDATA[<p>正则表达式用于字符串处理、表单验证等场合，实用高效。现将一些常用的表达式收集于此，以备不时之需。</p>
-
-<p>匹配中文字符的正则表达式： <code>[\u4e00-\u9fa5]</code></p>
-
-<blockquote><p>评注：匹配中文还真是个头疼的事，有了这个表达式就好办了</p></blockquote>
-
-<p>匹配双字节字符(包括汉字在内)：<code>[^\x00-\xff]</code></p>
-
-<blockquote><p>评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）</p></blockquote>
-
-<!--more-->
-
-
-<p>匹配空白行的正则表达式：<code>\n\s*\r</code></p>
-
-<blockquote><p>评注：可以用来删除空白行</p></blockquote>
-
-<p>匹配HTML标记的正则表达式：<code>&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/\1&gt;|&lt;.*? /&gt;</code></p>
-
-<blockquote><p>评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力</p></blockquote>
-
-<p>匹配首尾空白字符的正则表达式：<code>^\s*|\s*$</code></p>
-
-<blockquote><p>评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式</p></blockquote>
-
-<p>匹配Email地址的正则表达式：<code>\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*</code></p>
-
-<blockquote><p>评注：表单验证时很实用</p></blockquote>
-
-<p>匹配网址URL的正则表达式：<code>[a-zA-z]+://[^\s]*</code></p>
-
-<blockquote><p>评注：网上流传的版本功能很有限，上面这个基本可以满足需求</p></blockquote>
-
-<p>匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：<code>^[a-zA-Z][a-zA-Z0-9_]{4,15}$</code></p>
-
-<blockquote><p>评注：表单验证时很实用</p></blockquote>
-
-<p>匹配国内电话号码：<code>\d{3}-\d{8}|\d{4}-\d{7}</code></p>
-
-<blockquote><p>评注：匹配形式如 0511-4405222 或 021-87888822</p></blockquote>
-
-<p>匹配腾讯QQ号：<code>[1-9][0-9]{4,}</code></p>
-
-<blockquote><p>评注：腾讯QQ号从10000开始</p></blockquote>
-
-<p>匹配中国邮政编码：<code>[1-9]\d{5}(?!\d)</code></p>
-
-<blockquote><p>评注：中国邮政编码为6位数字</p></blockquote>
-
-<p>匹配身份证：<code>\d{15}|\d{18}</code></p>
-
-<blockquote><p>评注：中国的身份证为15位或18位</p></blockquote>
-
-<p>匹配ip地址：<code>\d+\.\d+\.\d+\.\d+</code></p>
-
-<blockquote><p>评注：提取ip地址时有用</p></blockquote>
-
-<p>匹配特定数字：
-<code>^[1-9]\d*$</code>　 　 //匹配正整数</p>
-
-<p><code>^-[1-9]\d*$</code> 　 //匹配负整数</p>
-
-<p><code>^-?[1-9]\d*$</code>　　 //匹配整数</p>
-
-<p><code>^[1-9]\d*|0$</code>　 //匹配非负整数（正整数 + 0）</p>
-
-<p><code>^-[1-9]\d*|0$</code>　　 //匹配非正整数（负整数 + 0）</p>
-
-<p><code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$</code>　　 //匹配正浮点数</p>
-
-<p><code>^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$</code> //匹配负浮点数</p>
-
-<p><code>^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$</code>　 //匹配浮点数</p>
-
-<p><code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$</code>　　 //匹配非负浮点数（正浮点数 + 0）</p>
-
-<p><code>^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$</code>　　//匹配非正浮点数（负浮点数 + 0）</p>
-
-<blockquote><p>评注：处理大量数据时有用，具体应用时注意修正</p></blockquote>
-
-<p>匹配特定字符串：
-<code>^[A-Za-z]+$</code>　　//匹配由26个英文字母组成的字符串</p>
-
-<p><code>^[A-Z]+$</code>　　//匹配由26个英文字母的大写组成的字符串</p>
-
-<p><code>^[a-z]+$</code>　　//匹配由26个英文字母的小写组成的字符串</p>
-
-<p><code>^[A-Za-z0-9]+$</code>　　//匹配由数字和26个英文字母组成的字符串</p>
-
-<p><code>^\w+$</code>　　//匹配由数字、26个英文字母或者下划线组成的字符串</p>
-
-<blockquote><p>评注：最基本也是最常用的一些表达式</p></blockquote>
-
-<p><a href="http://lifesinger.3322.org/myblog/?p=185">原载地址</a></p>
 ]]></content>
   </entry>
   

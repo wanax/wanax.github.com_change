@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tec | 陋室]]></title>
   <link href="http://wanax.github.io/blog/categories/tec/atom.xml" rel="self"/>
   <link href="http://wanax.github.io/"/>
-  <updated>2014-01-20T16:16:01+08:00</updated>
+  <updated>2014-03-01T17:26:44+08:00</updated>
   <id>http://wanax.github.io/</id>
   <author>
     <name><![CDATA[Wanax]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS应用发布流程]]></title>
+    <link href="http://wanax.github.io/blog/2014/03/01/iosying-yong-fa-bu-liu-cheng/"/>
+    <updated>2014-03-01T17:20:00+08:00</updated>
+    <id>http://wanax.github.io/blog/2014/03/01/iosying-yong-fa-bu-liu-cheng</id>
+    <content type="html"><![CDATA[<h2>iOS应用发布流程</h2>
+
+<h3>概述</h3>
+
+<p>整个发布流程有四个关键词，<em>Certificates</em>，<em>Identifiers</em>，<em>Devices</em>与<em>Provisioning Profiles</em>.</p>
+
+<p>它们的相互关系如下图所示，</p>
+
+<p><img src="/images/tec/iOSPub/pic_1.png" alt="image" /></p>
+
+<p>简单说来便是用户身份验证书（Certificates），App应用身份ID（Identifiers），可用于开发的Devices三者合一生成一份Provisioning Profile，并将此profile下载到本机双击安装后就自然可以在xcode中找到了(注意左上角的“GooGuu”在配置发布时应将Target与Project的设置调未相同选项，以避免发布失败)。</p>
+
+<!--more-->
+
+
+<p><img src="/images/tec/iOSPub/pic_3.png" alt="image" /></p>
+
+<h3>步骤分解</h3>
+
+<h4>一.Certificates证书申请</h4>
+
+<p>付费申请到开发者账号后首先要做的便是使用它来生成一个开发或者发布的证书，这个证书是App发布的起点，有了它便表明你是名已经被苹果公司认证过的开发人员并有权力发布自己开发的App到AppStore上去。</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133624">iOS开发者申请发布证书</a></p>
+
+<p>证书申请的步骤这位姐姐讲解地很详细了，不需要再一一赘述，看到第J步&mdash;<em>下载证书，双击安装</em>便可以停一下，先来看Identifier。</p>
+
+<h4>二.Identifiers-App ID的申请</h4>
+
+<p>Certificates是表明你开发者身份的东西，花了近100的大洋肯定不可能只满足用来开发一款App，而是会进行多方面的尝试，这时候就需要通过App ID来对我们开发出的各种应用进行唯一的标示。</p>
+
+<p>可以简单的理解为Certificates的苹果公司给你的身份证，而App ID是你给自己开发的App的一个身份证。</p>
+
+<p><img src="/images/tec/iOSPub/pic_4.png" alt="image" /></p>
+
+<h4>三.Devices的用处</h4>
+
+<p>开发的App可以在Xcode自带的模拟器下运行调试，想要进行真机测试的话则需要用到Devices的配置选项了。</p>
+
+<p>当你将外置设备连入苹果电脑，进入Xcode的Window->Organizer->Devices中便会发现自己的设备名称：</p>
+
+<p><img src="/images/tec/iOSPub/pic_5.png" alt="image" /></p>
+
+<p>现在的Xcode已经集成了添加Device的功能，点击连接后的设备名称，你会在右边的窗口中发现诸如“添加该设备到开发机”之类的选项。</p>
+
+<p><img src="/images/tec/iOSPub/pic_6.png" alt="image" /></p>
+
+<p>之后到Device里简单的验证一下便可以了，你会发现自己的设备序列号已经添加到了该列表里面。</p>
+
+<p>这个Devices列表按照第二张图的样子看应该是会在最后跟AppID与Certificate打包在一起来生成Profile文件，这样开发者身份信息，App的身份信息，可用测试的设备信息都可以随时的调用。</p>
+
+<h4>四.Provisioning Profiles的生成与使用</h4>
+
+<p>还是继续从第K步&mdash;<em>生成证书对应的provision File</em> 看刚刚那位姐姐的讲解吧。</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133624">iOS开发者申请发布证书</a></p>
+
+<h3>发布</h3>
+
+<p>这样一步步下来，一份完成的Profile便拿在了手上，分为Development和Distribution两种，分别用于开发与发布的使用。</p>
+
+<p>还不清楚的话可以看下这位哥儿们的讲解，更加的专业与细致。</p>
+
+<p><a href="http://www.cnblogs.com/cywin888/p/3263027.html">关于Certificate、Provisioning Profile、App ID的介绍及其之间的关系</a></p>
+
+<p>接下来还剩下两步工作，一个是本地二进制文件的打包验证，一个是苹果网站的新App申请或者旧App版本更新的申请。</p>
+
+<h4>1.苹果网站上的相关工作</h4>
+
+<p>我们去到<a href="https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa">App Product</a>这里，在网站上对App进行配置。</p>
+
+<p>大致可以理解为通知苹果公司我将会有一个App通过Xcode进行上传，你要注意接收啊之类云云。</p>
+
+<p>如果之前已经有旧的版本了那很简单，进入“Manage Your Apps”的页面，点击你要更新的App进入一个新的页面，里面有个Button叫“Add Version”点击进入，有一个流程页面，唯一需要注意的是<em>填写的新的版本号需要跟本地项目的Target->General的下图位置处的版本号填写相同</em>，不然在最后打包完毕验证时会发生错误导致无法提交。</p>
+
+<p><img src="/images/tec/iOSPub/pic_10.png" alt="image" /></p>
+
+<p><img src="/images/tec/iOSPub/pic_9.png" alt="image" /></p>
+
+<p>如果是第一次发布App则稍微有点麻烦，具体的还是参见刚刚那位姐姐的文章吧&hellip;</p>
+
+<p><a href="http://my.oschina.net/joanfen/blog/133642">iOS 发布应用程序到App Store</a></p>
+
+<h4>2.本地Xcode的相关工作</h4>
+
+<p>将发布设备调节到下图的位置，前提是没有外置的设备连在苹果机上，其实连上也无所谓，只是文字显示不一样。</p>
+
+<p><img src="/images/tec/iOSPub/pic_7.png" alt="image" /></p>
+
+<p>然后点击Product->Archive来静待二进制文件的生成吧。</p>
+
+<p>生成后会自动跳转到Window->Organizer->Archives，然后分别对打包好的App进行验证与最后的提交，就是这样了~</p>
+
+<p><img src="/images/tec/iOSPub/pic_8.png" alt="image" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python Django框架网站搭建入门]]></title>
@@ -719,48 +821,6 @@ testlable.frame =CGRectMake(10,20, actualsize.width, actualsize.height);
 </code></pre>
 
 <p>```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Scala在Mac下的安装方法]]></title>
-    <link href="http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa/"/>
-    <updated>2013-10-25T14:36:00+08:00</updated>
-    <id>http://wanax.github.io/blog/2013/10/25/scalazai-macxia-de-an-zhuang-fang-fa</id>
-    <content type="html"><![CDATA[<h3>第一种方法</h3>
-
-<p>1.访问scala的官网<a href="http://www.scala-lang.org/">这里</a>下载最新版的scala。</p>
-
-<p>2.解压缩文件包，可将其移动至<code>/usr/local/share</code>下</p>
-
-<p><code>
-mv /download/scalapath /usr/local/share
-</code></p>
-
-<p>3.修改环境变量，在mac下使用<code>sudo su</code>进入管理员权限，修改配置文件profile，</p>
-
-<p><code>
-vim /etc/profile
-</code></p>
-
-<p>在文件的末尾加入</p>
-
-<p><code>
-export PATH="$PATH:/usr/local/share/scala/bin"
-</code></p>
-
-<p><code>:wq!</code>保存退出，重启终端，完成scala的配置安装。</p>
-
-<h3>第二种方法</h3>
-
-<p>如果本机有安装Ruby的话则安装更加简单，可以借助Homebrew进行安装。
-首先安装Homebrew</p>
-
-<blockquote><p>ruby -e “$(curl -fsSL <a href="https://raw.github.com/mxcl/homebrew/go">https://raw.github.com/mxcl/homebrew/go</a>)”</p></blockquote>
-
-<p>再进行scala的安装<code>brew install scala</code></p>
-
-<p>大功告成~</p>
 ]]></content>
   </entry>
   
